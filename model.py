@@ -18,6 +18,11 @@ class MultiLayerPerceptron(torch.nn.Module):
         self.loss_function = loss_function
         self.optimizer = torch.optim.SGD(self.parameters(), lr=0.001)
 
+        for element in self.layers:
+            print(element)
+            if 'linear' in str(type(element)) :
+                torch.nn.init.xavier_uniform_(element.weight)
+
     def forward(self, X):
         # The forward method informs about the forward pass: how one computes outputs of the network
         # from the input and the parameters of the layers registered at init
@@ -37,8 +42,6 @@ class MultiLayerPerceptron(torch.nn.Module):
             self.optimizer.zero_grad()
             # Forward pass
             y_pred = self.forward(X_torch)
-            print(y_pred.shape)
-            print(y_torch.shape)
 
             # Compute Loss
             loss = self.loss_function.compute_loss(y_pred, y_torch)
@@ -46,5 +49,7 @@ class MultiLayerPerceptron(torch.nn.Module):
             # Backward pass
             loss.backward()
             self.optimizer.step()
+
+            print("Epoch: {}\tLoss = {}".format(e + 1, loss))
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 

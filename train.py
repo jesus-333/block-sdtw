@@ -19,7 +19,6 @@ X_subset = X_train[y_train < 4]
 np.random.shuffle(X_subset)
 X_subset = X_subset[:50]
 
-
 config = dict(
     batch_size = 30,
     lr = 1e-2,                          # Learning rate (lr)
@@ -39,28 +38,56 @@ config = dict(
 loss_function = reconstruction_loss(config)
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-# Model declaration
+# Layers defintion
 
-model = MultiLayerPerceptron(
-    layers = nn.Sequential(
-        nn.Linear(in_features = 150, out_features = 256),
-        nn.ReLU(),
-        nn.Linear(in_features = 256, out_features = 125)
-    ),
-    loss_function = loss_function
+layers = nn.Sequential(
+    nn.Linear(in_features = 150, out_features = 256),
+    nn.ReLU(),
+    nn.Linear(in_features = 256, out_features = 125)
 )
-
-y = model(X_subset[:, :150])
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 # Model training
 
+# Train and test MSE
+config['recon_loss_type'] = 0
+loss_function = reconstruction_loss(config)
+model = MultiLayerPerceptron(layers, loss_function)
 model.fit(X_subset[:, :150], X_subset[:, 150:], max_epochs = config['epochs'])
-
 ts_index = 50
-y_pred = model(X_test[:, :150, 0]).detach().numpy()
+y_pred_MSE = model(X_test[:, :150, 0]).detach().numpy()
 
-plt.figure()
-plt.title('Multi-step ahead forecasting using MSE')
-plt.plot(X_test[ts_index].ravel())
-plt.plot(np.arange(150, 275), y_pred[ts_index], 'r-')
+# Train and test SDTW
+config['recon_loss_type'] = 1
+loss_function = reconstruction_loss(config)
+model = MultiLayerPerceptron(layers, loss_function)
+model.fit(X_subset[:, :150], X_subset[:, 150:], max_epochs = config['epochs'])
+ts_index = 50
+y_pred_SDTW = model(X_test[:, :150, 0]).detach().numpy()
+
+# Train and test block SDTW
+config['recon_loss_type'] = 3
+loss_function = reconstruction_loss(config)
+model = MultiLayerPerceptron(layers, loss_function)
+model.fit(X_subset[:, :150], X_subset[:, 150:], max_epochs = config['epochs'])
+ts_index = 50
+y_pred_block_SDTW = model(X_test[:, :150, 0]).detach().numpy()
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+# Plot
+
+# Change backend
+plt.switch_backend('TkAgg')
+
+fig, ax = plt.subplots(1, 1, figsize = (10, 10))
+
+ax.plot(X_test[ts_index].ravel(), label = 'True')
+ax.plot(np.arange(150, 275), y_pred_MSE[ts_index], 'r-', label = 'MSE', color = 'g')
+ax.plot(np.arange(150, 275), y_pred_SDTW[ts_index], 'r-', label = 'SDTW', color = 'b')
+ax.plot(np.arange(150, 275), y_pred_block_SDTW[ts_index], 'r-', label = 'Block SDTW', color = 'r')
+
+ax.grid()
+ax.legend()
+
+fig.tight_layout()
+fig.show()

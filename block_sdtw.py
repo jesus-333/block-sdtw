@@ -91,7 +91,7 @@ class reconstruction_loss():
     def compute_loss(self, x, x_r):
 
         if self.recon_loss_type == 0 : # MSE
-            tmp_recon_loss = self.recon_loss_function(x, x_r).mean()
+            tmp_recon_loss = self.recon_loss_function(x, x_r)
         elif self.recon_loss_type == 1 : # Soft-DTW
             tmp_recon_loss = self.recon_loss_function(x, x_r)
         elif self.recon_loss_type == 2 : # Soft-DTW divergence
@@ -110,6 +110,6 @@ class reconstruction_loss():
             str_error += "Current values is {}".format(self.recon_loss_type)
             raise ValueError(str_error)
 
-        recon_loss = self.alpha * tmp_recon_loss
+        recon_loss = self.alpha * tmp_recon_loss.mean()
 
         return recon_loss
