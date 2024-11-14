@@ -11,12 +11,16 @@ import torch
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 class MultiLayerPerceptron(torch.nn.Module):
-    def __init__(self, layers, loss_function = None):
+    def __init__(self, layers, loss_function = None, config : dict = dict()):
         # At init, we define our layers
         super(MultiLayerPerceptron, self).__init__()
         self.layers = layers
         self.loss_function = loss_function
-        self.optimizer = torch.optim.SGD(self.parameters(), lr=0.001)
+        
+        lr = config['lr'] if 'lr' in config else 0.001
+
+        # self.optimizer = torch.optim.SGD(self.parameters(), lr = lr)
+        self.optimizer = torch.optim.AdamW(self.parameters(), lr = lr)
 
         for element in self.layers:
             print(element)
@@ -24,16 +28,23 @@ class MultiLayerPerceptron(torch.nn.Module):
                 torch.nn.init.xavier_uniform_(element.weight)
 
     def forward(self, X):
-        # The forward method informs about the forward pass: how one computes outputs of the network
-        # from the input and the parameters of the layers registered at init
+        # Convert to torch tensor
         if not isinstance(X, torch.Tensor):
             X = torch.Tensor(X)
-        batch_size = X.size(0)
-        X_reshaped = torch.reshape(X, (batch_size, -1))  # Manipulations to deal with time series format
-        output = self.layers(X_reshaped)
-        return torch.reshape(output, (batch_size, -1, 1))  # Manipulations to deal with time series format
 
-    def fit(self, X, y, max_epochs=10):
+        # Reshape for time series
+        batch_size = X.size(0)
+        X_reshaped = torch.reshape(X, (batch_size, -1))  
+
+        # Forward step
+        output = self.layers(X_reshaped)
+
+        # Manipulations to deal with time series format
+        output = torch.reshape(output, (batch_size, -1, 1))  
+
+        return  output
+
+    def fit(self, X, y, max_epochs = 10):
         # The fit method performs the actual optimization
         X_torch = torch.Tensor(X)
         y_torch = torch.Tensor(y)
