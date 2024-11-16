@@ -1,5 +1,5 @@
 """
-Load the weights and print the results
+Load the weights and print the prediction results
 """
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 

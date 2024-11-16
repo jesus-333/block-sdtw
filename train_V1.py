@@ -27,7 +27,6 @@ X_subset = X_train[y_train < 4]
 np.random.shuffle(X_subset)
 X_subset = X_subset[:50]
 
-
 X_subset = X_train
 np.random.shuffle(X_subset)
 
