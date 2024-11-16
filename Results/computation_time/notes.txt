@@ -1,0 +1,1 @@
+The results for the raspberry, in the case of block-SDTW are obtained with block_size = 100
