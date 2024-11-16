@@ -1,0 +1,11 @@
+Model details
+MultiLayerPerceptron(
+  (layers): Sequential(
+    (0): Linear(in_features=150, out_features=512, bias=True)
+    (1): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): SELU()
+    (3): Linear(in_features=512, out_features=125, bias=True)
+  )
+)
+Config
+{'batch_size': 30, 'lr': 0.001, 'epochs': 3000, 'use_scheduler': True, 'lr_decay_rate': 0.999, 'optimizer_weight_decay': 0.01, 'alpha': 1, 'recon_loss_type': 3, 'block_size': 30, 'shift': 30, 'edge_samples_ignored': 0, 'gamma_dtw': 1, 'device': 'cpu', 'soft_DTW_type': 3}
