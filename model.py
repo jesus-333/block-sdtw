@@ -19,13 +19,14 @@ class MultiLayerPerceptron(torch.nn.Module):
         
         lr = config['lr'] if 'lr' in config else 0.001
 
-        # self.optimizer = torch.optim.SGD(self.parameters(), lr = lr)
-        self.optimizer = torch.optim.AdamW(self.parameters(), lr = lr)
+        self.optimizer = torch.optim.SGD(self.parameters(), lr = lr)
+        # self.optimizer = torch.optim.Adamax(self.parameters(), lr = lr)
+        # self.optimizer = torch.optim.AdamW(self.parameters(), lr = lr)
 
-        for element in self.layers:
-            print(element)
-            if 'linear' in str(type(element)) :
-                torch.nn.init.xavier_uniform_(element.weight)
+        if 'lr_decay_rate' in config :
+            self.lr_scheduler = torch.optim.lr_scheduler.ExponentialLR(self.optimizer, gamma = config['lr_decay_rate'])
+        else :
+            self.lr_scheduler = None
 
     def forward(self, X):
         # Convert to torch tensor
@@ -60,6 +61,8 @@ class MultiLayerPerceptron(torch.nn.Module):
             # Backward pass
             loss.backward()
             self.optimizer.step()
+            
+            if self.lr_scheduler is not None : self.lr_scheduler.step()
 
             print("Epoch: {}\tLoss = {}".format(e + 1, loss))
 

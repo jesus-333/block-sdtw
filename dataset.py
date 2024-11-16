@@ -127,3 +127,30 @@ def visualize_signals(x_1, x_2, x_original = None, t_orig = None, visualize_plot
     if visualize_plot : fig.show()
 
     return fig, ax
+
+
+def visualize_prediction(ts_index, x_orig, start_prediction,
+                         x_pred_MSE = None, x_pred_SDTW = None, x_pred_block_SDTW = None, 
+                         show_figure = True): 
+    if x_pred_MSE is None and x_pred_SDTW is None and x_pred_block_SDTW is None : raise ValueError("At least one prediction must be provided")
+    len_prediction = len(x_pred_MSE[ts_index]) if x_pred_MSE is not None else len(x_pred_SDTW[ts_index]) if x_pred_SDTW is not None else len(x_pred_block_SDTW[ts_index])
+
+    fig, ax = plt.subplots(1, 1, figsize = (10, 10))
+
+    t_array = np.arange(0, len(x_orig[ts_index]))
+    t_prediction = np.arange(start_prediction, start_prediction + len_prediction)
+
+    ax.plot(x_orig[ts_index].ravel(), label = 'True')
+    if x_pred_MSE is not None :        ax.plot(t_prediction, x_pred_MSE[ts_index], label = 'MSE', color = 'g')
+    if x_pred_SDTW is not None :       ax.plot(t_prediction, x_pred_SDTW[ts_index], label = 'SDTW', color = 'b')
+    if x_pred_block_SDTW is not None : ax.plot(t_prediction, x_pred_block_SDTW[ts_index], label = 'Block SDTW', color = 'r')
+
+    ax.set_title('Prediction of the time series ' + str(ts_index))
+
+    ax.grid()
+    ax.legend()
+
+    fig.tight_layout()
+    if show_figure : fig.show()
+
+    return fig, ax

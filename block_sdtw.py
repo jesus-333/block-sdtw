@@ -6,8 +6,11 @@ import torch.nn.functional as F
 
 from soft_dtw_cuda import SoftDTW
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-
-def block_sdtw(x : torch.tensor, x_r : torch.tensor, dtw_loss_function, block_size : int, soft_DTW_type : int, normalize_by_block_size : bool = True):
+0
+def block_sdtw(x : torch.tensor, x_r : torch.tensor, 
+               dtw_loss_function, 
+               block_size : int, soft_DTW_type : int, shift : int = -1,
+               normalize_by_block_size : bool = True):
     """
     Instead of applying the dtw to the entire signal, this function applies it on block of size block_size.
 
@@ -20,12 +23,16 @@ def block_sdtw(x : torch.tensor, x_r : torch.tensor, dtw_loss_function, block_si
     @return recon_error: (torch.tensor) Tensor of shape B
     """
 
+    if shift <= 0 : shift = block_size
+
     tmp_recon_loss = 0
     i = 0
+    continue_cylce = True
 
-    while True :
+    while continue_cylce :
         # Get indicies for the block
         idx_1 = int(i * block_size)
+        idx_1 = int(i * shift)
         idx_2 = int((i + 1) * block_size) if int((i + 1) * block_size) < x.shape[1] else -1
 
         # Get block of the signal
@@ -45,21 +52,22 @@ def block_sdtw(x : torch.tensor, x_r : torch.tensor, dtw_loss_function, block_si
         # (Optional) Normalize by the number of samples in the block
         if normalize_by_block_size : block_loss = block_loss / (idx_2 - idx_1)
 
-        # Accumulate the loss for the various block
-        tmp_recon_loss += block_loss
-
         # End the cylce at the last block
-        if idx_2 == -1 : break
+        if idx_2 == -1 : continue_cylce = False
+
+        # Accumulate the loss for the various block
+        # if continue_cylce :
+        #     tmp_recon_loss += block_loss
+        tmp_recon_loss += block_loss
+        # print("\t", i, idx_1, idx_2, float(block_loss.mean().detach()))
 
         # Increase index
         i += 1
 
     return tmp_recon_loss
 
-
 def recon_loss_mse(x, x_r):
     return F.mse_loss(x, x_r)
-
 
 class reconstruction_loss():
     def __init__(self, config : dict):
@@ -75,13 +83,23 @@ class reconstruction_loss():
             use_cuda = True if config['device'] == 'cuda' else False
             config['soft_DTW_type'] = config['recon_loss_type']
             self.recon_loss_function = SoftDTW(use_cuda = use_cuda, gamma = gamma_dtw)
+
+            # Extra parameter for the block version
+            if config['recon_loss_type'] == 3 or config['recon_loss_type'] == 4 :
+                self.block_size = config['block_size']
+                self.shift = config['shift'] if 'config' else config['block_size']
+                self.normalize_by_block_size = config['normalize_by_block_size'] if 'normalize_by_block_size' in config else False
+
+                if self.shift > self.block_size :
+                    print("Shift cannot be bigger than block size. Current values shift = {}, block_size = {}".format(self.shift, self.block_size))
+                    print("Set shift = block_size")
+                    self.shift = self.block_size
         else :
             raise ValueError("recon_loss_type must have an integer value between 0 and 3. Current value is {}".format(config['recon_loss_type']))
         self.recon_loss_type = config['recon_loss_type']
 
         self.edge_samples_ignored = config['edge_samples_ignored'] if 'edge_samples_ignored' in config else 0
         if self.edge_samples_ignored < 0: self.edge_samples_ignored = 0
-
 
         # Hyperparameter for the various part of the loss
         self.alpha = config['alpha'] if 'alpha' in config else 1 # Recon
@@ -100,7 +118,11 @@ class reconstruction_loss():
             dtw_yy = self.recon_loss_function(x_r, x_r)
             tmp_recon_loss = dtw_xy - 0.5 * (dtw_xx + dtw_yy)
         elif self.recon_loss_type == 3 or self.recon_loss_type == 4: # Block-SDTW/Block-SDTW-Divergence
-            tmp_recon_loss = block_sdtw(x, x_r, self.recon_loss_function, self.config['block_size'], self.recon_loss_type)
+            tmp_recon_loss = block_sdtw(x, x_r, 
+                                        self.recon_loss_function, 
+                                        self.block_size, self.recon_loss_type, self.shift,
+                                        self.normalize_by_block_size,
+                                        )
         else :
             str_error = "soft_DTW_type must have one of the following values:\n"
             str_error += "\t 1 (classical SDTW)"
