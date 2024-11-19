@@ -5,8 +5,9 @@ from torch import nn
 import torch.nn.functional as F
 
 from soft_dtw_cuda import SoftDTW
+from numba import jit
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-0
+
 def block_sdtw(x : torch.tensor, x_r : torch.tensor, 
                dtw_loss_function, 
                block_size : int, soft_DTW_type : int, shift : int = -1,
