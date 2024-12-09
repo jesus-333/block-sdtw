@@ -41,6 +41,11 @@ def block_sdtw(x : torch.tensor, x_r : torch.tensor,
         x_block = x[:, idx_1:idx_2, :]
         x_r_block = x_r[:, idx_1:idx_2, :]
 
+        # print(idx_1, idx_2)
+        # print(x.shape)
+        # print(x_r.shape)
+        # print("\t", x_block.shape, "\n\t", x_r_block.shape, "\n")
+
         # Compute dtw for the block
         if soft_DTW_type == 3 : # Standard SDTW
             block_loss = dtw_loss_function(x_block, x_r_block)
@@ -52,6 +57,7 @@ def block_sdtw(x : torch.tensor, x_r : torch.tensor,
 
         # (Optional) Normalize by the number of samples in the block
         if normalize_by_block_size : block_loss = block_loss / (idx_2 - idx_1)
+        # print("\t", block_loss)
 
         # End the cylce at the last block
         if idx_2 == -1 : continue_cylce = False
