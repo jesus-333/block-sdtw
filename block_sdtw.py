@@ -67,6 +67,7 @@ def block_sdtw(x : torch.tensor, x_r : torch.tensor,
         #     tmp_recon_loss += block_loss
         tmp_recon_loss += block_loss
         # print("\t", i, idx_1, idx_2, float(block_loss.mean().detach()))
+        # print("\t", idx_1, block_loss)
 
         # Increase index
         i += 1
@@ -142,3 +143,58 @@ class reconstruction_loss():
         recon_loss = self.alpha * tmp_recon_loss.mean()
 
         return recon_loss
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+def block_sdtw_for_analysis(x : torch.tensor, x_r : torch.tensor, 
+               dtw_loss_function, 
+               block_size : int, soft_DTW_type : int, shift : int = -1,
+               normalize_by_block_size : bool = True):
+    """
+    Work as block_sdtw but also save the values of the single block
+    """
+
+    if shift <= 0 : shift = block_size
+
+    tmp_recon_loss = 0
+    i = 0
+    continue_cylce = True
+    block_values = []
+
+    while continue_cylce :
+        # Get indicies for the block
+        idx_1 = int(i * block_size)
+        idx_1 = int(i * shift)
+        idx_2 = int((i + 1) * block_size) if int((i + 1) * block_size) < x.shape[1] else -1
+
+        # Get block of the signal
+        # Note that the order of the axis is different. Check the note in the compute_dtw_loss_along_channels function, at the beggining of the for cycle.
+        x_block = x[:, idx_1:idx_2, :]
+        x_r_block = x_r[:, idx_1:idx_2, :]
+
+        # Compute dtw for the block
+        if soft_DTW_type == 3 : # Standard SDTW
+            block_loss = dtw_loss_function(x_block, x_r_block)
+        elif soft_DTW_type == 4 : # SDTW divergence
+            dtw_xy_block = dtw_loss_function(x_block, x_r_block)
+            dtw_xx_block = dtw_loss_function(x_block, x_block)
+            dtw_yy_block = dtw_loss_function(x_r_block, x_r_block)
+            block_loss = dtw_xy_block - 0.5 * (dtw_xx_block + dtw_yy_block)
+
+        # (Optional) Normalize by the number of samples in the block
+        if normalize_by_block_size : block_loss = block_loss / (idx_2 - idx_1)
+
+        # End the cylce at the last block
+        if idx_2 == -1 : continue_cylce = False
+
+        # Accumulate the loss for the various block
+        # if continue_cylce :
+        #     tmp_recon_loss += block_loss
+        tmp_recon_loss += block_loss
+
+        # Increase index
+        i += 1
+
+        block_values.append(float(block_loss.cpu().detach()))
+
+    return tmp_recon_loss, block_values
