@@ -25,13 +25,13 @@ t_samples = np.linspace(0, 1, n_samples)
 amplitude_1 = 15
 f_1 = 17
 samples_1 =  2 * np.pi * f_1 * t_samples
-sine_1 = torch.from_numpy(amplitude_1 * np.sin(samples_1)) * np.random.rand(len(samples_1))
+sine_1 = torch.from_numpy(amplitude_1 * np.sin(samples_1)) 
 
 amplitude_2 = 15
 f_2 = 17
 shift_2 = 0.1
 samples_2 =  2 * np.pi * f_2 * t_samples + shift_2
-sine_2 = torch.from_numpy(amplitude_2 * np.sin(samples_2)) * np.random.rand(len(samples_2))
+sine_2 = torch.from_numpy(amplitude_2 * np.sin(samples_2))
 
 plot_config = dict(
     figsize = (13, 10),
@@ -78,6 +78,9 @@ for i in range(len(block_size_list)) :
     # tmp_loss = float(loss_function.compute_loss(sine_2, sine_1).cpu().numpy())
     tmp_loss, block_values = block_sdtw_for_analysis(sine_1, sine_2, sdtw_loss_function,config_loss['block_size'], config_loss['recon_loss_type'], config_loss['shift'], config_loss['normalize_by_block_size'])
 
+    tmp_loss /= len(block_values)
+    print(np.round(block_values, 2))
+
     loss_values_per_block_size.append(tmp_loss.cpu().numpy())
     average_loss_per_block_list.append(np.mean(block_values))
     std_loss_per_block_list.append(np.std(block_values))
@@ -86,6 +89,7 @@ for i in range(len(block_size_list)) :
 config_loss['recon_loss_type'] = 1
 loss_function_normal_sdtw = reconstruction_loss(config_loss)
 normal_sdtw_value = np.ones(len(loss_values_per_block_size  )) * float(loss_function_normal_sdtw.compute_loss(sine_1, sine_2).cpu().numpy())
+
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 # Plot stuff
