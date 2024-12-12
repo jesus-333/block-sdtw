@@ -1,5 +1,5 @@
 """
-Compute the value of Block-SDTW for different values of block_size.
+Similar to loss_vs_frequency_shift but the Block-SDTW is shown as a percentage of SDTW
 Use two sinusoid to compute the value.
 """
 
@@ -19,14 +19,13 @@ from soft_dtw_cuda import SoftDTW
 
 n_samples = 300
 block_size_list = [50, 100, 150]
-normalize_by_n_of_block = False
 add_noise = False
 
 t_samples = np.linspace(0, 1, n_samples)
 
-amplitude_1 = 15
-amplitude_2 = 15
-f_1 = 80
+amplitude_1 = 1
+amplitude_2 = 1
+f_1 = 1
 samples_1 =  2 * np.pi * f_1 * t_samples
 sine_1 = torch.from_numpy(amplitude_1 * np.sin(samples_1))  
 
@@ -72,6 +71,21 @@ sdtw_loss_function = SoftDTW(use_cuda = True if device == 'cuda' else False, gam
 loss_values_per_block_size = np.zeros((len(block_size_list), len(f_2_list)))
 loss_values_sdtw = []
 
+# Compute loss for SDTW
+config_loss['recon_loss_type'] = 2
+loss_function_normal_sdtw = reconstruction_loss(config_loss)
+for i in range(len(f_2_list)) :
+    f_2 = f_2_list[i]
+    samples_2 =  2 * np.pi * f_2 * t_samples + shift_2
+    sine_2 = torch.from_numpy(amplitude_2 * np.sin(samples_2))
+    sine_2 = sine_2.unsqueeze(0).unsqueeze(-1).to(device)  
+
+    normal_sdtw_value = np.ones(len(loss_values_per_block_size  )) * float(loss_function_normal_sdtw.compute_loss(sine_1, sine_2).cpu().numpy())
+
+    loss_function = reconstruction_loss(config_loss)
+    tmp_loss = float(loss_function.compute_loss(sine_2, sine_1).cpu().numpy())
+    loss_values_sdtw.append(tmp_loss)
+
 # Compute loss for block-SDTW
 config_loss['recon_loss_type'] = 4
 for i in range(len(block_size_list)) :
@@ -91,24 +105,12 @@ for i in range(len(block_size_list)) :
 
         # loss_function = reconstruction_loss(config_loss)
         tmp_loss, block_values = block_sdtw_for_analysis(sine_1, sine_2, sdtw_loss_function,config_loss['block_size'], config_loss['recon_loss_type'], config_loss['shift'], config_loss['normalize_by_block_size'])
-        if normalize_by_n_of_block : tmp_loss /= len(block_values)
+        
+        # Normalize block-SDTW by the values of SDTW
+        tmp_loss /= loss_values_sdtw[j]
 
         loss_values_per_block_size[i, j] = tmp_loss
 
-# Compute loss for SDTW
-config_loss['recon_loss_type'] = 2
-loss_function_normal_sdtw = reconstruction_loss(config_loss)
-for i in range(len(f_2_list)) :
-    f_2 = f_2_list[i]
-    samples_2 =  2 * np.pi * f_2 * t_samples + shift_2
-    sine_2 = torch.from_numpy(amplitude_2 * np.sin(samples_2))
-    sine_2 = sine_2.unsqueeze(0).unsqueeze(-1).to(device)  
-
-    normal_sdtw_value = np.ones(len(loss_values_per_block_size  )) * float(loss_function_normal_sdtw.compute_loss(sine_1, sine_2).cpu().numpy())
-
-    loss_function = reconstruction_loss(config_loss)
-    tmp_loss = float(loss_function.compute_loss(sine_2, sine_1).cpu().numpy())
-    loss_values_sdtw.append(tmp_loss)
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 # Plot config
@@ -119,10 +121,10 @@ fig, ax = plt.subplots(1, 1, figsize = plot_config['figsize'])
 for i in range(len(block_size_list)) :
     ax.plot(f_2_list, loss_values_per_block_size[i], label = "Block-SDTW - block size = {}".format(block_size_list[i]))
 
-ax.plot(f_2_list, loss_values_sdtw, label = "SDTW", color = 'black')
+# ax.plot(f_2_list, loss_values_sdtw, label = "SDTW", color = 'black')
 
 ax.set_xlabel("$f_2$ [Hz]", fontsize = plot_config['fontsize'])
-ax.set_ylabel("Loss value", fontsize = plot_config['fontsize'])
+ax.set_ylabel("Block-SDTW / SDTW", fontsize = plot_config['fontsize'])
 ax.set_xlim([f_2_list[0], f_2_list[-1]])
 ax.tick_params(axis = 'both', which = 'major', labelsize = plot_config['fontsize'])
 ax.legend(fontsize = plot_config['fontsize'])
@@ -140,4 +142,4 @@ if plot_config['save_fig'] :
     path_save = 'Results/loss_vs_frequency_shift/'
 
     os.makedirs(path_save, exist_ok = True)
-    fig.savefig(path_save + 'f1_{}Hz_A1_{}_f2_{}Hz_A2_{}.png'.format(f_1, amplitude_1, f_2, amplitude_2))
+    fig.savefig(path_save + 'f1_{}Hz_A1_{}_f2_{}Hz_A2_{}_percentage.png'.format(f_1, amplitude_1, f_2, amplitude_2))
