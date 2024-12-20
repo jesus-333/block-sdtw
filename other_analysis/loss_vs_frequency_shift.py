@@ -24,9 +24,9 @@ add_noise = False
 
 t_samples = np.linspace(0, 1, n_samples)
 
-amplitude_1 = 15
-amplitude_2 = 15
-f_1 = 80
+amplitude_1 = 20
+amplitude_2 = 20
+f_1 = 100
 samples_1 =  2 * np.pi * f_1 * t_samples
 sine_1 = torch.from_numpy(amplitude_1 * np.sin(samples_1))  
 

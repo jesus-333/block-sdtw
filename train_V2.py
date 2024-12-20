@@ -20,8 +20,8 @@ length_2 = 100
 config = dict(
     # Training parameters
     batch_size = 30,
-    lr = 0.001,                          # Learning rate (lr)
-    epochs = 60,                       # Number of epochs to train the model
+    lr = 0.001,                         # Learning rate (lr)
+    epochs = 60,                        # Number of epochs to train the model
     use_scheduler = True,               # Use the lr scheduler
     lr_decay_rate = 0.999,              # Parameter of the lr exponential scheduler
     optimizer_weight_decay = 1e-2,      # Weight decay of the optimizer
