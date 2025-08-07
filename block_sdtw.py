@@ -95,7 +95,7 @@ class reconstruction_loss():
             # Extra parameter for the block version
             if config['recon_loss_type'] == 3 or config['recon_loss_type'] == 4 :
                 self.block_size = config['block_size']
-                self.shift = config['shift'] if 'config' else config['block_size']
+                self.shift = config['shift'] if 'shift' in config else config['block_size']
                 self.normalize_by_block_size = config['normalize_by_block_size'] if 'normalize_by_block_size' in config else False
 
                 if self.shift > self.block_size :
