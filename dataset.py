@@ -163,7 +163,7 @@ def visualize_signals(x_1, x_2, x_original = None, t_orig = None, visualize_plot
 
 def visualize_prediction(ts_index, x_orig, start_prediction,
                          x_pred_MSE = None, x_pred_SDTW = None, x_pred_block_SDTW = None,
-                         show_figure = True) :
+                         show_figure = True, path_save : str = None) :
     """
     Function to visualize the prediction of the time series.
 
@@ -183,6 +183,10 @@ def visualize_prediction(ts_index, x_orig, start_prediction,
         The predicted time series using Block SDTW loss, of shape (n_signals, signal_length).
     show_figure : bool, optional
         If True, the figure will be shown. Default is True.
+    path_save : str, optional
+        If provided, the figure will be saved to this path. If None, the figure will not be saved. Default is None.
+        The path should include the filename and the extension (e.g. 'path/to/save/figure.png').
+        If the folder does not exist, it will be created.
     """
     
     # Remove the last dimension if it is 1
@@ -215,6 +219,15 @@ def visualize_prediction(ts_index, x_orig, start_prediction,
 
     fig.tight_layout()
     if show_figure : fig.show()
+    
+    print(f"Visualizing time series {ts_index} with starting point {start_prediction} for prediction")
+    print(path_save)
+    if path_save is not None :
+        folder_path = os.path.dirname(path_save)
+        if not os.path.exists(folder_path) : os.makedirs(folder_path)
+
+        fig.savefig(path_save)
+        print(f"Figure saved to {path_save}")
 
     return fig, ax
 

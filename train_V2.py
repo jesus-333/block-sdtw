@@ -1,7 +1,10 @@
 """
 Advanced version of the of train_V1.py
+
+@author: Alberto Zancanaro (Jesus)
+@organization: Luxembourg Centre for Systems Biomedicine (LCSB)
 """
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 import numpy as np
 from torch import nn
@@ -10,12 +13,13 @@ import dataset
 from model import MultiLayerPerceptron
 from block_sdtw import reconstruction_loss
 
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Settings
 
 n_signals_to_generate = 120
 length_1 = 150
 length_2 = 100
+bandwidth = 10
 
 config = dict(
     # Training parameters
@@ -34,7 +38,7 @@ config = dict(
     device = "cpu",
 )
 
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Dataset creation
 
 # Get dataset
@@ -47,13 +51,13 @@ x_1_train, x_2_train, x_orig_train, t_orig_train = dataset.generate_signals(x_su
 # Generate input signals and the counterpart to predict (test)
 x_1_test, x_2_test, x_orig_test, t_orig_test = dataset.generate_signals(x_test, n_signals_to_generate = n_signals_to_generate , length_1 = length_1, length_2 = length_2)
 
-# Visualize randomlly 4 pairs of signals
+# Visualize randomly 4 pairs of signals
 # for i in range(4) :
 #     idx = np.random.randint(0, n_signals_to_generate)
 #     dataset.visualize_signals(x_1_train[idx], x_2_train[idx], x_orig_train[idx], t_orig_train[idx])
 
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-# Layers defintion
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Layers definition
 
 layers = nn.Sequential(
     nn.Linear(in_features = x_1_train.shape[1], out_features = 256),
@@ -61,31 +65,39 @@ layers = nn.Sequential(
     nn.Linear(in_features = 256, out_features = x_2_train.shape[1])
 )
 
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Model training
 
 # Train and test MSE
 config['recon_loss_type'] = 0
 loss_function = reconstruction_loss(config)
 model = MultiLayerPerceptron(layers, loss_function, config)
-model.fit(x_1_train, x_2_train, max_epochs = config['epochs'])
+model.fit(x_1_train, x_2_train, config)
 y_pred_MSE = model(x_1_test).detach().numpy()
 
 # Train and test SDTW
 config['recon_loss_type'] = 1
 loss_function = reconstruction_loss(config)
 model = MultiLayerPerceptron(layers, loss_function, config)
-model.fit(x_1_train, x_2_train, max_epochs = config['epochs'])
+model.fit(x_1_train, x_2_train, config)
 y_pred_SDTW = model(x_1_test).detach().numpy()
 
 # Train and test block SDTW
 config['recon_loss_type'] = 3
 loss_function = reconstruction_loss(config)
 model = MultiLayerPerceptron(layers, loss_function, config)
-model.fit(x_1_train, x_2_train, max_epochs = config['epochs'])
+model.fit(x_1_train, x_2_train, config)
 y_pred_block_SDTW = model(x_1_test).detach().numpy()
 
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+# Train and test PruneDTW
+config['recon_loss_type'] = 1
+config['bandwidth'] = bandwidth
+loss_function = reconstruction_loss(config)
+model = MultiLayerPerceptron(layers, loss_function, config)
+model.fit(x_1_train, x_2_train, config)
+y_pred_pruned_DTW = model(x_1_test).detach().numpy()
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Plot results
 
 ts_index = np.random.randint(0, n_signals_to_generate)

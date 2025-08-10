@@ -30,6 +30,7 @@ X_subset = X_subset[:50]
 X_subset = X_train
 np.random.shuffle(X_subset)
 
+bandwidth = 10
 config = dict(
     # Training parameters
     batch_size = 30,
@@ -46,13 +47,13 @@ config = dict(
     edge_samples_ignored = 0,           # Ignore this number of samples during the computation of the reconstructation loss
     gamma_dtw = 1,                      # Hyperparameter of the SDTW. Control the steepness of the soft-min inside the SDTW. The closer to 0 the closer the soft-min approximate the real min
     # device = "cuda" if torch.cuda.is_available() else "cpu",
-    device = "cpu",
+    device = "mps",
 )
 
 plot_and_save_all = False
 loss_function = reconstruction_loss(config)
 
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Layers defintion
 
 def get_layer() :
@@ -90,14 +91,14 @@ def save_model(model, config, path, model_name):
     with open(path + 'model_details.txt', 'w') as f:
         f.write(tmp_string)
 
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Model training
 
 # Train and test MSE
 config['recon_loss_type'] = 0
 loss_function = reconstruction_loss(config)
 model = MultiLayerPerceptron(get_layer(), loss_function, config)
-model.fit(X_subset[:, :150], X_subset[:, 150:], max_epochs = config['epochs'])
+model.fit(X_subset[:, :150], X_subset[:, 150:], config)
 y_pred_MSE = model(X_test[:, :150]).detach().numpy()
 save_model(model, config, 'saved_model/', 'model_MSE')
 
@@ -105,7 +106,7 @@ save_model(model, config, 'saved_model/', 'model_MSE')
 config['recon_loss_type'] = 1
 loss_function = reconstruction_loss(config)
 model = MultiLayerPerceptron(get_layer(), loss_function, config)
-model.fit(X_subset[:, :150], X_subset[:, 150:], max_epochs = config['epochs'])
+model.fit(X_subset[:, :150], X_subset[:, 150:], config)
 y_pred_SDTW = model(X_test[:, :150]).detach().numpy()
 save_model(model, config, 'saved_model/', 'model_SDTW')
 
@@ -113,11 +114,20 @@ save_model(model, config, 'saved_model/', 'model_SDTW')
 config['recon_loss_type'] = 3
 loss_function = reconstruction_loss(config)
 model = MultiLayerPerceptron(get_layer(), loss_function, config)
-model.fit(X_subset[:, :150], X_subset[:, 150:], max_epochs = config['epochs'])
+model.fit(X_subset[:, :150], X_subset[:, 150:], config)
 y_pred_block_SDTW = model(X_test[:, :150]).detach().numpy()
 save_model(model, config, 'saved_model/', 'model_block_SDTW')
 
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+# Train and test PrunedDTW
+config['recon_loss_type'] = 1
+config['bandwidth'] = bandwidth
+loss_function = reconstruction_loss(config)
+model = MultiLayerPerceptron(get_layer(), loss_function, config)
+model.fit(X_subset[:, :150], X_subset[:, 150:], config)
+y_pred_pruned_DTW = model(X_test[:, :150]).detach().numpy()
+save_model(model, config, 'saved_model/', 'model_prunedDTW')
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Plot results
 
 # Plot function
@@ -130,6 +140,7 @@ def plot_prediction(ts_index, X_test, y_pred_MSE, y_pred_SDTW, y_pred_block_SDTW
     ax.plot(X_test[ts_index].ravel(), label = 'True')
     ax.plot(np.arange(150, 275), y_pred_MSE[ts_index], 'r-', label = 'MSE', color = 'magenta')
     ax.plot(np.arange(150, 275), y_pred_SDTW[ts_index], 'r-', label = 'SDTW', color = 'b')
+    ax.plot(np.arange(150, 275), y_pred_pruned_DTW[ts_index], 'r-', label = 'Pruned DTW', color = 'orange')
     ax.plot(np.arange(150, 275), y_pred_block_SDTW[ts_index], 'r-', label = 'Block SDTW', color = 'black')
     ax.set_title('Prediction of the time series ' + str(ts_index))
     ax.axvline(x = 150, color = 'r', linestyle = '--')

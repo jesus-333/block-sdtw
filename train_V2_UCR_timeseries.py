@@ -23,7 +23,7 @@ from block_sdtw import reconstruction_loss
 config = dict(
     # Training parameters
     n_dataset_to_use = 1,               # Number of datasets to use from the UCR archive (See notes below for more details)
-    portion_of_signals_for_input = 0.65, # Portion of the signals to use for training (the rest will be used for prediction)
+    portion_of_signals_for_input = -1,  # Portion of the signals to use for training (the rest will be used for prediction)(If negative, the last 100 samples will be used for prediction if the signal is longer than 100 samples; otherwise, the last 50% of the signal will be used for prediction)
     batch_size = -1,                     # Batch size for training
     lr = 0.001,                          # Learning rate (lr)
     max_epochs = 60,                         # Number of epochs to train the model
@@ -55,6 +55,7 @@ list_dataset_to_use = np.random.choice(list_all_dataset_name, size = config['n_d
 
 for i in range(len(list_dataset_to_use)):
     name_dataset = list_dataset_to_use[i]
+    name_dataset = 'Ham'
     print("Dataset {}: {}".format(i, name_dataset))
     
     # Path to the dataset folder
@@ -63,16 +64,24 @@ for i in range(len(list_dataset_to_use)):
     # Get training and test data
     x_orig_train, _, x_orig_test, _ = dataset.read_UCR_dataset(path_folder_dataset, name_dataset)
 
+    # Check portion_of_signals_for_input
+    if config['portion_of_signals_for_input'] < 0 :
+        # If negative, use the last 100 samples for prediction if the signal is longer than 100 samples; otherwise, use the last 50% of the signal for prediction
+        if x_orig_train.shape[1] > 100 :
+            config['portion_of_signals_for_input'] = (x_orig_train.shape[1] - 100) / x_orig_train.shape[1]
+        else :
+            config['portion_of_signals_for_input'] = 0.5
+
     # Divide the training data in input signal and signal to predict (TRAIN)
     x_1_train, x_2_train = dataset.generate_signals_V2(x_orig_train, int(x_orig_train.shape[1] * config['portion_of_signals_for_input']))
 
     # Divide the test data in input signal and signal to predict (TEST)
     x_1_test, x_2_test = dataset.generate_signals_V2(x_orig_test, int(x_orig_test.shape[1] * config['portion_of_signals_for_input']))
 
-    # print("Shape of x_1_train: ", x_1_train.shape)
-    # print("Shape of x_2_train: ", x_2_train.shape)
-    # print("Shape of x_1_test: ", x_1_test.shape)
-    # print("Shape of x_2_test: ", x_2_test.shape)
+    print("Shape of x_1_train: ", x_1_train.shape)
+    print("Shape of x_2_train: ", x_2_train.shape)
+    print("Shape of x_1_test: ", x_1_test.shape)
+    print("Shape of x_2_test: ", x_2_test.shape)
 
     # Visualize randomly 4 pairs of signals
     # for i in range(4) :
@@ -91,10 +100,22 @@ for i in range(len(list_dataset_to_use)):
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     # Layers definition
 
+    n_neurons = 256  # Number of neurons in the hidden layers
+
+    # V1 (1 hidden layer)
     layers = nn.Sequential(
-        nn.Linear(in_features = x_1_train.shape[1], out_features = 256),
+        nn.Linear(in_features = x_1_train.shape[1], out_features = n_neurons),
         nn.GELU(),
-        nn.Linear(in_features = 256, out_features = x_2_train.shape[1])
+        nn.Linear(in_features = n_neurons, out_features = x_2_train.shape[1])
+    )
+
+    # V2 (2 hidden layers)
+    layers = nn.Sequential(
+        nn.Linear(in_features = x_1_train.shape[1], out_features = n_neurons),
+        nn.GELU(),
+        nn.Linear(in_features = n_neurons, out_features = n_neurons),
+        nn.GELU(),
+        nn.Linear(in_features = n_neurons, out_features = x_2_train.shape[1])
     )
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -128,7 +149,8 @@ for i in range(len(list_dataset_to_use)):
     # Plot results
 
     ts_index = np.random.randint(0, x_1_test.shape[0])
-    start_prediction = int(x_1_test.shape[1] * config['portion_of_signals_for_input'])
+    start_prediction = int(x_orig_test.shape[1] * config['portion_of_signals_for_input'])
+    path_save = f"./Results/UCR_timeseries/{name_dataset}/time_series_{ts_index}.png"
 
-    dataset.visualize_prediction(ts_index, x_orig_test, start_prediction, y_pred_MSE, y_pred_SDTW, y_pred_block_SDTW)
+    dataset.visualize_prediction(ts_index, x_orig_test, start_prediction, y_pred_MSE, y_pred_SDTW, y_pred_block_SDTW, path_save = path_save)
 

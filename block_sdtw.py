@@ -88,9 +88,10 @@ class reconstruction_loss():
         elif config['recon_loss_type'] == 1 or config['recon_loss_type'] == 2 or \
              config['recon_loss_type'] == 3 or config['recon_loss_type'] == 4: # SDTW/SDTW divergence/Block-SDTW/Block-SDTW-Divergence
             gamma_dtw = config['gamma_dtw'] if 'gamma_dtw' in config else 1
-            use_cuda = True if config['device'] == 'cuda' else False
+            bandwidth = config['bandwidth'] if 'bandwidth' in config else None
+            use_cuda  = True if config['device'] == 'cuda' else False
             config['soft_DTW_type'] = config['recon_loss_type']
-            self.recon_loss_function = SoftDTW(use_cuda = use_cuda, gamma = gamma_dtw)
+            self.recon_loss_function = SoftDTW(use_cuda = use_cuda, gamma = gamma_dtw, bandwidth = bandwidth)
 
             # Extra parameter for the block version
             if config['recon_loss_type'] == 3 or config['recon_loss_type'] == 4 :
