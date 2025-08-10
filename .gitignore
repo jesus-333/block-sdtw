@@ -2,6 +2,8 @@
 *.png
 *.eps
 *.pdf
+*.DS_Store
 data/UCRArchive_2018
 data
 saved_models
+saved_model/UCR
