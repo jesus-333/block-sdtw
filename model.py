@@ -29,6 +29,8 @@ class MultiLayerPerceptron(torch.nn.Module):
         else :
             self.lr_scheduler = None
 
+        self.training_failed = False
+
     def forward(self, X, device = 'cpu'):
         # Convert to torch tensor and move to device if necessary
         if not isinstance(X, torch.Tensor):
@@ -48,7 +50,7 @@ class MultiLayerPerceptron(torch.nn.Module):
 
         return output
 
-    def fit(self, X, y, config : dict):
+    def fit(self, X, y, config : dict) :
         # The fit method performs the actual optimization
         X_torch = torch.Tensor(X).to(config['device'])
         y_torch = torch.Tensor(y).to(config['device'])
@@ -79,6 +81,12 @@ class MultiLayerPerceptron(torch.nn.Module):
                 # Compute Loss
                 loss = self.loss_function.compute_loss(y_pred, y_batch)
 
+                # Check if NaN is present in loss
+                if torch.isnan(loss).sum() > 0 :
+                    print("NaN detected in loss. Stopping training.")
+                    self.training_failed = True
+                    return
+
                 # Backward pass
                 loss.backward()
                 self.optimizer.step()
@@ -86,6 +94,8 @@ class MultiLayerPerceptron(torch.nn.Module):
                 if self.lr_scheduler is not None : self.lr_scheduler.step()
 
             print("Epoch: {}\tLoss = {}".format(e + 1, loss))
+
+        self.training_failed = False
 
     def save_model(self, path : str, filename : str = None) :
         """

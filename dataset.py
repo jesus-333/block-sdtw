@@ -162,8 +162,8 @@ def visualize_signals(x_1, x_2, x_original = None, t_orig = None, visualize_plot
 
 
 def visualize_prediction(ts_index, x_orig, start_prediction,
-                         x_pred_MSE = None, x_pred_SDTW = None, x_pred_block_SDTW = None,
-                         show_figure = True, path_save : str = None) :
+                         x_pred_MSE = None, x_pred_SDTW = None, x_pred_Pruned_DTW = None, x_pred_block_SDTW = None,
+                         show_figure = True, path_save : str = None, plot_title : str = None) :
     """
     Function to visualize the prediction of the time series.
 
@@ -187,6 +187,8 @@ def visualize_prediction(ts_index, x_orig, start_prediction,
         If provided, the figure will be saved to this path. If None, the figure will not be saved. Default is None.
         The path should include the filename and the extension (e.g. 'path/to/save/figure.png').
         If the folder does not exist, it will be created.
+    plot_title : str, optional
+        The title of the plot. If None, no title will be set. Default is None
     """
     
     # Remove the last dimension if it is 1
@@ -202,20 +204,38 @@ def visualize_prediction(ts_index, x_orig, start_prediction,
 
     len_prediction = len(x_pred_MSE[ts_index]) if x_pred_MSE is not None else len(x_pred_SDTW[ts_index]) if x_pred_SDTW is not None else len(x_pred_block_SDTW[ts_index])
 
-    fig, ax = plt.subplots(1, 1, figsize = (10, 10))
+    fig, ax = plt.subplots(1, 1, figsize = (12, 9))
+    fontsize = 22
+    linewidth = 1.3
 
     # t_array = np.arange(0, len(x_orig[ts_index]))
     t_prediction = np.arange(start_prediction, start_prediction + len_prediction)
 
-    ax.plot(x_orig[ts_index].ravel(), label = 'True')
-    if x_pred_MSE is not None        : ax.plot(t_prediction, x_pred_MSE[ts_index], label = 'MSE', color = 'g')
-    if x_pred_SDTW is not None       : ax.plot(t_prediction, x_pred_SDTW[ts_index], label = 'SDTW', color = 'b')
-    if x_pred_block_SDTW is not None : ax.plot(t_prediction, x_pred_block_SDTW[ts_index], label = 'Block SDTW', color = 'r')
-
-    ax.set_title('Prediction of the time series ' + str(ts_index))
+    ax.plot(x_orig[ts_index].ravel(), label = 'Original Signal', color = 'black')
+    if x_pred_MSE is not None        : ax.plot(t_prediction, x_pred_MSE[ts_index],
+                                               linewidth = linewidth,
+                                               label = 'MSE', color = 'g'
+                                               )
+    if x_pred_SDTW is not None       : ax.plot(t_prediction, x_pred_SDTW[ts_index],
+                                               linewidth = linewidth,
+                                               label = 'SDTW', color = 'tab:red'
+                                               )
+    if x_pred_Pruned_DTW is not None : ax.plot(t_prediction, x_pred_Pruned_DTW[ts_index],
+                                               linewidth = linewidth,
+                                               label = 'Pruned DTW', color = 'violet'
+                                               )
+    if x_pred_block_SDTW is not None : ax.plot(t_prediction, x_pred_block_SDTW[ts_index],
+                                               linewidth = linewidth,
+                                               label = 'Block SDTW', color = 'blue'
+                                               )
+    
+    if plot_title is not None : ax.set_title(plot_title)
+    ax.set_ylabel('Amplitude [A.U.]', fontsize = fontsize)
+    ax.set_xlabel('Time samples', fontsize = fontsize)
+    ax.tick_params(axis = 'both', which = 'major', labelsize = fontsize)
 
     ax.grid()
-    ax.legend()
+    ax.legend(fontsize = fontsize)
 
     fig.tight_layout()
     if show_figure : fig.show()
