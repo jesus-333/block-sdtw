@@ -12,3 +12,6 @@ saved_model/block_size_10_predict_portion_85
 saved_model/block_size_10_predict_samples_100
 saved_model/block_size_50_predict_portion_85
 saved_model/block_size_50_predict_samples_100
+saved_model/neurons_256_predict_portion_85
+saved_model/previous_experiments
+saved_model
