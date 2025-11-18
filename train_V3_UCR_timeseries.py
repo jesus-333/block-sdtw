@@ -27,29 +27,51 @@ bandwidth = 1
 config = dict(
     # Training parameters
     portion_of_signals_for_input = 0.85, # Portion of the signals to use for training (the rest will be used for prediction)
-    n_samples_to_predict = 100,            # Number of samples to predict (If negative it is ignored and the portion_of_signals_for_input is used to define the number of samples to predict. Otherwise, this parameter override portion_of_signals_for_input)
+    n_samples_to_predict = -1,            # Number of samples to predict (If negative it is ignored and the portion_of_signals_for_input is used to define the number of samples to predict. Otherwise, this parameter override portion_of_signals_for_input)
     batch_size = -1,                     # Batch size for training
     lr = 0.001,                          # Learning rate (lr)
     max_epochs = 60,                         # Number of epochs to train the model
     use_scheduler = True,                # Use the lr scheduler
     lr_decay_rate = 0.999,               # Parameter of the lr exponential scheduler
     optimizer_weight_decay = 1e-2,       # Weight decay of the optimizer
-    alpha = 1,                           # Multiplier of the reconstruction error
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    # General loss config
     recon_loss_type = 1,                 # Loss function for the reconstruction (0 = L2, 1 = SDTW, 2 = SDTW-Divergence)
+    alpha = 1,                           # Multiplier of the reconstruction error
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    # Soft-DTW/block SDTW config
     block_size = 10,
     edge_samples_ignored = 0,            # Ignore this number of samples during the computation of the reconstructation loss
     gamma_dtw = 1,                       # Hyperparameter of the SDTW. Control the steepness of the soft-min inside the SDTW. The closer to 0 the closer the soft-min approximate the real min
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    # OTW config
+    s = 0.5,
+    beta = 1,
+    m = 1,
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     # device = "cuda" if torch.cuda.is_available() else "cpu",
     device = "mps",
     save_weights = True,                # Save the model weights after training. The path will be defined in the config['save_model_path'] + the name of the dataset
     save_model_path = "./saved_model/", # Path to save the model weights
+    save_every_n_epoch = 10,             # If positive save the model every n epochs
     plot_and_save_prediction = True,     # Plot and save a prediction example after training
 )
+
+loss_function_to_use_list = ['MSE', 'SDTW', 'pruned_SDTW', 'OTW', 'block_SDTW']
+# loss_function_to_use_list = ['block_SDTW']
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Dataset creation
 
 path_UCR_folder = "./data/UCRArchive_2018/"
+
+loss_function_to_recon_loss_type = dict(
+    MSE = 0,
+    SDTW = 1,
+    pruned_SDTW = 1,
+    OTW = 5,
+    block_SDTW = 3,
+)
 
 # Get all the folders inside path_UCR_folder
 list_all_dataset_name = [f for f in os.listdir(path_UCR_folder) if os.path.isdir(os.path.join(path_UCR_folder, f))]
@@ -98,7 +120,7 @@ for i in range(len(list_all_dataset_name)):
     if length_signal_to_predict <= config['block_size'] :
         print(f"Skipping dataset {name_dataset} because the portion of the signal to predict ({length_signal_to_predict}) is too small compared to the block size ({config['block_size']})")
         print("fThe length of the signal to predict should be at least twice the block size (i.e. block_size/length_signal_to_predict <= 0.5)")
-        print(f"Current Ratio: {config['block_size']/length_signal_to_predict:.3f} > 0.5")
+        print(f"Current Ratio: {config['block_size'] / length_signal_to_predict:.3f} > 0.5")
         continue
 
     # Visualize randomly 4 pairs of signals
@@ -138,68 +160,70 @@ for i in range(len(list_all_dataset_name)):
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     # Model training
-
+    
+    # Define save model path
     if config['n_samples_to_predict'] > 0 :
-        save_model_path_for_current_dataset = os.path.join(config['save_model_path'], f"block_size_{config['block_size']}_predict_samples_{config['n_samples_to_predict']}")
-        save_model_path_for_current_dataset = os.path.join(save_model_path_for_current_dataset, name_dataset)
+        folder_name = f"neurons_{n_neurons}_predict_samples_{config['n_samples_to_predict']}"
     else :
-        save_model_path_for_current_dataset = os.path.join(config['save_model_path'], f"block_size_{config['block_size']}_predict_portion_{int(config['portion_of_signals_for_input']*100)}")
-        save_model_path_for_current_dataset = os.path.join(save_model_path_for_current_dataset, name_dataset)
+        folder_name = f"neurons_{n_neurons}_predict_portion_{int(config['portion_of_signals_for_input'] * 100)}"
+
+    save_model_path_for_current_dataset = os.path.join(config['save_model_path'], folder_name)
+    save_model_path_for_current_dataset = os.path.join(save_model_path_for_current_dataset, name_dataset)
 
     print(f"Save model path: {save_model_path_for_current_dataset}")
 
-    # Train and test MSE
-    config['recon_loss_type'] = 0
-    loss_function = reconstruction_loss(config)
-    model = MultiLayerPerceptron(layers, loss_function, config)
-    model.fit(x_1_train, x_2_train, config)
-    y_pred_MSE = model(x_1_test).detach().cpu().numpy()
-    if config['save_weights'] and not model.training_failed : model.save_model(save_model_path_for_current_dataset, filename = "model_MSE.pth")
+    # Dictionary to store prediction results
+    prediction_results = dict()
 
-    # Train and test SDTW
-    config['recon_loss_type'] = 1
-    loss_function = reconstruction_loss(config)
-    model = MultiLayerPerceptron(layers, loss_function, config)
-    model.fit(x_1_train, x_2_train, config)
-    y_pred_SDTW = model(x_1_test).detach().cpu().numpy()
-    if config['save_weights'] and not model.training_failed : model.save_model(save_model_path_for_current_dataset, filename = "model_SDTW.pth")
+    for i in range(len(loss_function_to_use_list)) :
+        # Get loss function
+        loss_function_to_use = loss_function_to_use_list[i]
+        config['recon_loss_type'] = loss_function_to_recon_loss_type[loss_function_to_use]
+        loss_function = reconstruction_loss(config)
 
-    # Train and test Pruned DTW
-    config['recon_loss_type'] = 1
-    config['bandwidth'] = bandwidth
-    loss_function = reconstruction_loss(config)
-    model = MultiLayerPerceptron(layers, loss_function, config)
-    model.fit(x_1_train, x_2_train, config)
-    y_pred_Pruned_DTW = model(x_1_test).detach().cpu().numpy()
-    if config['save_weights'] and not model.training_failed : model.save_model(save_model_path_for_current_dataset, filename = "model_pruned_SDTW.pth")
+        # Create model
+        model = MultiLayerPerceptron(layers, loss_function, config)
+        model.save_model_path = save_model_path_for_current_dataset
 
-    # Train and test block SDTW
-    config['recon_loss_type'] = 3
-    loss_function = reconstruction_loss(config)
-    model = MultiLayerPerceptron(layers, loss_function, config)
-    model.fit(x_1_train, x_2_train, config)
-    y_pred_block_SDTW = model(x_1_test).detach().cpu().numpy()
-    if config['save_weights'] and not model.training_failed : model.save_model(save_model_path_for_current_dataset, filename = "model_block_SDTW.pth")
+        model_name = f'model_block_SDTW_{config["block_size"]}' if loss_function_to_use == 'block_SDTW' else f'model_{loss_function_to_use}'
+        model.model_name = f"{model_name}"
+
+        # Train model
+        model.fit(x_1_train, x_2_train, config)
+
+        # Save prediction on test set and model weights
+        if not model.training_failed :
+            prediction_results[loss_function_to_use] = model(x_1_test).detach().cpu().numpy()
+            if config['save_weights'] : model.save_model(save_model_path_for_current_dataset, filename = f"{model_name}_END")
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     # Plot results
     # Randomly select two time series from the test set and visualize the prediction
-    if config['plot_and_save_prediction'] and not model.training_failed :
+    if config['plot_and_save_prediction'] and len(prediction_results) > 0 :
 
         if config['n_samples_to_predict'] > 0 :
-            path_save_plot  = os.path.join(config['save_model_path'], f"block_size_{config['block_size']}_predict_samples_{config['n_samples_to_predict']}")
+            folder_name = f"neurons_{n_neurons}_predict_samples_{config['n_samples_to_predict']}"
         else :
-            path_save_plot = os.path.join(config['save_model_path'], f"block_size_{config['block_size']}_predict_portion_{int(config['portion_of_signals_for_input']*100)}")
+            folder_name = f"neurons_{n_neurons}_predict_portion_{int(config['portion_of_signals_for_input'] * 100)}"
+
+        path_save_plot = os.path.join(config['save_model_path'], folder_name)
         os.makedirs(path_save_plot, exist_ok = True)
 
         start_prediction = int(x_orig_test.shape[1] * config['portion_of_signals_for_input'])
 
+        x_pred_list = []
+        x_pred_label = []
+
+        for loss_function_to_use in prediction_results :
+            x_pred_list.append(prediction_results[loss_function_to_use])
+            x_pred_label.append(loss_function_to_use)
+
         ts_index = np.random.randint(0, x_1_test.shape[0])
         tmp_path_save_plot = f"{path_save_plot}/0_plot_prediction/{name_dataset}_{ts_index}.png"
-        dataset.visualize_prediction(ts_index, x_orig_test, start_prediction, y_pred_MSE, y_pred_SDTW, y_pred_Pruned_DTW, y_pred_block_SDTW,
+        dataset.visualize_prediction(ts_index, x_orig_test, start_prediction, x_pred_list, x_pred_label,
                                      show_figure = False, path_save = tmp_path_save_plot, plot_title = f"Dataset: {name_dataset} - idx {ts_index}")
 
         ts_index = np.random.randint(0, x_1_test.shape[0])
         tmp_path_save_plot = f"{path_save_plot}/0_plot_prediction/{name_dataset}_{ts_index}.png"
-        dataset.visualize_prediction(ts_index, x_orig_test, start_prediction, y_pred_MSE, y_pred_SDTW, y_pred_Pruned_DTW, y_pred_block_SDTW,
+        dataset.visualize_prediction(ts_index, x_orig_test, start_prediction, x_pred_list, x_pred_label,
                                      show_figure = False, path_save = tmp_path_save_plot, plot_title = f"Dataset: {name_dataset} - idx {ts_index}")

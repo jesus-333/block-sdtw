@@ -31,6 +31,11 @@ class MultiLayerPerceptron(torch.nn.Module):
 
         self.training_failed = False
 
+        # Save model configuration options
+        self.save_model_path    = config['save_model_path'] if 'save_model_path' in config else "./saved_model/"
+        self.model_name         = config['model_name'] if 'model_name' in config else "model.pth"
+        self.save_every_n_epoch = config['save_every_n_epoch'] if 'save_every_n_epoch' in config else -1
+
     def forward(self, X, device = 'cpu'):
         # Convert to torch tensor and move to device if necessary
         if not isinstance(X, torch.Tensor):
@@ -67,6 +72,9 @@ class MultiLayerPerceptron(torch.nn.Module):
         # Move model to the specified device
         self.to(config['device'])
 
+        # Backup of model parameters in case of NaN during training
+        backup_state_dict = self.state_dict()
+
         for e in range(config['max_epochs']):
 
             for i, (X_batch, y_batch) in enumerate(dataloader):
@@ -83,7 +91,11 @@ class MultiLayerPerceptron(torch.nn.Module):
 
                 # Check if NaN is present in loss
                 if torch.isnan(loss).sum() > 0 :
-                    print("NaN detected in loss. Stopping training.")
+                    # If NaN is detected, restore the paramaters from previous epoch and stop training
+
+                    print("NaN detected in loss. Parameters restored from previous epoch. Training stopped.")
+                    self.load_state_dict(backup_state_dict)
+
                     self.training_failed = True
                     return
 
@@ -93,23 +105,36 @@ class MultiLayerPerceptron(torch.nn.Module):
                 
                 if self.lr_scheduler is not None : self.lr_scheduler.step()
 
+                backup_state_dict = self.state_dict()
+
             print("Epoch: {}\tLoss = {}".format(e + 1, loss))
+            if self.save_every_n_epoch > 0 and (e + 1) % self.save_every_n_epoch == 0 : self.save_model(filename = f'{self.model_name}_epoch_{e + 1}.pth')
 
         self.training_failed = False
 
-    def save_model(self, path : str, filename : str = None) :
+    def save_model(self, path : str = None, filename : str = None) :
         """
-        Save the model to the specified path.
-        If filename is provided, it will be used as the filename. Otherwise, the 'model.pth' will be used.
+        Save the model to the path specified in self.save_model_path with the filename specified in self.model_name.
+        If path is provided, it will override self.save_model_path.
+        if filename is provided, it will override self.model_name.
+
+        Parameters
+        ----------
+        path : str
+            The directory path where the model will be saved. If None, uses self.save_model_path
+            (By default, if not provided during initialization, it is self.save_model_path = "./saved_model/")
+        filename : str
+            The filename for the saved model. If None, uses self.model_name.pth
+            (By default, if not provided during initialization, it is self.model_name = 'model')
         """
     
-        if not os.path.exists(path):
-            os.makedirs(path)
+        if not os.path.exists(self.save_model_path) :
+            os.makedirs(self.save_model_path)
 
-        if filename is None:
-            filename = 'model.pth'
+        filename = filename if filename is not None else self.model_name
+        filename += '.pth' if not filename.endswith('.pth') else ''
 
-        full_path = os.path.join(path, filename)
+        full_path = os.path.join(self.save_model_path, filename)
         torch.save(self.state_dict(), full_path)
         print(f"Model saved to {full_path}")
 

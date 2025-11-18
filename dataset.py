@@ -162,7 +162,7 @@ def visualize_signals(x_1, x_2, x_original = None, t_orig = None, visualize_plot
 
 
 def visualize_prediction(ts_index, x_orig, start_prediction,
-                         x_pred_MSE = None, x_pred_SDTW = None, x_pred_Pruned_DTW = None, x_pred_block_SDTW = None,
+                         x_pred_list : list, x_pred_label : list[str],
                          show_figure = True, path_save : str = None, plot_title : str = None) :
     """
     Function to visualize the prediction of the time series.
@@ -175,12 +175,10 @@ def visualize_prediction(ts_index, x_orig, start_prediction,
         The original time series data of shape (n_signals, signal_length).
     start_prediction : int
         The starting point of the prediction in the time series.
-    x_pred_MSE : numpy array, optional
-        The predicted time series using MSE loss, of shape (n_signals, signal_length).
-    x_pred_SDTW : numpy array, optional
-        The predicted time series using SDTW loss, of shape (n_signals, signal_length).
-    x_pred_block_SDTW : numpy array, optional
-        The predicted time series using Block SDTW loss, of shape (n_signals, signal_length).
+    x_pred_list : list
+        A list containing the predicted time series data. Each element of the list should be a numpy array of shape (n_signals, signal_length).
+    x_pred_label : list of str
+        A list containing the labels for each predicted time series in `x_pred_list`. The length of this list should be the same as the length of `x_pred_list`.
     show_figure : bool, optional
         If True, the figure will be shown. Default is True.
     path_save : str, optional
@@ -193,42 +191,36 @@ def visualize_prediction(ts_index, x_orig, start_prediction,
     
     # Remove the last dimension if it is 1
     x_orig = x_orig.squeeze()  # Ensure x_orig is 2D
-    x_pred_MSE = x_pred_MSE.squeeze() if x_pred_MSE is not None else None
-    x_pred_SDTW = x_pred_SDTW.squeeze() if x_pred_SDTW is not None else None
-    x_pred_block_SDTW = x_pred_block_SDTW.squeeze() if x_pred_block_SDTW is not None else None
-    
+
     # Check input data
-    if x_pred_MSE is None and x_pred_SDTW is None and x_pred_block_SDTW is None : raise ValueError("At least one prediction must be provided")
     if x_orig.ndim != 2 : raise ValueError("x_orig must be a 2D array of shape (n_signals, signal_length)")
     if ts_index < 0 or ts_index >= x_orig.shape[0] : raise ValueError(f"ts_index must be between 0 and {x_orig.shape[0] - 1}. Current value is {ts_index}")
-
-    len_prediction = len(x_pred_MSE[ts_index]) if x_pred_MSE is not None else len(x_pred_SDTW[ts_index]) if x_pred_SDTW is not None else len(x_pred_block_SDTW[ts_index])
 
     fig, ax = plt.subplots(1, 1, figsize = (12, 9))
     fontsize = 22
     linewidth = 1.3
-
-    # t_array = np.arange(0, len(x_orig[ts_index]))
-    t_prediction = np.arange(start_prediction, start_prediction + len_prediction)
-
     ax.plot(x_orig[ts_index].ravel(), label = 'Original Signal', color = 'black')
-    if x_pred_MSE is not None        : ax.plot(t_prediction, x_pred_MSE[ts_index],
-                                               linewidth = linewidth,
-                                               label = 'MSE', color = 'g'
-                                               )
-    if x_pred_SDTW is not None       : ax.plot(t_prediction, x_pred_SDTW[ts_index],
-                                               linewidth = linewidth,
-                                               label = 'SDTW', color = 'tab:red'
-                                               )
-    if x_pred_Pruned_DTW is not None : ax.plot(t_prediction, x_pred_Pruned_DTW[ts_index],
-                                               linewidth = linewidth,
-                                               label = 'Pruned DTW', color = 'violet'
-                                               )
-    if x_pred_block_SDTW is not None : ax.plot(t_prediction, x_pred_block_SDTW[ts_index],
-                                               linewidth = linewidth,
-                                               label = 'Block SDTW', color = 'blue'
-                                               )
+
+    color_map = dict(
+        MSE = 'g',
+        SDTW = 'tab:red',
+        pruned_SDTW = 'violet',
+        block_SDTW = 'blue',
+        OTW = 'orange',
+    )
+
+    for i in range(len(x_pred_list)) :
+        x_pred = x_pred_list[i].squeeze()  # Ensure each x_pred is 2D
+        label = x_pred_label[i]
+
+        len_prediction = len(x_pred[ts_index])
     
+        t_prediction = np.arange(start_prediction, start_prediction + len_prediction)
+        ax.plot(t_prediction, x_pred[ts_index],
+                linewidth = linewidth,
+                label = label, color = color_map[label]
+                )
+        
     if plot_title is not None : ax.set_title(plot_title)
     ax.set_ylabel('Amplitude [A.U.]', fontsize = fontsize)
     ax.set_xlabel('Time samples', fontsize = fontsize)

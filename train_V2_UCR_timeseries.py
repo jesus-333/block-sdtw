@@ -16,6 +16,7 @@ from torch import nn
 import dataset
 from model import MultiLayerPerceptron
 from block_sdtw import reconstruction_loss
+import otw
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Settings
@@ -23,24 +24,36 @@ from block_sdtw import reconstruction_loss
 bandwidth = 1
 config = dict(
     # Training parameters
-    n_dataset_to_use = -1,               # Number of datasets to use from the UCR archive (See notes below for more details)
+    n_dataset_to_use = 15,               # Number of datasets to use from the UCR archive (See notes below for more details)
     portion_of_signals_for_input = -1,  # Portion of the signals to use for training (the rest will be used for prediction)(If negative, the last 100 samples will be used for prediction if the signal is longer than 100 samples; otherwise, the last 50% of the signal will be used for prediction)
     batch_size = -1,                     # Batch size for training
     lr = 0.001,                          # Learning rate (lr)
-    max_epochs = 60,                         # Number of epochs to train the model
+    max_epochs = 20,                         # Number of epochs to train the model
     use_scheduler = True,                # Use the lr scheduler
     lr_decay_rate = 0.999,               # Parameter of the lr exponential scheduler
     optimizer_weight_decay = 1e-2,       # Weight decay of the optimizer
-    alpha = 1,                           # Multiplier of the reconstruction error
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    # General loss parameters
     recon_loss_type = 1,                 # Loss function for the reconstruction (0 = L2, 1 = SDTW, 2 = SDTW-Divergence)
+    alpha = 1,                           # Multiplier of the reconstruction error
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    # Soft-DTW/block SDTW config
     block_size = 10,
     edge_samples_ignored = 0,            # Ignore this number of samples during the computation of the reconstructation loss
     gamma_dtw = 1,                       # Hyperparameter of the SDTW. Control the steepness of the soft-min inside the SDTW. The closer to 0 the closer the soft-min approximate the real min
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    # OTW config
+    s = 0.5,
+    beta = 1,
+    m = 1,
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    # Technical stuff
     # device = "cuda" if torch.cuda.is_available() else "cpu",
     device = "mps",
     save_weights = True,                # Save the model weights after training. The path will be defined in the config['save_model_path'] + the name of the dataset
     save_model_path = "./saved_models/", # Path to save the model weights
 )
+
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Dataset creation
@@ -135,7 +148,7 @@ for i in range(len(list_dataset_to_use)):
     loss_function = reconstruction_loss(config)
     model = MultiLayerPerceptron(layers, loss_function, config)
     model.fit(x_1_train, x_2_train, config)
-    y_pred_MSE = model(x_1_test).detach().cpu().numpy()
+    x_pred_MSE = model(x_1_test).detach().cpu().numpy()
     if config['save_weights'] : model.save_model(save_model_path_for_current_dataset, filename = "model_MSE.pth")
 
     # Train and test SDTW
@@ -143,7 +156,7 @@ for i in range(len(list_dataset_to_use)):
     loss_function = reconstruction_loss(config)
     model = MultiLayerPerceptron(layers, loss_function, config)
     model.fit(x_1_train, x_2_train, config)
-    y_pred_SDTW = model(x_1_test).detach().cpu().numpy()
+    x_pred_SDTW = model(x_1_test).detach().cpu().numpy()
     if config['save_weights'] : model.save_model(save_model_path_for_current_dataset, filename = "model_SDTW.pth")
 
     # Train and test Pruned DTW
@@ -152,15 +165,23 @@ for i in range(len(list_dataset_to_use)):
     loss_function = reconstruction_loss(config)
     model = MultiLayerPerceptron(layers, loss_function, config)
     model.fit(x_1_train, x_2_train, config)
-    y_pred_Pruned_DTW = model(x_1_test).detach().cpu().numpy()
-    if config['save_weights'] : model.save_model(save_model_path_for_current_dataset, filename = "model_SDTW.pth")
+    x_pred_Pruned_DTW = model(x_1_test).detach().cpu().numpy()
+    if config['save_weights'] : model.save_model(save_model_path_for_current_dataset, filename = "model_Pruned_SDTW.pth")
+
+    # Train and test OTW
+    config['recon_loss_type'] = 5
+    loss_function = reconstruction_loss(config)
+    model = MultiLayerPerceptron(layers, loss_function, config)
+    model.fit(x_1_train, x_2_train, config)
+    x_pred_OTW = model(x_1_test).detach().cpu().numpy()
+    if config['save_weights'] : model.save_model(save_model_path_for_current_dataset, filename = "model_OTW.pth")
 
     # Train and test block SDTW
     config['recon_loss_type'] = 3
     loss_function = reconstruction_loss(config)
     model = MultiLayerPerceptron(layers, loss_function, config)
     model.fit(x_1_train, x_2_train, config)
-    y_pred_block_SDTW = model(x_1_test).detach().cpu().numpy()
+    x_pred_block_SDTW = model(x_1_test).detach().cpu().numpy()
     if config['save_weights'] : model.save_model(save_model_path_for_current_dataset, filename = "model_block_SDTW.pth")
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -170,9 +191,12 @@ for i in range(len(list_dataset_to_use)):
     start_prediction = int(x_orig_test.shape[1] * config['portion_of_signals_for_input'])
     path_save = f"./Results/UCR_timeseries/{name_dataset}/time_series_{ts_index}.png"
 
-    # y_pred_MSE = None
+    # x_pred_MSE = None
     # ts_index = 754
     # path_save = f"./Results/UCR_timeseries_PAPER/{name_dataset}_time_series_{ts_index}.pdf"
 
-    dataset.visualize_prediction(ts_index, x_orig_test, start_prediction, y_pred_MSE, y_pred_SDTW, y_pred_Pruned_DTW, y_pred_block_SDTW, path_save = path_save)
+    x_pred_list = [x_pred_MSE, x_pred_SDTW, x_pred_Pruned_DTW, x_pred_block_SDTW, x_pred_OTW]
+    x_pred_label = ['MSE', 'SDTW', 'Pruned_SDTW', 'Block_SDTW', 'OTW']
+
+    dataset.visualize_prediction(ts_index, x_orig_test, start_prediction, x_pred_list, x_pred_label, path_save = path_save)
 

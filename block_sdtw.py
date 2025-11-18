@@ -6,6 +6,8 @@ import torch.nn.functional as F
 
 from soft_dtw_cuda import SoftDTW
 from numba import jit
+
+import otw
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 def block_sdtw(x : torch.tensor, x_r : torch.tensor, 
@@ -103,8 +105,12 @@ class reconstruction_loss():
                     print("Shift cannot be bigger than block size. Current values shift = {}, block_size = {}".format(self.shift, self.block_size))
                     print("Set shift = block_size")
                     self.shift = self.block_size
+        elif config['recon_loss_type'] == 5 : # OTW
+            self.s = config['s'] if 's' in config else 0.5
+            self.m = config['m'] if 'm' in config else 1
+            self.beta = config['beta'] if 'beta' in config else 1
         else :
-            raise ValueError("recon_loss_type must have an integer value between 0 and 3. Current value is {}".format(config['recon_loss_type']))
+            raise ValueError("recon_loss_type must have an integer value between 0 and 5. Current value is {}".format(config['recon_loss_type']))
         self.recon_loss_type = config['recon_loss_type']
 
         self.edge_samples_ignored = config['edge_samples_ignored'] if 'edge_samples_ignored' in config else 0
@@ -128,16 +134,19 @@ class reconstruction_loss():
             tmp_recon_loss = dtw_xy - 0.5 * (dtw_xx + dtw_yy)
         elif self.recon_loss_type == 3 or self.recon_loss_type == 4: # Block-SDTW/Block-SDTW-Divergence
             tmp_recon_loss = block_sdtw(x, x_r, 
-                                        self.recon_loss_function, 
+                                        self.recon_loss_function,
                                         self.block_size, self.recon_loss_type, self.shift,
                                         self.normalize_by_block_size,
                                         )
+        elif self.recon_loss_type == 5 :
+            tmp_recon_loss = otw.otw_distance(x.squeeze(), x_r.squeeze(), self.m, self.s, self.beta)
         else :
             str_error = "soft_DTW_type must have one of the following values:\n"
             str_error += "\t 1 (classical SDTW)"
-            str_error += "\t 1 (SDTW divergence)"
-            str_error += "\t 1 (Block SDTW)"
-            str_error += "\t 1 (Block-SDTW-Divergence)"
+            str_error += "\t 2 (SDTW divergence)"
+            str_error += "\t 3 (Block SDTW)"
+            str_error += "\t 4 (Block-SDTW-Divergence)"
+            str_error += "\t 5 (OTW)"
             str_error += "Current values is {}".format(self.recon_loss_type)
             raise ValueError(str_error)
 
@@ -163,9 +172,9 @@ def block_sdtw_for_analysis(x : torch.tensor, x_r : torch.tensor,
     block_values = []
 
     while continue_cylce :
-        # Get indicies for the block
+        # Get indexes for the block
         idx_1 = int(i * block_size)
-        idx_1 = int(i * shift)
+        # idx_1 = int(i * shift)
         idx_2 = int((i + 1) * block_size) if int((i + 1) * block_size) < x.shape[1] else -1
 
         # Get block of the signal
