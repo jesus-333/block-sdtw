@@ -34,12 +34,12 @@ from model import MultiLayerPerceptron
 plot_config = dict(
     # Info about the data used for training and prediction
     portion_of_signals_for_input = 0.85, # Portion of the signals to use for training (the rest will be used for prediction)
-    n_samples_to_predict = -1,            # Number of samples to predict (If negative it is ignored and the portion_of_signals_for_input is used to define the number of samples to predict. Otherwise, this parameter override portion_of_signals_for_input)
+    n_samples_to_predict = 100,            # Number of samples to predict (If negative it is ignored and the portion_of_signals_for_input is used to define the number of samples to predict. Otherwise, this parameter override portion_of_signals_for_input)
     block_size = 10,
-    normalize_0_1_range = False,        # Normalize each signal between 0 and 1 before DTW computation
+    normalize_0_1_range = True,        # Normalize each signal between 0 and 1 before DTW computation
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    clip_results = True,               # If True each row will have values 1, 2, 3 corresponding to the best, second best and third best method for each dataset
-    figsize = (12, 6),
+    clip_results = False,               # If True each row will have values 1, 2, 3 corresponding to the best, second best and third best method for each dataset
+    figsize = (18, 12),
     cmap = 'Reds',
     aspect = 'auto',
 )
@@ -129,4 +129,25 @@ axs[1].set_xticklabels(xticks_labels_test, rotation = 90)
 
 fig.tight_layout()
 plt.show()
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Save plot
+
+if plot_config['n_samples_to_predict'] > 0 :
+    path_save_plot = f"./saved_model/block_size_{plot_config['block_size']}_predict_samples_{plot_config['n_samples_to_predict']}/0_comparison/"
+else :
+    path_save_plot = f"./saved_model/block_size_{plot_config['block_size']}_predict_portion_{int(plot_config['portion_of_signals_for_input'] * 100)}/0_comparison/"
+
+if plot_config['normalize_0_1_range'] :
+    path_save_plot += "normalized_"
+
+if plot_config['clip_results'] :
+    path_save_plot += "clipped_results_"
+
+fig.savefig(path_save_plot + "comparison_average_error_prediction.png")
+
+
+
+
+
 

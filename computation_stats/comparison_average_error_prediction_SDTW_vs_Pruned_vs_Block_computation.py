@@ -38,7 +38,7 @@ model_config = dict(
     block_size = 50,
     device = "mps",
     model_weights_path = "./saved_model/", # Path to save the model weights
-    normalize_0_1_range = False,        # Normalize each signal between 0 and 1 before DTW computation
+    normalize_0_1_range = True,        # Normalize each signal between 0 and 1 before DTW computation
 )
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
