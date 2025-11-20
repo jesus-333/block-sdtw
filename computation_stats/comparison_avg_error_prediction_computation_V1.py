@@ -1,11 +1,11 @@
 """
-Compare the prediction of model trained with SDTW, Pruned SDTW and Block SDTW.
+Compare the prediction of model trained with the various loss functions (MSE, SDTW, SDTW divergence, Pruned SDTW, OTW, Block SDTW)
 For each dataset the average prediction error is computed.
 
 To compute the average prediction error we follow these steps:
-- Train the model with SDTW/Pruned SDTW/Block SDTW (script train_V3_UCR_timeseries.py) (The training is done with raw data)
-- Load the specific dataset and load the weights of the model trained with SDTW/Pruned SDTW/Block SDTW on the dataset
-- Compute the signal prediction on the test set
+- Train the model with the various loss functions (script train_V3_UCR_timeseries.py) (The training is done with raw data)
+- Load the specific dataset and load the weights of the model trained on that dataset
+- Compute the signal prediction on the test set (for each model obtained with the various loss functions)
 - Normalize the predicted signal and the ground truth signal between 0 and 1
 - Compare the signal prediction with the ground truth using the standard DTW function for all 3 methods.
 
@@ -20,7 +20,6 @@ Notes :
 # Imports
 
 import dtw
-import matplotlib.pyplot as plt
 import numpy as np
 import os
 import torch
@@ -35,10 +34,23 @@ model_config = dict(
     # Training parameters
     portion_of_signals_for_input = 0.85, # Portion of the signals to use for training (the rest will be used for prediction)
     n_samples_to_predict = -1,            # Number of samples to predict (If negative it is ignored and the portion_of_signals_for_input is used to define the number of samples to predict. Otherwise, this parameter override portion_of_signals_for_input)
+    epoch = -1,
     block_size = 50,
     device = "mps",
     model_weights_path = "./saved_model/", # Path to save the model weights
     normalize_0_1_range = True,        # Normalize each signal between 0 and 1 before DTW computation
+)
+
+loss_function_to_use_list = ['MSE', 'SDTW', 'SDTW_divergence', 'pruned_SDTW', 'OTW', 'block_SDTW_10', 'block_SDTW_50']
+
+loss_function_to_idx = dict(
+    MSE = 0,
+    SDTW = 1,
+    SDTW_divergence = 2,
+    pruned_SDTW = 3,
+    OTW = 4,
+    block_SDTW_10 = 5,
+    block_SDTW_50 = 6
 )
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -50,14 +62,19 @@ path_UCR_folder = "./data/UCRArchive_2018/"
 list_all_dataset_name = [f for f in os.listdir(path_UCR_folder) if os.path.isdir(os.path.join(path_UCR_folder, f))]
 
 # Matrix to store the average errors
-average_errors_matrix_train = np.zeros((len(list_all_dataset_name), 3)) # Columns: SDTW, Pruned SDTW, Block SDTW
-average_errors_matrix_test  = np.zeros((len(list_all_dataset_name), 3)) # Columns: SDTW, Pruned SDTW, Block SDTW
+# TODO add the possibility to load matrices from previous computations and update them
+average_errors_matrix_train = np.zeros((len(list_all_dataset_name), 7)) # Columns: SDTW, Pruned SDTW, Block SDTW
+average_errors_matrix_test  = np.zeros((len(list_all_dataset_name), 7)) # Columns: SDTW, Pruned SDTW, Block SDTW
 
-orginal_n_samples_to_predict = model_config['n_samples_to_predict']
+# variable to store distance lists (they will be later converted to numpy arrays)
+distance_matrix_train = []
+distance_matrix_test  = []
+
+original_n_samples_to_predict = model_config['n_samples_to_predict']
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-def get_model_and_load_weights(model_config : dict, model_weights_path : str, training_modality : str) :
+def get_model_and_load_weights(model_config : dict, model_weights_path : str, training_modality : str, epoch : int = -1) :
     """
     Get the model and load the weights from the specified path.
 
@@ -68,12 +85,8 @@ def get_model_and_load_weights(model_config : dict, model_weights_path : str, tr
     model_weights_path : str
         Path to the model weights.
     training_modality : str
-        Training modality. It can be "SDTW", "pruned_SDTW" or "block_SDTW".
+        Training modality. Used to load the correct model weights.
     """
-
-    # Check training modality
-    if training_modality not in ["SDTW", "pruned_SDTW", "block_SDTW"] :
-        raise ValueError(f"Invalid training modality: {training_modality}. It must be 'SDTW', 'pruned_SDTW' or 'block_SDTW'.")
 
     # Number of neurons in the hidden layers
     n_neurons = 256
@@ -91,13 +104,13 @@ def get_model_and_load_weights(model_config : dict, model_weights_path : str, tr
     model = MultiLayerPerceptron(layers, loss_function = None, config = model_config)
 
     # Load model weights
-    model_weights_path = f"{model_weights_path}model_{training_modality}.pth"
+    if epoch == -1 : epoch = 'END'
+    model_weights_path = f"{model_weights_path}model_{training_modality}_{epoch}.pth"
     model.load_state_dict(torch.load(model_weights_path, map_location = model_config['device']))
 
     return model
 
-
-def compute_average_error(x_input, x_ground_truth, model, model_config : dict) : 
+def compute_average_error(x_input, x_ground_truth, model, model_config : dict) :
     """
     Compute the average error between the predicted signal and the ground truth signal using standard DTW.
     The predicted signal is obtained by passing x_input through the model.
@@ -105,9 +118,9 @@ def compute_average_error(x_input, x_ground_truth, model, model_config : dict) :
     Parameters
     ----------
     x_input : np.ndarray
-        Input signal to the model. It has shape (n_samples, input_signal_length), with n_sample the number of samples in the dataset.
+        Input signal to the model. It has shape (n_signals, input_signal_length)
     x_ground_truth : np.ndarray
-        Ground truth signal. It has shape (n_samples, output_signal_length), with n_sample the number of samples in the dataset.
+        Ground truth signal. It has shape (n_signals, output_signal_length)
     model : torch.nn.Module
         Trained model to use for prediction.
     model_config : dict
@@ -144,14 +157,14 @@ def compute_average_error(x_input, x_ground_truth, model, model_config : dict) :
     # Compute average error over all samples
     average_error = np.mean(distance_list)
 
-    return average_error
+    return average_error, distance_list
 
 def predict_signal(x_input, model, model_config) :
     """
     Parameters
     ----------
     x_input : np.ndarray
-        Input signal to the model. It has shape (n_samples, input_signal_length), with n_sample the number of samples in the dataset.
+        Input signal to the model. It has shape (n_signals, input_signal_length)
     model : torch.nn.Module
         Trained model to use for prediction.
     model_config : dict
@@ -170,7 +183,7 @@ def predict_signal(x_input, model, model_config) :
 
     return x_pred_tensor
 
-def compute_distance_ground_truth_prediction(x_ground_truth, x_predict) :
+def compute_distance_ground_truth_prediction(x_ground_truth, x_predict) -> list :
     """
     Compute the average error between the predicted signal and the ground truth signal using standard DTW.
     The predicted signal is obtained by passing x_input through the model.
@@ -178,9 +191,14 @@ def compute_distance_ground_truth_prediction(x_ground_truth, x_predict) :
     Parameters
     ----------
     x_ground_truth : np.ndarray
-        Ground truth signal. It has shape (n_samples, output_signal_length), with n_sample the number of samples in the dataset.
+        Ground truth signal. It has shape (n_signals, output_signal_length)
     x_predict : np.ndarray
-        Predicted signal. It has shape (n_samples, output_signal_length), with n_sample the number of samples in the dataset.
+        Predicted signal. It has shape (n_signals, output_signal_length)
+
+    Returns
+    -------
+    distance_list : list
+        List containing the average error per signal in the batch.
     """
 
     distance_list = []
@@ -199,6 +217,7 @@ def compute_distance_ground_truth_prediction(x_ground_truth, x_predict) :
 
     return distance_list
 
+max_n_signals = -1
 
 for i in range(len(list_all_dataset_name)):
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -212,9 +231,12 @@ for i in range(len(list_all_dataset_name)):
     
     # Path to the model weights
     if model_config['n_samples_to_predict'] > 0 :
-        path_weights = f"{model_config['model_weights_path']}block_size_{model_config['block_size']}_predict_samples_{model_config['n_samples_to_predict']}/{name_dataset}/"
+        folder_name = f"neurons_256_predict_samples_{model_config['n_samples_to_predict']}"
     else :
-        path_weights = f"{model_config['model_weights_path']}block_size_{model_config['block_size']}_predict_portion_{int(model_config['portion_of_signals_for_input'] * 100)}/{name_dataset}/"
+        folder_name = f"neurons_256_predict_portion_{int(model_config['portion_of_signals_for_input'] * 100)}"
+
+    path_weights = f"{model_config['model_weights_path']}{folder_name}/{name_dataset}/"
+    print(path_weights)
 
     # Check if the model weights folder exists
     if not os.path.exists(path_weights) :
@@ -246,90 +268,95 @@ for i in range(len(list_all_dataset_name)):
     # Note that this happens only if n_samples_to_predict < 0
     if model_config['n_samples_to_predict'] < 0 : model_config['n_samples_to_predict'] = x_2_train.shape[1]
 
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    # --- SDTW ---
-    # Get model and load weights
-    model_for_prediction = get_model_and_load_weights(model_config, path_weights, "SDTW")
+    for j in range(len(loss_function_to_use_list)) :
+        # Get loss functions label and index
+        loss_function_to_use = loss_function_to_use_list[j]
+        idx_loss_function = loss_function_to_idx[loss_function_to_use]
+        print(f"  - Loss function: {loss_function_to_use} ({j + 1}/{len(loss_function_to_use_list)})")
 
-    # Compute model predictions and compute average error (TRAIN)
-    try :
-        average_error_train_SDTW = compute_average_error(x_1_train, x_2_train, model_for_prediction, model_config)
-    except ValueError as e :
-        average_error_train_SDTW = 0
-        print(f"Warning: {e}")
-    average_errors_matrix_train[i, 0] = average_error_train_SDTW
+        # Get model and load weights
+        try :
+            model_for_prediction = get_model_and_load_weights(model_config, path_weights, loss_function_to_use, model_config['epoch'])
+        except FileNotFoundError :
+            print(f"    Warning: Model weights not found for loss function {loss_function_to_use}, skipping...")
+            average_errors_matrix_train[i, idx_loss_function] = 0
+            average_errors_matrix_test[i, idx_loss_function]  = 0
+            distance_matrix_train.append([])
+            distance_matrix_test.append([])
+            continue
 
-    # Compute model predictions and compute average error (TEST)
-    try :
-        average_error_test_SDTW = compute_average_error(x_1_test, x_2_test, model_for_prediction, model_config)
-    except ValueError as e:
-        average_error_test_SDTW = 0
-        print(f"Warning: {e}")
+        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        # Compute model predictions and compute average error (TRAIN)
+        try :
+            average_error_train, distance_list_train = compute_average_error(x_1_train, x_2_train, model_for_prediction, model_config)
+        except ValueError as e :
+            average_error_train, distance_list_train = 0, []
+            print(f"Warning: {e}")
+        average_errors_matrix_train[i, idx_loss_function] = average_error_train
+        distance_matrix_train.append(distance_list_train)
 
-    average_errors_matrix_test[i, 0] = average_error_test_SDTW
+        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        # Compute model predictions and compute average error (TEST)
+        try :
+            average_error_test, distance_list_test = compute_average_error(x_1_test, x_2_test, model_for_prediction, model_config)
+        except ValueError as e:
+            average_error_test, distance_list_test = 0, []
+            print(f"Warning: {e}")
+        average_errors_matrix_test[i, idx_loss_function] = average_error_test
+        distance_matrix_test.append(distance_list_test)
 
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    # --- Pruned SDTW ---
-    # Get model and load weights
-    model_for_prediction = get_model_and_load_weights(model_config, path_weights, "pruned_SDTW")
+        # Update max_n_signals
+        if max_n_signals < len(distance_list_train) : max_n_signals = len(distance_list_train)
+        if max_n_signals < len(distance_list_test)  : max_n_signals = len(distance_list_test)
+        
+    # Restore n_samples_to_predict in the model config
+    # This is needed when we compute the errors for the models trained with portion_of_signals_for_input
+    # Due to computation reasons we still use n_samples_to_predict in the dataset generation
+    # So even if we originally set n_samples_to_predict < 0, it will be later set to a positive value corresponding to (1 - portion_of_signals_for_input) * signal_length
+    # To avoid error for those cases we restore the original value of n_samples_to_predict
+    # In case we had set n_samples_to_predict > 0 from the beginning this will not change anything
+    model_config['n_samples_to_predict'] = original_n_samples_to_predict
 
-    # Compute model predictions and compute average error (TRAIN)
-    try :
-        average_error_train_pruned_SDTW = compute_average_error(x_1_train, x_2_train, model_for_prediction, model_config)
-    except ValueError as e :
-        average_error_train_pruned_SDTW = 0 
-        print(f"Warning: {e}")
-    average_errors_matrix_train[i, 1] = average_error_train_pruned_SDTW
-
-    # Compute model predictions and compute average error (TEST)
-    try :
-        average_error_test_pruned_SDTW = compute_average_error(x_1_test, x_2_test, model_for_prediction, model_config)
-    except ValueError as e :
-        average_error_test_pruned_SDTW = 0
-        print(f"Warning: {e}")
-    average_errors_matrix_test[i, 1] = average_error_test_pruned_SDTW
-
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    # --- Block SDTW ---
-
-    # Get model and load weights
-    model_for_prediction = get_model_and_load_weights(model_config, path_weights, "block_SDTW")
-
-    # Compute model predictions and compute average error (TRAIN)
-    try :
-        average_error_train_block_SDTW = compute_average_error(x_1_train, x_2_train, model_for_prediction, model_config)
-    except ValueError as e :
-        average_error_train_block_SDTW = 0
-        print(f"Warning: {e}")
-    average_errors_matrix_train[i, 2] = average_error_train_block_SDTW
-
-    # Compute model predictions and compute average error (TEST)
-    try : 
-        average_error_test_block_SDTW = compute_average_error(x_1_test, x_2_test, model_for_prediction, model_config)
-    except ValueError as e :
-        average_error_test_block_SDTW = 0
-        print(f"Warning: {e}")
-    average_errors_matrix_test[i, 2] = average_error_test_block_SDTW
-
-    model_config['n_samples_to_predict'] = orginal_n_samples_to_predict
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Convert distance lists to numpy arrays
 
+tmp_distance_matrix_train = np.zeros((len(distance_matrix_train), max_n_signals))
+tmp_distance_matrix_test  = np.zeros((len(distance_matrix_test), max_n_signals))
+
+for i in range(len(distance_matrix_train)) :
+    distance_list_train = distance_matrix_train[i]
+    distance_list_test  = distance_matrix_test[i]
+
+    tmp_distance_matrix_train[i, 0:len(distance_list_train)] = np.array(distance_list_train)
+    tmp_distance_matrix_test[i, 0:len(distance_list_test)]   = np.array(distance_list_test)
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Save average errors matrices
+
 if model_config['n_samples_to_predict'] > 0 :
-    path_save = f"{model_config['model_weights_path']}block_size_{model_config['block_size']}_predict_samples_{model_config['n_samples_to_predict']}/0_comparison/"
+    folder_name = f"neurons_256_predict_samples_{model_config['n_samples_to_predict']}"
 else :
-    path_save = f"{model_config['model_weights_path']}block_size_{model_config['block_size']}_predict_portion_{int(model_config['portion_of_signals_for_input'] * 100)}/0_comparison/"
+    folder_name = f"neurons_256_predict_portion_{int(model_config['portion_of_signals_for_input'] * 100)}"
+
+path_save = f"{model_config['model_weights_path']}{folder_name}/0_comparison/"
 
 # Create folder if it does not exist
 if not os.path.exists(path_save) : os.makedirs(path_save)
 
 # Save average errors
 if model_config['normalize_0_1_range'] :
+    # Save normalized average errors and distance matrices as numpy arrays
     np.save(f"{path_save}normalized_average_errors_matrix_train.npy", average_errors_matrix_train)
     np.save(f"{path_save}normalized_average_errors_matrix_test.npy", average_errors_matrix_test)
+    np.save(f"{path_save}normalized_distance_matrix_train.npy", tmp_distance_matrix_train)
+    np.save(f"{path_save}normalized_distance_matrix_test.npy", tmp_distance_matrix_test)
 else :
+    # Save average errors and distance matrices as numpy arrays
     np.save(f"{path_save}average_errors_matrix_train.npy", average_errors_matrix_train)
     np.save(f"{path_save}average_errors_matrix_test.npy", average_errors_matrix_test)
+    np.save(f"{path_save}distance_matrix_train.npy", tmp_distance_matrix_train)
+    np.save(f"{path_save}distance_matrix_test.npy", tmp_distance_matrix_test)
+
 
 
 
