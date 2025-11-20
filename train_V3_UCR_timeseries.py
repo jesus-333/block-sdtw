@@ -40,7 +40,7 @@ config = dict(
     alpha = 1,                           # Multiplier of the reconstruction error
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     # Soft-DTW/block SDTW config
-    block_size = 10,
+    block_size = 50,
     edge_samples_ignored = 0,            # Ignore this number of samples during the computation of the reconstructation loss
     gamma_dtw = 1,                       # Hyperparameter of the SDTW. Control the steepness of the soft-min inside the SDTW. The closer to 0 the closer the soft-min approximate the real min
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -57,8 +57,10 @@ config = dict(
     plot_and_save_prediction = True,     # Plot and save a prediction example after training
 )
 
-loss_function_to_use_list = ['MSE', 'SDTW', 'pruned_SDTW', 'OTW', 'block_SDTW']
-# loss_function_to_use_list = ['block_SDTW']
+loss_function_to_use_list = ['MSE', 'SDTW', 'SDTW_divergence', 'pruned_SDTW', 'OTW', 'block_SDTW']
+loss_function_to_use_list = ['block_SDTW']
+
+n_neurons = 256  # Number of neurons in the hidden layers
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Dataset creation
@@ -68,6 +70,7 @@ path_UCR_folder = "./data/UCRArchive_2018/"
 loss_function_to_recon_loss_type = dict(
     MSE = 0,
     SDTW = 1,
+    SDTW_divergence = 2,
     pruned_SDTW = 1,
     OTW = 5,
     block_SDTW = 3,
@@ -138,27 +141,6 @@ for i in range(len(list_all_dataset_name)):
     if x_1_train.shape[0] >= 100 : config['batch_size'] = 100
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    # Layers definition
-
-    n_neurons = 256  # Number of neurons in the hidden layers
-
-    # V1 (1 hidden layer)
-    layers = nn.Sequential(
-        nn.Linear(in_features = x_1_train.shape[1], out_features = n_neurons),
-        nn.GELU(),
-        nn.Linear(in_features = n_neurons, out_features = x_2_train.shape[1])
-    )
-
-    # V2 (2 hidden layers)
-    layers = nn.Sequential(
-        nn.Linear(in_features = x_1_train.shape[1], out_features = n_neurons),
-        nn.GELU(),
-        nn.Linear(in_features = n_neurons, out_features = n_neurons),
-        nn.GELU(),
-        nn.Linear(in_features = n_neurons, out_features = x_2_train.shape[1])
-    )
-
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     # Model training
     
     # Define save model path
@@ -181,13 +163,35 @@ for i in range(len(list_all_dataset_name)):
         config['recon_loss_type'] = loss_function_to_recon_loss_type[loss_function_to_use]
         loss_function = reconstruction_loss(config)
 
+        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        # Layers definition
+
+        # V1 (1 hidden layer)
+        layers = nn.Sequential(
+            nn.Linear(in_features = x_1_train.shape[1], out_features = n_neurons),
+            nn.GELU(),
+            nn.Linear(in_features = n_neurons, out_features = x_2_train.shape[1])
+        )
+
+        # V2 (2 hidden layers)
+        layers = nn.Sequential(
+            nn.Linear(in_features = x_1_train.shape[1], out_features = n_neurons),
+            nn.GELU(),
+            nn.Linear(in_features = n_neurons, out_features = n_neurons),
+            nn.GELU(),
+            nn.Linear(in_features = n_neurons, out_features = x_2_train.shape[1])
+        )
+
+        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         # Create model
+
         model = MultiLayerPerceptron(layers, loss_function, config)
         model.save_model_path = save_model_path_for_current_dataset
 
         model_name = f'model_block_SDTW_{config["block_size"]}' if loss_function_to_use == 'block_SDTW' else f'model_{loss_function_to_use}'
         model.model_name = f"{model_name}"
 
+        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         # Train model
         model.fit(x_1_train, x_2_train, config)
 
@@ -195,6 +199,8 @@ for i in range(len(list_all_dataset_name)):
         if not model.training_failed :
             prediction_results[loss_function_to_use] = model(x_1_test).detach().cpu().numpy()
             if config['save_weights'] : model.save_model(save_model_path_for_current_dataset, filename = f"{model_name}_END")
+
+        del model, layers, loss_function
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     # Plot results

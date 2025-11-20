@@ -204,6 +204,7 @@ def visualize_prediction(ts_index, x_orig, start_prediction,
     color_map = dict(
         MSE = 'g',
         SDTW = 'tab:red',
+        SDTW_divergence = 'brown',
         pruned_SDTW = 'violet',
         block_SDTW = 'blue',
         OTW = 'orange',
