@@ -1,32 +1,16 @@
 """
-Compare the prediction of model trained with SDTW, Pruned SDTW and Block SDTW.
-For each dataset the average prediction error is computed.
+Plot the results obtained with comparison_avg_error_prediction_computation_V1.py
 
-To compute the average prediction error we follow these steps:
-- Train the model with SDTW/Pruned SDTW/Block SDTW (script train_V3_UCR_timeseries.py) (The training is done with raw data)
-- Load the specific dataset and load the weights of the model trained with SDTW/Pruned SDTW/Block SDTW on the dataset
-- Compute the signal prediction on the test set
-- Normalize the predicted signal and the ground truth signal between 0 and 1
-- Compare the signal prediction with the ground truth using the standard DTW function for all 3 methods.
-
-Notes :
-- The reason to use standard DTW to compare the predictions is due to the fact that the 3 loss functions (SDTW, Pruned SDTW, Block SDTW) have different numerical ranges as output.
-- The use of a 4th function (standard DTW) to compare the predictions allows to have a fair comparison between the 3 methods.
-- Note that each prediction is normalized on the number of samples in the signal. This allow to have an average error per sample
-
+@author: Alberto Zancanaro (Jesus)
+@organization: Luxembourg Centre for Systems Biomedicine (LCSB)
 """
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Imports
 
-import dtw
 import matplotlib.pyplot as plt
 import numpy as np
 import os
-import torch
-
-import dataset
-from model import MultiLayerPerceptron
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Settings

@@ -14,6 +14,8 @@ Notes :
 - The use of a 4th function (standard DTW) to compare the predictions allows to have a fair comparison between the 3 methods.
 - Note that each prediction is normalized on the number of samples in the signal. This allow to have an average error per sample
 
+@author: Alberto Zancanaro (Jesus)
+@organization: Luxembourg Centre for Systems Biomedicine (LCSB)
 """
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
