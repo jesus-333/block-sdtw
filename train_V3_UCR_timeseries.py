@@ -14,6 +14,7 @@ Link download : https://www.cs.ucr.edu/%7Eeamonn/time_series_data_2018/
 
 import numpy as np
 import os
+import torch
 from torch import nn
 
 import dataset
@@ -41,7 +42,7 @@ config = dict(
     alpha = 1,                           # Multiplier of the reconstruction error
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     # Soft-DTW/block SDTW config
-    block_size = 50,
+    block_size = 10,
     edge_samples_ignored = 0,            # Ignore this number of samples during the computation of the reconstructation loss
     gamma_dtw = 1,                       # Hyperparameter of the SDTW. Control the steepness of the soft-min inside the SDTW. The closer to 0 the closer the soft-min approximate the real min
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -50,8 +51,8 @@ config = dict(
     beta = 1,
     m = 1,
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    # device = "cuda" if torch.cuda.is_available() else "cpu",
-    device = "mps",
+    device = "cuda" if torch.cuda.is_available() else "cpu",
+    # device = "mps",
     save_weights = True,                # Save the model weights after training. The path will be defined in the config['save_model_path'] + the name of the dataset
     save_model_path = "./saved_model/", # Path to save the model weights
     save_every_n_epoch = 10,             # If positive save the model every n epochs
