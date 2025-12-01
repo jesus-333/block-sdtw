@@ -76,18 +76,21 @@ def plot_prediction(ts_index, X_test,
 
     fig, ax = plt.subplots(1, 1, figsize = plot_config['figsize'])
 
-    ax.plot(X_test[ts_index].ravel(), label = 'True')
+    ax.plot(X_test[ts_index].ravel(), label = 'Original Signal', color = 'black')
     # ax.plot(np.arange(150, 275), y_pred_MSE[ts_index], label = 'MSE', color = 'magenta', linewidth = plot_config['linewidth'])
-    ax.plot(np.arange(150, 275), y_pred_SDTW[ts_index], label = 'SDTW', color = 'tab:orange', linewidth = plot_config['linewidth'])
-    ax.plot(np.arange(150, 275), y_pred_Pruned_DTW[ts_index], label = 'Pruned DTW (bandwidth = 10)', color = 'tab:purple', linewidth = plot_config['linewidth'])
-    ax.plot(np.arange(150, 275), y_pred_block_SDTW[ts_index], label = 'Block SDTW', color = 'tab:red', linewidth = plot_config['linewidth'])
+    ax.plot(np.arange(150, 275), y_pred_SDTW[ts_index], label = 'SDTW', color = 'tab:red', linewidth = plot_config['linewidth'])
+    ax.plot(np.arange(150, 275), y_pred_Pruned_DTW[ts_index], label = 'Pruned DTW (bandwidth = 10)', color = 'violet', linewidth = plot_config['linewidth'])
+    ax.plot(np.arange(150, 275), y_pred_block_SDTW[ts_index], label = 'Block SDTW', color = 'tab:blue', linewidth = plot_config['linewidth'])
     if plot_config['add_title'] : ax.set_title('Prediction of the time series ' + str(ts_index), fontsize = plot_config['fontsize'])
     ax.axvline(x = 150, color = 'black', linestyle = '--')
 
     ax.grid()
     if plot_config['add_legend'] : ax.legend(fontsize = plot_config['fontsize'])
     ax.set_ylim(X_test[ts_index].min() * 1.1, X_test[ts_index].max() * 1.1)
+    ax.set_ylabel('Amplitude [A.U.]', fontsize = plot_config['fontsize'])
     ax.set_xlim([0, 275])
+    # ax.set_xlim([0, 265])
+    ax.set_xlabel('Time samples', fontsize = plot_config['fontsize'])
     ax.tick_params(axis = 'both', which = 'major', labelsize = plot_config['fontsize'])
 
     fig.tight_layout()
