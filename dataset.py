@@ -42,6 +42,27 @@ def get_subset(x_train, y_train, n = 50) :
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+def z_score_normalization(x : np.ndarray) -> np.ndarray :
+    """
+    Z-score normalization of the input signal
+
+    Parameters
+    ----------
+    x : numpy array
+        The input signal of shape (n_signal, signal_length)
+
+    Returns
+    -------
+    x_normalized : numpy array
+        The normalized signal of shape (n_signal, signal_length)
+    """
+    x_mean = np.mean(x, axis = 1, keepdims = True)
+    x_std  = np.std(x, axis = 1, keepdims = True)
+
+    x_normalized = (x - x_mean) / x_std
+
+    return x_normalized
+
 def generate_signals(x, n_signals_to_generate : int, length_1 : int = 150, length_2 : int = 150) :
     """
     From the input signal 'x', generate 'n_signal' pairs.
@@ -134,6 +155,7 @@ def generate_signals_V2(x : np.ndarray, point_for_division : int) :
 
     return signals_1, signals_2
 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 def visualize_signals(x_1, x_2, x_original = None, t_orig = None, visualize_plot = True) :
     if t_orig is None and x_original is not None : raise ValueError("If the original signal is provided, the starting point of the first signal must be provided")

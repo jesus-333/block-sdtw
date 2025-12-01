@@ -23,7 +23,7 @@ plot_config = dict(
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     clip_results = False,               # If True each row will have values 1, 2, 3 corresponding to the best, second best and third best method for each dataset
     figsize = (18, 12),
-    cmap = 'Reds',
+    cmap = 'Reds_r',
     # cmap = 'RdYlGn',
     aspect = 'auto',
 )
@@ -94,6 +94,9 @@ if plot_config['clip_results'] :
 else :
     vmin_train, vmin_test = 0, 0
     vmax_train, vmax_test = 1, 1
+
+    vmin_train, vmin_test = 0, 0
+    vmax_train, vmax_test = 0.5, 0.5
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Plotting
