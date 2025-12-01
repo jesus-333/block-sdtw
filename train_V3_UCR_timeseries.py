@@ -26,6 +26,7 @@ from block_sdtw import reconstruction_loss
 bandwidth = 1
 config = dict(
     # Training parameters
+    use_z_score_normalization = True,    # If True a z-score normalization will be applied signal by signal within each dataset
     portion_of_signals_for_input = 0.85, # Portion of the signals to use for training (the rest will be used for prediction)
     n_samples_to_predict = -1,            # Number of samples to predict (If negative it is ignored and the portion_of_signals_for_input is used to define the number of samples to predict. Otherwise, this parameter override portion_of_signals_for_input)
     batch_size = -1,                     # Batch size for training
@@ -107,6 +108,11 @@ for i in range(len(list_all_dataset_name)):
             print(f"Current Ratio: {config['n_samples_to_predict']/x_orig_train.shape[1]:.3f} >= 0.5")
             continue
 
+    # (OPTIONAL) Z-score normalization
+    if config['use_z_score_normalization'] :
+        x_orig_train = dataset.z_score_normalization(x_orig_train)
+        x_orig_test = dataset.z_score_normalization(x_orig_test)
+
     # Divide the training data in input signal and signal to predict (TRAIN)
     x_1_train, x_2_train = dataset.generate_signals_V2(x_orig_train, int(x_orig_train.shape[1] * config['portion_of_signals_for_input']))
 
@@ -148,6 +154,8 @@ for i in range(len(list_all_dataset_name)):
         folder_name = f"neurons_{n_neurons}_predict_samples_{config['n_samples_to_predict']}"
     else :
         folder_name = f"neurons_{n_neurons}_predict_portion_{int(config['portion_of_signals_for_input'] * 100)}"
+
+    if config['use_z_score_normalization'] : folder_name += '_z_score'
 
     save_model_path_for_current_dataset = os.path.join(config['save_model_path'], folder_name)
     save_model_path_for_current_dataset = os.path.join(save_model_path_for_current_dataset, name_dataset)
@@ -211,6 +219,8 @@ for i in range(len(list_all_dataset_name)):
             folder_name = f"neurons_{n_neurons}_predict_samples_{config['n_samples_to_predict']}"
         else :
             folder_name = f"neurons_{n_neurons}_predict_portion_{int(config['portion_of_signals_for_input'] * 100)}"
+
+        if config['use_z_score_normalization'] : folder_name += '_z_score'
 
         path_save_plot = os.path.join(config['save_model_path'], folder_name)
         os.makedirs(path_save_plot, exist_ok = True)
