@@ -37,6 +37,9 @@ def otw_distance(x : torch.Tensor, y : torch.Tensor, m : float = 1, s : int | fl
     torch.Tensor
         OTW distance between the two time series
     """
+    
+    # Set temporary to high value to stabilize training
+    # beta = 100
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     # Check inputs
@@ -75,7 +78,6 @@ def smooth_l1_loss(x : torch.Tensor, beta : float, reduction = 'mean') -> torch.
     """
     Computes the smooth l1 of the input tensor x, as defined in equation (9) of the paper.
 
-
     Parameters
     ----------
     x : torch.Tensor
@@ -106,9 +108,9 @@ def window_cumsum(x : torch.Tensor, s : int) -> torch.Tensor :
     """
     Computes the cumulative sum of the input tensor x as defined in equation (7) of the paper.
 
-    Given a time series A represented as an array of values [a1, a2, ..., aL], the window cumsum is computed as "
+    Given a time series A represented as an array of values [a1, a2, ..., aL], the window cumsum is computed as :
     window_cumsum(A) = cumsum(A) - cumsum(A[0:L-s])
-    "
+    (i.e. the cumsum of all the array minus the cumsum of the array excluding the last s elements)
 
     Parameters
     ----------
@@ -124,8 +126,8 @@ def window_cumsum(x : torch.Tensor, s : int) -> torch.Tensor :
     """
 
     cumsum_x = torch.cumsum(x, dim = 1)
-
-    windowed_cumsum = cumsum_x[:, -1] - (cumsum_x[:, :-s][:, -1] if s < x.shape[1] else 0)
+    
+    windowed_cumsum = cumsum_x[:, -1] - (cumsum_x[:, - (s + 1)] if s < x.shape[1] else 0)
 
     return windowed_cumsum
 
