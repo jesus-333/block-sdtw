@@ -4,7 +4,7 @@ For each dataset the average prediction error is computed.
 
 This works similarly to comparison_avg_error_prediction_computation_V1.py but instead of comparing the DTW final values it uses the length of the DTW path vs the signal length.
 
-In this script the final score to evaluate the prediction quality is score = 1 - (signal length / DTW path length)
+In this script the final score (R, from Ratio) to evaluate the prediction quality is defined as R = signal_length / length_dtw_path
 
 The rationale is that if the predicted signal is very similar to the ground truth signal, then the DTW path will be close to the diagonal and its length will be close to the signal length.
 So in the best case scenario DTW path length = signal length => signal length / DTW path length = 1 => score = 0
@@ -19,6 +19,7 @@ On the other hand, the score will become closer to 1 as the DTW path length incr
 
 import numpy as np
 import os
+import pickle
 import torch
 import tslearn.metrics
 
@@ -30,15 +31,16 @@ from model import MultiLayerPerceptron
 
 model_config = dict(
     # Training parameters
+    use_z_score_normalization = True,    # If True a z-score normalization will be applied signal by signal within each dataset
     portion_of_signals_for_input = 0.85, # Portion of the signals to use for training (the rest will be used for prediction)
     n_samples_to_predict = 100,            # Number of samples to predict (If negative it is ignored and the portion_of_signals_for_input is used to define the number of samples to predict. Otherwise, this parameter override portion_of_signals_for_input)
     epoch = -1,
-    block_size = 50,
     device = "mps",
     model_weights_path = "./saved_model/", # Path to save the model weights
 )
 
 loss_function_to_use_list = ['MSE', 'SDTW', 'SDTW_divergence', 'pruned_SDTW', 'OTW', 'block_SDTW_10', 'block_SDTW_50']
+loss_function_to_use_list = ['OTW']
 
 loss_function_to_idx = dict(
     MSE = 0,
@@ -64,8 +66,8 @@ average_scores_matrix_train = np.zeros((len(list_all_dataset_name), 7)) # Column
 average_scores_matrix_test  = np.zeros((len(list_all_dataset_name), 7)) # Columns: SDTW, Pruned SDTW, Block SDTW
 
 # variable to store distance lists (they will be later converted to numpy arrays)
-score_matrix_train = []
-score_matrix_test  = []
+score_lists_train = {}
+score_lists_test  = {}
 
 original_n_samples_to_predict = model_config['n_samples_to_predict']
 
@@ -101,8 +103,9 @@ def get_model_and_load_weights(model_config : dict, model_weights_path : str, tr
     model = MultiLayerPerceptron(layers, loss_function = None, config = model_config)
 
     # Load model weights
-    if epoch == -1 : epoch = 'END'
-    model_weights_path = f"{model_weights_path}model_{training_modality}_{epoch}.pth"
+    if epoch == -1 : epoch_str = 'END'
+    else : epoch_str = f'epoch_{epoch}'
+    model_weights_path = f"{model_weights_path}model_{training_modality}_{epoch_str}.pth"
     model.load_state_dict(torch.load(model_weights_path, map_location = model_config['device']))
 
     return model
@@ -134,7 +137,7 @@ def compute_average_score(x_input, x_ground_truth, model, model_config : dict) -
     # Get model predictions
     x_pred = predict_signal(x_input, model, model_config)
 
-    score_list = compute_distance_ground_truth_prediction(x_ground_truth, x_pred)
+    score_list = compute_score_batch(x_ground_truth, x_pred)
 
     # Compute average error over all samples
     average_score = np.mean(score_list)
@@ -170,9 +173,9 @@ def predict_signal(x_input, model, model_config) -> np.ndarray :
 
     return x_pred_tensor
 
-def compute_distance_ground_truth_prediction(x_ground_truth, x_predict) -> list :
+def compute_score_batch(x_ground_truth, x_predict) -> list :
     """
-    Compute the average error between the predicted signal and the ground truth signal using standard DTW.
+    Compute the score for the current batch of x_predict.
     The predicted signal is obtained by passing x_input through the model.
     
     Parameters
@@ -185,7 +188,7 @@ def compute_distance_ground_truth_prediction(x_ground_truth, x_predict) -> list 
     Returns
     -------
     score_list : list
-        List containing the average error per signal in the batch.
+        List containing the score for each signal in x_predict
     """
 
     score_list = []
@@ -197,10 +200,13 @@ def compute_distance_ground_truth_prediction(x_ground_truth, x_predict) -> list 
         # Compute DTW distance
         dtw_path, _ = tslearn.metrics.dtw_path(x_gt_signal, x_pred_signal)
 
-        # Average error per sample
-        score = 1 - (len(x_gt_signal) / len(dtw_path))
+        # Define the ratio R
+        R = len(x_gt_signal) / len(dtw_path)
+        
+        # Define score S
+        # S = 2 * R - 1
 
-        score_list.append(score)
+        score_list.append(R)
 
     return score_list
 
@@ -209,6 +215,10 @@ max_n_signals = -1
 for i in range(len(list_all_dataset_name)):
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     # Check if the trained model exists for the current dataset/settings
+
+    # Temporary variables to store the score matrices for the current dataset
+    score_lists_train_per_loss_function = dict()
+    score_lists_test_per_loss_function = dict()
 
     # Get dataset name
     name_dataset = list_all_dataset_name[i]
@@ -222,14 +232,16 @@ for i in range(len(list_all_dataset_name)):
     else :
         folder_name = f"neurons_256_predict_portion_{int(model_config['portion_of_signals_for_input'] * 100)}"
 
+    if model_config['use_z_score_normalization'] : folder_name += '_z_score'
+
     path_weights = f"{model_config['model_weights_path']}{folder_name}/{name_dataset}/"
     print(path_weights)
 
     # Check if the model weights folder exists
     if not os.path.exists(path_weights) :
         print(f"Dataset {i}: {name_dataset} - No trained model found, skipping... ({round((i + 1) / len(list_all_dataset_name) * 100, 2)}%)")
-        score_matrix_train.append([])
-        score_matrix_test.append([])
+        score_lists_train[name_dataset] = dict()
+        score_lists_test[name_dataset]  = dict()
         continue
     else :
         print(f"Dataset {i}: {name_dataset} ({round((i + 1) / len(list_all_dataset_name) * 100, 2)}%)")
@@ -242,6 +254,11 @@ for i in range(len(list_all_dataset_name)):
 
     # Get training and test data
     x_orig_train, _, x_orig_test, _ = dataset.read_UCR_dataset(path_folder_dataset, name_dataset)
+
+    # (OPTIONAL) Z-score normalization
+    if model_config['use_z_score_normalization'] :
+        x_orig_train = dataset.z_score_normalization(x_orig_train)
+        x_orig_test = dataset.z_score_normalization(x_orig_test)
 
     # Update portion_of_signals_for_input if n_samples_to_predict is set. portion_of_signals_for_input is used to divide the signals in input signal and signal to predict
     # Remember that n_samples_to_predict override portion_of_signals_for_input if it is > 0
@@ -270,36 +287,40 @@ for i in range(len(list_all_dataset_name)):
             print(f"    Warning: Model weights not found for loss function {loss_function_to_use}, skipping...")
             average_scores_matrix_train[i, idx_loss_function] = 0
             average_scores_matrix_test[i, idx_loss_function]  = 0
-            score_matrix_train.append([])
-            score_matrix_test.append([])
+            score_lists_train_per_loss_function[loss_function_to_use] = []
+            score_lists_test_per_loss_function[loss_function_to_use]  = []
             continue
 
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         # Compute model predictions and compute average error (TRAIN)
         try :
-            average_score_train, score_list_train = compute_average_score(x_1_train, x_2_train, model_for_prediction, model_config)
+            average_score_train, score_list_train_specific_loss_function = compute_average_score(x_1_train, x_2_train, model_for_prediction, model_config)
         except ValueError as e :
-            average_score_train, score_list_train = 0, []
+            average_score_train, score_list_train_specific_loss_function = 0, []
             print(f"Warning: {e}")
         average_scores_matrix_train[i, idx_loss_function] = average_score_train
-        score_matrix_train.append(score_list_train)
+        score_lists_train_per_loss_function[loss_function_to_use] = score_list_train_specific_loss_function
 
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         # Compute model predictions and compute average error (TEST)
         try :
-            average_score_test, score_list_test = compute_average_score(x_1_test, x_2_test, model_for_prediction, model_config)
+            average_score_test, score_list_test_specific_loss_function = compute_average_score(x_1_test, x_2_test, model_for_prediction, model_config)
         except ValueError as e:
-            average_score_test, score_list_test = 0, []
+            average_score_test, score_list_test_specific_loss_function = 0, []
             print(f"Warning: {e}")
         average_scores_matrix_test[i, idx_loss_function] = average_score_test
-        score_matrix_test.append(score_list_test)
+        score_lists_test_per_loss_function[loss_function_to_use] = score_list_test_specific_loss_function
 
         # print(f"\t{max(score_list_train)}, {max(score_list_test)}")
 
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         # Update max_n_signals
-        if max_n_signals < len(score_list_train) : max_n_signals = len(score_list_train)
-        if max_n_signals < len(score_list_test)  : max_n_signals = len(score_list_test)
+        if max_n_signals < len(score_list_train_specific_loss_function) : max_n_signals = len(score_list_train_specific_loss_function)
+        if max_n_signals < len(score_list_test_specific_loss_function)  : max_n_signals = len(score_list_test_specific_loss_function)
+
+    # Save the score matrices inside the dictionary
+    score_lists_train[name_dataset] = score_lists_train_per_loss_function
+    score_lists_test[name_dataset]  = score_lists_test_per_loss_function
         
     # Restore n_samples_to_predict in the model config
     # This is needed when we compute the errors for the models trained with portion_of_signals_for_input
@@ -309,39 +330,31 @@ for i in range(len(list_all_dataset_name)):
     # In case we had set n_samples_to_predict > 0 from the beginning this will not change anything
     model_config['n_samples_to_predict'] = original_n_samples_to_predict
 
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-# Convert distance lists to numpy arrays
-
-tmp_score_matrix_train = np.ones((len(score_matrix_train), max_n_signals)) * (-1)
-tmp_score_matrix_test  = np.ones((len(score_matrix_test), max_n_signals)) * (-1)
-
-for i in range(len(score_matrix_train)) :
-    distance_list_train = score_matrix_train[i]
-    distance_list_test  = score_matrix_test[i]
-
-    tmp_score_matrix_train[i, 0:len(distance_list_train)] = np.array(distance_list_train)
-    tmp_score_matrix_test[i, 0:len(distance_list_test)]   = np.array(distance_list_test)
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Save average errors matrices
-
-raise ValueError("STOP")
 
 if model_config['n_samples_to_predict'] > 0 :
     folder_name = f"neurons_256_predict_samples_{model_config['n_samples_to_predict']}"
 else :
     folder_name = f"neurons_256_predict_portion_{int(model_config['portion_of_signals_for_input'] * 100)}"
 
+if model_config['use_z_score_normalization'] : folder_name += '_z_score'
+
 path_save = f"{model_config['model_weights_path']}{folder_name}/0_comparison/"
 
 # Create folder if it does not exist
 if not os.path.exists(path_save) : os.makedirs(path_save)
 
+if model_config['epoch'] == -1 : model_config['epoch'] = 'END'
+
 # Save average scores and distance matrices as numpy arrays
-np.save(f"{path_save}average_scores_matrix_train.npy", average_scores_matrix_train)
-np.save(f"{path_save}average_scores_matrix_test.npy", average_scores_matrix_test)
-np.save(f"{path_save}score_matrix_train.npy", tmp_score_matrix_train)
-np.save(f"{path_save}score_matrix_test.npy", tmp_score_matrix_test)
+np.save(f"{path_save}average_scores_matrix_train_{model_config['epoch']}.npy", average_scores_matrix_train)
+np.save(f"{path_save}average_scores_matrix_test_{model_config['epoch']}.npy", average_scores_matrix_test)
+
+# Save score matrices 
+with open(f"{path_save}score_lists_train_{model_config['epoch']}.pkl", "wb") as f : pickle.dump(score_lists_train, f)
+with open(f"{path_save}score_lists_test_{model_config['epoch']}.pkl", "wb") as f : pickle.dump(score_lists_test, f)
 
 
 
