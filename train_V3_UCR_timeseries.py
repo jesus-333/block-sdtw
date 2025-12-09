@@ -28,7 +28,7 @@ config = dict(
     # Training parameters
     use_z_score_normalization = True,    # If True a z-score normalization will be applied signal by signal within each dataset
     portion_of_signals_for_input = 0.85, # Portion of the signals to use for training (the rest will be used for prediction)
-    n_samples_to_predict = -1,            # Number of samples to predict (If negative it is ignored and the portion_of_signals_for_input is used to define the number of samples to predict. Otherwise, this parameter override portion_of_signals_for_input)
+    n_samples_to_predict = 100,            # Number of samples to predict (If negative it is ignored and the portion_of_signals_for_input is used to define the number of samples to predict. Otherwise, this parameter override portion_of_signals_for_input)
     batch_size = -1,                     # Batch size for training
     lr = 0.001,                          # Learning rate (lr)
     max_epochs = 60,                         # Number of epochs to train the model
@@ -59,7 +59,7 @@ config = dict(
 )
 
 loss_function_to_use_list = ['MSE', 'SDTW', 'SDTW_divergence', 'pruned_SDTW', 'OTW', 'block_SDTW']
-loss_function_to_use_list = ['block_SDTW']
+# loss_function_to_use_list = ['OTW']
 
 n_neurons = 256  # Number of neurons in the hidden layers
 
@@ -118,12 +118,7 @@ for i in range(len(list_all_dataset_name)):
 
     # Divide the test data in input signal and signal to predict (TEST)
     x_1_test, x_2_test = dataset.generate_signals_V2(x_orig_test, int(x_orig_test.shape[1] * config['portion_of_signals_for_input']))
-
-    print("Shape of x_1_train: ", x_1_train.shape)
-    print("Shape of x_2_train: ", x_2_train.shape)
-    print("Shape of x_1_test: ", x_1_test.shape)
-    print("Shape of x_2_test: ", x_2_test.shape)
-
+    
     length_signal_to_predict = x_2_train.shape[1]
 
     if length_signal_to_predict <= config['block_size'] :
@@ -143,6 +138,9 @@ for i in range(len(list_all_dataset_name)):
     x_2_train = np.expand_dims(x_2_train, axis = -1)
     x_1_test = np.expand_dims(x_1_test, axis = -1)
     x_2_test = np.expand_dims(x_2_test, axis = -1)
+
+    print(x_1_train.shape)
+    continue
 
     if x_1_train.shape[0] >= 100 : config['batch_size'] = 100
 
