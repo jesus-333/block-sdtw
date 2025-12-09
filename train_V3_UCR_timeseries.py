@@ -42,7 +42,7 @@ config = dict(
     alpha = 1,                           # Multiplier of the reconstruction error
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     # Soft-DTW/block SDTW config
-    block_size = 10,
+    block_size = 50,
     edge_samples_ignored = 0,            # Ignore this number of samples during the computation of the reconstructation loss
     gamma_dtw = 1,                       # Hyperparameter of the SDTW. Control the steepness of the soft-min inside the SDTW. The closer to 0 the closer the soft-min approximate the real min
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -60,7 +60,7 @@ config = dict(
 )
 
 loss_function_to_use_list = ['MSE', 'SDTW', 'SDTW_divergence', 'pruned_SDTW', 'OTW', 'block_SDTW']
-loss_function_to_use_list = ['block_SDTW']
+loss_function_to_use_list = ['block_SDTW_divergence']
 
 n_neurons = 256  # Number of neurons in the hidden layers
 
@@ -76,6 +76,7 @@ loss_function_to_recon_loss_type = dict(
     pruned_SDTW = 1,
     OTW = 5,
     block_SDTW = 3,
+    block_SDTW_divergence = 4,
 )
 
 # Get all the folders inside path_UCR_folder

@@ -49,9 +49,9 @@ def block_sdtw(x : torch.tensor, x_r : torch.tensor,
         # print("\t", x_block.shape, "\n\t", x_r_block.shape, "\n")
 
         # Compute dtw for the block
-        if soft_DTW_type == 3 : # Standard SDTW
+        if soft_DTW_type == 3 : # Block SDTW
             block_loss = dtw_loss_function(x_block, x_r_block)
-        elif soft_DTW_type == 4 : # SDTW divergence
+        elif soft_DTW_type == 4 : # Block SDTW divergence
             dtw_xy_block = dtw_loss_function(x_block, x_r_block)
             dtw_xx_block = dtw_loss_function(x_block, x_block)
             dtw_yy_block = dtw_loss_function(x_r_block, x_r_block)
