@@ -14,6 +14,7 @@ Link download : https://www.cs.ucr.edu/%7Eeamonn/time_series_data_2018/
 
 import numpy as np
 import os
+import torch
 from torch import nn
 
 import dataset
@@ -50,8 +51,8 @@ config = dict(
     beta = 1,
     m = 1,
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    # device = "cuda" if torch.cuda.is_available() else "cpu",
-    device = "mps",
+    device = "cuda" if torch.cuda.is_available() else "cpu",
+    # device = "mps",
     save_weights = True,                # Save the model weights after training. The path will be defined in the config['save_model_path'] + the name of the dataset
     save_model_path = "./saved_model/", # Path to save the model weights
     save_every_n_epoch = 10,             # If positive save the model every n epochs
@@ -59,7 +60,7 @@ config = dict(
 )
 
 loss_function_to_use_list = ['MSE', 'SDTW', 'SDTW_divergence', 'pruned_SDTW', 'OTW', 'block_SDTW']
-# loss_function_to_use_list = ['OTW']
+loss_function_to_use_list = ['block_SDTW_divergence']
 
 n_neurons = 256  # Number of neurons in the hidden layers
 
@@ -75,6 +76,7 @@ loss_function_to_recon_loss_type = dict(
     pruned_SDTW = 1,
     OTW = 5,
     block_SDTW = 3,
+    block_SDTW_divergence = 4,
 )
 
 # Get all the folders inside path_UCR_folder
