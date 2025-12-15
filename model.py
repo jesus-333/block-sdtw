@@ -112,7 +112,7 @@ class MultiLayerPerceptron(torch.nn.Module):
                 if self.save_every_n_epoch > 0 and (e + 1) % self.save_every_n_epoch == 0 : self.save_model(filename = f'{self.model_name}_epoch_{e + 1}.pth')
 
             self.training_failed = False
-        except Error as e :
+        except Exception as e :
             print("ERROR")
             print(e)
             print("TRAIN STOPPED")
