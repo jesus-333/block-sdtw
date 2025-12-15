@@ -121,12 +121,7 @@ for i in range(len(list_all_dataset_name)):
 
     # Divide the test data in input signal and signal to predict (TEST)
     x_1_test, x_2_test = dataset.generate_signals_V2(x_orig_test, int(x_orig_test.shape[1] * config['portion_of_signals_for_input']))
-
-    print("Shape of x_1_train: ", x_1_train.shape)
-    print("Shape of x_2_train: ", x_2_train.shape)
-    print("Shape of x_1_test: ", x_1_test.shape)
-    print("Shape of x_2_test: ", x_2_test.shape)
-
+    
     length_signal_to_predict = x_2_train.shape[1]
 
     if length_signal_to_predict <= config['block_size'] :
@@ -146,6 +141,9 @@ for i in range(len(list_all_dataset_name)):
     x_2_train = np.expand_dims(x_2_train, axis = -1)
     x_1_test = np.expand_dims(x_1_test, axis = -1)
     x_2_test = np.expand_dims(x_2_test, axis = -1)
+
+    print(x_1_train.shape)
+    continue
 
     if x_1_train.shape[0] >= 100 : config['batch_size'] = 100
 

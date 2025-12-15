@@ -17,14 +17,16 @@ import os
 
 plot_config = dict(
     # Info about the data used for training and prediction
+    use_z_score_normalization = True,    # If True a z-score normalization will be applied signal by signal within each dataset
     portion_of_signals_for_input = 0.85, # Portion of the signals to use for training (the rest will be used for prediction)
-    n_samples_to_predict = -1,            # Number of samples to predict (If negative it is ignored and the portion_of_signals_for_input is used to define the number of samples to predict. Otherwise, this parameter override portion_of_signals_for_input)
-    block_size = 10,
+    n_samples_to_predict = 100,            # Number of samples to predict (If negative it is ignored and the portion_of_signals_for_input is used to define the number of samples to predict. Otherwise, this parameter override portion_of_signals_for_input)
+    epoch = -1,
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     clip_results = False,               # If True each row will have values 1, 2, 3 corresponding to the best, second best and third best method for each dataset
+    exclude_failed_dataset = True,     # If True only the dataset where at least 1 training was successful will be plotted
     figsize = (18, 12),
-    cmap = 'Reds_r',
-    # cmap = 'RdYlGn',
+    cmap = 'Greens',
+    # cmap = 'seismic_r',
     aspect = 'auto',
 )
 
@@ -54,21 +56,43 @@ if plot_config['n_samples_to_predict'] > 0 :
 else :
     folder_name = f"neurons_256_predict_portion_{int(plot_config['portion_of_signals_for_input'] * 100)}"
 
+if plot_config['use_z_score_normalization'] : folder_name += '_z_score'
+
 path_errors_matrix_folder = f"saved_model/{folder_name}/0_comparison/"
 
-# Load matrix with the average errors for all loss functions
-matrix_with_all_data_train = np.load(path_errors_matrix_folder + "average_scores_matrix_train.npy")
-matrix_with_all_data_test  = np.load(path_errors_matrix_folder + "average_scores_matrix_test.npy")
+if plot_config['epoch'] == -1 : plot_config['epoch'] = 'end'
 
-# Create matrix to store the average errors for the selected loss functions
-matrix_to_plot_train = np.zeros((len(list_all_dataset_name), len(loss_function_to_plot)))
-matrix_to_plot_test = np.zeros((len(list_all_dataset_name), len(loss_function_to_plot)))
+# Load matrix with the average errors for all loss functions
+matrix_with_all_data_train = np.load(path_errors_matrix_folder + f"average_scores_matrix_train_{plot_config['epoch']}.npy")
+matrix_with_all_data_test  = np.load(path_errors_matrix_folder + f"average_scores_matrix_test_{plot_config['epoch']}.npy")
+
+if plot_config['exclude_failed_dataset'] :
+    n_dataset_to_plot = np.sum([1 for i in range(len(list_all_dataset_name)) if matrix_with_all_data_train[i, :].sum() > 0])
+else :
+    n_dataset_to_plot = len(list_all_dataset_name)
+
+matrix_to_plot_train = np.zeros((n_dataset_to_plot, len(loss_function_to_plot)))
+matrix_to_plot_test = np.zeros((n_dataset_to_plot, len(loss_function_to_plot)))
 
 # Fill the matrix to plot
-for i in range(len(loss_function_to_plot)) :
-    idx = loss_function_to_idx[loss_function_to_plot[i]]
-    matrix_to_plot_train[:, i] = matrix_with_all_data_train[:, idx]
-    matrix_to_plot_test[:, i]  = matrix_with_all_data_test[:, idx]
+idx_row_to_plot = 0
+for i in range(len(list_all_dataset_name)) :
+    if plot_config['exclude_failed_dataset'] :
+        # Skip the iteration for datasets where all trainings failed
+        if matrix_with_all_data_train[i, :].sum() == 0 :
+            continue
+    idx_row_original_data = i
+    for j in range(len(loss_function_to_plot)) :
+        idx_column_original_data = loss_function_to_idx[loss_function_to_plot[j]]
+        matrix_to_plot_train[idx_row_to_plot, j] = matrix_with_all_data_train[idx_row_original_data, idx_column_original_data]
+        matrix_to_plot_test[idx_row_to_plot, j]  = matrix_with_all_data_test[idx_row_original_data, idx_column_original_data]
+    
+    # Increment the row index for the matrix to plot
+    # Note that this line is only reached if the dataset was not skipped
+    # So it is reach every iteration if exclude_failed_dataset is False
+    # Otherwise it is only reached for successful datasets
+    idx_row_to_plot += 1
+
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # (OPTIONAL) Clip results
@@ -93,10 +117,11 @@ if plot_config['clip_results'] :
     vmax_train, vmax_test = len(loss_function_to_plot), len(loss_function_to_plot)
 else :
     vmin_train, vmin_test = 0, 0
+    vmin_train, vmin_test = 0.5, 0.5
     vmax_train, vmax_test = 1, 1
 
-    vmin_train, vmin_test = 0, 0
-    vmax_train, vmax_test = 0.5, 0.5
+    # vmin_train, vmin_test = 0, 0
+    # vmax_train, vmax_test = 0.5, 0.5
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Plotting
@@ -112,8 +137,8 @@ axs[1].imshow(matrix_to_plot_test.T, cmap = plot_config['cmap'], aspect = plot_c
               )
 
 for i in range(2) :
-    axs[i].set_xticks(np.arange(len(list_all_dataset_name)) + 0.5, minor = True,)
-    # axs[i].set_yticks(np.arange(3) + 0.5, minor = True)
+    axs[i].set_xticks(np.arange(n_dataset_to_plot) + 0.5, minor = True,)
+    axs[i].set_yticks(np.arange(len(loss_function_to_idx) - 1) + 0.5, minor = True)
     axs[i].set_xticklabels([], minor = True)
     axs[i].grid(which = 'minor', color = 'k', linestyle = '-', snap = False)
     # axs[i].grid(which = 'major',color = 'k', linestyle = '-', snap = False)
@@ -127,11 +152,13 @@ for i in range(2) :
 
     # Add colorbar
     cbar = fig.colorbar(axs[i].images[0], ax = axs[i], fraction = 0.046, pad = 0.04)
+    cbar.vmin = 0.5
+
     
 
 # Set x-ticks only for datasets that were used (i.e., rows that have at least one non-zero value)
-xticks_train = [i for i in range(len(list_all_dataset_name)) if matrix_to_plot_train[i, :].sum() > 0]
-xticks_test  = [i for i in range(len(list_all_dataset_name)) if matrix_to_plot_test[i, :].sum() > 0]
+xticks_train = [i for i in range(n_dataset_to_plot) if matrix_to_plot_train[i, :].sum() > 0]
+xticks_test  = [i for i in range(n_dataset_to_plot) if matrix_to_plot_test[i, :].sum() > 0]
 xticks_labels_train = [f"{list_all_dataset_name[i][0:3]} ({i})" for i in xticks_train]
 xticks_labels_test  = [f"{list_all_dataset_name[i][0:3]} ({i})" for i in xticks_test]
 
@@ -152,6 +179,9 @@ fig.suptitle(overall_title, fontsize = 16)
 fig.tight_layout()
 plt.show()
 
+print("N. of valid dataset (TRAIN) :", len(xticks_train))
+print("N. of valid dataset (TEST)  :", len(xticks_test))
+
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Save plot
 
@@ -160,12 +190,14 @@ if plot_config['n_samples_to_predict'] > 0 :
 else :
     folder_name = f"neurons_256_predict_portion_{int(plot_config['portion_of_signals_for_input'] * 100)}"
 
+if plot_config['use_z_score_normalization'] : folder_name += '_z_score'
+
 path_save_plot = f"saved_model/{folder_name}/0_comparison/"
 
 if plot_config['clip_results'] :
     path_save_plot += "clipped_results_"
 
-fig.savefig(path_save_plot + "comparison_average_score_prediction.png")
+fig.savefig(path_save_plot + f"comparison_average_score_prediction_{plot_config['epoch']}.png")
 
 
 
