@@ -31,7 +31,7 @@ config = dict(
     rescale_score_in_0_1_range = False, # If True rescale the scores of each loss function in the range [0, 1] before plotting. The rescaling is done with the formula R_rescaled = 2 * R - 1, where R is the original score.
 )
 
-loss_function_to_plot = ['MSE', 'SDTW', 'SDTW_divergence', 'pruned_SDTW', 'OTW', 'block_SDTW_10', 'block_SDTW_50']
+loss_function_to_plot = ['MSE', 'SDTW', 'SDTW_divergence', 'pruned_SDTW', 'OTW', 'block_SDTW_10', 'block_SDTW_50', 'block_SDTW_divergence_10', 'block_SDTW_divergence_50']
 # loss_function_to_plot = ['MSE', 'SDTW', 'SDTW_divergence', 'pruned_SDTW', 'OTW', 'block_SDTW_10', 'block_SDTW_50']
 
 

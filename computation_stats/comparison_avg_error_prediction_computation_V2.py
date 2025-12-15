@@ -39,8 +39,8 @@ model_config = dict(
     model_weights_path = "./saved_model/", # Path to save the model weights
 )
 
-loss_function_to_use_list = ['MSE', 'SDTW', 'SDTW_divergence', 'pruned_SDTW', 'OTW', 'block_SDTW_10', 'block_SDTW_50']
-loss_function_to_use_list = ['OTW']
+loss_function_to_use_list = ['MSE', 'SDTW', 'SDTW_divergence', 'pruned_SDTW', 'OTW', 'block_SDTW_10', 'block_SDTW_50', 'block_SDTW_divergence_10', 'block_SDTW_divergence_50']
+# loss_function_to_use_list = ['OTW']
 
 loss_function_to_idx = dict(
     MSE = 0,
@@ -49,7 +49,9 @@ loss_function_to_idx = dict(
     pruned_SDTW = 3,
     OTW = 4,
     block_SDTW_10 = 5,
-    block_SDTW_50 = 6
+    block_SDTW_50 = 6,
+    block_SDTW_divergence_10 = 7,
+    block_SDTW_divergence_50 = 8
 )
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -62,8 +64,8 @@ list_all_dataset_name = [f for f in os.listdir(path_UCR_folder) if os.path.isdir
 
 # Matrix to store the average errors
 # TODO add the possibility to load matrices from previous computations and update them
-average_scores_matrix_train = np.zeros((len(list_all_dataset_name), 7)) # Columns: SDTW, Pruned SDTW, Block SDTW
-average_scores_matrix_test  = np.zeros((len(list_all_dataset_name), 7)) # Columns: SDTW, Pruned SDTW, Block SDTW
+average_scores_matrix_train = np.zeros((len(list_all_dataset_name), 9)) # Columns: MSE, SDTW, SDTW divergence, Pruned SDTW, OTW, Block SDTW 10, Block SDTW 50, Block SDTW divergence 10, Block SDTW divergence 50
+average_scores_matrix_test  = np.zeros((len(list_all_dataset_name), 9)) # Columns: MSE, SDTW, SDTW divergence, Pruned SDTW, OTW, Block SDTW 10, Block SDTW 50, Block SDTW divergence 10, Block SDTW divergence 50
 
 # variable to store distance lists (they will be later converted to numpy arrays)
 score_lists_train = {}
