@@ -56,61 +56,68 @@ class MultiLayerPerceptron(torch.nn.Module):
         return output
 
     def fit(self, X, y, config : dict) :
-        # The fit method performs the actual optimization
-        X_torch = torch.Tensor(X).to(config['device'])
-        y_torch = torch.Tensor(y).to(config['device'])
-    
-        if 'max_epochs' not in config : config['max_epochs'] = 100
-        if 'batch_size' not in config : config['batch_size'] = 32
-        if config['batch_size'] <= 0 or config['batch_size'] > X_torch.shape[0] : config['batch_size'] = X_torch.shape[0]
-        if 'device' not in config : config['device'] = 'cpu'
+        try :
+            # The fit method performs the actual optimization
+            X_torch = torch.Tensor(X).to(config['device'])
+            y_torch = torch.Tensor(y).to(config['device'])
+        
+            if 'max_epochs' not in config : config['max_epochs'] = 100
+            if 'batch_size' not in config : config['batch_size'] = 32
+            if config['batch_size'] <= 0 or config['batch_size'] > X_torch.shape[0] : config['batch_size'] = X_torch.shape[0]
+            if 'device' not in config : config['device'] = 'cpu'
 
-        # Create DataLoader for batching
-        dataset = torch.utils.data.TensorDataset(X_torch, y_torch)
-        dataloader = torch.utils.data.DataLoader(dataset, batch_size = config['batch_size'], shuffle=True)
+            # Create DataLoader for batching
+            dataset = torch.utils.data.TensorDataset(X_torch, y_torch)
+            dataloader = torch.utils.data.DataLoader(dataset, batch_size = config['batch_size'], shuffle=True)
 
-        # Move model to the specified device
-        self.to(config['device'])
+            # Move model to the specified device
+            self.to(config['device'])
 
-        # Backup of model parameters in case of NaN during training
-        backup_state_dict = self.state_dict()
+            # Backup of model parameters in case of NaN during training
+            backup_state_dict = self.state_dict()
 
-        for e in range(config['max_epochs']):
+            for e in range(config['max_epochs']):
 
-            for i, (X_batch, y_batch) in enumerate(dataloader):
-                # Move data to the device
-                X_batch = X_batch
-                y_batch = y_batch
+                for i, (X_batch, y_batch) in enumerate(dataloader):
+                    # Move data to the device
+                    X_batch = X_batch
+                    y_batch = y_batch
 
-                self.optimizer.zero_grad()
-                # Forward pass
-                y_pred = self.forward(X_batch)
+                    self.optimizer.zero_grad()
+                    # Forward pass
+                    y_pred = self.forward(X_batch)
 
-                # Compute Loss
-                loss = self.loss_function.compute_loss(y_pred, y_batch)
+                    # Compute Loss
+                    loss = self.loss_function.compute_loss(y_pred, y_batch)
 
-                # Check if NaN is present in loss
-                if torch.isnan(loss).sum() > 0 :
-                    # If NaN is detected, restore the paramaters from previous epoch and stop training
+                    # Check if NaN is present in loss
+                    if torch.isnan(loss).sum() > 0 :
+                        # If NaN is detected, restore the paramaters from previous epoch and stop training
 
-                    print("NaN detected in loss. Parameters restored from previous epoch. Training stopped.")
-                    self.load_state_dict(backup_state_dict)
+                        print("NaN detected in loss. Parameters restored from previous epoch. Training stopped.")
+                        self.load_state_dict(backup_state_dict)
 
-                    self.training_failed = True
-                    return
+                        self.training_failed = True
+                        return
 
-                # Backward pass
-                loss.backward()
-                self.optimizer.step()
-                
-                if self.lr_scheduler is not None : self.lr_scheduler.step()
+                    # Backward pass
+                    loss.backward()
+                    self.optimizer.step()
+                    
+                    if self.lr_scheduler is not None : self.lr_scheduler.step()
 
-                backup_state_dict = self.state_dict()
+                    backup_state_dict = self.state_dict()
 
-            print("Epoch: {}\tLoss = {}".format(e + 1, loss))
-            if self.save_every_n_epoch > 0 and (e + 1) % self.save_every_n_epoch == 0 : self.save_model(filename = f'{self.model_name}_epoch_{e + 1}.pth')
+                print("Epoch: {}\tLoss = {}".format(e + 1, loss))
+                if self.save_every_n_epoch > 0 and (e + 1) % self.save_every_n_epoch == 0 : self.save_model(filename = f'{self.model_name}_epoch_{e + 1}.pth')
 
-        self.training_failed = False
+            self.training_failed = False
+        except Error as e :
+            print("ERROR")
+            print(e)
+            print("TRAIN STOPPED")
+
+            self.training_failed = True
 
     def save_model(self, path : str = None, filename : str = None) :
         """
