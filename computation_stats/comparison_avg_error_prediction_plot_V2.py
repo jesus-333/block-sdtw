@@ -20,13 +20,13 @@ plot_config = dict(
     use_z_score_normalization = True,    # If True a z-score normalization will be applied signal by signal within each dataset
     portion_of_signals_for_input = 0.85, # Portion of the signals to use for training (the rest will be used for prediction)
     n_samples_to_predict = 100,            # Number of samples to predict (If negative it is ignored and the portion_of_signals_for_input is used to define the number of samples to predict. Otherwise, this parameter override portion_of_signals_for_input)
-    epoch = 20,
+    epoch = -1,
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     clip_results = False,               # If True each row will have values 1, 2, 3 corresponding to the best, second best and third best method for each dataset
     exclude_failed_dataset = True,     # If True only the dataset where at least 1 training was successful will be plotted
     figsize = (18, 12),
-    # cmap = 'Greens',
-    cmap = 'seismic',
+    cmap = 'Greens',
+    # cmap = 'seismic_r',
     aspect = 'auto',
 )
 
@@ -117,6 +117,7 @@ if plot_config['clip_results'] :
     vmax_train, vmax_test = len(loss_function_to_plot), len(loss_function_to_plot)
 else :
     vmin_train, vmin_test = 0, 0
+    vmin_train, vmin_test = 0.5, 0.5
     vmax_train, vmax_test = 1, 1
 
     # vmin_train, vmin_test = 0, 0
@@ -136,7 +137,7 @@ axs[1].imshow(matrix_to_plot_test.T, cmap = plot_config['cmap'], aspect = plot_c
               )
 
 for i in range(2) :
-    axs[i].set_xticks(np.arange(len(list_all_dataset_name)) + 0.5, minor = True,)
+    axs[i].set_xticks(np.arange(n_dataset_to_plot) + 0.5, minor = True,)
     axs[i].set_yticks(np.arange(len(loss_function_to_idx) - 1) + 0.5, minor = True)
     axs[i].set_xticklabels([], minor = True)
     axs[i].grid(which = 'minor', color = 'k', linestyle = '-', snap = False)
@@ -151,6 +152,8 @@ for i in range(2) :
 
     # Add colorbar
     cbar = fig.colorbar(axs[i].images[0], ax = axs[i], fraction = 0.046, pad = 0.04)
+    cbar.vmin = 0.5
+
     
 
 # Set x-ticks only for datasets that were used (i.e., rows that have at least one non-zero value)

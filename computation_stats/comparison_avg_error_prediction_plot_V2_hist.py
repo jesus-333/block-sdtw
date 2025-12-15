@@ -36,7 +36,7 @@ plot_config = dict(
     figsize = (18, 12),
     fontsize = 16,
     aspect = 'auto',
-    n_bins = 75,                           # Number of bins to use for the histogram
+    n_bins = 20,                           # Number of bins to use for the histogram
     normalize_hist = False,                 # If True normalize the histogram
     add_title = True,                      # If True add a title to the plot
     show_fig = True,                     # If True show the figure
@@ -235,14 +235,15 @@ for i in range(len(plot_config['dataset_to_plot'])) :
             if plot_config['save_fig'] : save_fig(fig, plot_config, path_data)
 
                 
-# # Example of using seaborn to plot a distribution with KDE
-# sns_plot = sns.displot(data = merged_score_lists_train,
-#                        # bins = plot_config['n_bins'],
-#                        kind = 'kde',
-#                          # kde = True,
-#                        )
-# plt.grid()
-# plt.show()
+# Example of using seaborn to plot a distribution with KDE
+sns_plot = sns.displot(data = merged_score_lists_train,
+                        bins = plot_config['n_bins'],
+                        kde = True,
+                        # kind = 'kde'
+                       )
+plt.grid()
+plt.tight_layout()
+plt.show()
 #
 #
 # import statsmodels.api as sm
