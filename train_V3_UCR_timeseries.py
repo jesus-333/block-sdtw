@@ -59,8 +59,8 @@ config = dict(
     plot_and_save_prediction = True,     # Plot and save a prediction example after training
 )
 
-loss_function_to_use_list = ['MSE', 'SDTW', 'SDTW_divergence', 'pruned_SDTW', 'OTW', 'block_SDTW']
-loss_function_to_use_list = ['block_SDTW_divergence']
+loss_function_to_use_list = ['MSE', 'SDTW', 'SDTW_divergence', 'pruned_SDTW', 'OTW', 'block_SDTW', 'block_SDTW_divergence']
+loss_function_to_use_list = ['block_SDTW', 'block_SDTW_divergence']
 
 n_neurons = 256  # Number of neurons in the hidden layers
 
@@ -167,9 +167,9 @@ for i in range(len(list_all_dataset_name)):
     # Dictionary to store prediction results
     prediction_results = dict()
 
-    for i in range(len(loss_function_to_use_list)) :
+    for j in range(len(loss_function_to_use_list)) :
         # Get loss function
-        loss_function_to_use = loss_function_to_use_list[i]
+        loss_function_to_use = loss_function_to_use_list[j]
         config['recon_loss_type'] = loss_function_to_recon_loss_type[loss_function_to_use]
         loss_function = reconstruction_loss(config)
 
