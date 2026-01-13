@@ -16,6 +16,7 @@ import os
 name_machine = "PC_Lab"
 name_machine = "WSL_CPU"
 name_machine = "WSL_CUDA"
+name_machine = "Mac_CPU"
 path_files = "Results/computation_time/script_2/{}/".format(name_machine)
 
 t_list = (np.arange(19) + 2) * 50

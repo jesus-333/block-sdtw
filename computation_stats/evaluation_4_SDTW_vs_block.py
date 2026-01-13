@@ -3,7 +3,7 @@ Compare the SDTW (implemented in soft_dtw_cuda.py) vs the block-SDTW, for variou
 
 Please note that the block-SDTW still use the SDTW implementation of soft_dtw_cuda to compute the SDTW inside the various block
 """
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Imports
 
 import torch
@@ -20,7 +20,7 @@ except ImportError:
 
 from block_sdtw import reconstruction_loss
 
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 T_list = [500, 1000]
 block_size_list = [100, 250]
 # block_size_list = [250]

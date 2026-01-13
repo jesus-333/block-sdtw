@@ -29,15 +29,15 @@ block_size_list = [5, 10, 25, 50, 100]
 # Specify the loss type to use
 # 0 : use the Rust implementation of the soft-DTW
 # 1 : use the CUDA implementation of the soft-DTW
-# 2 : use the Soft-DTW divergence 
-# 3 : use the Block version of the Soft-DTW 
-# 4 : use the Block version of the Soft-DTW divergence 
+# 2 : use the Soft-DTW divergence
+# 3 : use the Block version of the Soft-DTW
+# 4 : use the Block version of the Soft-DTW divergence
 loss_type_list = [1, 3]
 
 # Other parameters
 use_cuda = True
 n_average = 40
-pc_name = "WSL_CUDA"
+pc_name = "Mac_CPU"
 save_results = True
 
 config_loss = dict(
@@ -48,8 +48,8 @@ config_loss = dict(
     normalize_by_block_size = False,
     edge_samples_ignored = 0,           # Ignore this number of samples during the computation of the reconstructation loss
     gamma_dtw = 1,                      # Hyperparameter of the SDTW. Control the steepness of the soft-min inside the SDTW. The closer to 0 the closer the soft-min approximate the real min
-    device = "cuda",
-    # device = "cpu",
+    # device = "cuda",
+    device = "cpu",
 )
 config_loss['shift'] = config_loss['block_size']
 
