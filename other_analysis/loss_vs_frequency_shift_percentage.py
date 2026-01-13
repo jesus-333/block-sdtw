@@ -3,11 +3,10 @@ Similar to loss_vs_frequency_shift but the Block-SDTW is shown as a percentage o
 Use two sinusoid to compute the value.
 """
 
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Imports
 
 import torch
-import time
 import numpy as np
 import os
 import matplotlib.pyplot as plt
@@ -15,7 +14,7 @@ import matplotlib.pyplot as plt
 from block_sdtw import reconstruction_loss, block_sdtw, block_sdtw_for_analysis
 from soft_dtw_cuda import SoftDTW
 
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 n_samples = 300
 block_size_list = [50, 100, 150]
@@ -26,8 +25,8 @@ t_samples = np.linspace(0, 1, n_samples)
 amplitude_1 = 1
 amplitude_2 = 1
 f_1 = 1
-samples_1 =  2 * np.pi * f_1 * t_samples
-sine_1 = torch.from_numpy(amplitude_1 * np.sin(samples_1))  
+samples_1 = 2 * np.pi * f_1 * t_samples
+sine_1 = torch.from_numpy(amplitude_1 * np.sin(samples_1))
 
 shift_2 = 0
 f_2_list = np.arange(30) + f_1
@@ -42,7 +41,7 @@ if add_noise :
     noise = torch.randn(len(samples_1))
     sine_1 += noise
 
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Compute loss values
 
 loss_values_per_block_size  = []
@@ -112,7 +111,7 @@ for i in range(len(block_size_list)) :
         loss_values_per_block_size[i, j] = tmp_loss
 
 
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Plot config
 
 fig, ax = plt.subplots(1, 1, figsize = plot_config['figsize'])
