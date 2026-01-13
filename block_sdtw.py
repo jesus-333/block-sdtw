@@ -1,17 +1,16 @@
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 import torch
-from torch import nn
 import torch.nn.functional as F
 
 from soft_dtw_cuda import SoftDTW
 from numba import jit
 
 import otw
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-def block_sdtw(x : torch.tensor, x_r : torch.tensor, 
-               dtw_loss_function, 
+def block_sdtw(x : torch.tensor, x_r : torch.tensor,
+               dtw_loss_function,
                block_size : int, soft_DTW_type : int, shift : int = -1,
                normalize_by_block_size : bool = True):
     """
@@ -33,15 +32,18 @@ def block_sdtw(x : torch.tensor, x_r : torch.tensor,
     continue_cylce = True
 
     while continue_cylce :
-        # Get indicies for the block
+        # Get indices for the block
         idx_1 = int(i * block_size)
         idx_1 = int(i * shift)
         idx_2 = int((i + 1) * block_size) if int((i + 1) * block_size) < x.shape[1] else -1
 
         # Get block of the signal
-        # Note that the order of the axis is different. Check the note in the compute_dtw_loss_along_channels function, at the beggining of the for cycle.
-        x_block = x[:, idx_1:idx_2, :]
-        x_r_block = x_r[:, idx_1:idx_2, :]
+        if idx_2 == -1 :
+            x_block = x[:, idx_1:, :]
+            x_r_block = x_r[:, idx_1:, :]
+        else :
+            x_block = x[:, idx_1:idx_2, :]
+            x_r_block = x_r[:, idx_1:idx_2, :]
 
         # print(idx_1, idx_2)
         # print(x.shape)
@@ -58,7 +60,7 @@ def block_sdtw(x : torch.tensor, x_r : torch.tensor,
             block_loss = dtw_xy_block - 0.5 * (dtw_xx_block + dtw_yy_block)
 
         # (Optional) Normalize by the number of samples in the block
-        if normalize_by_block_size : block_loss = block_loss / (idx_2 - idx_1)
+        if normalize_by_block_size : block_loss = block_loss / x_block.shape[1]
         # print("\t", block_loss)
 
         # End the cylce at the last block
@@ -76,13 +78,49 @@ def block_sdtw(x : torch.tensor, x_r : torch.tensor,
 
     return tmp_recon_loss
 
+def block_sdtw_optimized(x : torch.tensor, x_r : torch.tensor,
+               dtw_loss_function,
+               block_size : int, soft_DTW_type : int, shift : int = -1,
+               normalize_by_block_size : bool = True):
+    """
+    Used only if length_signal % block_size == 0, i.e. the block size divide without rest the length of the signal.
+
+    @param x: (torch.tensor) First input tensor of shape B x T x 1
+    @param x_r: (torch.tensor) Second input tensor of shape B x T x 1
+    """
+    
+    if x.shape[1] % block_size != 0 :
+        raise ValueError(f"block_sdtw_optimize can be used only if length_signal % block_size == 0. Current values are length_signal = {x.shape[1]}, block_size = {block_size}. Currently length_signal % block_size = {x.shape[1] % block_size}")
+    
+    # Compute new batch size
+    virtual_batch_size = int(x.shape[0] * (x.shape[1] / block_size))
+    
+    # Reshape input tensors
+    x_reshaped   = x.view(virtual_batch_size, block_size, -1)
+    x_r_reshaped = x_r.view(virtual_batch_size, block_size, -1)
+
+    if soft_DTW_type == 3 : # Block SDTW
+        block_loss = dtw_loss_function(x_reshaped, x_r_reshaped)
+    elif soft_DTW_type == 4 : # Block SDTW divergence
+        dtw_xy_block = dtw_loss_function(x_reshaped, x_r_reshaped)
+        dtw_xx_block = dtw_loss_function(x_reshaped, x_reshaped)
+        dtw_yy_block = dtw_loss_function(x_r_reshaped, x_r_reshaped)
+        block_loss = dtw_xy_block - 0.5 * (dtw_xx_block + dtw_yy_block)
+
+    # (Optional) Normalize by the number of samples in the block
+    if normalize_by_block_size : block_loss = block_loss / block_size
+
+    # Return the loss reshaped to have the original batch size
+    return block_loss.view(x.shape[0], -1).sum(dim = 1)
+    # return block_loss.view(x.shape[0], -1)
+
 def recon_loss_mse(x, x_r):
     return F.mse_loss(x, x_r)
 
 class reconstruction_loss():
     def __init__(self, config : dict):
         """
-        Class that compute the loss function for the Variational autoencoder
+        Class that compute the reconstruction loss
         """
         # Reconstruction loss
         if config['recon_loss_type'] == 0: # L2 loss
@@ -133,7 +171,7 @@ class reconstruction_loss():
             dtw_yy = self.recon_loss_function(x_r, x_r)
             tmp_recon_loss = dtw_xy - 0.5 * (dtw_xx + dtw_yy)
         elif self.recon_loss_type == 3 or self.recon_loss_type == 4: # Block-SDTW/Block-SDTW-Divergence
-            tmp_recon_loss = block_sdtw(x, x_r, 
+            tmp_recon_loss = block_sdtw(x, x_r,
                                         self.recon_loss_function,
                                         self.block_size, self.recon_loss_type, self.shift,
                                         self.normalize_by_block_size,
@@ -154,10 +192,10 @@ class reconstruction_loss():
 
         return recon_loss
 
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-def block_sdtw_for_analysis(x : torch.tensor, x_r : torch.tensor, 
-               dtw_loss_function, 
+def block_sdtw_for_analysis(x : torch.tensor, x_r : torch.tensor,
+               dtw_loss_function,
                block_size : int, soft_DTW_type : int, shift : int = -1,
                normalize_by_block_size : bool = True):
     """
@@ -178,9 +216,12 @@ def block_sdtw_for_analysis(x : torch.tensor, x_r : torch.tensor,
         idx_2 = int((i + 1) * block_size) if int((i + 1) * block_size) < x.shape[1] else -1
 
         # Get block of the signal
-        # Note that the order of the axis is different. Check the note in the compute_dtw_loss_along_channels function, at the beggining of the for cycle.
-        x_block = x[:, idx_1:idx_2, :]
-        x_r_block = x_r[:, idx_1:idx_2, :]
+        if idx_2 == -1 :
+            x_block = x[:, idx_1:, :]
+            x_r_block = x_r[:, idx_1:, :]
+        else :
+            x_block = x[:, idx_1:idx_2, :]
+            x_r_block = x_r[:, idx_1:idx_2, :]
 
         # Compute dtw for the block
         if soft_DTW_type == 3 : # Standard SDTW
@@ -192,10 +233,7 @@ def block_sdtw_for_analysis(x : torch.tensor, x_r : torch.tensor,
             block_loss = dtw_xy_block - 0.5 * (dtw_xx_block + dtw_yy_block)
 
         # (Optional) Normalize by the number of samples in the block
-        if normalize_by_block_size : block_loss = block_loss / (idx_2 - idx_1)
-
-        # End the cylce at the last block
-        if idx_2 == -1 : continue_cylce = False
+        if normalize_by_block_size : block_loss = block_loss / x_block.shape[1]
 
         # Accumulate the loss for the various block
         # if continue_cylce :
@@ -204,7 +242,10 @@ def block_sdtw_for_analysis(x : torch.tensor, x_r : torch.tensor,
 
         # Increase index
         i += 1
+        
+        block_values.append((block_loss.cpu().detach().squeeze()))
 
-        block_values.append(float(block_loss.cpu().detach()))
-
+        # End the cylce at the last block
+        if idx_2 == -1 : continue_cylce = False
+        
     return tmp_recon_loss, block_values
