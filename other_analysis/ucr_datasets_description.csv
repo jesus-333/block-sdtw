@@ -1,0 +1,130 @@
+Dataset_Name,N_Samples_Per_Signal,Portion_Of_Signal_To_Predict,Reason_For_Skipping
+Haptics,1092,0.09157509157509157,-
+SyntheticControl,60,-1.0,Signals too short
+Worms,900,0.1111111111111111,-
+Computers,720,0.1388888888888889,-
+HouseTwenty,2000,0.05,-
+GestureMidAirD3,360,0.2777777777777778,-
+Chinatown,24,-1.0,Signals too short
+UWaveGestureLibraryAll,945,0.10582010582010581,-
+Strawberry,235,0.425531914893617,-
+Car,577,0.1733102253032929,-
+GunPointAgeSpan,150,0.6666666666666666,Portion to predict too short
+GestureMidAirD2,360,0.2777777777777778,-
+BeetleFly,512,0.1953125,-
+Wafer,152,0.6578947368421053,Portion to predict too short
+CBF,128,0.78125,Portion to predict too short
+Adiac,176,0.5681818181818182,Portion to predict too short
+ItalyPowerDemand,24,-1.0,Signals too short
+Yoga,426,0.2347417840375587,-
+AllGestureWiimoteY,500,0.2,-
+Trace,275,0.36363636363636365,-
+PigAirwayPressure,2000,0.05,-
+ShapesAll,512,0.1953125,-
+Beef,470,0.2127659574468085,-
+GesturePebbleZ2,455,0.21978021978021978,-
+Mallat,1024,0.09765625,-
+GunPointOldVersusYoung,150,0.6666666666666666,Portion to predict too short
+MiddlePhalanxTW,80,-1.0,Signals too short
+AllGestureWiimoteX,500,0.2,-
+Meat,448,0.22321428571428573,-
+Herring,512,0.1953125,-
+MiddlePhalanxOutlineCorrect,80,-1.0,Signals too short
+InsectEPGRegularTrain,601,0.16638935108153077,-
+FordA,500,0.2,-
+SwedishLeaf,128,0.78125,Portion to predict too short
+InlineSkate,1882,0.053134962805526036,-
+DodgerLoopDay,288,0.3472222222222222,-
+UMD,150,0.6666666666666666,Portion to predict too short
+CricketY,300,0.3333333333333333,-
+Missing_value_and_variable_length_datasets_adjusted,-1,-1.0,Different folder structure
+WormsTwoClass,900,0.1111111111111111,-
+SmoothSubspace,15,-1.0,Signals too short
+OSULeaf,427,0.234192037470726,-
+Ham,431,0.23201856148491878,-
+CricketX,300,0.3333333333333333,-
+SonyAIBORobotSurface1,70,-1.0,Signals too short
+ToeSegmentation1,277,0.36101083032490977,-
+ScreenType,720,0.1388888888888889,-
+PigArtPressure,2000,0.05,-
+SmallKitchenAppliances,720,0.1388888888888889,-
+Crop,46,-1.0,Signals too short
+MoteStrain,84,-1.0,Signals too short
+MelbournePedestrian,24,-1.0,Signals too short
+ECGFiveDays,136,0.7352941176470589,Portion to predict too short
+Wine,234,0.42735042735042733,-
+SemgHandMovementCh2,1500,0.06666666666666667,-
+FreezerSmallTrain,301,0.33222591362126247,-
+UWaveGestureLibraryZ,315,0.31746031746031744,-
+NonInvasiveFetalECGThorax1,750,0.13333333333333333,-
+TwoLeadECG,82,-1.0,Signals too short
+Lightning7,319,0.31347962382445144,-
+Phoneme,1024,0.09765625,-
+SemgHandSubjectCh2,1500,0.06666666666666667,-
+DodgerLoopWeekend,288,0.3472222222222222,-
+MiddlePhalanxOutlineAgeGroup,80,-1.0,Signals too short
+GestureMidAirD1,360,0.2777777777777778,-
+DistalPhalanxOutlineCorrect,80,-1.0,Signals too short
+DistalPhalanxTW,80,-1.0,Signals too short
+FacesUCR,131,0.7633587786259542,Portion to predict too short
+ECG5000,140,0.7142857142857143,Portion to predict too short
+ShakeGestureWiimoteZ,385,0.2597402597402597,-
+GesturePebbleZ1,455,0.21978021978021978,-
+HandOutlines,2709,0.0369139904023625,-
+GunPointMaleVersusFemale,150,0.6666666666666666,Portion to predict too short
+Coffee,286,0.34965034965034963,-
+Rock,2844,0.035161744022503515,-
+MixedShapesSmallTrain,1024,0.09765625,-
+AllGestureWiimoteZ,500,0.2,-
+FordB,500,0.2,-
+FiftyWords,270,0.37037037037037035,-
+InsectWingbeatSound,256,0.390625,-
+MedicalImages,99,-1.0,Signals too short
+Symbols,398,0.25125628140703515,-
+ArrowHead,251,0.398406374501992,-
+ProximalPhalanxOutlineAgeGroup,80,-1.0,Signals too short
+EOGHorizontalSignal,1250,0.08,-
+TwoPatterns,128,0.78125,Portion to predict too short
+ChlorineConcentration,166,0.6024096385542169,Portion to predict too short
+Plane,144,0.6944444444444444,Portion to predict too short
+ACSF1,1460,0.0684931506849315,-
+PhalangesOutlinesCorrect,80,-1.0,Signals too short
+ShapeletSim,500,0.2,-
+DistalPhalanxOutlineAgeGroup,80,-1.0,Signals too short
+InsectEPGSmallTrain,601,0.16638935108153077,-
+PickupGestureWiimoteZ,361,0.2770083102493075,-
+EOGVerticalSignal,1250,0.08,-
+CricketZ,300,0.3333333333333333,-
+FaceFour,350,0.2857142857142857,-
+RefrigerationDevices,720,0.1388888888888889,-
+PLAID,1344,0.0744047619047619,-
+MixedShapesRegularTrain,1024,0.09765625,-
+GunPoint,150,0.6666666666666666,Portion to predict too short
+DodgerLoopGame,288,0.3472222222222222,-
+ECG200,96,-1.0,Signals too short
+ToeSegmentation2,343,0.2915451895043732,-
+WordSynonyms,270,0.37037037037037035,-
+Fungi,201,0.4975124378109453,-
+BirdChicken,512,0.1953125,-
+SemgHandGenderCh2,1500,0.06666666666666667,-
+OliveOil,570,0.17543859649122806,-
+BME,128,0.78125,Portion to predict too short
+LargeKitchenAppliances,720,0.1388888888888889,-
+SonyAIBORobotSurface2,65,-1.0,Signals too short
+Lightning2,637,0.15698587127158556,-
+EthanolLevel,1751,0.05711022272986865,-
+UWaveGestureLibraryX,315,0.31746031746031744,-
+FreezerRegularTrain,301,0.33222591362126247,-
+Fish,463,0.2159827213822894,-
+ProximalPhalanxOutlineCorrect,80,-1.0,Signals too short
+NonInvasiveFetalECGThorax2,750,0.13333333333333333,-
+UWaveGestureLibraryY,315,0.31746031746031744,-
+FaceAll,131,0.7633587786259542,Portion to predict too short
+StarLightCurves,1024,0.09765625,-
+ElectricDevices,96,-1.0,Signals too short
+Earthquakes,512,0.1953125,-
+PowerCons,144,0.6944444444444444,Portion to predict too short
+DiatomSizeReduction,345,0.2898550724637681,-
+CinCECGTorso,1639,0.06101281269066504,-
+PigCVP,2000,0.05,-
+ProximalPhalanxTW,80,-1.0,Signals too short
