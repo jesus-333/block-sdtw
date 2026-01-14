@@ -13,7 +13,7 @@ import numpy as np
 import os
 try :
     import soft_dtw_rust
-    import_soft_dtw_rust = True 
+    import_soft_dtw_rust = True
 except ImportError:
     import_soft_dtw_rust = False
     print("Rust implementation of the soft-DTW is not available")
@@ -36,7 +36,7 @@ loss_type_list = [1, 3]
 
 # Other parameters
 use_cuda = True
-n_average = 40
+n_repetitions = 200
 pc_name = "Mac_CPU"
 save_results = True
 
@@ -60,14 +60,14 @@ if 0 in loss_type_list and not import_soft_dtw_rust :
 
 device = 'cuda' if torch.cuda.is_available() and use_cuda else 'cpu'
 
-def repeat_inference(x, n_average : int, recon_loss_type : int, config : dict) :
+def repeat_inference(x, n_repetitions : int, recon_loss_type : int, config : dict) :
     time_list_loss = []
 
     if recon_loss_type > 0 :
         loss_function = reconstruction_loss(config)
 
     with torch.no_grad() :
-        for i in range(n_average) :
+        for i in range(n_repetitions) :
             # Start time
             time_start = time.time()
 
@@ -105,7 +105,7 @@ for loss_type_to_use in loss_type_list :
                 print("\t\tblock_size = {}".format(block_size))
 
                 # Compute inference time
-                time_list_loss  = repeat_inference(x, n_average, loss_type_to_use, config_loss)
+                time_list_loss  = repeat_inference(x, n_repetitions, loss_type_to_use, config_loss)
 
                 if save_results :
                     # Create the path if it does not exist
@@ -117,7 +117,7 @@ for loss_type_to_use in loss_type_list :
                     np.save(path_save + '_time_list_loss.npy', time_list_loss)
         else :
             # Compute inference time
-            time_list_loss  = repeat_inference(x, n_average, loss_type_to_use, config_loss)
+            time_list_loss  = repeat_inference(x, n_repetitions, loss_type_to_use, config_loss)
 
             if save_results :
 

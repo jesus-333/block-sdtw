@@ -21,7 +21,7 @@ batch_size = 5
 
 # Other parameters
 use_cuda = False
-n_repetitions = 20
+n_repetitions = 200
 pc_name = "Mac_CPU"
 save_results = True
 
