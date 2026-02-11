@@ -4,7 +4,7 @@ The block-SDTW is computed for different block size
 
 Please note that the block-SDTW still use the SDTW implementation of soft_dtw_cuda to compute the SDTW inside the various block
 """
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Imports
 
 import torch
@@ -21,7 +21,7 @@ except ImportError:
 
 from block_sdtw import reconstruction_loss
 
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 T_list = (np.arange(40) + 1) * 50
 T_list = (np.arange(20) + 1) * 50
 block_size_list = [5, 10, 25, 50, 100]
@@ -36,7 +36,7 @@ loss_type_list = [1, 3]
 
 # Other parameters
 use_cuda = True
-n_repetitions = 200
+n_repetitions = 400
 pc_name = "Mac_CPU"
 save_results = True
 
@@ -53,7 +53,7 @@ config_loss = dict(
 )
 config_loss['shift'] = config_loss['block_size']
 
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 if 0 in loss_type_list and not import_soft_dtw_rust :
     raise ValueError("The Rust implementation of the soft-DTW is not available. Please install the package from https://pypi.org/project/soft-dtw-rust/")
@@ -80,9 +80,9 @@ def repeat_inference(x, n_repetitions : int, recon_loss_type : int, config : dic
             # Save computations times
             time_list_loss.append(time.time() - time_start)
 
-    return time_list_loss 
+    return time_list_loss
 
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Compute the average inference time
 
 for loss_type_to_use in loss_type_list :
