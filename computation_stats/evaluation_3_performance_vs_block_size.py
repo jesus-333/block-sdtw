@@ -1,7 +1,7 @@
 """
 Compute the block-DTW for various block size, given a fixed length T
 """
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Imports
 
 import torch
@@ -11,13 +11,13 @@ import os
 
 from block_sdtw import reconstruction_loss
 
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 block_size_list = (np.arange(20) + 1) * 5
 T_list = [100, 200, 500]
 
 # Specify the loss type to use
-# 3 : use the Block version of the Soft-DTW 
-# 4 : use the Block version of the Soft-DTW divergence 
+# 3 : use the Block version of the Soft-DTW
+# 4 : use the Block version of the Soft-DTW divergence
 loss_type_list = [3]
 
 # Other parameters
@@ -39,7 +39,7 @@ config_loss = dict(
 )
 config_loss['shift'] = config_loss['block_size']
 
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 if torch.cuda.is_available() and use_cuda :
     device = 'cuda' 
@@ -64,7 +64,7 @@ def repeat_inference(x, n_average : int, config : dict) :
 
     return time_list_loss 
 
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Compute the average inference time
 
 for loss_type_to_use in loss_type_list :

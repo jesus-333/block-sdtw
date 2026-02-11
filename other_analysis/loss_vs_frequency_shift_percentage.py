@@ -7,7 +7,6 @@ Use two sinusoid to compute the value.
 # Imports
 
 import torch
-import time
 import numpy as np
 import os
 import matplotlib.pyplot as plt

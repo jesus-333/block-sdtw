@@ -2,12 +2,10 @@
 Compute the value of Block-SDTW for different values of block_size.
 Use two sinusoid to compute the value.
 """
-
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Imports
 
 import torch
-import time
 import numpy as np
 import os
 import matplotlib.pyplot as plt
@@ -15,7 +13,7 @@ import matplotlib.pyplot as plt
 from block_sdtw import reconstruction_loss, block_sdtw, block_sdtw_for_analysis
 from soft_dtw_cuda import SoftDTW
 
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 n_samples = 300
 block_size_list = np.arange(1, 31) * 5
@@ -24,13 +22,13 @@ t_samples = np.linspace(0, 1, n_samples)
 
 amplitude_1 = 15
 f_1 = 17
-samples_1 =  2 * np.pi * f_1 * t_samples
-sine_1 = torch.from_numpy(amplitude_1 * np.sin(samples_1)) 
+samples_1 = 2 * np.pi * f_1 * t_samples
+sine_1 = torch.from_numpy(amplitude_1 * np.sin(samples_1))
 
 amplitude_2 = 15
 f_2 = 17
 shift_2 = 0.1
-samples_2 =  2 * np.pi * f_2 * t_samples + shift_2
+samples_2 = 2 * np.pi * f_2 * t_samples + shift_2
 sine_2 = torch.from_numpy(amplitude_2 * np.sin(samples_2))
 
 plot_config = dict(
@@ -39,7 +37,7 @@ plot_config = dict(
     save_fig = True,
 )
 
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Compute loss values
 
 loss_values_per_block_size  = []

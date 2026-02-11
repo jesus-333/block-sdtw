@@ -63,10 +63,11 @@ for loss_type in loss_type_list : # Iterate over loss function variation
                     file_name = path_files + "T_{}_batch_{}_{}_block_{}_time_list_loss.npy".format(t, batch_size, loss_type_str, block_size)
                     time_list = np.load(file_name)
                     
+                    # Compute mean and std
                     tmp_list_mean.append(np.mean(time_list))
                     tmp_list_std.append(np.std(time_list))
-            
-                # Compute mean and std
+        
+                # Save mean and std
                 time_matrix_mean_list.append(tmp_list_mean)
                 time_matrix_std_list .append(tmp_list_std)
 
@@ -84,10 +85,11 @@ for loss_type in loss_type_list : # Iterate over loss function variation
                 file_name = path_files + "T_{}_batch_{}_{}_time_list_loss.npy".format(t, batch_size, loss_type_str)
                 time_list = np.load(file_name)
 
+                # Compute mean and std
                 tmp_list_mean.append(np.mean(time_list))
                 tmp_list_std.append(np.std(time_list))
-                
-            # Compute mean and std
+            
+            # Save mean and std
             time_matrix_mean_list.append(tmp_list_mean)
             time_matrix_std_list .append(tmp_list_std)
 
