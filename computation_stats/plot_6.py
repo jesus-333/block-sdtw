@@ -14,6 +14,8 @@ import os
 
 
 name_machine = "Mac_CPU"
+# name_machine = "Colab"
+name_machine = "IRIS"
 path_files = "Results/computation_time/script_6/{}/".format(name_machine)
 
 t_list = (np.arange(10) + 1) * 100
@@ -25,8 +27,8 @@ plot_config = dict(
     figsize = (15, 8),
     fontsize = 20,
     use_millisec = True,
-    add_std = True,
-    use_log_scale = True,
+    add_std = False,
+    use_log_scale = False,
     vmin = None,
     vmax = None,
     save_fig = True
@@ -106,9 +108,11 @@ if plot_config['add_std'] :
 
 # Add legend, labels, etc.
 ax.legend(label_list, fontsize = plot_config['fontsize'])
-ax.set_xlabel("Batch size", fontsize = plot_config['fontsize'])
+ax.set_xlabel("N. samples", fontsize = plot_config['fontsize'])
 ax.set_xlim([t_list[0], t_list[-1]])
-if not plot_config['use_log_scale'] : ax.set_ylim([0, time_matrix_mean.max() * 1.05])
+# if not plot_config['use_log_scale'] : ax.set_ylim([0, time_matrix_mean.max() * 1.05])
+ax.set_ylim([0, 270])
+# ax.set_ylim([0.4, 500])
 if plot_config['normalization'] == 1 or plot_config['normalization'] == 2 :
     ax.set_ylabel("Time (normalized)", fontsize = plot_config['fontsize'])
 else :
