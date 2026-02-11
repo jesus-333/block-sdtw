@@ -332,7 +332,6 @@ for i in range(len(list_all_dataset_name)):
     # In case we had set n_samples_to_predict > 0 from the beginning this will not change anything
     model_config['n_samples_to_predict'] = original_n_samples_to_predict
 
-
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Save average errors matrices
 
@@ -354,7 +353,7 @@ if model_config['epoch'] == -1 : model_config['epoch'] = 'END'
 np.save(f"{path_save}average_scores_matrix_train_{model_config['epoch']}.npy", average_scores_matrix_train)
 np.save(f"{path_save}average_scores_matrix_test_{model_config['epoch']}.npy", average_scores_matrix_test)
 
-# Save score matrices 
+# Save score matrices
 with open(f"{path_save}score_lists_train_{model_config['epoch']}.pkl", "wb") as f : pickle.dump(score_lists_train, f)
 with open(f"{path_save}score_lists_test_{model_config['epoch']}.pkl", "wb") as f : pickle.dump(score_lists_test, f)
 

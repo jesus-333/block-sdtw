@@ -26,7 +26,7 @@ plot_config = dict(
     figsize = (15, 8),
     fontsize = 20,
     use_millisec = True,
-    add_std = False,
+    add_std = True,
     use_log_scale = False,
     save_fig = True
 )
@@ -65,6 +65,9 @@ for loss_type in loss_type_list : # Iterate over loss function variation
 time_matrix_mean = np.asarray(time_matrix_mean_list)
 time_matrix_std = np.asarray(time_matrix_std_list)
 
+for i in range(len(label_list)) : label_list[i] = label_list[i].replace('naive', 'sequential')
+for i in range(len(label_list)) : label_list[i] = label_list[i].replace('optimized', 'parallel')
+
 if plot_config['use_millisec'] :
     time_matrix_mean *= 1000
     time_matrix_std *= 1000
@@ -83,9 +86,10 @@ for i in range(time_matrix_mean.shape[0]) :
             color = color_list[i])
 
 # (OPTIONAL) Add std
-# if plot_config['add_std'] :
-#     for i in range(len(loss_type_list)) :
-#         ax.fill_between(t_list, time_matrix_mean[i] - time_matrix_std[i], time_matrix_mean[i] + time_matrix_std[i], alpha = 0.3)
+if plot_config['add_std'] :
+    for i in range(time_matrix_mean.shape[0]) :
+        ax.fill_between(t_list, time_matrix_mean[i] - time_matrix_std[i], time_matrix_mean[i] + time_matrix_std[i], 
+                        alpha = 0.3, color = color_list[i])
 
 # Add legend, labels, etc.
 ax.legend(label_list, fontsize = plot_config['fontsize'])

@@ -28,9 +28,9 @@ plot_config = dict(
     add_cross_failed_dataset = True,  # If True add a cross to the cells corresponding to failed dataset
     split_train_test_figure = True,              # If True create two different figures for train and test. Otherwise create a single figure with two subplots
     figsize = (20, 8),
-    cmap = 'Greens',
-    fontsize = 14,
-    # cmap = 'seismic',
+    # cmap = 'Greens',
+    cmap = 'Spectral',
+    fontsize = 16,
     aspect = 'auto',
     save_plot = True,
     format_to_save_plot = ['png', 'pdf']
@@ -164,6 +164,20 @@ def create_plot(fig, ax, matrix_to_plot, n_dataset_to_plot, vmax, vmin, title = 
     Note that the function will not work if you copy and paste it in another script. It used some variable defined above
     """
 
+    # Add crosses for failed dataset
+    if plot_config['add_cross_failed_dataset'] :
+        for i in range(matrix_to_plot.shape[0]) :
+            for j in range(matrix_to_plot.shape[1]) :
+                if matrix_to_plot[i, j] == 0 :
+                    marker_size = 10 if plot_config['exclude_failed_dataset'] else 5
+                    ax.plot(i, j, marker = 'x', color = 'red', markersize = marker_size, markeredgewidth = 2)
+
+    # Set x-ticks only for datasets that were used (i.e., rows that have at least one non-zero value)
+    xticks = [i for i in range(n_dataset_to_plot) if matrix_to_plot[i, :].sum() > 0]
+    xticks_labels = [f"{list_filtered_dataset[i][0:3]} ({list_idx_filtered_dataset[i]})" for i in xticks]
+
+    matrix_to_plot[matrix_to_plot == 0] = np.nan # Set the values corresponding to failed dataset to NaN to have them in white color in the plot
+
     # Plot matrices
     ax.imshow(matrix_to_plot.T, cmap = plot_config['cmap'], aspect = plot_config['aspect'],
               vmax = vmax, vmin = vmin
@@ -188,20 +202,8 @@ def create_plot(fig, ax, matrix_to_plot, n_dataset_to_plot, vmax, vmin, title = 
     cbar.vmax = 1
     cbar.ax.tick_params(labelsize = plot_config['fontsize'])
 
-    # Set x-ticks only for datasets that were used (i.e., rows that have at least one non-zero value)
-    xticks = [i for i in range(n_dataset_to_plot) if matrix_to_plot[i, :].sum() > 0]
-    xticks_labels = [f"{list_filtered_dataset[i][0:3]} ({list_idx_filtered_dataset[i]})" for i in xticks]
-
     ax.set_xticks(xticks)
     ax.set_xticklabels(xticks_labels, rotation = 90, fontsize = plot_config['fontsize'])
-
-    # Add crosses for failed dataset
-    if plot_config['add_cross_failed_dataset'] :
-        for i in range(matrix_to_plot.shape[0]) :
-            for j in range(matrix_to_plot.shape[1]) :
-                if matrix_to_plot[i, j] == 0 :
-                    marker_size = 10 if plot_config['exclude_failed_dataset'] else 5
-                    ax.plot(i, j, marker = 'x', color = 'red', markersize = marker_size, markeredgewidth = 2)
 
     # Add overall title
     if plot_config['n_samples_to_predict'] > 0 :
