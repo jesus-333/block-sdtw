@@ -42,7 +42,7 @@ config = dict(
     alpha = 1,                           # Multiplier of the reconstruction error
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     # Soft-DTW/block SDTW config
-    block_size = 50,
+    block_size = 10,
     edge_samples_ignored = 0,            # Ignore this number of samples during the computation of the reconstructation loss
     gamma_dtw = 1,                       # Hyperparameter of the SDTW. Control the steepness of the soft-min inside the SDTW. The closer to 0 the closer the soft-min approximate the real min
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -61,6 +61,7 @@ config = dict(
 
 loss_function_to_use_list = ['MSE', 'SDTW', 'SDTW_divergence', 'pruned_SDTW', 'OTW', 'block_SDTW', 'block_SDTW_divergence']
 loss_function_to_use_list = ['block_SDTW', 'block_SDTW_divergence']
+# loss_function_to_use_list = ['block_SDTW_divergence']
 
 n_neurons = 256  # Number of neurons in the hidden layers
 
@@ -125,7 +126,7 @@ for i in range(len(list_all_dataset_name)):
 
     if length_signal_to_predict <= config['block_size'] :
         print(f"Skipping dataset {name_dataset} because the portion of the signal to predict ({length_signal_to_predict}) is too small compared to the block size ({config['block_size']})")
-        print("fThe length of the signal to predict should be at least twice the block size (i.e. block_size/length_signal_to_predict <= 0.5)")
+        print("The length of the signal to predict should be at least twice the block size (i.e. block_size/length_signal_to_predict <= 0.5)")
         print(f"Current Ratio: {config['block_size'] / length_signal_to_predict:.3f} > 0.5")
         continue
 
@@ -195,8 +196,14 @@ for i in range(len(list_all_dataset_name)):
 
         model = MultiLayerPerceptron(layers, loss_function, config)
         model.save_model_path = save_model_path_for_current_dataset
+        
+        if loss_function_to_use == 'block_SDTW' :
+            model_name = f'model_block_SDTW_{config["block_size"]}'
+        elif loss_function_to_use == 'block_SDTW_divergence' :
+            model_name = f'model_block_SDTW_divergence_{config["block_size"]}'
+        else :
+            model_name = f'model_{loss_function_to_use}'
 
-        model_name = f'model_block_SDTW_{config["block_size"]}' if loss_function_to_use == 'block_SDTW' else f'model_{loss_function_to_use}'
         model.model_name = f"{model_name}"
 
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
