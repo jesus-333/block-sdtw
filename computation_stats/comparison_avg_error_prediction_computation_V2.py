@@ -34,8 +34,8 @@ model_config = dict(
     use_z_score_normalization = True,    # If True a z-score normalization will be applied signal by signal within each dataset
     portion_of_signals_for_input = 0.85, # Portion of the signals to use for training (the rest will be used for prediction)
     n_samples_to_predict = 100,            # Number of samples to predict (If negative it is ignored and the portion_of_signals_for_input is used to define the number of samples to predict. Otherwise, this parameter override portion_of_signals_for_input)
-    epoch = -1,
-    device = "mps",
+    epoch = 40,
+    device = "cuda",
     model_weights_path = "./saved_model/", # Path to save the model weights
 )
 
