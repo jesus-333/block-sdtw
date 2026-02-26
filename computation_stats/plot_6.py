@@ -15,7 +15,7 @@ import os
 
 name_machine = "Mac_CPU"
 # name_machine = "Colab"
-name_machine = "IRIS"
+# name_machine = "IRIS"
 path_files = "Results/computation_time/script_6/{}/".format(name_machine)
 
 t_list = (np.arange(10) + 1) * 100
@@ -25,10 +25,10 @@ batch_size = 5
 plot_config = dict(
     normalization = 0,
     figsize = (15, 8),
-    fontsize = 20,
+    fontsize = 25,
     use_millisec = True,
     add_std = False,
-    use_log_scale = False,
+    use_log_scale = True,
     vmin = None,
     vmax = None,
     save_fig = True
@@ -111,7 +111,7 @@ ax.legend(label_list, fontsize = plot_config['fontsize'])
 ax.set_xlabel("N. samples", fontsize = plot_config['fontsize'])
 ax.set_xlim([t_list[0], t_list[-1]])
 # if not plot_config['use_log_scale'] : ax.set_ylim([0, time_matrix_mean.max() * 1.05])
-ax.set_ylim([0, 270])
+# ax.set_ylim([0, 270])
 # ax.set_ylim([0.4, 500])
 if plot_config['normalization'] == 1 or plot_config['normalization'] == 2 :
     ax.set_ylabel("Time (normalized)", fontsize = plot_config['fontsize'])
@@ -123,10 +123,10 @@ ax.grid()
 ax.tick_params(axis = 'both', which = 'major', labelsize = plot_config['fontsize'])
 
 fig.tight_layout()
-fig.show()
+plt.show()
 
 if plot_config['save_fig'] :
-    path_save = "Results/computation_time/plot/"
+    path_save = f"Results/computation_time/plot/plot_6_batch_{batch_size}/"
     os.makedirs(path_save, exist_ok = True)
     path_save = f"Results/computation_time/plot/plot_6_{name_machine}"
     if plot_config['use_log_scale'] : path_save += "_log"
