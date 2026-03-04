@@ -18,13 +18,13 @@ license = "Apache-2.0"
 authors = [
   { name = "Alberto (Jesus) Zancanaro", email = "alberto.zancanaro.1@gmail.com" },
 ]
-description = "Torch implementation of the Block DTW loss function"
+description = "Torch implementation of various DTW inpsired loss function"
 dependencies = [
-	"numpy",
 	"numba",
 	"toml",
     "torch",
 ]
+readme = "README.md"
 [project.optional-dependencies]
 extra = [
 ]
