@@ -65,7 +65,7 @@ loss_function_to_label = dict(
 path_UCR_folder = "./data/UCRArchive_2018/"
 
 # Get all the folders inside path_UCR_folder
-list_all_dataset_name = [f for f in os.listdir(path_UCR_folder) if os.path.isdir(os.path.join(path_UCR_folder, f))]
+list_all_dataset_name = [f.lower() for f in os.listdir(path_UCR_folder) if os.path.isdir(os.path.join(path_UCR_folder, f))]
 list_filtered_dataset = [] # List with all dataset plotted. It is the equals to list_all_dataset_name if exclude_failed_dataset is False.
 list_idx_filtered_dataset = [] # List with the indices of the dataset. Each element correspond to the index in list_filtered_dataset
 
@@ -108,6 +108,7 @@ for i in range(len(list_all_dataset_name)) :
     if plot_config['exclude_failed_dataset'] :
         # Skip the iteration for datasets where all training runs failed
         if matrix_with_all_data_train[i, :].sum() == 0 :
+            print(f"Dataset {i} : {list_all_dataset_name[i][0:3]}\tSKIPPED (failed dataset)")
             continue
     
     # Add data to the matrix to plot
@@ -268,9 +269,6 @@ if plot_config['save_plot'] :
         for format_to_save in plot_config['format_to_save_plot'] :
             filename = f"comparison_average_score_prediction_train_test_{plot_config['epoch']}_{plot_config['cmap']}.{format_to_save}"
             fig.savefig(path_save_plot + filename)
-
-
-
 
 
 

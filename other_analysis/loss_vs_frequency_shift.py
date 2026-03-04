@@ -27,7 +27,7 @@ t_samples = np.linspace(0, 1, n_samples)
 
 amplitude_1 = 20
 amplitude_2 = 20
-f_1 = 1
+f_1 = 17
 samples_1 = 2 * np.pi * f_1 * t_samples
 sine_1 = torch.from_numpy(amplitude_1 * np.sin(samples_1))
 
@@ -35,10 +35,11 @@ shift_2 = 0
 f_2_list = np.arange(30) + f_1
 
 plot_config = dict(
-    figsize = (13, 10),
+    figsize = (13, 9),
     linewidth = 1.5,
     marker_size = 12,
-    fontsize = 20,
+    fontsize = 22,
+    add_title = False,
     save_fig = True,
 )
 
@@ -173,16 +174,28 @@ for i in range(len(block_size_list)) :
             marker = 'x', markersize = plot_config['marker_size']
             )
 
+# Set axis labels
 ax.set_xlabel("$f_2$ [Hz]", fontsize = plot_config['fontsize'])
 ax.set_ylabel("Loss value", fontsize = plot_config['fontsize'])
+
+# Set lims
 ax.set_xlim([f_2_list[0], f_2_list[-1]])
+
 ax.tick_params(axis = 'both', which = 'major', labelsize = plot_config['fontsize'])
+
+# Set y axis to scientfic notation
+ax.ticklabel_format(axis = 'y', style = 'sci', scilimits = (0, 0))
+
+# Add legend and grid
 ax.legend(fontsize = plot_config['fontsize'])
 ax.grid(True)
-if add_noise :
-    ax.set_title("$f_1$ = {}Hz, $A_1$ = {} (Noisy), $A_2$ = {}".format(f_1, amplitude_1, amplitude_2), fontsize = plot_config['fontsize'])
-else :
-    ax.set_title("$f_1$ = {}Hz, $A_1$ = {}, $A_2$ = {}".format(f_1, amplitude_1, amplitude_2), fontsize = plot_config['fontsize'])
+
+# Add title
+if plot_config['add_title'] :
+    if add_noise :
+        ax.set_title("$f_1$ = {}Hz, $A_1$ = {} (Noisy), $A_2$ = {}".format(f_1, amplitude_1, amplitude_2), fontsize = plot_config['fontsize'])
+    else :
+        ax.set_title("$f_1$ = {}Hz, $A_1$ = {}, $A_2$ = {}".format(f_1, amplitude_1, amplitude_2), fontsize = plot_config['fontsize'])
 
 fig.tight_layout()
 fig.show()

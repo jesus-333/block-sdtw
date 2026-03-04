@@ -26,7 +26,7 @@ block_size = 75
 plot_config = dict(
     figsize = (20, 20),
     aspect = 'equal',
-    path_save = './other_analysis/figures/'
+    path_save = './other_analysis/figures/path_1/'
 )
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -61,7 +61,7 @@ def create_path_dtw(dtw_map : np.ndarray) -> np.ndarray :
 
         if i == dtw_map.shape[0] - 1 or dtw_map[i + 1, j] == 2 :
             # It can only move right because it has reached the last row or the cell below is precluded
-            j += 1  
+            j += 1
         elif j == dtw_map.shape[1] - 1 or dtw_map[i, j + 1] == 2 :
             # It can only move down because it has reached the last column or the cell to the right is precluded
             i += 1
@@ -86,7 +86,9 @@ def create_mask_pruned_dtw(map_size : int, diagonal_size : int) :
     for i in range(map_size) :
         for j in range(map_size) :
             if abs(i - j) <= diagonal_size :
-                mask[i, j] = 0
+                # Change the cell only 50% of the time
+                if np.random.rand() < 0.5 : mask[i, j] = 0
+                # mask[i, j] = 0
 
     return mask
 
