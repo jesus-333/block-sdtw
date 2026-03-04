@@ -16,3 +16,4 @@ saved_model/neurons_256_predict_portion_85
 saved_model/previous_experiments
 saved_model
 Results/hpc_log
+dist
