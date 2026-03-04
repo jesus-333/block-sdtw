@@ -1,5 +1,5 @@
 """
-Implementation of OTW, from "OTW: Optimal Transport Warping for Time Series"
+Implementation of OTW, from "OTW: Optimal Transport Warping for Time Series" (by Fabian Latorre, Chenghao Liu, Doyen Sahoo, and Steven C.H. Hoi)
 
 For more details see :
 - https://ieeexplore.ieee.org/document/10095915
