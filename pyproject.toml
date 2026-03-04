@@ -6,12 +6,12 @@ build-backend = "hatchling.build"
 include = ["/src"]
 
 [tool.hatch.build.targets.wheel.sources]
-"src" = "block_dtw"
+"src" = "dtw_loss_function"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 [project]
-name = "Block_DTW"
+name = "DTW_loss_function"
 version = "1.0"
 license = "Apache-2.0"
 authors = [
