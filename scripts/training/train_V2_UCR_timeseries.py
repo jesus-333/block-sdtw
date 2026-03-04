@@ -51,7 +51,7 @@ config = dict(
     # device = "cuda" if torch.cuda.is_available() else "cpu",
     device = "mps",
     save_weights = True,                # Save the model weights after training. The path will be defined in the config['save_model_path'] + the name of the dataset
-    save_model_path = "./saved_models/", # Path to save the model weights
+    save_model_path = "./saved_model/", # Path to save the model weights
 )
 
 
