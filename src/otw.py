@@ -4,6 +4,9 @@ Implementation of OTW, from "OTW: Optimal Transport Warping for Time Series"
 For more details see :
 - https://ieeexplore.ieee.org/document/10095915
 - https://arxiv.org/abs/2306.00620
+
+@author: Alberto Zancanaro (Jesus)
+@organization: Luxembourg Centre for Systems Biomedicine (LCSB)
 """
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -12,6 +15,37 @@ For more details see :
 import torch
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+class otw() :
+
+    def __init__(self, m : float = 1, s : int | float = 0.5, beta : float = 1, reduction : str = 'mean') -> None :
+        """
+        Initializes the OTW distance module.
+        """
+
+        self.m = m
+        self.s = s
+        self.beta = beta
+        self.reduction = reduction
+
+    def __call__(self, x : torch.Tensor, y : torch.Tensor) -> torch.Tensor :
+        """
+        Computes the OTW distance between two time series.
+
+        Parameters
+        ----------
+        x : torch.Tensor
+            First time series, of shape (B, L) where B is the batch size and L is the length of the time series.
+        y : torch.Tensor
+            Second time series, of shape (B, L) where B is the batch size and L is the length of the time series.
+
+        Returns
+        -------
+        torch.Tensor
+            OTW distance between the two time series
+        """
+
+        return otw_distance(x, y, self.m, self.s, self.beta, self.reduction)
 
 def otw_distance(x : torch.Tensor, y : torch.Tensor, m : float = 1, s : int | float = 0.5, beta : float = 1, reduction : str = 'mean') -> torch.Tensor:
     """
@@ -73,7 +107,6 @@ def otw_distance(x : torch.Tensor, y : torch.Tensor, m : float = 1, s : int | fl
 
     return otw_term_1 + otw_term_2
 
-
 def smooth_l1_loss(x : torch.Tensor, beta : float, reduction = 'mean') -> torch.Tensor :
     """
     Computes the smooth l1 of the input tensor x, as defined in equation (9) of the paper.
@@ -130,5 +163,3 @@ def window_cumsum(x : torch.Tensor, s : int) -> torch.Tensor :
     windowed_cumsum = cumsum_x[:, -1] - (cumsum_x[:, - (s + 1)] if s < x.shape[1] else 0)
 
     return windowed_cumsum
-
-
