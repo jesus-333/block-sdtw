@@ -41,7 +41,9 @@ import torch
 from dtw_loss_functions import block_dtw
 
 block_size = 25
+
 use_cuda = torch.cuda.is_available()
+device = 'cuda' if use_cuda else 'cpu'
 
 batch_size = 5
 time_samples = 300
@@ -62,6 +64,7 @@ import torch
 from dtw_loss_functions import soft_dtw_cuda
 
 use_cuda = torch.cuda.is_available()
+device = 'cuda' if use_cuda else 'cpu'
 
 batch_size = 5
 time_samples = 300

@@ -46,7 +46,7 @@ import numpy as np
 import torch
 import time
 
-from dtw_loss_function import soft_dtw_cuda, block_dtw
+from dtw_loss_functions import soft_dtw_cuda, block_dtw
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Default arguments
@@ -156,4 +156,3 @@ print(f"Average computational time over {n_repetitions} repetitions :")
 print(f"\tBlock DTW Naive Implementation     : {block_naive_times.mean():.4f}±{block_naive_times.std():.4f} {label_time}")
 print(f"\tBlock DTW Optimized Implementation : {block_optimized_times.mean():.4f}±{block_optimized_times.std():.4f} {label_time}")
 print(f"\tSDTW Loss Function                 : {sdtw_times.mean():.4f}±{sdtw_times.std():.4f} {label_time}")
-
