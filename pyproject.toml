@@ -3,12 +3,12 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/dtw_loss_function"]
+packages = ["src/dtw_loss_functions"]
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 [project]
-name = "dtw_loss_function"
+name = "dtw_loss_functions"
 version = "1.0.1"
 license = "Apache-2.0"
 authors = [

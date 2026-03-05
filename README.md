@@ -27,8 +27,8 @@ pip install dtw-loss-function
 Alternatively, you can download the repository and compile it locally via [hatchling](https://pypi.org/project/hatchling/)
 ```sh
 pip install hatchling
-git clone https://github.com/jesus-333/dtw_loss_function.git
-cd dtw_loss_function
+git clone https://github.com/jesus-333/dtw_loss_functions.git
+cd dtw_loss_functions
 hatchling build && pip install .
 ```
 
@@ -38,7 +38,7 @@ Each loss function is implemented as a class inside the packet.
 ### Block-DTW Example
 ```python
 import torch
-from dtw_loss_function import block_dtw
+from dtw_loss_functions import block_dtw
 
 block_size = 25
 use_cuda = torch.cuda.is_available()
@@ -59,7 +59,7 @@ output_block_dtw = block_dtw_loss(x, x_r)
 Note that the SoftDTW CUDA was [originally implemented](https://github.com/Maghoumi/pytorch-softdtw-cuda) by Mehran Maghoumi.
 ```python
 import torch
-from dtw_loss_function import soft_dtw_cuda
+from dtw_loss_functions import soft_dtw_cuda
 
 use_cuda = torch.cuda.is_available()
 
