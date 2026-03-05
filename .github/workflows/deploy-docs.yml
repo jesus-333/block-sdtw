@@ -19,7 +19,7 @@ jobs:
       
       - name: Deploy to documentation repository
         env:
-          TARGET_REPO: your-username/your-docs-repo  # Change this!
+          TARGET_REPO: jesus-333/dtw_loss_functions_documentation
           TARGET_BRANCH: main  # Branch in the docs repo (often 'main' or 'gh-pages')
           GITHUB_TOKEN: ${{ secrets.DOCS_DEPLOY_TOKEN }}
         run: |
