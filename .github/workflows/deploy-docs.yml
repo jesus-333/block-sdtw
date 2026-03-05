@@ -1,0 +1,53 @@
+name: Deploy Documentation to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # or 'master' - change to match your default branch
+    paths:
+      - 'docs/**'  # Only trigger when files in docs/ change
+
+jobs:
+  deploy-docs:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout source repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch all history for proper git operations
+      
+      - name: Deploy to documentation repository
+        env:
+          TARGET_REPO: your-username/your-docs-repo  # Change this!
+          TARGET_BRANCH: main  # Branch in the docs repo (often 'main' or 'gh-pages')
+          GITHUB_TOKEN: ${{ secrets.DOCS_DEPLOY_TOKEN }}
+        run: |
+          # Configure git
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "actions@github.com"
+          
+          # Clone the target documentation repository
+          git clone https://x-access-token:${GITHUB_TOKEN}@github.com/${TARGET_REPO}.git docs-deploy
+          cd docs-deploy
+          
+          # Switch to target branch (create if doesn't exist)
+          git checkout ${TARGET_BRANCH} || git checkout -b ${TARGET_BRANCH}
+          
+          # Remove old content (preserve .git directory)
+          find . -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf {} +
+          
+          # Copy new documentation content
+          cp -r ../docs/* .
+          
+          # Add, commit and push changes
+          git add .
+          
+          # Only commit if there are changes
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update documentation from source repo (commit: ${{ github.sha }})"
+            git push origin ${TARGET_BRANCH}
+            echo "Documentation successfully deployed!"
+          fi
