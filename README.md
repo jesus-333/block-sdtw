@@ -9,11 +9,11 @@ Each implementation is compatible with PyTorch and can be used for training.
 - OTW. Implementation of the Optimal Transport Warping function. See the paper [OTW: Optimal Transport Warping for Time Series](https://ieeexplore.ieee.org/document/10095915) for more details.
 
 ## Important Notes about Repository Name
-This repository was initially created to develop only the code related to block-DTW loss function. As with many academic projects, the code was initially "not very well organized", so I decided to refactor it and transform it into a Python package for easier use.
+The original name of this repository was `block-sdtw` because it was initially created to develop only the code related to block-DTW loss function. As with many academic projects, the code was initially "not very well organized", so I decided to refactor it and transform it into a Python package for easier use.
 Since my implementation of Block-DTW relies on Mehran Maghoumi's [implementation](https://github.com/Maghoumi/pytorch-softdtw-cuda) of SoftDTW, I decided to also include SoftDTW inside the package.
 Due to some testing, I also had the opportunity to implement the [OTW](https://ieeexplore.ieee.org/document/10095915) loss function.
 
-At this point, given the presence of 3 different loss functions within the code base, the name `block-dtw` for the package seemed a bit misleading to me. So, I decided to change the name from `block-dtw` to `dtw-loss-function`.
+At this point, given the presence of 3 different loss functions within the code base, the name `block-sdtw` for the package seemed a bit misleading to me. So, I decided to change the name from `block-sdtw` to `dtw-loss-function`.
 
 ## Installation 
 
