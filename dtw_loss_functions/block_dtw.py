@@ -20,7 +20,6 @@ Authors
 -------
 Alberto Zancanaro <alberto.zancanaro@uni.lu>
 
-
 """
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -47,6 +46,15 @@ class block_dtw() :
     If you are not sure which implementation to use, you can use the block_dtw class.
     Note that if you know a priori that the optimized version can be used in your case, it is recommended to use directly the block_dtw_optimized class, which is faster than the block_dtw class (no overhead of checking the input tensors length and block size).
 
+    Attributes
+    ----------
+
+    block_size : int
+        Size of the blocks into which to divide the signal.
+    block_dtw_naive : :class:`block_dtw_naive`
+        Instance of the naive implementation of the block DTW.
+    block_dtw_optimized : :class:`block_dtw_optimized`
+        Instance of the optimized implementation of the block DTW.
 
     Parameters
     ----------
@@ -115,6 +123,21 @@ class block_dtw_naive(SoftDTW) :
         self.block_size = block_size
 
     def forward(self, x : torch.tensor, x_r : torch.tensor) -> torch.tensor :
+        """
+        Compute the block DTW loss between the input tensors `x` and `x_r` by computing the SDTW on each block separately and summing the results.
+
+        Parameters
+        ----------
+        x : torch.tensor
+            First input tensor of shape B x T x C
+        x_r : torch.tensor
+            Second input tensor of shape B x T x C
+
+        Returns
+        -------
+        recon_error : torch.tensor
+            Tensor of shape B containing the block DTW loss for each sample in the batch.
+        """
         tmp_recon_loss = 0
         i = 0
         continue_cylce = True
@@ -149,9 +172,12 @@ class block_dtw_optimized(SoftDTW) :
     """
     Optimized implementation of the block DTW, which exploits reshaping of the input tensors to compute the SDTW on all blocks at once.
     
+
     This version can be used only if the length of the input tensors is divisible by the block size, i.e. if ``length_signal % block_size == 0``.
     Note that the class will not check if this condition is satisfied, so it is the responsibility of the user to ensure that the input tensors length and block size are compatible.
 
+    This requirement is necessary because the optimized implementation exploits reshaping of the input tensors to compute the SDTW on all blocks at once.
+    This works because SoftDTW implementation allow batched inputs,so we can reshape the input tensors to have a new batch size equal to the number of blocks, and compute the SDTW on all blocks at once.
 
     For details on the parameters, see the docstring of the :class:`block_dtw` class.
     """
@@ -166,6 +192,22 @@ class block_dtw_optimized(SoftDTW) :
         self.block_size = block_size
 
     def forward(self, x : torch.tensor, x_r : torch.tensor) -> torch.tensor :
+        """
+        Compute the block DTW loss between the input tensors `x` and `x_r` by exploiting reshaping of the input tensors to compute the SDTW on all blocks at once.
+
+        Parameters
+        ----------
+        x : torch.tensor
+            First input tensor of shape B x T x C
+        x_r : torch.tensor
+            Second input tensor of shape B x T x C
+
+        Returns
+        -------
+        recon_error : torch.tensor
+            Tensor of shape B containing the block DTW loss for each sample in the batch.
+        """
+
         # Compute new batch size
         virtual_batch_size = int(x.shape[0] * (x.shape[1] / self.block_size))
         

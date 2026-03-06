@@ -1,3 +1,30 @@
+"""
+Cuda Implementation of SoftDTW by Mehran Maghoumi.
+
+The code here is identical to the one in the original repository (https://github.com/Maghoumi/pytorch-softdtw-cuda).
+The only changes are the modification of the docstring to numpydoc style, to make it consistent with the rest of the codebase.
+
+Example
+-------
+>>> from dtw_loss_functions import soft_dtw_cuda
+>>> import torch
+>>> use_cuda = torch.cuda.is_available()
+>>> device = 'cuda' if use_cuda else 'cpu'
+>>> batch_size = 5
+>>> time_samples = 300
+>>> channels = 1
+>>> x   = torch.randn(batch_size, time_samples, channels).to(device)
+>>> x_r = torch.randn(batch_size, time_samples, channels).to(device)
+>>> sdtw_loss = soft_dtw_cuda.SoftDTW(use_cuda = use_cuda)
+>>> output_sdtw = sdtw_loss(x, x_r)
+
+Authors
+-------
+Mehran Maghoumi
+
+"""
+
+
 # MIT License
 #
 # Copyright (c) 2020 Mehran Maghoumi
@@ -31,11 +58,15 @@ import math
 
 # ----------------------------------------------------------------------------------------------------------------------
 @cuda.jit
-def compute_softdtw_cuda(D, gamma, bandwidth, max_i, max_j, n_passes, R):
+def compute_softdtw_cuda(D, gamma, bandwidth, max_i, max_j, n_passes, R) :
     """
-    :param seq_len: The length of the sequence (both inputs are assumed to be of the same size)
-    :param n_passes: 2 * seq_len - 1 (The number of anti-diagonals)
+    Computes the soft-DTW value between two sequences using CUDA.
     """
+    
+    # OLD docstring
+    # :param seq_len: The length of the sequence (both inputs are assumed to be of the same size)
+    # :param n_passes: 2 * seq_len - 1 (The number of anti-diagonals)
+
     # Each block processes one pair of examples
     b = cuda.blockIdx.x
     # We have as many threads as seq_len, because the most number of threads we need
@@ -273,11 +304,38 @@ class _SoftDTW(Function):
 class SoftDTW(torch.nn.Module):
     """
     The soft DTW implementation that optionally supports CUDA
+
+    Attributes
+    ----------
+    normalize : bool
+        Flag indicating whether to perform normalization (as discussed in discussed in https://github.com/mblondel/soft-dtw/issues/10#issuecomment-383564790)
+        Note that if normalize is set to True, the SoftDTW divergence will be computed, which is defined as ``SoftDTW(X, Y) - 1/2 * (SoftDTW(X, X) + SoftDTW(Y, Y))``.
+    gamma : float
+        SoftDTW's gamma parameter
+    bandwidth : float or None
+        Sakoe-Chiba bandwidth for pruning. Passing 'None' will disable pruning.
+    dist_func : function or None
+        Optional point-wise distance function to use. If 'None', then a default Euclidean distance function will be used.
+    
+    Parameters
+    ----------
+    use_cuda : bool
+        Flag indicating whether the CUDA implementation should be used
+    gamma : float
+        SoftDTW's gamma parameter
+    normalize : bool
+        Flag indicating whether to perform normalization (as discussed in discussed in https://github.com/mblondel/soft-dtw/issues/10#issuecomment-383564790)
+        Note that if normalize is set to True, the SoftDTW divergence will be computed, which is defined as ``SoftDTW(X, Y) - 1/2 * (SoftDTW(X, X) + SoftDTW(Y, Y))``.
+    bandwidth : float or None
+        Sakoe-Chiba bandwidth for pruning. Passing 'None' will disable pruning.
+    dist_func : function or None
+        Optional point-wise distance function to use. If 'None', then a default Euclidean distance function will be used.
     """
 
     def __init__(self, use_cuda, gamma=1.0, normalize=False, bandwidth=None, dist_func=None):
         """
         Initializes a new instance using the supplied parameters
+
         :param use_cuda: Flag indicating whether the CUDA implementation should be used
         :param gamma: sDTW's gamma parameter
         :param normalize: Flag indicating whether to perform normalization
