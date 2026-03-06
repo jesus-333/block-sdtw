@@ -5,7 +5,8 @@ on:
     branches:
       - main 
     paths:
-      - 'docs/**'  # Only trigger when files in docs/ change
+      - 'docs/**'  # Trigger when files in docs/ change
+  workflow_dispatch:  # Allows manual triggering
 
 jobs:
   deploy-docs:
@@ -40,7 +41,14 @@ jobs:
           # Switch to target branch (create if doesn't exist)
           git checkout ${TARGET_BRANCH} || git checkout -b ${TARGET_BRANCH}
           
-          # Remove old content (preserve .git directory)
+          # Remove old content (preserve .git, .github, README.md, LICENSE, etc.)
+          find . -mindepth 1 -maxdepth 1 \
+            ! -name '.git' \
+            ! -name '.github' \
+            ! -name 'README.md' \
+            ! -name 'LICENSE' \
+            ! -name '.gitignore' \
+            -exec rm -rf {} +
           find . -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf {} +
           
           # Copy new documentation content
