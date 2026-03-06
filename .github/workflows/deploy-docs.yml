@@ -3,7 +3,7 @@ name: Deploy Documentation to GitHub Pages
 on:
   push:
     branches:
-      - main  # or 'master' - change to match your default branch
+      - main 
     paths:
       - 'docs/**'  # Only trigger when files in docs/ change
 
