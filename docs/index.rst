@@ -7,6 +7,7 @@ Welcome to the dtw_loss_functions documentation
 ===============================================
 
 This documentation is still work in progress. If you have any questions, please feel free to contact the author.
+
 For now the content is generated automatically from the docstrings in the code, through sphinx autodoc. The documentation will be improved in the future, with more examples and explanations.
 
 :mod:`dtw_loss_functions` is an python package with the torch implementation of various DTW-derived loss functions.
