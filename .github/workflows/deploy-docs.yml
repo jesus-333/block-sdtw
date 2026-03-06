@@ -23,12 +23,18 @@ jobs:
           TARGET_BRANCH: main  # Branch in the docs repo (often 'main' or 'gh-pages')
           GITHUB_TOKEN: ${{ secrets.DOCS_DEPLOY_TOKEN }}
         run: |
+          # Verify token is available
+          if [ -z "$GITHUB_TOKEN" ]; then
+            echo "Error: DOCS_DEPLOY_TOKEN secret is not set!"
+            exit 1
+          fi
+          
           # Configure git
           git config --global user.name "GitHub Actions Bot"
           git config --global user.email "actions@github.com"
           
           # Clone the target documentation repository
-          git clone https://x-access-token:${GITHUB_TOKEN}@github.com/${TARGET_REPO}.git docs-deploy
+          git clone https://${GITHUB_TOKEN}@github.com/${TARGET_REPO}.git docs-deploy
           cd docs-deploy
           
           # Switch to target branch (create if doesn't exist)
@@ -48,6 +54,6 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "Update documentation from source repo (commit: ${{ github.sha }})"
-            git push origin ${TARGET_BRANCH}
+            git push https://${GITHUB_TOKEN}@github.com/${TARGET_REPO}.git ${TARGET_BRANCH}
             echo "Documentation successfully deployed!"
           fi
