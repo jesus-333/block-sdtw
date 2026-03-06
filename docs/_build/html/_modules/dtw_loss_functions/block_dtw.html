@@ -98,7 +98,6 @@
 <span class="sd">-------</span>
 <span class="sd">Alberto Zancanaro &lt;alberto.zancanaro@uni.lu&gt;</span>
 
-
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="c1"># - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span>
@@ -127,6 +126,15 @@
 <span class="sd">    If you are not sure which implementation to use, you can use the block_dtw class.</span>
 <span class="sd">    Note that if you know a priori that the optimized version can be used in your case, it is recommended to use directly the block_dtw_optimized class, which is faster than the block_dtw class (no overhead of checking the input tensors length and block size).</span>
 
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+
+<span class="sd">    block_size : int</span>
+<span class="sd">        Size of the blocks into which to divide the signal.</span>
+<span class="sd">    block_dtw_naive : :class:`block_dtw_naive`</span>
+<span class="sd">        Instance of the naive implementation of the block DTW.</span>
+<span class="sd">    block_dtw_optimized : :class:`block_dtw_optimized`</span>
+<span class="sd">        Instance of the optimized implementation of the block DTW.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -200,6 +208,21 @@
 <div class="viewcode-block" id="block_dtw_naive.forward">
 <a class="viewcode-back" href="../../generated/dtw_loss_functions.block_dtw.html#dtw_loss_functions.block_dtw.block_dtw_naive.forward">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span> <span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">,</span> <span class="n">x_r</span> <span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span> <span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the block DTW loss between the input tensors `x` and `x_r` by computing the SDTW on each block separately and summing the results.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        x : torch.tensor</span>
+<span class="sd">            First input tensor of shape B x T x C</span>
+<span class="sd">        x_r : torch.tensor</span>
+<span class="sd">            Second input tensor of shape B x T x C</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        recon_error : torch.tensor</span>
+<span class="sd">            Tensor of shape B containing the block DTW loss for each sample in the batch.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">tmp_recon_loss</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">continue_cylce</span> <span class="o">=</span> <span class="kc">True</span>
@@ -238,9 +261,12 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Optimized implementation of the block DTW, which exploits reshaping of the input tensors to compute the SDTW on all blocks at once.</span>
 <span class="sd">    </span>
+
 <span class="sd">    This version can be used only if the length of the input tensors is divisible by the block size, i.e. if ``length_signal % block_size == 0``.</span>
 <span class="sd">    Note that the class will not check if this condition is satisfied, so it is the responsibility of the user to ensure that the input tensors length and block size are compatible.</span>
 
+<span class="sd">    This requirement is necessary because the optimized implementation exploits reshaping of the input tensors to compute the SDTW on all blocks at once.</span>
+<span class="sd">    This works because SoftDTW implementation allow batched inputs,so we can reshape the input tensors to have a new batch size equal to the number of blocks, and compute the SDTW on all blocks at once.</span>
 
 <span class="sd">    For details on the parameters, see the docstring of the :class:`block_dtw` class.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -257,6 +283,22 @@
 <div class="viewcode-block" id="block_dtw_optimized.forward">
 <a class="viewcode-back" href="../../generated/dtw_loss_functions.block_dtw.html#dtw_loss_functions.block_dtw.block_dtw_optimized.forward">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span> <span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">,</span> <span class="n">x_r</span> <span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span> <span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the block DTW loss between the input tensors `x` and `x_r` by exploiting reshaping of the input tensors to compute the SDTW on all blocks at once.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        x : torch.tensor</span>
+<span class="sd">            First input tensor of shape B x T x C</span>
+<span class="sd">        x_r : torch.tensor</span>
+<span class="sd">            Second input tensor of shape B x T x C</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        recon_error : torch.tensor</span>
+<span class="sd">            Tensor of shape B containing the block DTW loss for each sample in the batch.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="c1"># Compute new batch size</span>
         <span class="n">virtual_batch_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">block_size</span><span class="p">))</span>
         

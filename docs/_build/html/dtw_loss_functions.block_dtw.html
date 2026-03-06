@@ -51,7 +51,12 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Block DTW</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#authors">Authors</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#dtw_loss_functions.block_dtw.block_dtw"><code class="docutils literal notranslate"><span class="pre">block_dtw</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dtw_loss_functions.block_dtw.block_dtw"><code class="docutils literal notranslate"><span class="pre">block_dtw</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dtw_loss_functions.block_dtw.block_dtw.block_size"><code class="docutils literal notranslate"><span class="pre">block_dtw.block_size</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dtw_loss_functions.block_dtw.block_dtw.block_dtw_naive"><code class="docutils literal notranslate"><span class="pre">block_dtw.block_dtw_naive</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dtw_loss_functions.block_dtw.block_dtw.block_dtw_optimized"><code class="docutils literal notranslate"><span class="pre">block_dtw.block_dtw_optimized</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#dtw_loss_functions.block_dtw.block_dtw_naive"><code class="docutils literal notranslate"><span class="pre">block_dtw_naive</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#dtw_loss_functions.block_dtw.block_dtw_naive.forward"><code class="docutils literal notranslate"><span class="pre">block_dtw_naive.forward()</span></code></a></li>
 </ul>
@@ -126,6 +131,39 @@ The block DTW can be computed in two ways:</p>
 See the docstring of block_dtw_optimized for more details on the requirements for the optimized implementation.</p>
 <p>If you are not sure which implementation to use, you can use the block_dtw class.
 Note that if you know a priori that the optimized version can be used in your case, it is recommended to use directly the block_dtw_optimized class, which is faster than the block_dtw class (no overhead of checking the input tensors length and block size).</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dtw_loss_functions.block_dtw.block_dtw.block_size">
+<span class="sig-name descname"><span class="pre">block_size</span></span><a class="headerlink" href="#dtw_loss_functions.block_dtw.block_dtw.block_size" title="Link to this definition"></a></dt>
+<dd><p>Size of the blocks into which to divide the signal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dtw_loss_functions.block_dtw.block_dtw.block_dtw_naive">
+<span class="sig-name descname"><span class="pre">block_dtw_naive</span></span><a class="headerlink" href="#dtw_loss_functions.block_dtw.block_dtw.block_dtw_naive" title="Link to this definition"></a></dt>
+<dd><p>Instance of the naive implementation of the block DTW.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="generated/dtw_loss_functions.block_dtw.html#dtw_loss_functions.block_dtw.block_dtw_naive" title="dtw_loss_functions.block_dtw.block_dtw_naive"><code class="xref py py-class docutils literal notranslate"><span class="pre">block_dtw_naive</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dtw_loss_functions.block_dtw.block_dtw.block_dtw_optimized">
+<span class="sig-name descname"><span class="pre">block_dtw_optimized</span></span><a class="headerlink" href="#dtw_loss_functions.block_dtw.block_dtw.block_dtw_optimized" title="Link to this definition"></a></dt>
+<dd><p>Instance of the optimized implementation of the block DTW.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="generated/dtw_loss_functions.block_dtw.html#dtw_loss_functions.block_dtw.block_dtw_optimized" title="dtw_loss_functions.block_dtw.block_dtw_optimized"><code class="xref py py-class docutils literal notranslate"><span class="pre">block_dtw_optimized</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -158,17 +196,28 @@ Note that if you know a priori that the optimized version can be used in your ca
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/dtw_loss_functions.block_dtw.html#dtw_loss_functions.block_dtw.block_dtw_naive.forward" title="dtw_loss_functions.block_dtw.block_dtw_naive.forward"><code class="xref py py-obj docutils literal notranslate"><span class="pre">forward</span></code></a>(x, x_r)</p></td>
-<td><p>Compute the soft-DTW value between X and Y :param X: One batch of examples, batch_size x seq_len x dims :param Y: The other batch of examples, batch_size x seq_len x dims :return: The computed results</p></td>
+<td><p>Compute the block DTW loss between the input tensors <cite>x</cite> and <cite>x_r</cite> by computing the SDTW on each block separately and summing the results.</p></td>
 </tr>
 </tbody>
 </table>
 <dl class="py method">
 <dt class="sig sig-object py" id="dtw_loss_functions.block_dtw.block_dtw_naive.forward">
 <span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_r</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tensor</span></span></span><a class="reference internal" href="_modules/dtw_loss_functions/block_dtw.html#block_dtw_naive.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dtw_loss_functions.block_dtw.block_dtw_naive.forward" title="Link to this definition"></a></dt>
-<dd><p>Compute the soft-DTW value between X and Y
-:param X: One batch of examples, batch_size x seq_len x dims
-:param Y: The other batch of examples, batch_size x seq_len x dims
-:return: The computed results</p>
+<dd><p>Compute the block DTW loss between the input tensors <cite>x</cite> and <cite>x_r</cite> by computing the SDTW on each block separately and summing the results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>torch.tensor</em>) – First input tensor of shape B x T x C</p></li>
+<li><p><strong>x_r</strong> (<em>torch.tensor</em>) – Second input tensor of shape B x T x C</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>recon_error</strong> – Tensor of shape B containing the block DTW loss for each sample in the batch.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.tensor</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -180,22 +229,35 @@ Note that if you know a priori that the optimized version can be used in your ca
 <p>Optimized implementation of the block DTW, which exploits reshaping of the input tensors to compute the SDTW on all blocks at once.</p>
 <p>This version can be used only if the length of the input tensors is divisible by the block size, i.e. if <code class="docutils literal notranslate"><span class="pre">length_signal</span> <span class="pre">%</span> <span class="pre">block_size</span> <span class="pre">==</span> <span class="pre">0</span></code>.
 Note that the class will not check if this condition is satisfied, so it is the responsibility of the user to ensure that the input tensors length and block size are compatible.</p>
+<p>This requirement is necessary because the optimized implementation exploits reshaping of the input tensors to compute the SDTW on all blocks at once.
+This works because SoftDTW implementation allow batched inputs,so we can reshape the input tensors to have a new batch size equal to the number of blocks, and compute the SDTW on all blocks at once.</p>
 <p>For details on the parameters, see the docstring of the <a class="reference internal" href="generated/dtw_loss_functions.block_dtw.html#dtw_loss_functions.block_dtw.block_dtw" title="dtw_loss_functions.block_dtw.block_dtw"><code class="xref py py-class docutils literal notranslate"><span class="pre">block_dtw</span></code></a> class.</p>
 <p class="rubric">Methods</p>
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/dtw_loss_functions.block_dtw.html#dtw_loss_functions.block_dtw.block_dtw_optimized.forward" title="dtw_loss_functions.block_dtw.block_dtw_optimized.forward"><code class="xref py py-obj docutils literal notranslate"><span class="pre">forward</span></code></a>(x, x_r)</p></td>
-<td><p>Compute the soft-DTW value between X and Y :param X: One batch of examples, batch_size x seq_len x dims :param Y: The other batch of examples, batch_size x seq_len x dims :return: The computed results</p></td>
+<td><p>Compute the block DTW loss between the input tensors <cite>x</cite> and <cite>x_r</cite> by exploiting reshaping of the input tensors to compute the SDTW on all blocks at once.</p></td>
 </tr>
 </tbody>
 </table>
 <dl class="py method">
 <dt class="sig sig-object py" id="dtw_loss_functions.block_dtw.block_dtw_optimized.forward">
 <span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_r</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tensor</span></span></span><a class="reference internal" href="_modules/dtw_loss_functions/block_dtw.html#block_dtw_optimized.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dtw_loss_functions.block_dtw.block_dtw_optimized.forward" title="Link to this definition"></a></dt>
-<dd><p>Compute the soft-DTW value between X and Y
-:param X: One batch of examples, batch_size x seq_len x dims
-:param Y: The other batch of examples, batch_size x seq_len x dims
-:return: The computed results</p>
+<dd><p>Compute the block DTW loss between the input tensors <cite>x</cite> and <cite>x_r</cite> by exploiting reshaping of the input tensors to compute the SDTW on all blocks at once.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>torch.tensor</em>) – First input tensor of shape B x T x C</p></li>
+<li><p><strong>x_r</strong> (<em>torch.tensor</em>) – Second input tensor of shape B x T x C</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>recon_error</strong> – Tensor of shape B containing the block DTW loss for each sample in the batch.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.tensor</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>

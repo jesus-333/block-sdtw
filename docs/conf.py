@@ -57,6 +57,7 @@ modindex_common_prefix = ["dtw_loss_functions."]
 
 numpydoc_show_class_members = True
 numpydoc_show_inherited_class_members = False
+numpydoc_class_members_toctree = False
 
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
