@@ -8,6 +8,14 @@ Each implementation is compatible with PyTorch and can be used for training.
 - BlockDTW. Alternative version of SDTW, where a block-wise computation is used to improve performance. See the paper [BlockDTW: Efficient and Scalable Similarity Search Algorithm for Healthcare-Focused Time-Series](https://ieeexplore.ieee.org/document/11230700) for more details.
 - OTW. Implementation of the Optimal Transport Warping function. See the paper [OTW: Optimal Transport Warping for Time Series](https://ieeexplore.ieee.org/document/10095915) for more details.
 
+
+### Documentation
+
+You can read the package documentation at the [link](https://jesus-333.github.io/dtw_loss_functions_documentation/)
+
+Note that for now the documentation is generated automatically from the docstrings in the code, through sphinx autodoc. 
+It will be improved in the future, with more examples and explanations.
+
 ## Important Notes about Repository Name
 The original name of this repository was `block-sdtw` because it was initially created to develop only the code related to block-DTW loss function. As with many academic projects, the code was initially "not very well organized", so I decided to refactor it and transform it into a Python package for easier use.
 Since my implementation of Block-DTW relies on Mehran Maghoumi's [implementation](https://github.com/Maghoumi/pytorch-softdtw-cuda) of SoftDTW, I decided to also include SoftDTW inside the package.
