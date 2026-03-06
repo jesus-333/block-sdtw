@@ -1,4 +1,4 @@
-Results of doctest builder run on 2026-03-06 12:10:41
+Results of doctest builder run on 2026-03-06 12:52:31
 =====================================================
 
 Document: dtw_loss_functions.block_dtw
