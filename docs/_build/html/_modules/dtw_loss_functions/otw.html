@@ -79,12 +79,15 @@
 <span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Implementation of OTW, from &quot;OTW: Optimal Transport Warping for Time Series&quot; (by Fabian Latorre, Chenghao Liu, Doyen Sahoo, and Steven C.H. Hoi)</span>
 
+
 <span class="sd">For more details see :</span>
 <span class="sd">- https://ieeexplore.ieee.org/document/10095915</span>
 <span class="sd">- https://arxiv.org/abs/2306.00620</span>
 
-<span class="sd">@author: Alberto Zancanaro (Jesus)</span>
-<span class="sd">@organization: Luxembourg Centre for Systems Biomedicine (LCSB)</span>
+
+<span class="sd">Authors</span>
+<span class="sd">-------</span>
+<span class="sd">Alberto Zancanaro &lt;alberto.zancanaro@uni.lu&gt;</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="c1"># - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span>
@@ -112,12 +115,14 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Computes the OTW distance between two time series.</span>
 
+
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        x : torch.Tensor</span>
 <span class="sd">            First time series, of shape (B, L) where B is the batch size and L is the length of the time series.</span>
 <span class="sd">        y : torch.Tensor</span>
 <span class="sd">            Second time series, of shape (B, L) where B is the batch size and L is the length of the time series.</span>
+
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -134,6 +139,7 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Implements the OTW distance between two time series, as defined in equation (10) of the paper.</span>
 
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    x : torch.Tensor</span>
@@ -148,6 +154,7 @@
 <span class="sd">        If integer, it is interpreted as the number of time steps.</span>
 <span class="sd">    beta : float</span>
 <span class="sd">        Hyperparameter for the smooth l1 loss, default is 1.</span>
+
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -197,6 +204,7 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Computes the smooth l1 of the input tensor x, as defined in equation (9) of the paper.</span>
 
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    x : torch.Tensor</span>
@@ -205,6 +213,7 @@
 <span class="sd">        Hyperparameter for the smooth l1 loss.</span>
 <span class="sd">    reduction : str</span>
 <span class="sd">        Specifies the reduction to apply to the output: &#39;none&#39; | &#39;mean&#39; | &#39;sum&#39;. Default: &#39;mean&#39;.</span>
+
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -230,9 +239,11 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Computes the cumulative sum of the input tensor x as defined in equation (7) of the paper.</span>
 
-<span class="sd">    Given a time series A represented as an array of values [a1, a2, ..., aL], the window cumsum is computed as :</span>
-<span class="sd">    window_cumsum(A) = cumsum(A) - cumsum(A[0:L-s])</span>
+
+<span class="sd">    Given a time series A represented as an array of values ``[a1, a2, ..., aL]``, the window cumsum is computed as :</span>
+<span class="sd">    ``window_cumsum(A) = cumsum(A) - cumsum(A[0:L-s])``</span>
 <span class="sd">    (i.e. the cumsum of all the array minus the cumsum of the array excluding the last s elements)</span>
+
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -240,6 +251,7 @@
 <span class="sd">        Input tensor of shape (B, L).</span>
 <span class="sd">    s : int</span>
 <span class="sd">        Window size.</span>
+
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>

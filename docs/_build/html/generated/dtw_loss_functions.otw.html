@@ -82,8 +82,9 @@
 <p>For more details see :
 - <a class="reference external" href="https://ieeexplore.ieee.org/document/10095915">https://ieeexplore.ieee.org/document/10095915</a>
 - <a class="reference external" href="https://arxiv.org/abs/2306.00620">https://arxiv.org/abs/2306.00620</a></p>
-<p>&#64;author: Alberto Zancanaro (Jesus)
-&#64;organization: Luxembourg Centre for Systems Biomedicine (LCSB)</p>
+<section id="authors">
+<h2>Authors<a class="headerlink" href="#authors" title="Link to this heading"></a></h2>
+<p>Alberto Zancanaro &lt;<a class="reference external" href="mailto:alberto&#46;zancanaro&#37;&#52;&#48;uni&#46;lu">alberto<span>&#46;</span>zancanaro<span>&#64;</span>uni<span>&#46;</span>lu</a>&gt;</p>
 <p class="rubric">Functions</p>
 <table class="autosummary longtable docutils align-default">
 <tbody>
@@ -106,6 +107,7 @@
 </tr>
 </tbody>
 </table>
+</section>
 <dl class="py class">
 <dt class="sig sig-object py" id="dtw_loss_functions.otw.otw">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">dtw_loss_functions.otw.</span></span><span class="sig-name descname"><span class="pre">otw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reduction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'mean'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dtw_loss_functions/otw.html#otw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dtw_loss_functions.otw.otw" title="Link to this definition"></a></dt>
@@ -170,8 +172,8 @@ If integer, it is interpreted as the number of time steps.</p></li>
 <dt class="sig sig-object py" id="dtw_loss_functions.otw.window_cumsum">
 <span class="sig-prename descclassname"><span class="pre">dtw_loss_functions.otw.</span></span><span class="sig-name descname"><span class="pre">window_cumsum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="../_modules/dtw_loss_functions/otw.html#window_cumsum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dtw_loss_functions.otw.window_cumsum" title="Link to this definition"></a></dt>
 <dd><p>Computes the cumulative sum of the input tensor x as defined in equation (7) of the paper.</p>
-<p>Given a time series A represented as an array of values [a1, a2, …, aL], the window cumsum is computed as :
-window_cumsum(A) = cumsum(A) - cumsum(A[0:L-s])
+<p>Given a time series A represented as an array of values <code class="docutils literal notranslate"><span class="pre">[a1,</span> <span class="pre">a2,</span> <span class="pre">...,</span> <span class="pre">aL]</span></code>, the window cumsum is computed as :
+<code class="docutils literal notranslate"><span class="pre">window_cumsum(A)</span> <span class="pre">=</span> <span class="pre">cumsum(A)</span> <span class="pre">-</span> <span class="pre">cumsum(A[0:L-s])</span></code>
 (i.e. the cumsum of all the array minus the cumsum of the array excluding the last s elements)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
