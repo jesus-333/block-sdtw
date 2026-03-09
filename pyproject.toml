@@ -17,10 +17,12 @@ authors = [
 description = "Torch implementation of various DTW inpsired loss functions"
 dependencies = [
 	"numba",
+	"pysdtw",
 	"toml",
     "torch",
 ]
 readme = "README.md"
+
 [project.optional-dependencies]
 extra = [
 ]
