@@ -1,0 +1,31 @@
+name: Sync sdtw-cuda-ron-manual
+
+on:
+  workflow_dispatch:       # Allow manual trigger
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout dtw_loss_functions
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Clone sdtw-cuda-torch
+        run: |
+          git clone --depth=1 https://github.com/BGU-CS-VIL/sdtw-cuda-torch.git /tmp/sdtw-cuda-torch
+
+      - name: Copy softdtw_cuda folder
+        run: |
+          mkdir -p dtw_loss_functions/soft_dtw_implementations/soft_dtw_cuda_ron
+          cp -r /tmp/sdtw-cuda-torch/softdtw_cuda/. dtw_loss_functions/soft_dtw_implementations/soft_dtw_cuda_ron/
+
+      - name: Commit and push if changes exist
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add dtw_loss_functions/soft_dtw_implementations/sdtw_cuda_torch/
+          git commit -m "chore: sync softdtw_cuda from sdtw-cuda-torch ($(date +'%Y-%m-%d'))"
+          git push
