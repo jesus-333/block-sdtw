@@ -24,7 +24,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Soft DTW" href="dtw_loss_functions.soft_dtw_cuda.html" />
+    <link rel="next" title="Soft DTW" href="dtw_loss_functions.soft_dtw.html" />
     <link rel="prev" title="Block DTW" href="dtw_loss_functions.block_dtw.html" /> 
 </head>
 
@@ -47,18 +47,26 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Loss functions</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="dtw_loss_functions.block_dtw.html">Block DTW</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">OTW</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#authors">Authors</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#dtw_loss_functions.otw.otw"><code class="docutils literal notranslate"><span class="pre">otw</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dtw_loss_functions.otw.otw"><code class="docutils literal notranslate"><span class="pre">otw</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dtw_loss_functions.otw.otw.forward"><code class="docutils literal notranslate"><span class="pre">otw.forward()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#dtw_loss_functions.otw.otw_distance"><code class="docutils literal notranslate"><span class="pre">otw_distance()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#dtw_loss_functions.otw.smooth_l1_loss"><code class="docutils literal notranslate"><span class="pre">smooth_l1_loss()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#dtw_loss_functions.otw.window_cumsum"><code class="docutils literal notranslate"><span class="pre">window_cumsum()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="dtw_loss_functions.soft_dtw_cuda.html">Soft DTW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dtw_loss_functions.soft_dtw.html">Soft DTW</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.html">SoftDTW Subpackage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biblio.html">Bibliography</a></li>
 </ul>
 
         </div>
@@ -87,7 +95,7 @@
              
   <section id="module-dtw_loss_functions.otw">
 <span id="otw"></span><h1>OTW<a class="headerlink" href="#module-dtw_loss_functions.otw" title="Link to this heading"></a></h1>
-<p>Implementation of OTW, from “OTW: Optimal Transport Warping for Time Series” (by Fabian Latorre, Chenghao Liu, Doyen Sahoo, and Steven C.H. Hoi)</p>
+<p>Implementation of OTW, presented in <span id="id1">[<a class="reference internal" href="biblio.html#id12" title="Fabian Latorre, Chenghao Liu, Doyen Sahoo, and Steven C.H. Hoi. Otw: optimal transport warping for time series. In ICASSP 2023 - 2023 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), volume, 1-5. 2023. doi:10.1109/ICASSP49357.2023.10095915.">LLSH23</a>]</span></p>
 <p>For more details see :
 - <a class="reference external" href="https://ieeexplore.ieee.org/document/10095915">https://ieeexplore.ieee.org/document/10095915</a>
 - <a class="reference external" href="https://arxiv.org/abs/2306.00620">https://arxiv.org/abs/2306.00620</a></p>
@@ -98,15 +106,35 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="dtw_loss_functions.otw.otw">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">dtw_loss_functions.otw.</span></span><span class="sig-name descname"><span class="pre">otw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reduction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'mean'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dtw_loss_functions/otw.html#otw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dtw_loss_functions.otw.otw" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
 <p class="rubric">Methods</p>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__call__</span></code>(x, y)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dtw_loss_functions.otw.otw.forward" title="dtw_loss_functions.otw.otw.forward"><code class="xref py py-obj docutils literal notranslate"><span class="pre">forward</span></code></a>(x, y)</p></td>
 <td><p>Computes the OTW distance between two time series.</p></td>
 </tr>
 </tbody>
 </table>
+<dl class="py method">
+<dt class="sig sig-object py" id="dtw_loss_functions.otw.otw.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/dtw_loss_functions/otw.html#otw.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dtw_loss_functions.otw.otw.forward" title="Link to this definition"></a></dt>
+<dd><p>Computes the OTW distance between two time series.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>torch.Tensor</em>) – First time series, of shape (B, L) where B is the batch size and L is the length of the time series.</p></li>
+<li><p><strong>y</strong> (<em>torch.Tensor</em>) – Second time series, of shape (B, L) where B is the batch size and L is the length of the time series.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>OTW distance between the two time series</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="py function">
@@ -185,7 +213,7 @@ If integer, it is interpreted as the number of time steps.</p></li>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="dtw_loss_functions.block_dtw.html" class="btn btn-neutral float-left" title="Block DTW" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="dtw_loss_functions.soft_dtw_cuda.html" class="btn btn-neutral float-right" title="Soft DTW" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="dtw_loss_functions.soft_dtw.html" class="btn btn-neutral float-right" title="Soft DTW" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

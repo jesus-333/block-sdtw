@@ -1,0 +1,231 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Soft DTW &mdash; dtw_loss_functions  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="SoftDTW Subpackage" href="dtw_loss_functions.soft_dtw_implementations.html" />
+    <link rel="prev" title="OTW" href="dtw_loss_functions.otw.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            dtw_loss_functions
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Loss functions</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="dtw_loss_functions.block_dtw.html">Block DTW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dtw_loss_functions.otw.html">OTW</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Soft DTW</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dtw_loss_functions.soft_dtw.soft_dtw"><code class="docutils literal notranslate"><span class="pre">soft_dtw</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dtw_loss_functions.soft_dtw.soft_dtw.check_implementation"><code class="docutils literal notranslate"><span class="pre">soft_dtw.check_implementation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dtw_loss_functions.soft_dtw.soft_dtw.forward"><code class="docutils literal notranslate"><span class="pre">soft_dtw.forward()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.html">SoftDTW Subpackage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biblio.html">Bibliography</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">dtw_loss_functions</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Soft DTW</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/dtw_loss_functions.soft_dtw.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-dtw_loss_functions.soft_dtw">
+<span id="soft-dtw"></span><h1>Soft DTW<a class="headerlink" href="#module-dtw_loss_functions.soft_dtw" title="Link to this heading"></a></h1>
+<p>SoftDTW module. Since there are various implementations online of the SoftDTW, this module was created as a wrapper to be able to easily switch between different implementations.</p>
+<p>Currently, the following implementations are available:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>pytorch-softdtw-cuda by Mehran Maghoumi <span id="id1">[<a class="reference internal" href="biblio.html#id8" title="Mehran Maghoumi. Deep Recurrent Networks for Gesture Recognition and Synthesis. PhD thesis, University of Central Florida Orlando, Florida, 2020.">Mag20</a>]</span> <span id="id2">[<a class="reference internal" href="biblio.html#id9" title="Mehran Maghoumi, Eugene Matthew Taranta, and Joseph LaViola. Deepnag: deep non-adversarial gesture generation. In 26th International Conference on Intelligent User Interfaces, 213–223. 2021.">MTL21</a>]</span></dt><dd><ul>
+<li><p>GitHub repository : <a class="reference external" href="https://github.com/Maghoumi/pytorch-softdtw-cuda">https://github.com/Maghoumi/pytorch-softdtw-cuda</a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>pysdtw by Antoine Loriette</dt><dd><ul>
+<li><p>GitHub repository : <a class="reference external" href="https://github.com/toinsson/pysdtw">https://github.com/toinsson/pysdtw</a></p></li>
+<li><p>PyPi Page : <a class="reference external" href="https://pypi.org/project/pysdtw/">https://pypi.org/project/pysdtw/</a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>sdtw-cuda-torch by BGU-CS-VIL (implemented by Ron Shapira Weber) <span id="id3">[<a class="reference internal" href="biblio.html#id10" title="Ron Shapira Weber and Oren Freifeld. Softdtw-cuda-torch: memory-efficient gpu-accelerated soft dynamic time warping for pytorch. 2026. URL: https://arxiv.org/abs/2602.17206, arXiv:2602.17206.">WF26</a>]</span> <span id="id4">[<a class="reference internal" href="biblio.html#id11" title="Ron Shapira Weber, Shahar Benishay, Andrey Lavrinenko, Shahaf E. Finder, and Oren Freifeld. TimePoint: accelerated time series alignment via self-supervised keypoint and descriptor learning. In Aarti Singh, Maryam Fazel, Daniel Hsu, Simon Lacoste-Julien, Felix Berkenkamp, Tegan Maharaj, Kiri Wagstaff, and Jerry Zhu, editors, Proceedings of the 42nd International Conference on Machine Learning, volume 267 of Proceedings of Machine Learning Research, 54275–54299. PMLR, 13–19 Jul 2025. URL: https://proceedings.mlr.press/v267/shapira-weber25a.html.">SWBL+25</a>]</span></dt><dd><ul>
+<li><p>GitHub repository : <a class="reference external" href="https://github.com/BGU-CS-VIL/sdtw-cuda-torch">https://github.com/BGU-CS-VIL/sdtw-cuda-torch</a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>If you this module, please refer to the original implementations and cite the corresponding papers.
+For each implementation, the original paper is cited in the corresponding module docstring.
+Also, all the citation are listed in the <cite>citations.md</cite> file in the root of this repository.</p>
+<section id="authors">
+<h2>Authors<a class="headerlink" href="#authors" title="Link to this heading"></a></h2>
+<p>Alberto Zancanaro &lt;<a class="reference external" href="mailto:alberto&#46;zancanaro&#37;&#52;&#48;uni&#46;lu">alberto<span>&#46;</span>zancanaro<span>&#64;</span>uni<span>&#46;</span>lu</a>&gt;</p>
+</section>
+<dl class="py class">
+<dt class="sig sig-object py" id="dtw_loss_functions.soft_dtw.soft_dtw">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">dtw_loss_functions.soft_dtw.</span></span><span class="sig-name descname"><span class="pre">soft_dtw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">use_cuda</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bandwidth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dist_func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">callable</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">implementation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'mag'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fused</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dtw_loss_functions/soft_dtw.html#soft_dtw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dtw_loss_functions.soft_dtw.soft_dtw" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<p>SoftDTW class. This class is a wrapper for the different implementations of the SoftDTW.
+The implementation can be selected by passing the ‘implementation’ argument to the constructor. The available implementations are:</p>
+<ul class="simple">
+<li><p><cite>mag</cite>: pytorch-softdtw-cuda by Mehran Maghoumi</p></li>
+<li><p><cite>pysdtw</cite>: pysdtw by Antoine Loriette</p></li>
+<li><p><cite>ron</cite> : sdtw-cuda-torch by BGU-CS-VIL (implemented by Ron Shapira Weber)</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>use_cuda</strong> (<em>bool</em>) – If true, this class will use the CUDA implementation of the SDTW.</p></li>
+<li><p><strong>gamma</strong> (<em>float</em><em>, </em><em>optional</em>) – Value of the gamma hyperparameter for the SDTW. Default is <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p></li>
+<li><p><strong>normalize</strong> (<em>bool</em><em>, </em><em>optional</em>) – If true, the SDTW divergence will be computed instead of the SDTW. Default is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+<li><p><strong>bandwidth</strong> (<em>float</em><em>, </em><em>optional</em>) – Sakoe-Chiba bandwidth for pruning. If the <code class="docutils literal notranslate"><span class="pre">None</span></code> is given, no pruning is applied. Default is None.</p></li>
+<li><p><strong>dist_func</strong> (<em>function</em><em>, </em><em>optional</em>) – Distance function to use for the SDTW. Default is <code class="docutils literal notranslate"><span class="pre">None</span></code>, which corresponds to the squared Euclidean distance.</p></li>
+<li><p><strong>implementation</strong> (<em>str</em><em>, </em><em>optional</em>) – Implementation to use for the SDTW. Currently accepted values are <code class="docutils literal notranslate"><span class="pre">mag</span></code>, <code class="docutils literal notranslate"><span class="pre">pysdtw</span></code> and <code class="docutils literal notranslate"><span class="pre">ron</span></code>. Default is <code class="docutils literal notranslate"><span class="pre">mag</span></code>.</p></li>
+<li><p><strong>fused</strong> (<em>bool</em><em>, </em><em>optional</em>) – <p>Only for the ‘ron’ implementation.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">None</span></code>  -&gt; auto (use fused only when possible)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">True</span></code>  -&gt; require fused (error if not possible)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">False</span></code> -&gt; never fused (always materialize D and use D-based autograd)</p></li>
+</ul>
+</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dtw_loss_functions.soft_dtw.soft_dtw.check_implementation" title="dtw_loss_functions.soft_dtw.soft_dtw.check_implementation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_implementation</span></code></a>(implementation)</p></td>
+<td><p>Check if the selected implementation is valid.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dtw_loss_functions.soft_dtw.soft_dtw.forward" title="dtw_loss_functions.soft_dtw.soft_dtw.forward"><code class="xref py py-obj docutils literal notranslate"><span class="pre">forward</span></code></a>(x, y)</p></td>
+<td><p>Compute the SoftDTW distance between two time series.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="dtw_loss_functions.soft_dtw.soft_dtw.check_implementation">
+<span class="sig-name descname"><span class="pre">check_implementation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">implementation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dtw_loss_functions/soft_dtw.html#soft_dtw.check_implementation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dtw_loss_functions.soft_dtw.soft_dtw.check_implementation" title="Link to this definition"></a></dt>
+<dd><p>Check if the selected implementation is valid. If not, raise an error.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dtw_loss_functions.soft_dtw.soft_dtw.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/dtw_loss_functions/soft_dtw.html#soft_dtw.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dtw_loss_functions.soft_dtw.soft_dtw.forward" title="Link to this definition"></a></dt>
+<dd><p>Compute the SoftDTW distance between two time series.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>torch.Tensor</em>) – First input tensor of shape B x T x C</p></li>
+<li><p><strong>y</strong> (<em>torch.Tensor</em>) – Second input tensor of shape B x T x C</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>SoftDTW distance between the two time series</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="dtw_loss_functions.otw.html" class="btn btn-neutral float-left" title="OTW" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dtw_loss_functions.soft_dtw_implementations.html" class="btn btn-neutral float-right" title="SoftDTW Subpackage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Alberto Zancanaro.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

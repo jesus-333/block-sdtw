@@ -45,11 +45,16 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Loss functions</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="dtw_loss_functions.block_dtw.html">Block DTW</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dtw_loss_functions.otw.html">OTW</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dtw_loss_functions.soft_dtw_cuda.html">Soft DTW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dtw_loss_functions.soft_dtw.html">Soft DTW</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.html">SoftDTW Subpackage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biblio.html">Bibliography</a></li>
 </ul>
 
         </div>
@@ -88,10 +93,71 @@
 </dd>
 <dt>otw</dt><dd><p>Optimal Transport Warping loss.</p>
 </dd>
-<dt>soft_dtw_cuda</dt><dd><p>CUDA-accelerated Soft DTW implementation.</p>
+<dt>soft_dtw</dt><dd><p>Collection of SoftDTW implementations</p>
 </dd>
 </dl>
 </section>
+</section>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.html">SoftDTW Subpackage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.html">SoftDTW (Mehran Maghoumi)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.html#authors">Authors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.html#dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.SoftDTW"><code class="docutils literal notranslate"><span class="pre">SoftDTW</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.html#dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.SoftDTW.normalize"><code class="docutils literal notranslate"><span class="pre">SoftDTW.normalize</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.html#dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.SoftDTW.gamma"><code class="docutils literal notranslate"><span class="pre">SoftDTW.gamma</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.html#dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.SoftDTW.bandwidth"><code class="docutils literal notranslate"><span class="pre">SoftDTW.bandwidth</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.html#dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.SoftDTW.dist_func"><code class="docutils literal notranslate"><span class="pre">SoftDTW.dist_func</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.html#dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.SoftDTW.forward"><code class="docutils literal notranslate"><span class="pre">SoftDTW.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.html#dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.compute_softdtw"><code class="docutils literal notranslate"><span class="pre">compute_softdtw()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.html#dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.compute_softdtw_backward"><code class="docutils literal notranslate"><span class="pre">compute_softdtw_backward()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.html#dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.compute_softdtw_backward_cuda"><code class="docutils literal notranslate"><span class="pre">compute_softdtw_backward_cuda()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.html#dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.compute_softdtw_cuda"><code class="docutils literal notranslate"><span class="pre">compute_softdtw_cuda()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.html#dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.profile"><code class="docutils literal notranslate"><span class="pre">profile()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.html#dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.timed_run"><code class="docutils literal notranslate"><span class="pre">timed_run()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.pysdtw_normalize.html">pysdtw</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.pysdtw_normalize.html#authors">Authors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.pysdtw_normalize.html#dtw_loss_functions.soft_dtw_implementations.pysdtw_normalize.pysdtw_normalized"><code class="docutils literal notranslate"><span class="pre">pysdtw_normalized</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.pysdtw_normalize.html#dtw_loss_functions.soft_dtw_implementations.pysdtw_normalize.pysdtw_normalized.forward"><code class="docutils literal notranslate"><span class="pre">pysdtw_normalized.forward()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.html">SoftDTW (Ron Shapira Weber)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.html#dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.SoftDTW"><code class="docutils literal notranslate"><span class="pre">SoftDTW</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.html#dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.SoftDTW.forward"><code class="docutils literal notranslate"><span class="pre">SoftDTW.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.html#dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.softdtw"><code class="docutils literal notranslate"><span class="pre">softdtw()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.html#dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.softdtw_barycenter"><code class="docutils literal notranslate"><span class="pre">softdtw_barycenter()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.html#dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.softdtw_barycenter_cpu"><code class="docutils literal notranslate"><span class="pre">softdtw_barycenter_cpu()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.html">dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.utils.html">dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.utils package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd.html">dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd_xy.html">dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd_xy module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.barycenters.html">dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.barycenters module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.distances.html">dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.distances module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.functional.html">dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.functional module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.module.html">dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.module module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
 </section>
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
@@ -103,6 +169,7 @@
 <li class="toctree-l3"><a class="reference internal" href="dtw_loss_functions.block_dtw.html#dtw_loss_functions.block_dtw.block_dtw.block_size"><code class="docutils literal notranslate"><span class="pre">block_dtw.block_size</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="dtw_loss_functions.block_dtw.html#dtw_loss_functions.block_dtw.block_dtw.block_dtw_naive"><code class="docutils literal notranslate"><span class="pre">block_dtw.block_dtw_naive</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="dtw_loss_functions.block_dtw.html#dtw_loss_functions.block_dtw.block_dtw.block_dtw_optimized"><code class="docutils literal notranslate"><span class="pre">block_dtw.block_dtw_optimized</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dtw_loss_functions.block_dtw.html#dtw_loss_functions.block_dtw.block_dtw.forward"><code class="docutils literal notranslate"><span class="pre">block_dtw.forward()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="dtw_loss_functions.block_dtw.html#dtw_loss_functions.block_dtw.block_dtw_naive"><code class="docutils literal notranslate"><span class="pre">block_dtw_naive</span></code></a><ul>
@@ -117,28 +184,22 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="dtw_loss_functions.otw.html">OTW</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="dtw_loss_functions.otw.html#authors">Authors</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dtw_loss_functions.otw.html#dtw_loss_functions.otw.otw"><code class="docutils literal notranslate"><span class="pre">otw</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dtw_loss_functions.otw.html#dtw_loss_functions.otw.otw"><code class="docutils literal notranslate"><span class="pre">otw</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dtw_loss_functions.otw.html#dtw_loss_functions.otw.otw.forward"><code class="docutils literal notranslate"><span class="pre">otw.forward()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="dtw_loss_functions.otw.html#dtw_loss_functions.otw.otw_distance"><code class="docutils literal notranslate"><span class="pre">otw_distance()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="dtw_loss_functions.otw.html#dtw_loss_functions.otw.smooth_l1_loss"><code class="docutils literal notranslate"><span class="pre">smooth_l1_loss()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="dtw_loss_functions.otw.html#dtw_loss_functions.otw.window_cumsum"><code class="docutils literal notranslate"><span class="pre">window_cumsum()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="dtw_loss_functions.soft_dtw_cuda.html">Soft DTW</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="dtw_loss_functions.soft_dtw_cuda.html#authors">Authors</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dtw_loss_functions.soft_dtw_cuda.html#dtw_loss_functions.soft_dtw_cuda.SoftDTW"><code class="docutils literal notranslate"><span class="pre">SoftDTW</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="dtw_loss_functions.soft_dtw_cuda.html#dtw_loss_functions.soft_dtw_cuda.SoftDTW.normalize"><code class="docutils literal notranslate"><span class="pre">SoftDTW.normalize</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="dtw_loss_functions.soft_dtw_cuda.html#dtw_loss_functions.soft_dtw_cuda.SoftDTW.gamma"><code class="docutils literal notranslate"><span class="pre">SoftDTW.gamma</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="dtw_loss_functions.soft_dtw_cuda.html#dtw_loss_functions.soft_dtw_cuda.SoftDTW.bandwidth"><code class="docutils literal notranslate"><span class="pre">SoftDTW.bandwidth</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="dtw_loss_functions.soft_dtw_cuda.html#dtw_loss_functions.soft_dtw_cuda.SoftDTW.dist_func"><code class="docutils literal notranslate"><span class="pre">SoftDTW.dist_func</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="dtw_loss_functions.soft_dtw_cuda.html#dtw_loss_functions.soft_dtw_cuda.SoftDTW.forward"><code class="docutils literal notranslate"><span class="pre">SoftDTW.forward()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="dtw_loss_functions.soft_dtw.html">Soft DTW</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dtw_loss_functions.soft_dtw.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dtw_loss_functions.soft_dtw.html#dtw_loss_functions.soft_dtw.soft_dtw"><code class="docutils literal notranslate"><span class="pre">soft_dtw</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dtw_loss_functions.soft_dtw.html#dtw_loss_functions.soft_dtw.soft_dtw.check_implementation"><code class="docutils literal notranslate"><span class="pre">soft_dtw.check_implementation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dtw_loss_functions.soft_dtw.html#dtw_loss_functions.soft_dtw.soft_dtw.forward"><code class="docutils literal notranslate"><span class="pre">soft_dtw.forward()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="dtw_loss_functions.soft_dtw_cuda.html#dtw_loss_functions.soft_dtw_cuda.compute_softdtw"><code class="docutils literal notranslate"><span class="pre">compute_softdtw()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="dtw_loss_functions.soft_dtw_cuda.html#dtw_loss_functions.soft_dtw_cuda.compute_softdtw_backward"><code class="docutils literal notranslate"><span class="pre">compute_softdtw_backward()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="dtw_loss_functions.soft_dtw_cuda.html#dtw_loss_functions.soft_dtw_cuda.compute_softdtw_backward_cuda"><code class="docutils literal notranslate"><span class="pre">compute_softdtw_backward_cuda()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="dtw_loss_functions.soft_dtw_cuda.html#dtw_loss_functions.soft_dtw_cuda.compute_softdtw_cuda"><code class="docutils literal notranslate"><span class="pre">compute_softdtw_cuda()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="dtw_loss_functions.soft_dtw_cuda.html#dtw_loss_functions.soft_dtw_cuda.profile"><code class="docutils literal notranslate"><span class="pre">profile()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="dtw_loss_functions.soft_dtw_cuda.html#dtw_loss_functions.soft_dtw_cuda.timed_run"><code class="docutils literal notranslate"><span class="pre">timed_run()</span></code></a></li>
 </ul>
 </li>
 </ul>

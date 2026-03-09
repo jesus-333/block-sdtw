@@ -1,4 +1,4 @@
-Results of doctest builder run on 2026-03-06 13:44:30
+Results of doctest builder run on 2026-03-10 00:36:52
 =====================================================
 
 Document: dtw_loss_functions.block_dtw
@@ -9,24 +9,8 @@ Document: dtw_loss_functions.block_dtw
 12 passed and 0 failed.
 Test passed.
 
-Document: dtw_loss_functions.soft_dtw_cuda
-------------------------------------------
-1 items passed all tests:
-  11 tests in default
-11 tests in 1 items.
-11 passed and 0 failed.
-Test passed.
-
-Document: generated/dtw_loss_functions.block_dtw
-------------------------------------------------
-1 items passed all tests:
-  12 tests in default
-12 tests in 1 items.
-12 passed and 0 failed.
-Test passed.
-
-Document: generated/dtw_loss_functions.soft_dtw_cuda
-----------------------------------------------------
+Document: dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag
+-----------------------------------------------------------------------
 1 items passed all tests:
   11 tests in default
 11 tests in 1 items.
@@ -35,7 +19,7 @@ Test passed.
 
 Doctest summary
 ===============
-   46 tests
+   23 tests
     0 failures in tests
     0 failures in setup code
     0 failures in cleanup code

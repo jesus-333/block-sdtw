@@ -5,5 +5,32 @@
 \contentsline {section}{\numberline {2.1}Authors}{7}{section.2.1}%
 \contentsline {chapter}{\numberline {3}Soft DTW}{9}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Authors}{9}{section.3.1}%
-\contentsline {chapter}{\numberline {4}Indices and Tables}{13}{chapter.4}%
-\contentsline {chapter}{Index}{15}{section*.27}%
+\contentsline {chapter}{\numberline {4}SoftDTW Subpackage}{11}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Authors}{11}{section.4.1}%
+\contentsline {section}{\numberline {4.2}SoftDTW (Mehran Maghoumi)}{11}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Authors}{11}{subsection.4.2.1}%
+\contentsline {section}{\numberline {4.3}pysdtw}{13}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Authors}{14}{subsection.4.3.1}%
+\contentsline {section}{\numberline {4.4}SoftDTW (Ron Shapira Weber)}{14}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Subpackages}{19}{subsection.4.4.1}%
+\contentsline {subsubsection}{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda package}{19}{subsubsection*.39}%
+\contentsline {paragraph}{Submodules}{19}{paragraph*.40}%
+\contentsline {subparagraph}{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.kernels module}{19}{subparagraph*.41}%
+\contentsline {subparagraph}{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.launcher module}{21}{subparagraph*.49}%
+\contentsline {subsubsection}{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.utils package}{22}{subsubsection*.56}%
+\contentsline {paragraph}{Submodules}{22}{paragraph*.57}%
+\contentsline {subparagraph}{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.utils.checks module}{22}{subparagraph*.58}%
+\contentsline {subsection}{\numberline {4.4.2}Submodules}{22}{subsection.4.4.2}%
+\contentsline {subsubsection}{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.autograd module}{22}{subsubsection*.60}%
+\contentsline {subsubsection}{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.autograd\_xy module}{24}{subsubsection*.64}%
+\contentsline {subsubsection}{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.barycenters module}{25}{subsubsection*.68}%
+\contentsline {subsubsection}{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.distances module}{29}{subsubsection*.71}%
+\contentsline {subsubsection}{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.functional module}{29}{subsubsection*.74}%
+\contentsline {subsubsection}{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.module module}{30}{subsubsection*.76}%
+\contentsline {chapter}{\numberline {5}Bibliography}{33}{chapter.5}%
+\contentsline {section}{\numberline {5.1}First Section}{33}{section.5.1}%
+\contentsline {section}{\numberline {5.2}References list}{33}{section.5.2}%
+\contentsline {chapter}{\numberline {6}Indices and Tables}{35}{chapter.6}%
+\contentsline {chapter}{Bibliography}{37}{chapter*.79}%
+\contentsline {chapter}{Python Module Index}{39}{section*.80}%
+\contentsline {chapter}{Index}{41}{section*.81}%

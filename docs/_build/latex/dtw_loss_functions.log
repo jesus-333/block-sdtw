@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.3.6)  6 MAR 2026 14:21
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.3.6)  10 MAR 2026 00:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -904,136 +904,2331 @@ LaTeX Font Info:    Trying to load font information for TS1+txtt on input line
 File: ts1txtt.fd 2000/12/15 v3.1
 )
 LaTeX Font Info:    Trying to load font information for TS1+qtm on input line 1
-42.
+33.
 
 (/usr/local/texlive/2026/texmf-dist/tex/latex/tex-gyre/ts1qtm.fd
 File: ts1qtm.fd 2009/09/25 v1.2 font definition file for TS1/qtm
 ) [3{/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/tex-gyre/q-ts1.enc}]
 LaTeX Font Info:    Font shape `T1/txtt/m/it' in size <10> not available
-(Font)              Font shape `T1/txtt/m/sl' tried instead on input line 220.
- [4] [5] [6
-
-]
+(Font)              Font shape `T1/txtt/m/sl' tried instead on input line 191.
+ [4] [5] [6]
 Chapter 2.
-[7] [8]
+[7
+
+] [8]
 Chapter 3.
 [9
 
-] [10] [11] [12
-
-]
+] [10]
 Chapter 4.
-(./dtw_loss_functions.ind [13] [14
+[11
+
+] [12]
+Overfull \hbox (2.00862pt too wide) in paragraph at lines 1298--1298
+[]\T1/qtm/m/it/10 D_\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (18.57864pt too wide) in paragraph at lines 1298--1298
+\T1/qtm/m/it/10 gamma\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (10.33365pt too wide) in paragraph at lines 1298--1298
+\T1/qtm/m/it/10 band- 
+ []
+
+
+Overfull \hbox (14.4386pt too wide) in paragraph at lines 1298--1298
+\T1/qtm/m/it/10 width\T1/txtt/m/n/10 )|  
+ []
+
+
+Overfull \hbox (23.01855pt too wide) in paragraph at lines 1310--1310
+[]\T1/qtm/m/it/10 D\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (21.90855pt too wide) in paragraph at lines 1310--1310
+\T1/qtm/m/it/10 R\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (62.03857pt too wide) in paragraph at lines 1310--1310
+\T1/qtm/m/it/10 inv_gamma\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (36.57358pt too wide) in paragraph at lines 1310--1310
+\T1/qtm/m/it/10 band- 
+ []
+
+
+Overfull \hbox (37.92854pt too wide) in paragraph at lines 1310--1310
+\T1/qtm/m/it/10 width\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (40.43857pt too wide) in paragraph at lines 1310--1310
+\T1/qtm/m/it/10 max_i\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (40.69357pt too wide) in paragraph at lines 1310--1310
+\T1/qtm/m/it/10 max_j\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (51.90855pt too wide) in paragraph at lines 1310--1310
+\T1/qtm/m/it/10 n_passes\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (25.11356pt too wide) in paragraph at lines 1310--1310
+\T1/qtm/m/it/10 E\T1/txtt/m/n/10 )|  
+ []
+
+
+Overfull \hbox (4.65869pt too wide) in paragraph at lines 1322--1322
+\T1/qtm/m/it/10 n_passes\T1/qtm/m/n/10 , 
+ []
+
+[13]
+Overfull \hbox (17.60368pt too wide) in paragraph at lines 1380--1380
+[]\T1/qtm/m/it/10 use_cuda: 
+ []
+
+
+Overfull \hbox (8.87369pt too wide) in paragraph at lines 1380--1380
+\T1/qtm/m/it/10 gamma: 
+ []
+
+
+Overfull \hbox (1.96367pt too wide) in paragraph at lines 1380--1380
+\T1/qtm/m/it/10 width: 
+ []
+
+
+Overfull \hbox (16.40367pt too wide) in paragraph at lines 1380--1380
+\T1/qtm/m/it/10 dist_func: 
+ []
+
+
+Overfull \hbox (8.72368pt too wide) in paragraph at lines 1380--1380
+\T1/qtm/m/it/10 callable 
+ []
+
+
+Overfull \hbox (2.61366pt too wide) in paragraph at lines 1380--1380
+\T1/qtm/m/it/10 None\T1/txtt/m/n/10 )|  
+ []
+
+[14]
+LaTeX Font Info:    Trying to load font information for U+fontawesome7free1 on 
+input line 1572.
+
+(/usr/local/texlive/2026/texmf-dist/tex/latex/fontawesome7/ufontawesome7free1.f
+d)
+Overfull \hbox (18.42374pt too wide) in paragraph at lines 1614--1614
+\T1/qtm/m/it/10 early_stopping: 
+ []
+
+[15{/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/tex-gyre/q-ec-sc.enc}{/u
+sr/local/texlive/2026/texmf-dist/fonts/enc/dvips/fontawesome7/fa7free1_solid.en
+c}] [16]
+Overfull \hbox (8.8637pt too wide) in paragraph at lines 1698--1698
+\T1/qtm/m/it/10 gamma: 
+ []
+
+
+Overfull \hbox (10.08366pt too wide) in paragraph at lines 1698--1698
+\T1/qtm/m/it/10 weights: 
+ []
+
+
+Overfull \hbox (14.92368pt too wide) in paragraph at lines 1698--1698
+\T1/qtm/m/it/10 max_iter: 
+ []
+
+
+Overfull \hbox (0.93369pt too wide) in paragraph at lines 1698--1698
+\T1/qtm/m/it/10 fused: 
+ []
+
+
+Overfull \hbox (39.42368pt too wide) in paragraph at lines 1698--1698
+\T1/qtm/m/it/10 early_stopping: 
+ []
+
+
+Overfull \hbox (3.70369pt too wide) in paragraph at lines 1698--1698
+\T1/qtm/m/it/10 tience: 
+ []
+
+
+Overfull \hbox (3.41367pt too wide) in paragraph at lines 1698--1698
+\T1/qtm/m/n/10 Tensor|  
+ []
+
+[17] [18]
+Overfull \hbox (117.01834pt too wide) in paragraph at lines 1782--1782
+[]\T1/qtm/m/it/10 D_pad\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (95.40834pt too wide) in paragraph at lines 1782--1782
+\T1/qtm/m/it/10 R\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (135.53836pt too wide) in paragraph at lines 1782--1782
+\T1/qtm/m/it/10 inv_gamma\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (110.07336pt too wide) in paragraph at lines 1782--1782
+\T1/qtm/m/it/10 band- 
+ []
+
+
+Overfull \hbox (111.42833pt too wide) in paragraph at lines 1782--1782
+\T1/qtm/m/it/10 width\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (113.93835pt too wide) in paragraph at lines 1782--1782
+\T1/qtm/m/it/10 max_i\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (114.19336pt too wide) in paragraph at lines 1782--1782
+\T1/qtm/m/it/10 max_j\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (125.40834pt too wide) in paragraph at lines 1782--1782
+\T1/qtm/m/it/10 n_passes\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (98.61334pt too wide) in paragraph at lines 1782--1782
+\T1/qtm/m/it/10 E\T1/txtt/m/n/10 )|  
+ []
+
+
+Overfull \hbox (70.26842pt too wide) in paragraph at lines 1794--1794
+[]\T1/qtm/m/it/10 D\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (69.15842pt too wide) in paragraph at lines 1794--1794
+\T1/qtm/m/it/10 R\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (109.28844pt too wide) in paragraph at lines 1794--1794
+\T1/qtm/m/it/10 inv_gamma\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (83.82344pt too wide) in paragraph at lines 1794--1794
+\T1/qtm/m/it/10 band- 
+ []
+
+
+Overfull \hbox (85.1784pt too wide) in paragraph at lines 1794--1794
+\T1/qtm/m/it/10 width\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (87.68843pt too wide) in paragraph at lines 1794--1794
+\T1/qtm/m/it/10 max_i\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (87.94344pt too wide) in paragraph at lines 1794--1794
+\T1/qtm/m/it/10 max_j\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (99.15842pt too wide) in paragraph at lines 1794--1794
+\T1/qtm/m/it/10 n_passes\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (85.14342pt too wide) in paragraph at lines 1794--1794
+\T1/qtm/m/it/10 logE\T1/txtt/m/n/10 )|  
+ []
+
+
+Overfull \hbox (101.46336pt too wide) in paragraph at lines 1811--1811
+[]\T1/qtm/m/it/10 Dp\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (95.40834pt too wide) in paragraph at lines 1811--1811
+\T1/qtm/m/it/10 R\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (108.64336pt too wide) in paragraph at lines 1811--1811
+\T1/qtm/m/it/10 logE\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (135.53836pt too wide) in paragraph at lines 1811--1811
+\T1/qtm/m/it/10 inv_gamma\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (110.07336pt too wide) in paragraph at lines 1811--1811
+\T1/qtm/m/it/10 band- 
+ []
+
+
+Overfull \hbox (111.42833pt too wide) in paragraph at lines 1811--1811
+\T1/qtm/m/it/10 width\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (96.79834pt too wide) in paragraph at lines 1811--1811
+\T1/qtm/m/it/10 N\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (98.25334pt too wide) in paragraph at lines 1811--1811
+\T1/qtm/m/it/10 M\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (96.99335pt too wide) in paragraph at lines 1811--1811
+\T1/qtm/m/it/10 p\T1/txtt/m/n/10 )|  
+ []
+
+[19]
+Overfull \hbox (143.31822pt too wide) in paragraph at lines 1823--1823
+[]\T1/qtm/m/it/10 X\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (143.10323pt too wide) in paragraph at lines 1823--1823
+\T1/qtm/m/it/10 Y\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (142.6582pt too wide) in paragraph at lines 1823--1823
+\T1/qtm/m/it/10 R\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (155.89322pt too wide) in paragraph at lines 1823--1823
+\T1/qtm/m/it/10 logE\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (182.78822pt too wide) in paragraph at lines 1823--1823
+\T1/qtm/m/it/10 inv_gamma\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (157.32323pt too wide) in paragraph at lines 1823--1823
+\T1/qtm/m/it/10 band- 
+ []
+
+
+Overfull \hbox (158.67819pt too wide) in paragraph at lines 1823--1823
+\T1/qtm/m/it/10 width\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (144.0482pt too wide) in paragraph at lines 1823--1823
+\T1/qtm/m/it/10 N\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (145.5032pt too wide) in paragraph at lines 1823--1823
+\T1/qtm/m/it/10 M\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (143.7682pt too wide) in paragraph at lines 1823--1823
+\T1/qtm/m/it/10 D\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (144.24321pt too wide) in paragraph at lines 1823--1823
+\T1/qtm/m/it/10 p\T1/txtt/m/n/10 )|  
+ []
+
+
+Overfull \hbox (70.26842pt too wide) in paragraph at lines 1835--1835
+[]\T1/qtm/m/it/10 D\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (69.15842pt too wide) in paragraph at lines 1835--1835
+\T1/qtm/m/it/10 R\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (92.06844pt too wide) in paragraph at lines 1835--1835
+\T1/qtm/m/it/10 gamma\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (83.82344pt too wide) in paragraph at lines 1835--1835
+\T1/qtm/m/it/10 band- 
+ []
+
+
+Overfull \hbox (85.1784pt too wide) in paragraph at lines 1835--1835
+\T1/qtm/m/it/10 width\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (70.54842pt too wide) in paragraph at lines 1835--1835
+\T1/qtm/m/it/10 N\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (72.00342pt too wide) in paragraph at lines 1835--1835
+\T1/qtm/m/it/10 M\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (70.74342pt too wide) in paragraph at lines 1835--1835
+\T1/qtm/m/it/10 p\T1/txtt/m/n/10 )|  
+ []
+
+
+Overfull \hbox (117.0683pt too wide) in paragraph at lines 1847--1847
+[]\T1/qtm/m/it/10 X\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (116.8533pt too wide) in paragraph at lines 1847--1847
+\T1/qtm/m/it/10 Y\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (116.40828pt too wide) in paragraph at lines 1847--1847
+\T1/qtm/m/it/10 R\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (139.3183pt too wide) in paragraph at lines 1847--1847
+\T1/qtm/m/it/10 gamma\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (131.0733pt too wide) in paragraph at lines 1847--1847
+\T1/qtm/m/it/10 band- 
+ []
+
+
+Overfull \hbox (132.42827pt too wide) in paragraph at lines 1847--1847
+\T1/qtm/m/it/10 width\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (117.79828pt too wide) in paragraph at lines 1847--1847
+\T1/qtm/m/it/10 N\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (119.25328pt too wide) in paragraph at lines 1847--1847
+\T1/qtm/m/it/10 M\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (117.51828pt too wide) in paragraph at lines 1847--1847
+\T1/qtm/m/it/10 D\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (117.99329pt too wide) in paragraph at lines 1847--1847
+\T1/qtm/m/it/10 p\T1/txtt/m/n/10 )|  
+ []
+
+
+Overfull \hbox (54.51846pt too wide) in paragraph at lines 1859--1859
+[]\T1/qtm/m/it/10 D\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (76.31848pt too wide) in paragraph at lines 1859--1859
+\T1/qtm/m/it/10 gamma\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (68.07349pt too wide) in paragraph at lines 1859--1859
+\T1/qtm/m/it/10 band- 
+ []
+
+
+Overfull \hbox (69.42845pt too wide) in paragraph at lines 1859--1859
+\T1/qtm/m/it/10 width\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (71.93848pt too wide) in paragraph at lines 1859--1859
+\T1/qtm/m/it/10 max_i\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (72.19348pt too wide) in paragraph at lines 1859--1859
+\T1/qtm/m/it/10 max_j\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (83.40846pt too wide) in paragraph at lines 1859--1859
+\T1/qtm/m/it/10 n_passes\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (56.15845pt too wide) in paragraph at lines 1859--1859
+\T1/qtm/m/it/10 R\T1/txtt/m/n/10 )|  
+ []
+
+[20]
+Overfull \hbox (50.0435pt too wide) in paragraph at lines 1876--1876
+[]\T1/qtm/m/it/10 D: 
+ []
+
+
+Overfull \hbox (56.92351pt too wide) in paragraph at lines 1876--1876
+\T1/qtm/m/it/10 Ten- 
+ []
+
+
+Overfull \hbox (55.2835pt too wide) in paragraph at lines 1876--1876
+\T1/qtm/m/it/10 sor\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (48.9335pt too wide) in paragraph at lines 1876--1876
+\T1/qtm/m/it/10 R: 
+ []
+
+
+Overfull \hbox (56.92351pt too wide) in paragraph at lines 1876--1876
+\T1/qtm/m/it/10 Ten- 
+ []
+
+
+Overfull \hbox (55.2835pt too wide) in paragraph at lines 1876--1876
+\T1/qtm/m/it/10 sor\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (71.86351pt too wide) in paragraph at lines 1876--1876
+\T1/qtm/m/it/10 gamma: 
+ []
+
+
+Overfull \hbox (60.23349pt too wide) in paragraph at lines 1876--1876
+\T1/qtm/m/it/10 float\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (62.8235pt too wide) in paragraph at lines 1876--1876
+\T1/qtm/m/it/10 band- 
+ []
+
+
+Overfull \hbox (64.95349pt too wide) in paragraph at lines 1876--1876
+\T1/qtm/m/it/10 width: 
+ []
+
+
+Overfull \hbox (62.98347pt too wide) in paragraph at lines 1876--1876
+\T1/qtm/m/it/10 float\T1/txtt/m/n/10 )|  
+ []
+
+
+Overfull \hbox (132.94325pt too wide) in paragraph at lines 1888--1888
+[]\T1/qtm/m/it/10 X: 
+ []
+
+
+Overfull \hbox (140.93326pt too wide) in paragraph at lines 1888--1888
+\T1/qtm/m/it/10 Ten- 
+ []
+
+
+Overfull \hbox (139.29324pt too wide) in paragraph at lines 1888--1888
+\T1/qtm/m/it/10 sor\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (131.59325pt too wide) in paragraph at lines 1888--1888
+\T1/qtm/m/it/10 Y: 
+ []
+
+
+Overfull \hbox (140.93326pt too wide) in paragraph at lines 1888--1888
+\T1/qtm/m/it/10 Ten- 
+ []
+
+
+Overfull \hbox (139.29324pt too wide) in paragraph at lines 1888--1888
+\T1/qtm/m/it/10 sor\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (132.94325pt too wide) in paragraph at lines 1888--1888
+\T1/qtm/m/it/10 R: 
+ []
+
+
+Overfull \hbox (140.93326pt too wide) in paragraph at lines 1888--1888
+\T1/qtm/m/it/10 Ten- 
+ []
+
+
+Overfull \hbox (139.29324pt too wide) in paragraph at lines 1888--1888
+\T1/qtm/m/it/10 sor\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (155.87326pt too wide) in paragraph at lines 1888--1888
+\T1/qtm/m/it/10 gamma: 
+ []
+
+
+Overfull \hbox (144.24324pt too wide) in paragraph at lines 1888--1888
+\T1/qtm/m/it/10 float\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (146.83325pt too wide) in paragraph at lines 1888--1888
+\T1/qtm/m/it/10 band- 
+ []
+
+
+Overfull \hbox (148.96324pt too wide) in paragraph at lines 1888--1888
+\T1/qtm/m/it/10 width: 
+ []
+
+
+Overfull \hbox (146.99323pt too wide) in paragraph at lines 1888--1888
+\T1/qtm/m/it/10 float\T1/txtt/m/n/10 )|  
+ []
+
+
+Overfull \hbox (76.29343pt too wide) in paragraph at lines 1921--1921
+[]\T1/qtm/m/it/10 D: 
+ []
+
+
+Overfull \hbox (83.17343pt too wide) in paragraph at lines 1921--1921
+\T1/qtm/m/it/10 Ten- 
+ []
+
+
+Overfull \hbox (81.53342pt too wide) in paragraph at lines 1921--1921
+\T1/qtm/m/it/10 sor\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (75.18343pt too wide) in paragraph at lines 1921--1921
+\T1/qtm/m/it/10 R: 
+ []
+
+
+Overfull \hbox (83.17343pt too wide) in paragraph at lines 1921--1921
+\T1/qtm/m/it/10 Ten- 
+ []
+
+
+Overfull \hbox (81.53342pt too wide) in paragraph at lines 1921--1921
+\T1/qtm/m/it/10 sor\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (98.11343pt too wide) in paragraph at lines 1921--1921
+\T1/qtm/m/it/10 gamma: 
+ []
+
+
+Overfull \hbox (86.48341pt too wide) in paragraph at lines 1921--1921
+\T1/qtm/m/it/10 float\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (89.07343pt too wide) in paragraph at lines 1921--1921
+\T1/qtm/m/it/10 band- 
+ []
+
+
+Overfull \hbox (91.20341pt too wide) in paragraph at lines 1921--1921
+\T1/qtm/m/it/10 width: 
+ []
+
+
+Overfull \hbox (89.2334pt too wide) in paragraph at lines 1921--1921
+\T1/qtm/m/it/10 float\T1/txtt/m/n/10 )|  
+ []
+
+
+Overfull \hbox (44.79352pt too wide) in paragraph at lines 1933--1933
+[]\T1/qtm/m/it/10 D: 
+ []
+
+
+Overfull \hbox (51.67352pt too wide) in paragraph at lines 1933--1933
+\T1/qtm/m/it/10 Ten- 
+ []
+
+
+Overfull \hbox (50.03351pt too wide) in paragraph at lines 1933--1933
+\T1/qtm/m/it/10 sor\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (66.61353pt too wide) in paragraph at lines 1933--1933
+\T1/qtm/m/it/10 gamma: 
+ []
+
+
+Overfull \hbox (54.9835pt too wide) in paragraph at lines 1933--1933
+\T1/qtm/m/it/10 float\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (57.57352pt too wide) in paragraph at lines 1933--1933
+\T1/qtm/m/it/10 band- 
+ []
+
+
+Overfull \hbox (59.7035pt too wide) in paragraph at lines 1933--1933
+\T1/qtm/m/it/10 width: 
+ []
+
+
+Overfull \hbox (57.73349pt too wide) in paragraph at lines 1933--1933
+\T1/qtm/m/it/10 float\T1/txtt/m/n/10 )|  
+ []
+
+[21]
+Overfull \hbox (50.0435pt too wide) in paragraph at lines 1945--1945
+[]\T1/qtm/m/it/10 D: 
+ []
+
+
+Overfull \hbox (56.92351pt too wide) in paragraph at lines 1945--1945
+\T1/qtm/m/it/10 Ten- 
+ []
+
+
+Overfull \hbox (55.2835pt too wide) in paragraph at lines 1945--1945
+\T1/qtm/m/it/10 sor\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (71.86351pt too wide) in paragraph at lines 1945--1945
+\T1/qtm/m/it/10 gamma: 
+ []
+
+
+Overfull \hbox (60.23349pt too wide) in paragraph at lines 1945--1945
+\T1/qtm/m/it/10 float\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (62.8235pt too wide) in paragraph at lines 1945--1945
+\T1/qtm/m/it/10 band- 
+ []
+
+
+Overfull \hbox (64.95349pt too wide) in paragraph at lines 1945--1945
+\T1/qtm/m/it/10 width: 
+ []
+
+
+Overfull \hbox (62.98347pt too wide) in paragraph at lines 1945--1945
+\T1/qtm/m/it/10 float\T1/txtt/m/n/10 )|  
+ []
+
+
+Overfull \hbox (127.69327pt too wide) in paragraph at lines 1957--1957
+[]\T1/qtm/m/it/10 X: 
+ []
+
+
+Overfull \hbox (135.68327pt too wide) in paragraph at lines 1957--1957
+\T1/qtm/m/it/10 Ten- 
+ []
+
+
+Overfull \hbox (134.04326pt too wide) in paragraph at lines 1957--1957
+\T1/qtm/m/it/10 sor\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (126.34326pt too wide) in paragraph at lines 1957--1957
+\T1/qtm/m/it/10 Y: 
+ []
+
+
+Overfull \hbox (135.68327pt too wide) in paragraph at lines 1957--1957
+\T1/qtm/m/it/10 Ten- 
+ []
+
+
+Overfull \hbox (134.04326pt too wide) in paragraph at lines 1957--1957
+\T1/qtm/m/it/10 sor\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (150.62328pt too wide) in paragraph at lines 1957--1957
+\T1/qtm/m/it/10 gamma: 
+ []
+
+
+Overfull \hbox (138.99326pt too wide) in paragraph at lines 1957--1957
+\T1/qtm/m/it/10 float\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (141.58327pt too wide) in paragraph at lines 1957--1957
+\T1/qtm/m/it/10 band- 
+ []
+
+
+Overfull \hbox (143.71326pt too wide) in paragraph at lines 1957--1957
+\T1/qtm/m/it/10 width: 
+ []
+
+
+Overfull \hbox (141.74324pt too wide) in paragraph at lines 1957--1957
+\T1/qtm/m/it/10 float\T1/txtt/m/n/10 )|  
+ []
+
+
+Overfull \hbox (43.63853pt too wide) in paragraph at lines 2009--2009
+[]\T1/qtm/m/it/10 *args\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (62.24852pt too wide) in paragraph at lines 2009--2009
+\T1/qtm/m/it/10 **kwargs\T1/txtt/m/n/10 )|  
+ []
+
+[22] [23]
+Overfull \hbox (69.88846pt too wide) in paragraph at lines 2200--2200
+[]\T1/qtm/m/it/10 *args\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (88.49844pt too wide) in paragraph at lines 2200--2200
+\T1/qtm/m/it/10 **kwargs\T1/txtt/m/n/10 )|  
+ []
+
+[24]
+Overfull \hbox (27.93356pt too wide) in paragraph at lines 2401--2401
+[]\T1/qtm/m/it/10 X: 
+ []
+
+
+Overfull \hbox (35.92357pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 Ten- 
+ []
+
+
+Overfull \hbox (34.28355pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 sor\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (26.19354pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/scit/10 *\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (50.86357pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 gamma: 
+ []
+
+
+Overfull \hbox (36.27356pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 float 
+ []
+
+
+Overfull \hbox (25.24356pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 = 
+ []
+
+
+Overfull \hbox (33.74855pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 1.0\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (52.08354pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 weights: 
+ []
+
+
+Overfull \hbox (35.92357pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 Ten- 
+ []
+
+
+Overfull \hbox (31.27356pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 sor 
+ []
+
+
+Overfull \hbox (21.24355pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 | 
+ []
+
+
+Overfull \hbox (39.35356pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 None 
+ []
+
+
+Overfull \hbox (25.24356pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 = 
+ []
+
+
+Overfull \hbox (41.85356pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 None\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (56.92355pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 max_iter: 
+ []
+
+
+Overfull \hbox (29.05356pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 int 
+ []
+
+
+Overfull \hbox (25.24356pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 = 
+ []
+
+
+Overfull \hbox (36.24855pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 100\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (28.19354pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 lr: 
+ []
+
+
+Overfull \hbox (36.27356pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 float 
+ []
+
+
+Overfull \hbox (25.24356pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 = 
+ []
+
+
+Overfull \hbox (33.49356pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 0.1\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (34.86354pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 init: 
+ []
+
+
+Overfull \hbox (35.92357pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 Ten- 
+ []
+
+
+Overfull \hbox (31.27356pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 sor 
+ []
+
+
+Overfull \hbox (21.24355pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 | 
+ []
+
+
+Overfull \hbox (39.35356pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 None 
+ []
+
+
+Overfull \hbox (25.24356pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 = 
+ []
+
+
+Overfull \hbox (41.85356pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 None\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (31.26357pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 de- 
+ []
+
+
+Overfull \hbox (37.92357pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 vice: 
+ []
+
+
+Overfull \hbox (28.95355pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 str 
+ []
+
+
+Overfull \hbox (21.24355pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 | 
+ []
+
+
+Overfull \hbox (31.26357pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 de- 
+ []
+
+
+Overfull \hbox (34.59357pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 vice 
+ []
+
+
+Overfull \hbox (21.24355pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 | 
+ []
+
+
+Overfull \hbox (39.35356pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 None 
+ []
+
+
+Overfull \hbox (25.24356pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 = 
+ []
+
+
+Overfull \hbox (41.85356pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 None\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (33.79353pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 ver- 
+ []
+
+
+Overfull \hbox (40.15356pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 bose: 
+ []
+
+
+Overfull \hbox (36.27356pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 bool 
+ []
+
+
+Overfull \hbox (25.24356pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 = 
+ []
+
+
+Overfull \hbox (42.46356pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 False\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (42.93356pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 fused: 
+ []
+
+
+Overfull \hbox (36.27356pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 bool 
+ []
+
+
+Overfull \hbox (21.24355pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 | 
+ []
+
+
+Overfull \hbox (39.35356pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 None 
+ []
+
+
+Overfull \hbox (25.24356pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 = 
+ []
+
+
+Overfull \hbox (41.85356pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 None\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (81.42355pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 early_stopping: 
+ []
+
+
+Overfull \hbox (36.27356pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 bool 
+ []
+
+
+Overfull \hbox (25.24356pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 = 
+ []
+
+
+Overfull \hbox (39.13353pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 True\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (31.82356pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 pa- 
+ []
+
+
+Overfull \hbox (45.70357pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 tience: 
+ []
+
+
+Overfull \hbox (29.05356pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 int 
+ []
+
+
+Overfull \hbox (25.24356pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 = 
+ []
+
+
+Overfull \hbox (31.24855pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 10\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (32.28355pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 tol: 
+ []
+
+
+Overfull \hbox (36.27356pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 float 
+ []
+
+
+Overfull \hbox (25.24356pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 = 
+ []
+
+
+Overfull \hbox (31.26357pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 1e- 
+ []
+
+
+Overfull \hbox (33.93852pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/it/10 05\T1/txtt/m/n/10 ) 
+ []
+
+
+Overfull \hbox (28.49358pt too wide) in paragraph at lines 2401--2401
+\OMS/cmsy/m/n/10 !$ 
+ []
+
+
+Overfull \hbox (45.41354pt too wide) in paragraph at lines 2401--2401
+\T1/qtm/m/n/10 Tensor|  
+ []
+
+[25]
+Overfull \vbox (143.17003pt too high) has occurred while \output is active []
+
+
+[26]
+Overfull \hbox (48.9335pt too wide) in paragraph at lines 2485--2485
+[]\T1/qtm/m/it/10 X: 
+ []
+
+
+Overfull \hbox (56.92351pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 Ten- 
+ []
+
+
+Overfull \hbox (55.2835pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 sor\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (47.19348pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/scit/10 *\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (71.86351pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 gamma: 
+ []
+
+
+Overfull \hbox (57.2735pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 float 
+ []
+
+
+Overfull \hbox (46.2435pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 = 
+ []
+
+
+Overfull \hbox (54.74849pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 1.0\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (73.08348pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 weights: 
+ []
+
+
+Overfull \hbox (56.92351pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 Ten- 
+ []
+
+
+Overfull \hbox (52.2735pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 sor 
+ []
+
+
+Overfull \hbox (42.24348pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 | 
+ []
+
+
+Overfull \hbox (60.3535pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 None 
+ []
+
+
+Overfull \hbox (46.2435pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 = 
+ []
+
+
+Overfull \hbox (62.8535pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 None\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (77.9235pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 max_iter: 
+ []
+
+
+Overfull \hbox (50.0535pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 int 
+ []
+
+
+Overfull \hbox (46.2435pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 = 
+ []
+
+
+Overfull \hbox (57.24849pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 100\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (49.19348pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 lr: 
+ []
+
+
+Overfull \hbox (57.2735pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 float 
+ []
+
+
+Overfull \hbox (46.2435pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 = 
+ []
+
+
+Overfull \hbox (54.4935pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 0.1\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (55.86348pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 init: 
+ []
+
+
+Overfull \hbox (56.92351pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 Ten- 
+ []
+
+
+Overfull \hbox (52.2735pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 sor 
+ []
+
+
+Overfull \hbox (42.24348pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 | 
+ []
+
+
+Overfull \hbox (60.3535pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 None 
+ []
+
+
+Overfull \hbox (46.2435pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 = 
+ []
+
+
+Overfull \hbox (62.8535pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 None\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (54.79347pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 ver- 
+ []
+
+
+Overfull \hbox (61.1535pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 bose: 
+ []
+
+
+Overfull \hbox (57.2735pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 bool 
+ []
+
+
+Overfull \hbox (46.2435pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 = 
+ []
+
+
+Overfull \hbox (63.4635pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 False\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (63.9335pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 fused: 
+ []
+
+
+Overfull \hbox (57.2735pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 bool 
+ []
+
+
+Overfull \hbox (42.24348pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 | 
+ []
+
+
+Overfull \hbox (60.3535pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 None 
+ []
+
+
+Overfull \hbox (46.2435pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 = 
+ []
+
+
+Overfull \hbox (62.8535pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 None\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (102.4235pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 early_stopping: 
+ []
+
+
+Overfull \hbox (57.2735pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 bool 
+ []
+
+
+Overfull \hbox (46.2435pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 = 
+ []
+
+
+Overfull \hbox (60.13347pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 True\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (52.8235pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 pa- 
+ []
+
+
+Overfull \hbox (66.7035pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 tience: 
+ []
+
+
+Overfull \hbox (50.0535pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 int 
+ []
+
+
+Overfull \hbox (46.2435pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 = 
+ []
+
+
+Overfull \hbox (52.24849pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 10\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (53.2835pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 tol: 
+ []
+
+
+Overfull \hbox (57.2735pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 float 
+ []
+
+
+Overfull \hbox (46.2435pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 = 
+ []
+
+
+Overfull \hbox (52.2635pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 1e- 
+ []
+
+
+Overfull \hbox (54.93846pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/it/10 05\T1/txtt/m/n/10 ) 
+ []
+
+
+Overfull \hbox (49.49352pt too wide) in paragraph at lines 2485--2485
+\OMS/cmsy/m/n/10 !$ 
+ []
+
+
+Overfull \hbox (66.41348pt too wide) in paragraph at lines 2485--2485
+\T1/qtm/m/n/10 Tensor|  
+ []
+
+[27]
+Overfull \vbox (23.17003pt too high) has occurred while \output is active []
+
+
+[28]
+Overfull \hbox (10.51361pt too wide) in paragraph at lines 2558--2558
+[]\T1/qtm/m/it/10 x: 
+ []
+
+
+Overfull \hbox (20.17361pt too wide) in paragraph at lines 2558--2558
+\T1/qtm/m/it/10 Ten- 
+ []
+
+
+Overfull \hbox (18.5336pt too wide) in paragraph at lines 2558--2558
+\T1/qtm/m/it/10 sor\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (10.0136pt too wide) in paragraph at lines 2558--2558
+\T1/qtm/m/it/10 y: 
+ []
+
+
+Overfull \hbox (20.17361pt too wide) in paragraph at lines 2558--2558
+\T1/qtm/m/it/10 Ten- 
+ []
+
+
+Overfull \hbox (18.5336pt too wide) in paragraph at lines 2558--2558
+\T1/qtm/m/it/10 sor\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (10.44359pt too wide) in paragraph at lines 2558--2558
+\T1/qtm/m/scit/10 *\T1/qtm/m/n/10 , 
+ []
+
+
+Overfull \hbox (20.12358pt too wide) in paragraph at lines 2558--2558
+\T1/qtm/m/it/10 dist: 
+ []
+
+
+Overfull \hbox (18.96358pt too wide) in paragraph at lines 2558--2558
+\T1/qtm/m/it/10 str\T1/txtt/m/n/10 ) 
+ []
+
+
+Overfull \hbox (12.74362pt too wide) in paragraph at lines 2558--2558
+\OMS/cmsy/m/n/10 !$ 
+ []
+
+
+Overfull \hbox (29.66359pt too wide) in paragraph at lines 2558--2558
+\T1/qtm/m/n/10 Tensor|  
+ []
+
+[29]
+Overfull \hbox (0.68369pt too wide) in paragraph at lines 2623--2623
+\T1/qtm/m/it/10 clidean\TS1/qtm/m/it/10 '\T1/qtm/m/n/10 , 
+ []
+
+[30] [31] [32
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 11--13
+Chapter 5.
+[33] [34
+
+]
+Chapter 6.
+[35] [36
+
+] [37
+
+] [38
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 2827--2828
+[]\T1/txtt/m/n/10 dtw_loss_functions.soft_dtw_implementations\T1/qtm/m/n/10 ,
+ []
+
+
+Overfull \hbox (87.62158pt too wide) in paragraph at lines 2828--2829
+[]\T1/txtt/m/n/10 dtw_loss_functions.soft_dtw_implementations.pysdtw_normalize\
+T1/qtm/m/n/10 ,
+ []
+
+
+Overfull \hbox (92.87157pt too wide) in paragraph at lines 2829--2830
+[]\T1/txtt/m/n/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag
+\T1/qtm/m/n/10 ,
+ []
+
+
+Overfull \hbox (92.87157pt too wide) in paragraph at lines 2830--2831
+[]\T1/txtt/m/n/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron
+\T1/qtm/m/n/10 ,
+ []
+
+
+Overfull \hbox (140.12143pt too wide) in paragraph at lines 2831--2832
+[]\T1/txtt/m/n/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron
+.autograd\T1/qtm/m/n/10 ,
+ []
+
+
+Overfull \hbox (155.87138pt too wide) in paragraph at lines 2832--2833
+[]\T1/txtt/m/n/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron
+.autograd_xy\T1/qtm/m/n/10 ,
+ []
+
+
+Overfull \hbox (155.87138pt too wide) in paragraph at lines 2833--2834
+[]\T1/txtt/m/n/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron
+.barycenters\T1/qtm/m/n/10 ,
+ []
+
+
+Overfull \hbox (119.12149pt too wide) in paragraph at lines 2834--2835
+[]\T1/txtt/m/n/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron
+.cuda\T1/qtm/m/n/10 ,
+ []
+
+
+Overfull \hbox (161.12137pt too wide) in paragraph at lines 2835--2836
+[]\T1/txtt/m/n/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron
+.cuda.kernels\T1/qtm/m/n/10 ,
+ []
+
+
+Overfull \hbox (166.37135pt too wide) in paragraph at lines 2836--2837
+[]\T1/txtt/m/n/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron
+.cuda.launcher\T1/qtm/m/n/10 ,
+ []
+
+
+Overfull \hbox (145.37141pt too wide) in paragraph at lines 2837--2838
+[]\T1/txtt/m/n/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron
+.distances\T1/qtm/m/n/10 ,
+ []
+
+
+Overfull \hbox (150.6214pt too wide) in paragraph at lines 2838--2839
+[]\T1/txtt/m/n/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron
+.functional\T1/qtm/m/n/10 ,
+ []
+
+
+Overfull \hbox (129.62146pt too wide) in paragraph at lines 2839--2840
+[]\T1/txtt/m/n/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron
+.module\T1/qtm/m/n/10 ,
+ []
+
+
+Overfull \hbox (124.37148pt too wide) in paragraph at lines 2840--2841
+[]\T1/txtt/m/n/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron
+.utils\T1/qtm/m/n/10 ,
+ []
+
+
+Overfull \hbox (161.12137pt too wide) in paragraph at lines 2841--2842
+[]\T1/txtt/m/n/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron
+.utils.checks\T1/qtm/m/n/10 ,
+ []
+
+[39
+
+
+] (./dtw_loss_functions.ind [40
+
+
+]
+Overfull \hbox (206.81226pt too wide) in paragraph at lines 8--10
+[]\T1/txtt/m/n/10 backward() \T1/qtm/m/n/10 (\T1/qtm/m/it/10 dtw_loss_functions
+.soft_dtw_implementations.soft_dtw_cuda_ron.autograd.SoftDTWAutograd
+ []
+
+
+Overfull \hbox (232.41226pt too wide) in paragraph at lines 10--12
+[]\T1/txtt/m/n/10 backward() \T1/qtm/m/n/10 (\T1/qtm/m/it/10 dtw_loss_functions
+.soft_dtw_implementations.soft_dtw_cuda_ron.autograd_xy.SoftDTWXYAutograd
+ []
+
+
+Overfull \hbox (129.84229pt too wide) in paragraph at lines 12--14
+[]\T1/txtt/m/n/10 bandwidth \T1/qtm/m/n/10 (\T1/qtm/m/it/10 dtw_loss_functions.
+soft_dtw_implementations.soft_dtw_cuda_mag.SoftDTW
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 15--17
 []\T1/txtt/m/n/10 block_dtw_naive \T1/qtm/m/n/10 (\T1/qtm/m/it/10 class in
  []
 
 
-Overfull \hbox (16.67221pt too wide) in paragraph at lines 13--15
+Overfull \hbox (16.67221pt too wide) in paragraph at lines 17--19
 []\T1/txtt/m/n/10 block_dtw_naive \T1/qtm/m/n/10 (\T1/qtm/m/it/10 dtw_loss_func
 tions.block_dtw.block_dtw
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 15--17
+Underfull \hbox (badness 10000) in paragraph at lines 19--21
 []\T1/txtt/m/n/10 block_dtw_optimized \T1/qtm/m/n/10 (\T1/qtm/m/it/10 class in
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 17--19
+Underfull \hbox (badness 10000) in paragraph at lines 21--23
 []\T1/txtt/m/n/10 block_dtw_optimized
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 17--19
+Underfull \hbox (badness 10000) in paragraph at lines 21--23
 \T1/qtm/m/n/10 (\T1/qtm/m/it/10 dtw_loss_functions.block_dtw.block_dtw
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 19--21
+Underfull \hbox (badness 10000) in paragraph at lines 23--25
 []\T1/txtt/m/n/10 block_size \T1/qtm/m/n/10 (\T1/qtm/m/it/10 dtw_loss_functions
 .block_dtw.block_dtw
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 24--26
+Underfull \hbox (badness 10000) in paragraph at lines 28--30
+[]\T1/txtt/m/n/10 check_D() \T1/qtm/m/n/10 (\T1/qtm/m/it/10 in mod-ule
+ []
+
+
+Overfull \hbox (128.35739pt too wide) in paragraph at lines 28--30
+\T1/qtm/m/it/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.u
+tils.checks\T1/qtm/m/n/10 ),
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 30--32
+[]\T1/txtt/m/n/10 check_implementation()
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 30--32
+\T1/qtm/m/n/10 (\T1/qtm/m/it/10 dtw_loss_functions.soft_dtw.soft_dtw
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 32--34
 []\T1/txtt/m/n/10 compute_softdtw() \T1/qtm/m/n/10 (\T1/qtm/m/it/10 in mod-ule
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 26--28
+Overfull \hbox (83.60245pt too wide) in paragraph at lines 32--34
+\T1/qtm/m/it/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag\T
+1/qtm/m/n/10 ),
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 34--36
 []\T1/txtt/m/n/10 compute_softdtw_backward() \T1/qtm/m/n/10 (\T1/qtm/m/it/10 in
  mod-ule
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 28--30
+Overfull \hbox (83.60245pt too wide) in paragraph at lines 34--36
+\T1/qtm/m/it/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag\T
+1/qtm/m/n/10 ),
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 36--38
 []\T1/txtt/m/n/10 compute_softdtw_backward_cuda() \T1/qtm/m/n/10 (\T1/qtm/m/it/
 10 in mod-ule
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 30--32
+Overfull \hbox (83.60245pt too wide) in paragraph at lines 36--38
+\T1/qtm/m/it/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag\T
+1/qtm/m/n/10 ),
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--40
 []\T1/txtt/m/n/10 compute_softdtw_cuda() \T1/qtm/m/n/10 (\T1/qtm/m/it/10 in mod
 -ule
  []
 
 
-Overfull \hbox (11.53229pt too wide) in paragraph at lines 46--48
+Overfull \hbox (83.60245pt too wide) in paragraph at lines 38--40
+\T1/qtm/m/it/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag\T
+1/qtm/m/n/10 ),
+ []
+
+
+Overfull \hbox (129.84229pt too wide) in paragraph at lines 43--45
+[]\T1/txtt/m/n/10 dist_func \T1/qtm/m/n/10 (\T1/qtm/m/it/10 dtw_loss_functions.
+soft_dtw_implementations.soft_dtw_cuda_mag.SoftDTW
+ []
+
+
+Overfull \hbox (85.12158pt too wide) in paragraph at lines 53--54
+[]\T1/txtt/m/n/10 dtw_loss_functions.soft_dtw_implementations.pysdtw_normalize 
+
+ []
+
+
+Overfull \hbox (90.37157pt too wide) in paragraph at lines 55--56
+[]\T1/txtt/m/n/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag
+ 
+ []
+
+
+Overfull \hbox (90.37157pt too wide) in paragraph at lines 57--58
+[]\T1/txtt/m/n/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron
+ 
+ []
+
+
+Overfull \hbox (137.62143pt too wide) in paragraph at lines 59--60
+[]\T1/txtt/m/n/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron
+.autograd 
+ []
+
+
+Overfull \hbox (153.37138pt too wide) in paragraph at lines 61--62
+[]\T1/txtt/m/n/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron
+.autograd_xy 
+ []
+
+
+Overfull \hbox (153.37138pt too wide) in paragraph at lines 63--64
+[]\T1/txtt/m/n/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron
+.barycenters 
+ []
+
+
+Overfull \hbox (116.62149pt too wide) in paragraph at lines 65--66
+[]\T1/txtt/m/n/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron
+.cuda 
+ []
+
+
+Overfull \hbox (158.62137pt too wide) in paragraph at lines 67--68
+[]\T1/txtt/m/n/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron
+.cuda.kernels 
+ []
+
+
+Overfull \hbox (163.87135pt too wide) in paragraph at lines 69--70
+[]\T1/txtt/m/n/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron
+.cuda.launcher 
+ []
+
+
+Overfull \hbox (142.87141pt too wide) in paragraph at lines 71--72
+[]\T1/txtt/m/n/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron
+.distances 
+ []
+
+
+Overfull \hbox (148.1214pt too wide) in paragraph at lines 73--74
+[]\T1/txtt/m/n/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron
+.functional 
+ []
+
+
+Overfull \hbox (127.12146pt too wide) in paragraph at lines 75--76
+[]\T1/txtt/m/n/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron
+.module 
+ []
+
+
+Overfull \hbox (121.87148pt too wide) in paragraph at lines 77--78
+[]\T1/txtt/m/n/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron
+.utils 
+ []
+
+
+Overfull \hbox (158.62137pt too wide) in paragraph at lines 79--80
+[]\T1/txtt/m/n/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron
+.utils.checks 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 84--86
+[]\T1/txtt/m/n/10 forward() \T1/qtm/m/n/10 (\T1/qtm/m/it/10 dtw_loss_functions.
+block_dtw.block_dtw
+ []
+
+
+Overfull \hbox (11.53229pt too wide) in paragraph at lines 86--88
 []\T1/txtt/m/n/10 forward() \T1/qtm/m/n/10 (\T1/qtm/m/it/10 dtw_loss_functions.
 block_dtw.block_dtw_naive
  []
 
+[41
 
-Overfull \hbox (28.91231pt too wide) in paragraph at lines 48--50
+]
+Overfull \hbox (28.91231pt too wide) in paragraph at lines 88--90
 []\T1/txtt/m/n/10 forward() \T1/qtm/m/n/10 (\T1/qtm/m/it/10 dtw_loss_functions.
 block_dtw.block_dtw_optimized
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 77--79
+Underfull \hbox (badness 10000) in paragraph at lines 91--93
+[]\T1/txtt/m/n/10 forward() \T1/qtm/m/n/10 (\T1/qtm/m/it/10 dtw_loss_functions.
+soft_dtw.soft_dtw
+ []
+
+
+Overfull \hbox (162.22232pt too wide) in paragraph at lines 93--95
+[]\T1/txtt/m/n/10 forward() \T1/qtm/m/n/10 (\T1/qtm/m/it/10 dtw_loss_functions.
+soft_dtw_implementations.pysdtw_normalize.pysdtw_normalized
+ []
+
+
+Overfull \hbox (129.84229pt too wide) in paragraph at lines 95--97
+[]\T1/txtt/m/n/10 forward() \T1/qtm/m/n/10 (\T1/qtm/m/it/10 dtw_loss_functions.
+soft_dtw_implementations.soft_dtw_cuda_mag.SoftDTW
+ []
+
+
+Overfull \hbox (201.56227pt too wide) in paragraph at lines 97--99
+[]\T1/txtt/m/n/10 forward() \T1/qtm/m/n/10 (\T1/qtm/m/it/10 dtw_loss_functions.
+soft_dtw_implementations.soft_dtw_cuda_ron.autograd.SoftDTWAutograd
+ []
+
+
+Overfull \hbox (227.16228pt too wide) in paragraph at lines 99--101
+[]\T1/txtt/m/n/10 forward() \T1/qtm/m/n/10 (\T1/qtm/m/it/10 dtw_loss_functions.
+soft_dtw_implementations.soft_dtw_cuda_ron.autograd_xy.SoftDTWXYAutograd
+ []
+
+
+Overfull \hbox (158.20229pt too wide) in paragraph at lines 101--103
+[]\T1/txtt/m/n/10 forward() \T1/qtm/m/n/10 (\T1/qtm/m/it/10 dtw_loss_functions.
+soft_dtw_implementations.soft_dtw_cuda_ron.module.SoftDTW
+ []
+
+
+Overfull \hbox (126.26228pt too wide) in paragraph at lines 103--105
+[]\T1/txtt/m/n/10 forward() \T1/qtm/m/n/10 (\T1/qtm/m/it/10 dtw_loss_functions.
+soft_dtw_implementations.soft_dtw_cuda_ron.SoftDTW
+ []
+
+
+Overfull \hbox (108.84235pt too wide) in paragraph at lines 108--110
+[]\T1/txtt/m/n/10 gamma \T1/qtm/m/n/10 (\T1/qtm/m/it/10 dtw_loss_functions.soft
+_dtw_implementations.soft_dtw_cuda_mag.SoftDTW
+ []
+
+
+Overfull \hbox (18.37184pt too wide) in paragraph at lines 117--118
+[]| \T1/txtt/m/n/10 dtw_loss_functions.soft_dtw_implementations\T1/qtm/m/n/10 ,
+
+ []
+
+
+Overfull \hbox (107.62158pt too wide) in paragraph at lines 118--120
+[]| \T1/txtt/m/n/10 dtw_loss_functions.soft_dtw_implementations.pysdtw_normaliz
+e\T1/qtm/m/n/10 ,
+ []
+
+
+Overfull \hbox (112.87157pt too wide) in paragraph at lines 120--122
+[]| \T1/txtt/m/n/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_m
+ag\T1/qtm/m/n/10 ,
+ []
+
+
+Overfull \hbox (112.87157pt too wide) in paragraph at lines 122--124
+[]| \T1/txtt/m/n/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_r
+on\T1/qtm/m/n/10 ,
+ []
+
+
+Overfull \hbox (160.12143pt too wide) in paragraph at lines 124--126
+[]| \T1/txtt/m/n/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_r
+on.autograd\T1/qtm/m/n/10 ,
+ []
+
+
+Overfull \hbox (175.87138pt too wide) in paragraph at lines 126--128
+[]| \T1/txtt/m/n/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_r
+on.autograd_xy\T1/qtm/m/n/10 ,
+ []
+
+
+Overfull \hbox (175.87138pt too wide) in paragraph at lines 128--130
+[]| \T1/txtt/m/n/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_r
+on.barycenters\T1/qtm/m/n/10 ,
+ []
+
+
+Overfull \hbox (139.12149pt too wide) in paragraph at lines 130--132
+[]| \T1/txtt/m/n/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_r
+on.cuda\T1/qtm/m/n/10 ,
+ []
+
+
+Overfull \hbox (181.12137pt too wide) in paragraph at lines 132--134
+[]| \T1/txtt/m/n/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_r
+on.cuda.kernels\T1/qtm/m/n/10 ,
+ []
+
+
+Overfull \hbox (186.37135pt too wide) in paragraph at lines 134--136
+[]| \T1/txtt/m/n/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_r
+on.cuda.launcher\T1/qtm/m/n/10 ,
+ []
+
+
+Overfull \hbox (165.37141pt too wide) in paragraph at lines 136--138
+[]| \T1/txtt/m/n/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_r
+on.distances\T1/qtm/m/n/10 ,
+ []
+
+
+Overfull \hbox (170.6214pt too wide) in paragraph at lines 138--140
+[]| \T1/txtt/m/n/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_r
+on.functional\T1/qtm/m/n/10 ,
+ []
+
+
+Overfull \hbox (149.62146pt too wide) in paragraph at lines 140--142
+[]| \T1/txtt/m/n/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_r
+on.module\T1/qtm/m/n/10 ,
+ []
+
+
+Overfull \hbox (144.37148pt too wide) in paragraph at lines 142--144
+[]| \T1/txtt/m/n/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_r
+on.utils\T1/qtm/m/n/10 ,
+ []
+
+
+Overfull \hbox (181.12137pt too wide) in paragraph at lines 144--146
+[]| \T1/txtt/m/n/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_r
+on.utils.checks\T1/qtm/m/n/10 ,
+ []
+
+
+Overfull \hbox (129.84229pt too wide) in paragraph at lines 149--151
+[]\T1/txtt/m/n/10 normalize \T1/qtm/m/n/10 (\T1/qtm/m/it/10 dtw_loss_functions.
+soft_dtw_implementations.soft_dtw_cuda_mag.SoftDTW
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 159--161
+[]\T1/txtt/m/n/10 pairwise_distance() \T1/qtm/m/n/10 (\T1/qtm/m/it/10 in mod-ul
+e
+ []
+
+
+Overfull \hbox (119.69742pt too wide) in paragraph at lines 159--161
+\T1/qtm/m/it/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.d
+istances\T1/qtm/m/n/10 ),
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 161--163
 []\T1/txtt/m/n/10 profile() \T1/qtm/m/n/10 (\T1/qtm/m/it/10 in mod-ule
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 87--89
+Overfull \hbox (83.60245pt too wide) in paragraph at lines 161--163
+\T1/qtm/m/it/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag\T
+1/qtm/m/n/10 ),
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 163--165
+[]\T1/txtt/m/n/10 pysdtw_normalized \T1/qtm/m/n/10 (\T1/qtm/m/it/10 class in
+ []
+
+
+Overfull \hbox (75.57246pt too wide) in paragraph at lines 163--165
+\T1/qtm/m/it/10 dtw_loss_functions.soft_dtw_implementations.pysdtw_normalize\T1
+/qtm/m/n/10 ),
+ []
+
+
+Overfull \hbox (116.47151pt too wide) in paragraph at lines 170--172
+[]\T1/txtt/m/n/10 SoftDTW \T1/qtm/m/n/10 (\T1/qtm/m/it/10 class in dtw_loss_fun
+ctions.soft_dtw_implementations.soft_dtw_cuda_mag\T1/qtm/m/n/10 ),
+ []
+
+
+Overfull \hbox (112.89151pt too wide) in paragraph at lines 172--174
+[]\T1/txtt/m/n/10 SoftDTW \T1/qtm/m/n/10 (\T1/qtm/m/it/10 class in dtw_loss_fun
+ctions.soft_dtw_implementations.soft_dtw_cuda_ron\T1/qtm/m/n/10 ),
+ []
+
+
+Overfull \hbox (144.83151pt too wide) in paragraph at lines 174--176
+[]\T1/txtt/m/n/10 SoftDTW \T1/qtm/m/n/10 (\T1/qtm/m/it/10 class in dtw_loss_fun
+ctions.soft_dtw_implementations.soft_dtw_cuda_ron.module\T1/qtm/m/n/10 ),
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 176--178
+[]\T1/txtt/m/n/10 softdtw() \T1/qtm/m/n/10 (\T1/qtm/m/it/10 in mod-ule
+ []
+
+
+Overfull \hbox (80.02245pt too wide) in paragraph at lines 176--178
+\T1/qtm/m/it/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron\T
+1/qtm/m/n/10 ),
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 178--180
+[]\T1/txtt/m/n/10 softdtw() \T1/qtm/m/n/10 (\T1/qtm/m/it/10 in mod-ule
+ []
+
+
+Overfull \hbox (123.36742pt too wide) in paragraph at lines 178--180
+\T1/qtm/m/it/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.f
+unctional\T1/qtm/m/n/10 ),
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 180--182
+[]\T1/txtt/m/n/10 softdtw_backward_cpu() \T1/qtm/m/n/10 (\T1/qtm/m/it/10 in mod
+-ule
+ []
+
+
+Overfull \hbox (140.22243pt too wide) in paragraph at lines 180--182
+\T1/qtm/m/it/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.c
+uda.launcher\T1/qtm/m/n/10 ),
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 182--184
+[]\T1/txtt/m/n/10 softdtw_backward_cuda_fused_sqeuclid() \T1/qtm/m/n/10 (\T1/qt
+m/m/it/10 in
+ []
+
+
+Overfull \hbox (171.33243pt too wide) in paragraph at lines 182--184
+\T1/qtm/m/it/10 mod-ule dtw_loss_functions.soft_dtw_implementations.soft_dtw_cu
+da_ron.cuda.launcher\T1/qtm/m/n/10 ),
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 184--186
+[]\T1/txtt/m/n/10 softdtw_backward_cuda_log() \T1/qtm/m/n/10 (\T1/qtm/m/it/10 i
+n mod-ule
+ []
+
+
+Overfull \hbox (140.22243pt too wide) in paragraph at lines 184--186
+\T1/qtm/m/it/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.c
+uda.launcher\T1/qtm/m/n/10 ),
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 186--188
+[]\T1/txtt/m/n/10 softdtw_backward_kernel_legacy() \T1/qtm/m/n/10 (\T1/qtm/m/it
+/10 in mod-ule
+ []
+
+
+Overfull \hbox (133.54742pt too wide) in paragraph at lines 186--188
+\T1/qtm/m/it/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.c
+uda.kernels\T1/qtm/m/n/10 ),
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 188--190
+[]\T1/txtt/m/n/10 softdtw_backward_log_cuda() \T1/qtm/m/n/10 (\T1/qtm/m/it/10 i
+n mod-ule
+ []
+
+
+Overfull \hbox (133.54742pt too wide) in paragraph at lines 188--190
+\T1/qtm/m/it/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.c
+uda.kernels\T1/qtm/m/n/10 ),
+ []
+
+[42]
+Underfull \hbox (badness 10000) in paragraph at lines 190--192
+[]\T1/txtt/m/n/10 softdtw_backward_log_diag_cuda() \T1/qtm/m/n/10 (\T1/qtm/m/it
+/10 in mod-ule
+ []
+
+
+Overfull \hbox (133.54742pt too wide) in paragraph at lines 190--192
+\T1/qtm/m/it/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.c
+uda.kernels\T1/qtm/m/n/10 ),
+ []
+
+
+Overfull \hbox (164.65742pt too wide) in paragraph at lines 192--194
+\T1/qtm/m/it/10 mod-ule dtw_loss_functions.soft_dtw_implementations.soft_dtw_cu
+da_ron.cuda.kernels\T1/qtm/m/n/10 ),
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 194--196
+[]\T1/txtt/m/n/10 softdtw_barycenter() \T1/qtm/m/n/10 (\T1/qtm/m/it/10 in mod-u
+le
+ []
+
+
+Overfull \hbox (80.02245pt too wide) in paragraph at lines 194--196
+\T1/qtm/m/it/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron\T
+1/qtm/m/n/10 ),
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 196--198
+[]\T1/txtt/m/n/10 softdtw_barycenter() \T1/qtm/m/n/10 (\T1/qtm/m/it/10 in mod-u
+le
+ []
+
+
+Overfull \hbox (129.63745pt too wide) in paragraph at lines 196--198
+\T1/qtm/m/it/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.b
+arycenters\T1/qtm/m/n/10 ),
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 198--200
+[]\T1/txtt/m/n/10 softdtw_barycenter_cpu() \T1/qtm/m/n/10 (\T1/qtm/m/it/10 in m
+od-ule
+ []
+
+
+Overfull \hbox (80.02245pt too wide) in paragraph at lines 198--200
+\T1/qtm/m/it/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron\T
+1/qtm/m/n/10 ),
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 200--202
+[]\T1/txtt/m/n/10 softdtw_barycenter_cpu() \T1/qtm/m/n/10 (\T1/qtm/m/it/10 in m
+od-ule
+ []
+
+
+Overfull \hbox (129.63745pt too wide) in paragraph at lines 200--202
+\T1/qtm/m/it/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.b
+arycenters\T1/qtm/m/n/10 ),
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 202--204
+[]\T1/txtt/m/n/10 softdtw_forward_cpu() \T1/qtm/m/n/10 (\T1/qtm/m/it/10 in mod-
+ule
+ []
+
+
+Overfull \hbox (140.22243pt too wide) in paragraph at lines 202--204
+\T1/qtm/m/it/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.c
+uda.launcher\T1/qtm/m/n/10 ),
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 204--206
+[]\T1/txtt/m/n/10 softdtw_forward_cuda() \T1/qtm/m/n/10 (\T1/qtm/m/it/10 in mod
+-ule
+ []
+
+
+Overfull \hbox (140.22243pt too wide) in paragraph at lines 204--206
+\T1/qtm/m/it/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.c
+uda.launcher\T1/qtm/m/n/10 ),
+ []
+
+
+Overfull \hbox (154.11243pt too wide) in paragraph at lines 206--208
+\T1/qtm/m/it/10 ule dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_r
+on.cuda.launcher\T1/qtm/m/n/10 ),
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 208--210
+[]\T1/txtt/m/n/10 softdtw_forward_diag_cuda() \T1/qtm/m/n/10 (\T1/qtm/m/it/10 i
+n mod-ule
+ []
+
+
+Overfull \hbox (133.54742pt too wide) in paragraph at lines 208--210
+\T1/qtm/m/it/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.c
+uda.kernels\T1/qtm/m/n/10 ),
+ []
+
+
+Overfull \hbox (147.43742pt too wide) in paragraph at lines 210--212
+\T1/qtm/m/it/10 ule dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_r
+on.cuda.kernels\T1/qtm/m/n/10 ),
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 212--214
+[]\T1/txtt/m/n/10 softdtw_forward_kernel() \T1/qtm/m/n/10 (\T1/qtm/m/it/10 in m
+od-ule
+ []
+
+
+Overfull \hbox (133.54742pt too wide) in paragraph at lines 212--214
+\T1/qtm/m/it/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.c
+uda.kernels\T1/qtm/m/n/10 ),
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 214--216
+[]\T1/txtt/m/n/10 SoftDTWAutograd \T1/qtm/m/n/10 (\T1/qtm/m/it/10 class in
+ []
+
+
+Overfull \hbox (119.19742pt too wide) in paragraph at lines 214--216
+\T1/qtm/m/it/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.a
+utograd\T1/qtm/m/n/10 ),
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 216--218
+[]\T1/txtt/m/n/10 SoftDTWXYAutograd \T1/qtm/m/n/10 (\T1/qtm/m/it/10 class in
+ []
+
+
+Overfull \hbox (132.62744pt too wide) in paragraph at lines 216--218
+\T1/qtm/m/it/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.a
+utograd_xy\T1/qtm/m/n/10 ),
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 218--220
+[]\T1/txtt/m/n/10 sqeuclidean() \T1/qtm/m/n/10 (\T1/qtm/m/it/10 in mod-ule
+ []
+
+
+Overfull \hbox (119.69742pt too wide) in paragraph at lines 218--220
+\T1/qtm/m/it/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.d
+istances\T1/qtm/m/n/10 ),
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 223--225
 []\T1/txtt/m/n/10 timed_run() \T1/qtm/m/n/10 (\T1/qtm/m/it/10 in mod-ule
  []
 
-[15
 
-]) (./dtw_loss_functions.aux)
+Overfull \hbox (83.60245pt too wide) in paragraph at lines 223--225
+\T1/qtm/m/it/10 dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag\T
+1/qtm/m/n/10 ),
+ []
+
+[43]) (./dtw_loss_functions.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
  ***********
 Package rerunfilecheck Info: File `dtw_loss_functions.out' has not changed.
-(rerunfilecheck)             Checksum: 9813EFA759166C86E83098151723DEBF;711.
+(rerunfilecheck)             Checksum: 8EB8D0A2584B01B0DE5D583F430F19CB;7998.
  ) 
 Here is how much of TeX's memory you used:
- 21255 strings out of 467525
- 389470 string characters out of 5418983
- 794312 words of memory out of 5000000
- 49714 multiletter control sequences out of 15000+600000
- 673857 words of font info for 81 fonts, out of 8000000 for 9000
+ 21546 strings out of 467525
+ 405003 string characters out of 5418983
+ 802611 words of memory out of 5000000
+ 49888 multiletter control sequences out of 15000+600000
+ 686007 words of font info for 86 fonts, out of 8000000 for 9000
  1142 hyphenation exceptions out of 8191
- 72i,11n,82p,1207b,728s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
-></usr/local/texlive/2026/texmf-dist/fonts/type1/public/tex-gyre/qhvb.pfb></usr
-/local/texlive/2026/texmf-dist/fonts/type1/public/tex-gyre/qhvr.pfb></usr/local
-/texlive/2026/texmf-dist/fonts/type1/public/tex-gyre/qtmb.pfb></usr/local/texli
-ve/2026/texmf-dist/fonts/type1/public/tex-gyre/qtmr.pfb></usr/local/texlive/202
-6/texmf-dist/fonts/type1/public/tex-gyre/qtmri.pfb></usr/local/texlive/2026/tex
-mf-dist/fonts/type1/public/txfonts/t1xbtt.pfb></usr/local/texlive/2026/texmf-di
-st/fonts/type1/public/txfonts/t1xtt.pfb></usr/local/texlive/2026/texmf-dist/fon
-ts/type1/public/txfonts/t1xtt.pfb></usr/local/texlive/2026/texmf-dist/fonts/typ
-e1/public/txfonts/tcxtt.pfb>
-Output written on dtw_loss_functions.pdf (19 pages, 182748 bytes).
+ 72i,12n,82p,2188b,856s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2026/texmf-dist/fonts/type1/public/fontawesome7/FontAweso
+me7Free-Solid.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmsy10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/tex-gyr
+e/qhvb.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/tex-gyre/qhvr
+.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/tex-gyre/qtmb.pfb><
+/usr/local/texlive/2026/texmf-dist/fonts/type1/public/tex-gyre/qtmr.pfb></usr/l
+ocal/texlive/2026/texmf-dist/fonts/type1/public/tex-gyre/qtmri.pfb></usr/local/
+texlive/2026/texmf-dist/fonts/type1/public/txfonts/t1xbtt.pfb></usr/local/texli
+ve/2026/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb></usr/local/texlive/202
+6/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb></usr/local/texlive/2026/texm
+f-dist/fonts/type1/public/txfonts/tcxtt.pfb>
+Output written on dtw_loss_functions.pdf (47 pages, 249510 bytes).
 PDF statistics:
- 262 PDF objects out of 1000 (max. 8388607)
- 220 compressed objects within 3 object streams
- 57 named destinations out of 1000 (max. 500000)
- 85 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 721 PDF objects out of 1000 (max. 8388607)
+ 645 compressed objects within 7 object streams
+ 163 named destinations out of 1000 (max. 500000)
+ 301 words of extra memory for PDF output out of 10000 (max. 10000000)
 

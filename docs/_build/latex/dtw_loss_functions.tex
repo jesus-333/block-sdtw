@@ -57,7 +57,7 @@
 % Set up styles of URL: it should be placed after hyperref.
 \urlstyle{same}
 
-\addto\captionsenglish{\renewcommand{\contentsname}{Contents:}}
+\addto\captionsenglish{\renewcommand{\contentsname}{Loss functions}}
 
 \usepackage{sphinxmessages}
 \setcounter{tocdepth}{0}
@@ -65,7 +65,7 @@
 
 
 \title{dtw\_loss\_functions}
-\date{Mar 06, 2026}
+\date{Mar 09, 2026}
 \release{}
 \author{Alberto (Jesus) Zancanaro}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -129,11 +129,11 @@ Alberto Zancanaro \textless{}\sphinxhref{mailto:alberto.zancanaro@uni.lu}{albert
 \pysigstartsignatures
 \pysiglinewithargsret
 {\sphinxbfcode{\sphinxupquote{\DUrole{k}{class}\DUrole{w}{ }}}\sphinxcode{\sphinxupquote{dtw\_loss\_functions.block\_dtw.}}\sphinxbfcode{\sphinxupquote{block\_dtw}}}
-{\sphinxparam{\DUrole{n}{block\_size}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{int}}\sphinxparamcomma \sphinxparam{\DUrole{n}{use\_cuda}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{bool}}\sphinxparamcomma \sphinxparam{\DUrole{n}{gamma\_sdtw}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{1}}\sphinxparamcomma \sphinxparam{\DUrole{n}{use\_divergence}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{bool}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{False}}\sphinxparamcomma \sphinxparam{\DUrole{n}{bandwidth}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{None}}\sphinxparamcomma \sphinxparam{\DUrole{n}{dist\_func}\DUrole{o}{=}\DUrole{default_value}{None}}}
+{\sphinxparam{\DUrole{n}{block\_size}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{int}}\sphinxparamcomma \sphinxparam{\DUrole{n}{use\_cuda}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{bool}}\sphinxparamcomma \sphinxparam{\DUrole{n}{gamma\_sdtw}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{1}}\sphinxparamcomma \sphinxparam{\DUrole{n}{use\_divergence}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{bool}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{False}}\sphinxparamcomma \sphinxparam{\DUrole{n}{bandwidth}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{None}}\sphinxparamcomma \sphinxparam{\DUrole{n}{dist\_func}\DUrole{o}{=}\DUrole{default_value}{None}}\sphinxparamcomma \sphinxparam{\DUrole{n}{implementation}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{str}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{\textquotesingle{}mag\textquotesingle{}}}\sphinxparamcomma \sphinxparam{\DUrole{n}{fused}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{bool}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{None}}}
 {}
 \pysigstopsignatures
 \sphinxAtStartPar
-Bases: \sphinxcode{\sphinxupquote{object}}
+Bases: \sphinxcode{\sphinxupquote{Module}}
 
 \sphinxAtStartPar
 Class that compute the block DTW loss, which is a variant of the SDTW that computes the SDTW on blocks of the signal instead of the entire signal.
@@ -188,7 +188,7 @@ Instance of the naive implementation of the block DTW.
 \begin{quote}\begin{description}
 \sphinxlineitem{Type}
 \sphinxAtStartPar
-\sphinxcode{\sphinxupquote{block\_dtw\_naive}}
+{\hyperref[\detokenize{dtw_loss_functions.block_dtw:dtw_loss_functions.block_dtw.block_dtw_naive}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{block\_dtw\_naive}}}}}
 
 \end{description}\end{quote}
 
@@ -207,7 +207,7 @@ Instance of the optimized implementation of the block DTW.
 \begin{quote}\begin{description}
 \sphinxlineitem{Type}
 \sphinxAtStartPar
-\sphinxcode{\sphinxupquote{block\_dtw\_optimized}}
+{\hyperref[\detokenize{dtw_loss_functions.block_dtw:dtw_loss_functions.block_dtw.block_dtw_optimized}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{block\_dtw\_optimized}}}}}
 
 \end{description}\end{quote}
 
@@ -273,12 +273,12 @@ Instance of the optimized implementation of the block DTW.
 \sphinxtableatstartofbodyhook
 \begin{varwidth}[t]{\sphinxcolwidth{1}{2}}
 \sphinxAtStartPar
-\sphinxcode{\sphinxupquote{\_\_call\_\_}}(x, x\_r)
+{\hyperref[\detokenize{dtw_loss_functions.block_dtw:dtw_loss_functions.block_dtw.block_dtw.forward}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{forward}}}}}(x, x\_r)
 \sphinxbeforeendvarwidth
 \end{varwidth}%
 &\begin{varwidth}[t]{\sphinxcolwidth{1}{2}}
 \sphinxAtStartPar
-Compute the block DTW loss between the input tensors \sphinxtitleref{x} and \sphinxtitleref{x\_r}.
+Compute the block DTW loss between the input tensors \sphinxcode{\sphinxupquote{x}} and \sphinxcode{\sphinxupquote{x\_r}}.
 \sphinxbeforeendvarwidth
 \end{varwidth}%
 \\
@@ -287,6 +287,42 @@ Compute the block DTW loss between the input tensors \sphinxtitleref{x} and \sph
 \sphinxtableafterendhook
 \sphinxatlongtableend
 \end{savenotes}
+\index{forward() (dtw\_loss\_functions.block\_dtw.block\_dtw method)@\spxentry{forward()}\spxextra{dtw\_loss\_functions.block\_dtw.block\_dtw method}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{dtw_loss_functions.block_dtw:dtw_loss_functions.block_dtw.block_dtw.forward}}
+\pysigstartsignatures
+\pysiglinewithargsret
+{\sphinxbfcode{\sphinxupquote{forward}}}
+{\sphinxparam{\DUrole{n}{x}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{tensor}}\sphinxparamcomma \sphinxparam{\DUrole{n}{x\_r}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{tensor}}}
+{{ $\rightarrow$ tensor}}
+\pysigstopsignatures
+\sphinxAtStartPar
+Compute the block DTW loss between the input tensors \sphinxcode{\sphinxupquote{x}} and \sphinxcode{\sphinxupquote{x\_r}}.
+\begin{quote}\begin{description}
+\sphinxlineitem{Parameters}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{x}} (\sphinxstyleliteralemphasis{\sphinxupquote{torch.tensor}}) \textendash{} First input tensor of shape \sphinxcode{\sphinxupquote{B x T x C}}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{x\_r}} (\sphinxstyleliteralemphasis{\sphinxupquote{torch.tensor}}) \textendash{} Second input tensor of shape \sphinxcode{\sphinxupquote{B x T x C}}
+
+\end{itemize}
+
+\sphinxlineitem{Returns}
+\sphinxAtStartPar
+\sphinxstylestrong{recon\_error} \textendash{} Tensor of shape \sphinxcode{\sphinxupquote{B}} containing the block DTW loss for each sample in the batch.
+
+\sphinxlineitem{Return type}
+\sphinxAtStartPar
+torch.tensor
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
 
 \end{fulllineitems}
 
@@ -297,17 +333,17 @@ Compute the block DTW loss between the input tensors \sphinxtitleref{x} and \sph
 \pysigstartsignatures
 \pysiglinewithargsret
 {\sphinxbfcode{\sphinxupquote{\DUrole{k}{class}\DUrole{w}{ }}}\sphinxcode{\sphinxupquote{dtw\_loss\_functions.block\_dtw.}}\sphinxbfcode{\sphinxupquote{block\_dtw\_naive}}}
-{\sphinxparam{\DUrole{n}{block\_size}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{int}}\sphinxparamcomma \sphinxparam{\DUrole{n}{use\_cuda}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{bool}}\sphinxparamcomma \sphinxparam{\DUrole{n}{gamma\_sdtw}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{1}}\sphinxparamcomma \sphinxparam{\DUrole{n}{use\_divergence}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{bool}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{False}}\sphinxparamcomma \sphinxparam{\DUrole{n}{bandwidth}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{None}}\sphinxparamcomma \sphinxparam{\DUrole{n}{dist\_func}\DUrole{o}{=}\DUrole{default_value}{None}}}
+{\sphinxparam{\DUrole{n}{block\_size}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{int}}\sphinxparamcomma \sphinxparam{\DUrole{n}{use\_cuda}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{bool}}\sphinxparamcomma \sphinxparam{\DUrole{n}{gamma\_sdtw}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{1}}\sphinxparamcomma \sphinxparam{\DUrole{n}{use\_divergence}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{bool}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{False}}\sphinxparamcomma \sphinxparam{\DUrole{n}{bandwidth}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{None}}\sphinxparamcomma \sphinxparam{\DUrole{n}{dist\_func}\DUrole{o}{=}\DUrole{default_value}{None}}\sphinxparamcomma \sphinxparam{\DUrole{n}{implementation}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{str}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{\textquotesingle{}mag\textquotesingle{}}}\sphinxparamcomma \sphinxparam{\DUrole{n}{fused}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{bool}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{None}}}
 {}
 \pysigstopsignatures
 \sphinxAtStartPar
-Bases: \sphinxcode{\sphinxupquote{SoftDTW}}
+Bases: {\hyperref[\detokenize{dtw_loss_functions.soft_dtw:dtw_loss_functions.soft_dtw.soft_dtw}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{soft\_dtw}}}}}
 
 \sphinxAtStartPar
 Naive implementation of the block DTW, which computes the SDTW on each block separately.
 
 \sphinxAtStartPar
-For details on the parameters, see the docstring of the \sphinxcode{\sphinxupquote{block\_dtw}} class.
+For details on the parameters, see the docstring of the {\hyperref[\detokenize{dtw_loss_functions.block_dtw:dtw_loss_functions.block_dtw.block_dtw}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{block\_dtw}}}}} class.
 \subsubsection*{Methods}
 
 
@@ -339,12 +375,12 @@ For details on the parameters, see the docstring of the \sphinxcode{\sphinxupquo
 \sphinxtableatstartofbodyhook
 \begin{varwidth}[t]{\sphinxcolwidth{1}{2}}
 \sphinxAtStartPar
-\sphinxcode{\sphinxupquote{forward}}(x, x\_r)
+{\hyperref[\detokenize{dtw_loss_functions.block_dtw:dtw_loss_functions.block_dtw.block_dtw_naive.forward}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{forward}}}}}(x, x\_r)
 \sphinxbeforeendvarwidth
 \end{varwidth}%
 &\begin{varwidth}[t]{\sphinxcolwidth{1}{2}}
 \sphinxAtStartPar
-Compute the block DTW loss between the input tensors \sphinxtitleref{x} and \sphinxtitleref{x\_r} by computing the SDTW on each block separately and summing the results.
+Compute the block DTW loss between the input tensors \sphinxcode{\sphinxupquote{x}} and \sphinxcode{\sphinxupquote{x\_r}} by computing the SDTW on each block separately and summing the results.
 \sphinxbeforeendvarwidth
 \end{varwidth}%
 \\
@@ -364,22 +400,22 @@ Compute the block DTW loss between the input tensors \sphinxtitleref{x} and \sph
 {{ $\rightarrow$ tensor}}
 \pysigstopsignatures
 \sphinxAtStartPar
-Compute the block DTW loss between the input tensors \sphinxtitleref{x} and \sphinxtitleref{x\_r} by computing the SDTW on each block separately and summing the results.
+Compute the block DTW loss between the input tensors \sphinxcode{\sphinxupquote{x}} and \sphinxcode{\sphinxupquote{x\_r}} by computing the SDTW on each block separately and summing the results.
 \begin{quote}\begin{description}
 \sphinxlineitem{Parameters}\begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\sphinxstyleliteralstrong{\sphinxupquote{x}} (\sphinxstyleliteralemphasis{\sphinxupquote{torch.tensor}}) \textendash{} First input tensor of shape B x T x C
+\sphinxstyleliteralstrong{\sphinxupquote{x}} (\sphinxstyleliteralemphasis{\sphinxupquote{torch.tensor}}) \textendash{} First input tensor of shape \sphinxcode{\sphinxupquote{B x T x C}}
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstyleliteralstrong{\sphinxupquote{x\_r}} (\sphinxstyleliteralemphasis{\sphinxupquote{torch.tensor}}) \textendash{} Second input tensor of shape B x T x C
+\sphinxstyleliteralstrong{\sphinxupquote{x\_r}} (\sphinxstyleliteralemphasis{\sphinxupquote{torch.tensor}}) \textendash{} Second input tensor of shape \sphinxcode{\sphinxupquote{B x T x C}}
 
 \end{itemize}
 
 \sphinxlineitem{Returns}
 \sphinxAtStartPar
-\sphinxstylestrong{recon\_error} \textendash{} Tensor of shape B containing the block DTW loss for each sample in the batch.
+\sphinxstylestrong{recon\_error} \textendash{} Tensor of shape \sphinxcode{\sphinxupquote{B}} containing the block DTW loss for each sample in the batch.
 
 \sphinxlineitem{Return type}
 \sphinxAtStartPar
@@ -399,11 +435,11 @@ torch.tensor
 \pysigstartsignatures
 \pysiglinewithargsret
 {\sphinxbfcode{\sphinxupquote{\DUrole{k}{class}\DUrole{w}{ }}}\sphinxcode{\sphinxupquote{dtw\_loss\_functions.block\_dtw.}}\sphinxbfcode{\sphinxupquote{block\_dtw\_optimized}}}
-{\sphinxparam{\DUrole{n}{block\_size}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{int}}\sphinxparamcomma \sphinxparam{\DUrole{n}{use\_cuda}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{bool}}\sphinxparamcomma \sphinxparam{\DUrole{n}{gamma\_sdtw}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{1}}\sphinxparamcomma \sphinxparam{\DUrole{n}{use\_divergence}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{bool}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{False}}\sphinxparamcomma \sphinxparam{\DUrole{n}{bandwidth}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{None}}\sphinxparamcomma \sphinxparam{\DUrole{n}{dist\_func}\DUrole{o}{=}\DUrole{default_value}{None}}}
+{\sphinxparam{\DUrole{n}{block\_size}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{int}}\sphinxparamcomma \sphinxparam{\DUrole{n}{use\_cuda}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{bool}}\sphinxparamcomma \sphinxparam{\DUrole{n}{gamma\_sdtw}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{1}}\sphinxparamcomma \sphinxparam{\DUrole{n}{use\_divergence}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{bool}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{False}}\sphinxparamcomma \sphinxparam{\DUrole{n}{bandwidth}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{None}}\sphinxparamcomma \sphinxparam{\DUrole{n}{dist\_func}\DUrole{o}{=}\DUrole{default_value}{None}}\sphinxparamcomma \sphinxparam{\DUrole{n}{implementation}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{str}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{\textquotesingle{}mag\textquotesingle{}}}\sphinxparamcomma \sphinxparam{\DUrole{n}{fused}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{bool}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{None}}}
 {}
 \pysigstopsignatures
 \sphinxAtStartPar
-Bases: \sphinxcode{\sphinxupquote{SoftDTW}}
+Bases: {\hyperref[\detokenize{dtw_loss_functions.soft_dtw:dtw_loss_functions.soft_dtw.soft_dtw}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{soft\_dtw}}}}}
 
 \sphinxAtStartPar
 Optimized implementation of the block DTW, which exploits reshaping of the input tensors to compute the SDTW on all blocks at once.
@@ -417,7 +453,7 @@ This requirement is necessary because the optimized implementation exploits resh
 This works because SoftDTW implementation allow batched inputs,so we can reshape the input tensors to have a new batch size equal to the number of blocks, and compute the SDTW on all blocks at once.
 
 \sphinxAtStartPar
-For details on the parameters, see the docstring of the \sphinxcode{\sphinxupquote{block\_dtw}} class.
+For details on the parameters, see the docstring of the {\hyperref[\detokenize{dtw_loss_functions.block_dtw:dtw_loss_functions.block_dtw.block_dtw}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{block\_dtw}}}}} class.
 \subsubsection*{Methods}
 
 
@@ -449,7 +485,7 @@ For details on the parameters, see the docstring of the \sphinxcode{\sphinxupquo
 \sphinxtableatstartofbodyhook
 \begin{varwidth}[t]{\sphinxcolwidth{1}{2}}
 \sphinxAtStartPar
-\sphinxcode{\sphinxupquote{forward}}(x, x\_r)
+{\hyperref[\detokenize{dtw_loss_functions.block_dtw:dtw_loss_functions.block_dtw.block_dtw_optimized.forward}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{forward}}}}}(x, x\_r)
 \sphinxbeforeendvarwidth
 \end{varwidth}%
 &\begin{varwidth}[t]{\sphinxcolwidth{1}{2}}
@@ -509,7 +545,7 @@ torch.tensor
 \chapter{OTW}
 \label{\detokenize{dtw_loss_functions.otw:module-dtw_loss_functions.otw}}\label{\detokenize{dtw_loss_functions.otw:otw}}\label{\detokenize{dtw_loss_functions.otw::doc}}\index{module@\spxentry{module}!dtw\_loss\_functions.otw@\spxentry{dtw\_loss\_functions.otw}}\index{dtw\_loss\_functions.otw@\spxentry{dtw\_loss\_functions.otw}!module@\spxentry{module}}
 \sphinxAtStartPar
-Implementation of OTW, from “OTW: Optimal Transport Warping for Time Series” (by Fabian Latorre, Chenghao Liu, Doyen Sahoo, and Steven C.H. Hoi)
+Implementation of OTW, presented in {[}\hyperlink{cite.biblio:id12}{LLSH23}{]}
 
 \sphinxAtStartPar
 For more details see :
@@ -532,7 +568,7 @@ Alberto Zancanaro \textless{}\sphinxhref{mailto:alberto.zancanaro@uni.lu}{albert
 {}
 \pysigstopsignatures
 \sphinxAtStartPar
-Bases: \sphinxcode{\sphinxupquote{object}}
+Bases: \sphinxcode{\sphinxupquote{Module}}
 \subsubsection*{Methods}
 
 
@@ -564,7 +600,7 @@ Bases: \sphinxcode{\sphinxupquote{object}}
 \sphinxtableatstartofbodyhook
 \begin{varwidth}[t]{\sphinxcolwidth{1}{2}}
 \sphinxAtStartPar
-\sphinxcode{\sphinxupquote{\_\_call\_\_}}(x, y)
+{\hyperref[\detokenize{dtw_loss_functions.otw:dtw_loss_functions.otw.otw.forward}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{forward}}}}}(x, y)
 \sphinxbeforeendvarwidth
 \end{varwidth}%
 &\begin{varwidth}[t]{\sphinxcolwidth{1}{2}}
@@ -578,6 +614,42 @@ Computes the OTW distance between two time series.
 \sphinxtableafterendhook
 \sphinxatlongtableend
 \end{savenotes}
+\index{forward() (dtw\_loss\_functions.otw.otw method)@\spxentry{forward()}\spxextra{dtw\_loss\_functions.otw.otw method}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{dtw_loss_functions.otw:dtw_loss_functions.otw.otw.forward}}
+\pysigstartsignatures
+\pysiglinewithargsret
+{\sphinxbfcode{\sphinxupquote{forward}}}
+{\sphinxparam{\DUrole{n}{x}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor}}\sphinxparamcomma \sphinxparam{\DUrole{n}{y}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor}}}
+{{ $\rightarrow$ Tensor}}
+\pysigstopsignatures
+\sphinxAtStartPar
+Computes the OTW distance between two time series.
+\begin{quote}\begin{description}
+\sphinxlineitem{Parameters}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{x}} (\sphinxstyleliteralemphasis{\sphinxupquote{torch.Tensor}}) \textendash{} First time series, of shape (B, L) where B is the batch size and L is the length of the time series.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{y}} (\sphinxstyleliteralemphasis{\sphinxupquote{torch.Tensor}}) \textendash{} Second time series, of shape (B, L) where B is the batch size and L is the length of the time series.
+
+\end{itemize}
+
+\sphinxlineitem{Returns}
+\sphinxAtStartPar
+OTW distance between the two time series
+
+\sphinxlineitem{Return type}
+\sphinxAtStartPar
+torch.Tensor
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
 
 \end{fulllineitems}
 
@@ -717,17 +789,291 @@ torch.Tensor
 
 
 \chapter{Soft DTW}
-\label{\detokenize{dtw_loss_functions.soft_dtw_cuda:module-dtw_loss_functions.soft_dtw_cuda}}\label{\detokenize{dtw_loss_functions.soft_dtw_cuda:soft-dtw}}\label{\detokenize{dtw_loss_functions.soft_dtw_cuda::doc}}\index{module@\spxentry{module}!dtw\_loss\_functions.soft\_dtw\_cuda@\spxentry{dtw\_loss\_functions.soft\_dtw\_cuda}}\index{dtw\_loss\_functions.soft\_dtw\_cuda@\spxentry{dtw\_loss\_functions.soft\_dtw\_cuda}!module@\spxentry{module}}
+\label{\detokenize{dtw_loss_functions.soft_dtw:module-dtw_loss_functions.soft_dtw}}\label{\detokenize{dtw_loss_functions.soft_dtw:soft-dtw}}\label{\detokenize{dtw_loss_functions.soft_dtw::doc}}\index{module@\spxentry{module}!dtw\_loss\_functions.soft\_dtw@\spxentry{dtw\_loss\_functions.soft\_dtw}}\index{dtw\_loss\_functions.soft\_dtw@\spxentry{dtw\_loss\_functions.soft\_dtw}!module@\spxentry{module}}
 \sphinxAtStartPar
-Cuda Implementation of SoftDTW by Mehran Maghoumi.
+SoftDTW module. Since there are various implementations online of the SoftDTW, this module was created as a wrapper to be able to easily switch between different implementations.
 
 \sphinxAtStartPar
-The code here is identical to the one in the original repository (\sphinxurl{https://github.com/Maghoumi/pytorch-softdtw-cuda}).
+Currently, the following implementations are available:
+\begin{itemize}
+\item {} \begin{description}
+\sphinxlineitem{pytorch\sphinxhyphen{}softdtw\sphinxhyphen{}cuda by Mehran Maghoumi {[}\hyperlink{cite.biblio:id8}{Mag20}{]} {[}\hyperlink{cite.biblio:id9}{MTL21}{]}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+GitHub repository : \sphinxurl{https://github.com/Maghoumi/pytorch-softdtw-cuda}
+
+\end{itemize}
+
+\end{description}
+
+\item {} \begin{description}
+\sphinxlineitem{pysdtw by Antoine Loriette}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+GitHub repository : \sphinxurl{https://github.com/toinsson/pysdtw}
+
+\item {} 
+\sphinxAtStartPar
+PyPi Page : \sphinxurl{https://pypi.org/project/pysdtw/}
+
+\end{itemize}
+
+\end{description}
+
+\item {} \begin{description}
+\sphinxlineitem{sdtw\sphinxhyphen{}cuda\sphinxhyphen{}torch by BGU\sphinxhyphen{}CS\sphinxhyphen{}VIL (implemented by Ron Shapira Weber) {[}\hyperlink{cite.biblio:id10}{WF26}{]} {[}\hyperlink{cite.biblio:id11}{SWBL+25}{]}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+GitHub repository : \sphinxurl{https://github.com/BGU-CS-VIL/sdtw-cuda-torch}
+
+\end{itemize}
+
+\end{description}
+
+\end{itemize}
+
+\sphinxAtStartPar
+If you this module, please refer to the original implementations and cite the corresponding papers.
+For each implementation, the original paper is cited in the corresponding module docstring.
+Also, all the citation are listed in the \sphinxtitleref{citations.md} file in the root of this repository.
+
+
+\section{Authors}
+\label{\detokenize{dtw_loss_functions.soft_dtw:authors}}
+\sphinxAtStartPar
+Alberto Zancanaro \textless{}\sphinxhref{mailto:alberto.zancanaro@uni.lu}{alberto.zancanaro@uni.lu}\textgreater{}
+\index{soft\_dtw (class in dtw\_loss\_functions.soft\_dtw)@\spxentry{soft\_dtw}\spxextra{class in dtw\_loss\_functions.soft\_dtw}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw:dtw_loss_functions.soft_dtw.soft_dtw}}
+\pysigstartsignatures
+\pysiglinewithargsret
+{\sphinxbfcode{\sphinxupquote{\DUrole{k}{class}\DUrole{w}{ }}}\sphinxcode{\sphinxupquote{dtw\_loss\_functions.soft\_dtw.}}\sphinxbfcode{\sphinxupquote{soft\_dtw}}}
+{\sphinxparam{\DUrole{n}{use\_cuda}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{bool}}\sphinxparamcomma \sphinxparam{\DUrole{n}{gamma}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{1}}\sphinxparamcomma \sphinxparam{\DUrole{n}{normalize}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{bool}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{False}}\sphinxparamcomma \sphinxparam{\DUrole{n}{bandwidth}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{int}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{None}}\sphinxparamcomma \sphinxparam{\DUrole{n}{dist\_func}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{callable}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{None}}\sphinxparamcomma \sphinxparam{\DUrole{n}{implementation}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{str}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{\textquotesingle{}mag\textquotesingle{}}}\sphinxparamcomma \sphinxparam{\DUrole{n}{fused}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{bool}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{None}}}
+{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Bases: \sphinxcode{\sphinxupquote{Module}}
+
+\sphinxAtStartPar
+SoftDTW class. This class is a wrapper for the different implementations of the SoftDTW.
+The implementation can be selected by passing the ‘implementation’ argument to the constructor. The available implementations are:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxtitleref{mag}: pytorch\sphinxhyphen{}softdtw\sphinxhyphen{}cuda by Mehran Maghoumi
+
+\item {} 
+\sphinxAtStartPar
+\sphinxtitleref{pysdtw}: pysdtw by Antoine Loriette
+
+\item {} 
+\sphinxAtStartPar
+\sphinxtitleref{ron} : sdtw\sphinxhyphen{}cuda\sphinxhyphen{}torch by BGU\sphinxhyphen{}CS\sphinxhyphen{}VIL (implemented by Ron Shapira Weber)
+
+\end{itemize}
+\begin{quote}\begin{description}
+\sphinxlineitem{Parameters}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{use\_cuda}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}) \textendash{} If true, this class will use the CUDA implementation of the SDTW.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{gamma}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}\sphinxstyleliteralemphasis{\sphinxupquote{, }}\sphinxstyleliteralemphasis{\sphinxupquote{optional}}) \textendash{} Value of the gamma hyperparameter for the SDTW. Default is \sphinxcode{\sphinxupquote{1}}.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{normalize}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}\sphinxstyleliteralemphasis{\sphinxupquote{, }}\sphinxstyleliteralemphasis{\sphinxupquote{optional}}) \textendash{} If true, the SDTW divergence will be computed instead of the SDTW. Default is \sphinxcode{\sphinxupquote{False}}.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{bandwidth}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}\sphinxstyleliteralemphasis{\sphinxupquote{, }}\sphinxstyleliteralemphasis{\sphinxupquote{optional}}) \textendash{} Sakoe\sphinxhyphen{}Chiba bandwidth for pruning. If the \sphinxcode{\sphinxupquote{None}} is given, no pruning is applied. Default is None.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{dist\_func}} (\sphinxstyleliteralemphasis{\sphinxupquote{function}}\sphinxstyleliteralemphasis{\sphinxupquote{, }}\sphinxstyleliteralemphasis{\sphinxupquote{optional}}) \textendash{} Distance function to use for the SDTW. Default is \sphinxcode{\sphinxupquote{None}}, which corresponds to the squared Euclidean distance.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{implementation}} (\sphinxstyleliteralemphasis{\sphinxupquote{str}}\sphinxstyleliteralemphasis{\sphinxupquote{, }}\sphinxstyleliteralemphasis{\sphinxupquote{optional}}) \textendash{} Implementation to use for the SDTW. Currently accepted values are \sphinxcode{\sphinxupquote{mag}}, \sphinxcode{\sphinxupquote{pysdtw}} and \sphinxcode{\sphinxupquote{ron}}. Default is \sphinxcode{\sphinxupquote{mag}}.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{fused}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}\sphinxstyleliteralemphasis{\sphinxupquote{, }}\sphinxstyleliteralemphasis{\sphinxupquote{optional}}) \textendash{} 
+\sphinxAtStartPar
+Only for the ‘ron’ implementation.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{None}}  \sphinxhyphen{}\textgreater{} auto (use fused only when possible)
+
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{True}}  \sphinxhyphen{}\textgreater{} require fused (error if not possible)
+
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{False}} \sphinxhyphen{}\textgreater{} never fused (always materialize D and use D\sphinxhyphen{}based autograd)
+
+\end{itemize}
+
+
+\end{itemize}
+
+\end{description}\end{quote}
+\subsubsection*{Methods}
+
+
+\begin{savenotes}
+\sphinxatlongtablestart
+\sphinxthistablewithglobalstyle
+\sphinxthistablewithnovlinesstyle
+\makeatletter
+  \LTleft \@totalleftmargin plus1fill
+  \LTright\dimexpr\columnwidth-\@totalleftmargin-\linewidth\relax plus1fill
+\makeatother
+\begin{longtable}{\X{1}{2}\X{1}{2}}
+\sphinxtoprule
+\endfirsthead
+
+\multicolumn{2}{c}{\sphinxnorowcolor
+    \makebox[0pt]{\sphinxtablecontinued{\tablename\ \thetable{} \textendash{} continued from previous page}}%
+}\\
+\sphinxtoprule
+\endhead
+
+\sphinxbottomrule
+\multicolumn{2}{r}{\sphinxnorowcolor
+    \makebox[0pt][r]{\sphinxtablecontinued{continues on next page}}%
+}\\
+\endfoot
+
+\endlastfoot
+\sphinxtableatstartofbodyhook
+\begin{varwidth}[t]{\sphinxcolwidth{1}{2}}
+\sphinxAtStartPar
+{\hyperref[\detokenize{dtw_loss_functions.soft_dtw:dtw_loss_functions.soft_dtw.soft_dtw.check_implementation}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{check\_implementation}}}}}(implementation)
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{2}}
+\sphinxAtStartPar
+Check if the selected implementation is valid.
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+\\
+\sphinxhline\begin{varwidth}[t]{\sphinxcolwidth{1}{2}}
+\sphinxAtStartPar
+{\hyperref[\detokenize{dtw_loss_functions.soft_dtw:dtw_loss_functions.soft_dtw.soft_dtw.forward}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{forward}}}}}(x, y)
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{2}}
+\sphinxAtStartPar
+Compute the SoftDTW distance between two time series.
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+\\
+\sphinxbottomrule
+\end{longtable}
+\sphinxtableafterendhook
+\sphinxatlongtableend
+\end{savenotes}
+\index{check\_implementation() (dtw\_loss\_functions.soft\_dtw.soft\_dtw method)@\spxentry{check\_implementation()}\spxextra{dtw\_loss\_functions.soft\_dtw.soft\_dtw method}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw:dtw_loss_functions.soft_dtw.soft_dtw.check_implementation}}
+\pysigstartsignatures
+\pysiglinewithargsret
+{\sphinxbfcode{\sphinxupquote{check\_implementation}}}
+{\sphinxparam{\DUrole{n}{implementation}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{str}}}
+{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Check if the selected implementation is valid. If not, raise an error.
+
+\end{fulllineitems}
+
+\index{forward() (dtw\_loss\_functions.soft\_dtw.soft\_dtw method)@\spxentry{forward()}\spxextra{dtw\_loss\_functions.soft\_dtw.soft\_dtw method}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw:dtw_loss_functions.soft_dtw.soft_dtw.forward}}
+\pysigstartsignatures
+\pysiglinewithargsret
+{\sphinxbfcode{\sphinxupquote{forward}}}
+{\sphinxparam{\DUrole{n}{x}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor}}\sphinxparamcomma \sphinxparam{\DUrole{n}{y}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor}}}
+{{ $\rightarrow$ Tensor}}
+\pysigstopsignatures
+\sphinxAtStartPar
+Compute the SoftDTW distance between two time series.
+\begin{quote}\begin{description}
+\sphinxlineitem{Parameters}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{x}} (\sphinxstyleliteralemphasis{\sphinxupquote{torch.Tensor}}) \textendash{} First input tensor of shape B x T x C
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{y}} (\sphinxstyleliteralemphasis{\sphinxupquote{torch.Tensor}}) \textendash{} Second input tensor of shape B x T x C
+
+\end{itemize}
+
+\sphinxlineitem{Returns}
+\sphinxAtStartPar
+SoftDTW distance between the two time series
+
+\sphinxlineitem{Return type}
+\sphinxAtStartPar
+torch.Tensor
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
+\end{fulllineitems}
+
+
+\sphinxstepscope
+
+
+\chapter{SoftDTW Subpackage}
+\label{\detokenize{dtw_loss_functions.soft_dtw_implementations:module-dtw_loss_functions.soft_dtw_implementations}}\label{\detokenize{dtw_loss_functions.soft_dtw_implementations:softdtw-subpackage}}\label{\detokenize{dtw_loss_functions.soft_dtw_implementations::doc}}\index{module@\spxentry{module}!dtw\_loss\_functions.soft\_dtw\_implementations@\spxentry{dtw\_loss\_functions.soft\_dtw\_implementations}}\index{dtw\_loss\_functions.soft\_dtw\_implementations@\spxentry{dtw\_loss\_functions.soft\_dtw\_implementations}!module@\spxentry{module}}
+\sphinxAtStartPar
+SoftDTW submodule. Since there are various implementations online of the SoftDTW, this submodule was created as a wrapper to be able to easily switch between different implementations.
+
+\sphinxAtStartPar
+Currently, the following implementations are available:
+\sphinxhyphen{} pytorch\sphinxhyphen{}softdtw\sphinxhyphen{}cuda by Mehran Maghoumi
+\sphinxhyphen{} pysdtw by Antoine Loriette
+\sphinxhyphen{} sdtw\sphinxhyphen{}cuda\sphinxhyphen{}torch by BGU\sphinxhyphen{}CS\sphinxhyphen{}VIL (implemented by Ron Shapira Weber)
+
+
+\section{Authors}
+\label{\detokenize{dtw_loss_functions.soft_dtw_implementations:authors}}
+\sphinxAtStartPar
+Alberto Zancanaro \textless{}\sphinxhref{mailto:alberto.zancanaro@uni.lu}{alberto.zancanaro@uni.lu}\textgreater{}
+
+\sphinxstepscope
+
+
+\section{SoftDTW (Mehran Maghoumi)}
+\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag:module-dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag}}\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag:softdtw-mehran-maghoumi}}\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag::doc}}\index{module@\spxentry{module}!dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_mag@\spxentry{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_mag}}\index{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_mag@\spxentry{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_mag}!module@\spxentry{module}}
+\sphinxAtStartPar
+CUDA implementation of SoftDTW by Mehran Maghoumi. This is one of the most popular and used SoftDTW application available on web.
+
+\sphinxAtStartPar
+The code in this file is identical to the one in the original repository.
 The only changes are the modification of the docstring to numpydoc style, to make it consistent with the rest of the codebase.
+
+\sphinxAtStartPar
+If you use this implementation please cite {[}\hyperlink{cite.biblio:id8}{Mag20}{]} {[}\hyperlink{cite.biblio:id9}{MTL21}{]}
+
+\sphinxAtStartPar
+GitHub repository : \sphinxurl{https://github.com/Maghoumi/pytorch-softdtw-cuda}
 \subsubsection*{Example}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{dtw\PYGZus{}loss\PYGZus{}functions}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{soft\PYGZus{}dtw\PYGZus{}cuda}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{dtw\PYGZus{}loss\PYGZus{}functions}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{soft\PYGZus{}dtw}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{import}\PYG{+w}{ }\PYG{n+nn}{torch}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{use\PYGZus{}cuda} \PYG{o}{=} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{cuda}\PYG{o}{.}\PYG{n}{is\PYGZus{}available}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{device} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{cuda}\PYG{l+s+s1}{\PYGZsq{}} \PYG{k}{if} \PYG{n}{use\PYGZus{}cuda} \PYG{k}{else} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{cpu}\PYG{l+s+s1}{\PYGZsq{}}
@@ -736,22 +1082,22 @@ The only changes are the modification of the docstring to numpydoc style, to mak
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{channels} \PYG{o}{=} \PYG{l+m+mi}{1}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{x}   \PYG{o}{=} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{randn}\PYG{p}{(}\PYG{n}{batch\PYGZus{}size}\PYG{p}{,} \PYG{n}{time\PYGZus{}samples}\PYG{p}{,} \PYG{n}{channels}\PYG{p}{)}\PYG{o}{.}\PYG{n}{to}\PYG{p}{(}\PYG{n}{device}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{x\PYGZus{}r} \PYG{o}{=} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{randn}\PYG{p}{(}\PYG{n}{batch\PYGZus{}size}\PYG{p}{,} \PYG{n}{time\PYGZus{}samples}\PYG{p}{,} \PYG{n}{channels}\PYG{p}{)}\PYG{o}{.}\PYG{n}{to}\PYG{p}{(}\PYG{n}{device}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{sdtw\PYGZus{}loss} \PYG{o}{=} \PYG{n}{soft\PYGZus{}dtw\PYGZus{}cuda}\PYG{o}{.}\PYG{n}{SoftDTW}\PYG{p}{(}\PYG{n}{use\PYGZus{}cuda} \PYG{o}{=} \PYG{n}{use\PYGZus{}cuda}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{sdtw\PYGZus{}loss} \PYG{o}{=} \PYG{n}{soft\PYGZus{}dtw}\PYG{o}{.}\PYG{n}{soft\PYGZus{}dtw}\PYG{p}{(}\PYG{n}{use\PYGZus{}cuda} \PYG{o}{=} \PYG{n}{use\PYGZus{}cuda}\PYG{p}{,} \PYG{n}{implementation} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{mag}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{output\PYGZus{}sdtw} \PYG{o}{=} \PYG{n}{sdtw\PYGZus{}loss}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{x\PYGZus{}r}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 
-\section{Authors}
-\label{\detokenize{dtw_loss_functions.soft_dtw_cuda:authors}}
+\subsection{Authors}
+\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag:authors}}
 \sphinxAtStartPar
 Mehran Maghoumi
-\index{SoftDTW (class in dtw\_loss\_functions.soft\_dtw\_cuda)@\spxentry{SoftDTW}\spxextra{class in dtw\_loss\_functions.soft\_dtw\_cuda}}
+\index{SoftDTW (class in dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_mag)@\spxentry{SoftDTW}\spxextra{class in dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_mag}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_cuda:dtw_loss_functions.soft_dtw_cuda.SoftDTW}}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.SoftDTW}}
 \pysigstartsignatures
 \pysiglinewithargsret
-{\sphinxbfcode{\sphinxupquote{\DUrole{k}{class}\DUrole{w}{ }}}\sphinxcode{\sphinxupquote{dtw\_loss\_functions.soft\_dtw\_cuda.}}\sphinxbfcode{\sphinxupquote{SoftDTW}}}
+{\sphinxbfcode{\sphinxupquote{\DUrole{k}{class}\DUrole{w}{ }}}\sphinxcode{\sphinxupquote{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_mag.}}\sphinxbfcode{\sphinxupquote{SoftDTW}}}
 {\sphinxparam{\DUrole{n}{use\_cuda}}\sphinxparamcomma \sphinxparam{\DUrole{n}{gamma}\DUrole{o}{=}\DUrole{default_value}{1.0}}\sphinxparamcomma \sphinxparam{\DUrole{n}{normalize}\DUrole{o}{=}\DUrole{default_value}{False}}\sphinxparamcomma \sphinxparam{\DUrole{n}{bandwidth}\DUrole{o}{=}\DUrole{default_value}{None}}\sphinxparamcomma \sphinxparam{\DUrole{n}{dist\_func}\DUrole{o}{=}\DUrole{default_value}{None}}}
 {}
 \pysigstopsignatures
@@ -760,10 +1106,10 @@ Bases: \sphinxcode{\sphinxupquote{Module}}
 
 \sphinxAtStartPar
 The soft DTW implementation that optionally supports CUDA
-\index{normalize (dtw\_loss\_functions.soft\_dtw\_cuda.SoftDTW attribute)@\spxentry{normalize}\spxextra{dtw\_loss\_functions.soft\_dtw\_cuda.SoftDTW attribute}}
+\index{normalize (dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_mag.SoftDTW attribute)@\spxentry{normalize}\spxextra{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_mag.SoftDTW attribute}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_cuda:dtw_loss_functions.soft_dtw_cuda.SoftDTW.normalize}}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.SoftDTW.normalize}}
 \pysigstartsignatures
 \pysigline
 {\sphinxbfcode{\sphinxupquote{normalize}}}
@@ -780,10 +1126,10 @@ bool
 
 \end{fulllineitems}
 
-\index{gamma (dtw\_loss\_functions.soft\_dtw\_cuda.SoftDTW attribute)@\spxentry{gamma}\spxextra{dtw\_loss\_functions.soft\_dtw\_cuda.SoftDTW attribute}}
+\index{gamma (dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_mag.SoftDTW attribute)@\spxentry{gamma}\spxextra{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_mag.SoftDTW attribute}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_cuda:dtw_loss_functions.soft_dtw_cuda.SoftDTW.gamma}}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.SoftDTW.gamma}}
 \pysigstartsignatures
 \pysigline
 {\sphinxbfcode{\sphinxupquote{gamma}}}
@@ -799,10 +1145,10 @@ float
 
 \end{fulllineitems}
 
-\index{bandwidth (dtw\_loss\_functions.soft\_dtw\_cuda.SoftDTW attribute)@\spxentry{bandwidth}\spxextra{dtw\_loss\_functions.soft\_dtw\_cuda.SoftDTW attribute}}
+\index{bandwidth (dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_mag.SoftDTW attribute)@\spxentry{bandwidth}\spxextra{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_mag.SoftDTW attribute}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_cuda:dtw_loss_functions.soft_dtw_cuda.SoftDTW.bandwidth}}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.SoftDTW.bandwidth}}
 \pysigstartsignatures
 \pysigline
 {\sphinxbfcode{\sphinxupquote{bandwidth}}}
@@ -818,10 +1164,10 @@ float or None
 
 \end{fulllineitems}
 
-\index{dist\_func (dtw\_loss\_functions.soft\_dtw\_cuda.SoftDTW attribute)@\spxentry{dist\_func}\spxextra{dtw\_loss\_functions.soft\_dtw\_cuda.SoftDTW attribute}}
+\index{dist\_func (dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_mag.SoftDTW attribute)@\spxentry{dist\_func}\spxextra{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_mag.SoftDTW attribute}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_cuda:dtw_loss_functions.soft_dtw_cuda.SoftDTW.dist_func}}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.SoftDTW.dist_func}}
 \pysigstartsignatures
 \pysigline
 {\sphinxbfcode{\sphinxupquote{dist\_func}}}
@@ -894,7 +1240,7 @@ Note that if normalize is set to True, the SoftDTW divergence will be computed, 
 \sphinxtableatstartofbodyhook
 \begin{varwidth}[t]{\sphinxcolwidth{1}{2}}
 \sphinxAtStartPar
-\sphinxcode{\sphinxupquote{forward}}(X, Y)
+{\hyperref[\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.SoftDTW.forward}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{forward}}}}}(X, Y)
 \sphinxbeforeendvarwidth
 \end{varwidth}%
 &\begin{varwidth}[t]{\sphinxcolwidth{1}{2}}
@@ -908,10 +1254,10 @@ Compute the soft\sphinxhyphen{}DTW value between X and Y :param X: One batch of 
 \sphinxtableafterendhook
 \sphinxatlongtableend
 \end{savenotes}
-\index{forward() (dtw\_loss\_functions.soft\_dtw\_cuda.SoftDTW method)@\spxentry{forward()}\spxextra{dtw\_loss\_functions.soft\_dtw\_cuda.SoftDTW method}}
+\index{forward() (dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_mag.SoftDTW method)@\spxentry{forward()}\spxextra{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_mag.SoftDTW method}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_cuda:dtw_loss_functions.soft_dtw_cuda.SoftDTW.forward}}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.SoftDTW.forward}}
 \pysigstartsignatures
 \pysiglinewithargsret
 {\sphinxbfcode{\sphinxupquote{forward}}}
@@ -929,49 +1275,49 @@ Compute the soft\sphinxhyphen{}DTW value between X and Y
 
 \end{fulllineitems}
 
-\index{compute\_softdtw() (in module dtw\_loss\_functions.soft\_dtw\_cuda)@\spxentry{compute\_softdtw()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_cuda}}
+\index{compute\_softdtw() (in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_mag)@\spxentry{compute\_softdtw()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_mag}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_cuda:dtw_loss_functions.soft_dtw_cuda.compute_softdtw}}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.compute_softdtw}}
 \pysigstartsignatures
 \pysiglinewithargsret
-{\sphinxcode{\sphinxupquote{dtw\_loss\_functions.soft\_dtw\_cuda.}}\sphinxbfcode{\sphinxupquote{compute\_softdtw}}}
+{\sphinxcode{\sphinxupquote{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_mag.}}\sphinxbfcode{\sphinxupquote{compute\_softdtw}}}
 {\sphinxparam{\DUrole{n}{D}}\sphinxparamcomma \sphinxparam{\DUrole{n}{gamma}}\sphinxparamcomma \sphinxparam{\DUrole{n}{bandwidth}}}
 {}
 \pysigstopsignatures
 \end{fulllineitems}
 
-\index{compute\_softdtw\_backward() (in module dtw\_loss\_functions.soft\_dtw\_cuda)@\spxentry{compute\_softdtw\_backward()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_cuda}}
+\index{compute\_softdtw\_backward() (in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_mag)@\spxentry{compute\_softdtw\_backward()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_mag}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_cuda:dtw_loss_functions.soft_dtw_cuda.compute_softdtw_backward}}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.compute_softdtw_backward}}
 \pysigstartsignatures
 \pysiglinewithargsret
-{\sphinxcode{\sphinxupquote{dtw\_loss\_functions.soft\_dtw\_cuda.}}\sphinxbfcode{\sphinxupquote{compute\_softdtw\_backward}}}
+{\sphinxcode{\sphinxupquote{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_mag.}}\sphinxbfcode{\sphinxupquote{compute\_softdtw\_backward}}}
 {\sphinxparam{\DUrole{n}{D\_}}\sphinxparamcomma \sphinxparam{\DUrole{n}{R}}\sphinxparamcomma \sphinxparam{\DUrole{n}{gamma}}\sphinxparamcomma \sphinxparam{\DUrole{n}{bandwidth}}}
 {}
 \pysigstopsignatures
 \end{fulllineitems}
 
-\index{compute\_softdtw\_backward\_cuda() (in module dtw\_loss\_functions.soft\_dtw\_cuda)@\spxentry{compute\_softdtw\_backward\_cuda()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_cuda}}
+\index{compute\_softdtw\_backward\_cuda() (in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_mag)@\spxentry{compute\_softdtw\_backward\_cuda()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_mag}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_cuda:dtw_loss_functions.soft_dtw_cuda.compute_softdtw_backward_cuda}}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.compute_softdtw_backward_cuda}}
 \pysigstartsignatures
 \pysiglinewithargsret
-{\sphinxcode{\sphinxupquote{dtw\_loss\_functions.soft\_dtw\_cuda.}}\sphinxbfcode{\sphinxupquote{compute\_softdtw\_backward\_cuda}}}
+{\sphinxcode{\sphinxupquote{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_mag.}}\sphinxbfcode{\sphinxupquote{compute\_softdtw\_backward\_cuda}}}
 {\sphinxparam{\DUrole{n}{D}}\sphinxparamcomma \sphinxparam{\DUrole{n}{R}}\sphinxparamcomma \sphinxparam{\DUrole{n}{inv\_gamma}}\sphinxparamcomma \sphinxparam{\DUrole{n}{bandwidth}}\sphinxparamcomma \sphinxparam{\DUrole{n}{max\_i}}\sphinxparamcomma \sphinxparam{\DUrole{n}{max\_j}}\sphinxparamcomma \sphinxparam{\DUrole{n}{n\_passes}}\sphinxparamcomma \sphinxparam{\DUrole{n}{E}}}
 {}
 \pysigstopsignatures
 \end{fulllineitems}
 
-\index{compute\_softdtw\_cuda() (in module dtw\_loss\_functions.soft\_dtw\_cuda)@\spxentry{compute\_softdtw\_cuda()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_cuda}}
+\index{compute\_softdtw\_cuda() (in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_mag)@\spxentry{compute\_softdtw\_cuda()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_mag}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_cuda:dtw_loss_functions.soft_dtw_cuda.compute_softdtw_cuda}}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.compute_softdtw_cuda}}
 \pysigstartsignatures
 \pysiglinewithargsret
-{\sphinxcode{\sphinxupquote{dtw\_loss\_functions.soft\_dtw\_cuda.}}\sphinxbfcode{\sphinxupquote{compute\_softdtw\_cuda}}}
+{\sphinxcode{\sphinxupquote{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_mag.}}\sphinxbfcode{\sphinxupquote{compute\_softdtw\_cuda}}}
 {\sphinxparam{\DUrole{n}{D}}\sphinxparamcomma \sphinxparam{\DUrole{n}{gamma}}\sphinxparamcomma \sphinxparam{\DUrole{n}{bandwidth}}\sphinxparamcomma \sphinxparam{\DUrole{n}{max\_i}}\sphinxparamcomma \sphinxparam{\DUrole{n}{max\_j}}\sphinxparamcomma \sphinxparam{\DUrole{n}{n\_passes}}\sphinxparamcomma \sphinxparam{\DUrole{n}{R}}}
 {}
 \pysigstopsignatures
@@ -980,25 +1326,25 @@ Computes the soft\sphinxhyphen{}DTW value between two sequences using CUDA.
 
 \end{fulllineitems}
 
-\index{profile() (in module dtw\_loss\_functions.soft\_dtw\_cuda)@\spxentry{profile()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_cuda}}
+\index{profile() (in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_mag)@\spxentry{profile()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_mag}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_cuda:dtw_loss_functions.soft_dtw_cuda.profile}}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.profile}}
 \pysigstartsignatures
 \pysiglinewithargsret
-{\sphinxcode{\sphinxupquote{dtw\_loss\_functions.soft\_dtw\_cuda.}}\sphinxbfcode{\sphinxupquote{profile}}}
+{\sphinxcode{\sphinxupquote{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_mag.}}\sphinxbfcode{\sphinxupquote{profile}}}
 {\sphinxparam{\DUrole{n}{batch\_size}}\sphinxparamcomma \sphinxparam{\DUrole{n}{seq\_len\_a}}\sphinxparamcomma \sphinxparam{\DUrole{n}{seq\_len\_b}}\sphinxparamcomma \sphinxparam{\DUrole{n}{dims}}\sphinxparamcomma \sphinxparam{\DUrole{n}{tol\_backward}}}
 {}
 \pysigstopsignatures
 \end{fulllineitems}
 
-\index{timed\_run() (in module dtw\_loss\_functions.soft\_dtw\_cuda)@\spxentry{timed\_run()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_cuda}}
+\index{timed\_run() (in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_mag)@\spxentry{timed\_run()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_mag}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_cuda:dtw_loss_functions.soft_dtw_cuda.timed_run}}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.timed_run}}
 \pysigstartsignatures
 \pysiglinewithargsret
-{\sphinxcode{\sphinxupquote{dtw\_loss\_functions.soft\_dtw\_cuda.}}\sphinxbfcode{\sphinxupquote{timed\_run}}}
+{\sphinxcode{\sphinxupquote{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_mag.}}\sphinxbfcode{\sphinxupquote{timed\_run}}}
 {\sphinxparam{\DUrole{n}{a}}\sphinxparamcomma \sphinxparam{\DUrole{n}{b}}\sphinxparamcomma \sphinxparam{\DUrole{n}{sdtw}}}
 {}
 \pysigstopsignatures
@@ -1010,6 +1356,1424 @@ Assumes that a requires gradients.
 \end{fulllineitems}
 
 
+\sphinxstepscope
+
+
+\section{pysdtw}
+\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.pysdtw_normalize:module-dtw_loss_functions.soft_dtw_implementations.pysdtw_normalize}}\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.pysdtw_normalize:pysdtw}}\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.pysdtw_normalize::doc}}\index{module@\spxentry{module}!dtw\_loss\_functions.soft\_dtw\_implementations.pysdtw\_normalize@\spxentry{dtw\_loss\_functions.soft\_dtw\_implementations.pysdtw\_normalize}}\index{dtw\_loss\_functions.soft\_dtw\_implementations.pysdtw\_normalize@\spxentry{dtw\_loss\_functions.soft\_dtw\_implementations.pysdtw\_normalize}!module@\spxentry{module}}
+\sphinxAtStartPar
+Small Extension of the original PySDTW implementation to include normalization (i.e. the “divergence” version of the SoftDTW).
+
+
+\subsection{Authors}
+\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.pysdtw_normalize:authors}}
+\sphinxAtStartPar
+Alberto Zancanaro \textless{}\sphinxhref{mailto:alberto.zancanaro@uni.lu}{alberto.zancanaro@uni.lu}\textgreater{}
+\index{pysdtw\_normalized (class in dtw\_loss\_functions.soft\_dtw\_implementations.pysdtw\_normalize)@\spxentry{pysdtw\_normalized}\spxextra{class in dtw\_loss\_functions.soft\_dtw\_implementations.pysdtw\_normalize}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.pysdtw_normalize:dtw_loss_functions.soft_dtw_implementations.pysdtw_normalize.pysdtw_normalized}}
+\pysigstartsignatures
+\pysiglinewithargsret
+{\sphinxbfcode{\sphinxupquote{\DUrole{k}{class}\DUrole{w}{ }}}\sphinxcode{\sphinxupquote{dtw\_loss\_functions.soft\_dtw\_implementations.pysdtw\_normalize.}}\sphinxbfcode{\sphinxupquote{pysdtw\_normalized}}}
+{\sphinxparam{\DUrole{n}{use\_cuda}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{bool}}\sphinxparamcomma \sphinxparam{\DUrole{n}{gamma}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{1}}\sphinxparamcomma \sphinxparam{\DUrole{n}{bandwidth}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{int}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{None}}\sphinxparamcomma \sphinxparam{\DUrole{n}{dist\_func}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{callable}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{None}}}
+{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Bases: \sphinxcode{\sphinxupquote{SoftDTW}}
+
+\sphinxAtStartPar
+Extension of the original PySDTW implementation to include normalization (i.e. the “divergence” version of the SoftDTW).
+\subsubsection*{Methods}
+
+
+\begin{savenotes}
+\sphinxatlongtablestart
+\sphinxthistablewithglobalstyle
+\sphinxthistablewithnovlinesstyle
+\makeatletter
+  \LTleft \@totalleftmargin plus1fill
+  \LTright\dimexpr\columnwidth-\@totalleftmargin-\linewidth\relax plus1fill
+\makeatother
+\begin{longtable}{\X{1}{2}\X{1}{2}}
+\sphinxtoprule
+\endfirsthead
+
+\multicolumn{2}{c}{\sphinxnorowcolor
+    \makebox[0pt]{\sphinxtablecontinued{\tablename\ \thetable{} \textendash{} continued from previous page}}%
+}\\
+\sphinxtoprule
+\endhead
+
+\sphinxbottomrule
+\multicolumn{2}{r}{\sphinxnorowcolor
+    \makebox[0pt][r]{\sphinxtablecontinued{continues on next page}}%
+}\\
+\endfoot
+
+\endlastfoot
+\sphinxtableatstartofbodyhook
+\begin{varwidth}[t]{\sphinxcolwidth{1}{2}}
+\sphinxAtStartPar
+{\hyperref[\detokenize{dtw_loss_functions.soft_dtw_implementations.pysdtw_normalize:dtw_loss_functions.soft_dtw_implementations.pysdtw_normalize.pysdtw_normalized.forward}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{forward}}}}}(x, y)
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{2}}
+\sphinxAtStartPar
+Computes the normalized SoftDTW (i.e. SoftDTW Divergence) distance between two time series.
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+\\
+\sphinxbottomrule
+\end{longtable}
+\sphinxtableafterendhook
+\sphinxatlongtableend
+\end{savenotes}
+\index{forward() (dtw\_loss\_functions.soft\_dtw\_implementations.pysdtw\_normalize.pysdtw\_normalized method)@\spxentry{forward()}\spxextra{dtw\_loss\_functions.soft\_dtw\_implementations.pysdtw\_normalize.pysdtw\_normalized method}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.pysdtw_normalize:dtw_loss_functions.soft_dtw_implementations.pysdtw_normalize.pysdtw_normalized.forward}}
+\pysigstartsignatures
+\pysiglinewithargsret
+{\sphinxbfcode{\sphinxupquote{forward}}}
+{\sphinxparam{\DUrole{n}{x}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor}}\sphinxparamcomma \sphinxparam{\DUrole{n}{y}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor}}}
+{{ $\rightarrow$ Tensor}}
+\pysigstopsignatures
+\sphinxAtStartPar
+Computes the normalized SoftDTW (i.e. SoftDTW Divergence) distance between two time series.
+The final value is computed as SDTW(x, y) \sphinxhyphen{} SDTW(x, x) \sphinxhyphen{} SDTW(y, y).
+\begin{quote}\begin{description}
+\sphinxlineitem{Parameters}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{x}} (\sphinxstyleliteralemphasis{\sphinxupquote{torch.Tensor}}) \textendash{} First input tensor of shape B x T x C
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{y}} (\sphinxstyleliteralemphasis{\sphinxupquote{torch.Tensor}}) \textendash{} Second input tensor of shape B x T x C
+
+\end{itemize}
+
+\sphinxlineitem{Returns}
+\sphinxAtStartPar
+\sphinxstylestrong{sdtw\_divergence} \textendash{} Normalized SoftDTW distance between the two input tensors, of shape B.
+
+\sphinxlineitem{Return type}
+\sphinxAtStartPar
+torch.Tensor
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
+\end{fulllineitems}
+
+
+\sphinxstepscope
+
+
+\section{SoftDTW (Ron Shapira Weber)}
+\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron:module-dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron}}\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron:softdtw-ron-shapira-weber}}\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron::doc}}\index{module@\spxentry{module}!dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron@\spxentry{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron}}\index{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron@\spxentry{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron}!module@\spxentry{module}}\index{SoftDTW (class in dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron)@\spxentry{SoftDTW}\spxextra{class in dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.SoftDTW}}
+\pysigstartsignatures
+\pysiglinewithargsret
+{\sphinxbfcode{\sphinxupquote{\DUrole{k}{class}\DUrole{w}{ }}}\sphinxcode{\sphinxupquote{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.}}\sphinxbfcode{\sphinxupquote{SoftDTW}}}
+{\sphinxparam{\DUrole{keyword-only-separator}{\DUrole{o}{\sphinxstyleabbreviation{*} (Keyword\sphinxhyphen{}only parameters separator (PEP 3102))}}}\sphinxparamcomma \sphinxparam{\DUrole{n}{gamma}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{1.0}}\sphinxparamcomma \sphinxparam{\DUrole{n}{bandwidth}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float\DUrole{w}{ }\DUrole{p}{|}\DUrole{w}{ }None}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{None}}\sphinxparamcomma \sphinxparam{\DUrole{n}{normalize}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{bool}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{False}}\sphinxparamcomma \sphinxparam{\DUrole{n}{dist}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{str}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{\textquotesingle{}sqeuclidean\textquotesingle{}}}\sphinxparamcomma \sphinxparam{\DUrole{n}{fused}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{bool\DUrole{w}{ }\DUrole{p}{|}\DUrole{w}{ }None}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{None}}}
+{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Bases: \sphinxcode{\sphinxupquote{Module}}
+
+\sphinxAtStartPar
+User\sphinxhyphen{}facing module.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+dist: currently supports “sqeuclidean”
+
+\item {} 
+\sphinxAtStartPar
+normalize: SoftDTW(x,y) \sphinxhyphen{} 0.5*(SoftDTW(x,x)+SoftDTW(y,y))
+
+\item {} \begin{description}
+\sphinxlineitem{fused:}
+\sphinxAtStartPar
+None  \sphinxhyphen{}\textgreater{} auto (use fused only when possible)
+True  \sphinxhyphen{}\textgreater{} require fused (error if not possible)
+False \sphinxhyphen{}\textgreater{} never fused (always materialize D and use D\sphinxhyphen{}based autograd)
+
+\end{description}
+
+\end{itemize}
+\subsubsection*{Methods}
+
+
+\begin{savenotes}
+\sphinxatlongtablestart
+\sphinxthistablewithglobalstyle
+\sphinxthistablewithnovlinesstyle
+\makeatletter
+  \LTleft \@totalleftmargin plus1fill
+  \LTright\dimexpr\columnwidth-\@totalleftmargin-\linewidth\relax plus1fill
+\makeatother
+\begin{longtable}{\X{1}{2}\X{1}{2}}
+\sphinxtoprule
+\endfirsthead
+
+\multicolumn{2}{c}{\sphinxnorowcolor
+    \makebox[0pt]{\sphinxtablecontinued{\tablename\ \thetable{} \textendash{} continued from previous page}}%
+}\\
+\sphinxtoprule
+\endhead
+
+\sphinxbottomrule
+\multicolumn{2}{r}{\sphinxnorowcolor
+    \makebox[0pt][r]{\sphinxtablecontinued{continues on next page}}%
+}\\
+\endfoot
+
+\endlastfoot
+\sphinxtableatstartofbodyhook
+\begin{varwidth}[t]{\sphinxcolwidth{1}{2}}
+\sphinxAtStartPar
+{\hyperref[\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.SoftDTW.forward}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{forward}}}}}(x, y)
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{2}}
+\sphinxAtStartPar
+Define the computation performed at every call.
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+\\
+\sphinxbottomrule
+\end{longtable}
+\sphinxtableafterendhook
+\sphinxatlongtableend
+\end{savenotes}
+\index{forward() (dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.SoftDTW method)@\spxentry{forward()}\spxextra{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.SoftDTW method}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.SoftDTW.forward}}
+\pysigstartsignatures
+\pysiglinewithargsret
+{\sphinxbfcode{\sphinxupquote{forward}}}
+{\sphinxparam{\DUrole{n}{x}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor}}\sphinxparamcomma \sphinxparam{\DUrole{n}{y}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor}}}
+{{ $\rightarrow$ Tensor}}
+\pysigstopsignatures
+\sphinxAtStartPar
+Define the computation performed at every call.
+
+\sphinxAtStartPar
+Should be overridden by all subclasses.
+
+\begin{sphinxadmonition}{note}{Note:}
+\sphinxAtStartPar
+Although the recipe for forward pass needs to be defined within
+this function, one should call the \sphinxcode{\sphinxupquote{Module}} instance afterwards
+instead of this since the former takes care of running the
+registered hooks while the latter silently ignores them.
+\end{sphinxadmonition}
+
+\end{fulllineitems}
+
+
+\end{fulllineitems}
+
+\index{softdtw() (in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron)@\spxentry{softdtw()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.softdtw}}
+\pysigstartsignatures
+\pysiglinewithargsret
+{\sphinxcode{\sphinxupquote{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.}}\sphinxbfcode{\sphinxupquote{softdtw}}}
+{\sphinxparam{\DUrole{n}{x}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor}}\sphinxparamcomma \sphinxparam{\DUrole{n}{y}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor}}\sphinxparamcomma \sphinxparam{\DUrole{keyword-only-separator}{\DUrole{o}{\sphinxstyleabbreviation{*}}}}\sphinxparamcomma \sphinxparam{\DUrole{n}{gamma}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{1.0}}\sphinxparamcomma \sphinxparam{\DUrole{n}{bandwidth}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float\DUrole{w}{ }\DUrole{p}{|}\DUrole{w}{ }None}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{None}}\sphinxparamcomma \sphinxparam{\DUrole{n}{normalize}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{bool}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{False}}\sphinxparamcomma \sphinxparam{\DUrole{n}{dist}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{str}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{\textquotesingle{}sqeuclidean\textquotesingle{}}}\sphinxparamcomma \sphinxparam{\DUrole{n}{fused}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{bool\DUrole{w}{ }\DUrole{p}{|}\DUrole{w}{ }None}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{None}}}
+{{ $\rightarrow$ Tensor}}
+\pysigstopsignatures
+\sphinxAtStartPar
+Convenience functional API.
+
+\sphinxAtStartPar
+x: (B,N,D) or (N,D)
+y: (B,M,D) or (M,D)
+fused: None (auto), True (require fused), False (never fused)
+returns: (B,)
+
+\end{fulllineitems}
+
+\index{softdtw\_barycenter() (in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron)@\spxentry{softdtw\_barycenter()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.softdtw_barycenter}}
+\pysigstartsignatures
+\pysiglinewithargsret
+{\sphinxcode{\sphinxupquote{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.}}\sphinxbfcode{\sphinxupquote{softdtw\_barycenter}}}
+{\sphinxparam{\DUrole{n}{X}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor}}\sphinxparamcomma \sphinxparam{\DUrole{keyword-only-separator}{\DUrole{o}{\sphinxstyleabbreviation{*}}}}\sphinxparamcomma \sphinxparam{\DUrole{n}{gamma}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{1.0}}\sphinxparamcomma \sphinxparam{\DUrole{n}{weights}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor\DUrole{w}{ }\DUrole{p}{|}\DUrole{w}{ }None}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{None}}\sphinxparamcomma \sphinxparam{\DUrole{n}{max\_iter}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{int}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{100}}\sphinxparamcomma \sphinxparam{\DUrole{n}{lr}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{0.1}}\sphinxparamcomma \sphinxparam{\DUrole{n}{init}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor\DUrole{w}{ }\DUrole{p}{|}\DUrole{w}{ }None}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{None}}\sphinxparamcomma \sphinxparam{\DUrole{n}{device}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{str\DUrole{w}{ }\DUrole{p}{|}\DUrole{w}{ }device\DUrole{w}{ }\DUrole{p}{|}\DUrole{w}{ }None}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{None}}\sphinxparamcomma \sphinxparam{\DUrole{n}{verbose}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{bool}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{False}}\sphinxparamcomma \sphinxparam{\DUrole{n}{fused}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{bool\DUrole{w}{ }\DUrole{p}{|}\DUrole{w}{ }None}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{None}}\sphinxparamcomma \sphinxparam{\DUrole{n}{early\_stopping}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{bool}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{True}}\sphinxparamcomma \sphinxparam{\DUrole{n}{patience}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{int}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{10}}\sphinxparamcomma \sphinxparam{\DUrole{n}{tol}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{1e\sphinxhyphen{}05}}}
+{{ $\rightarrow$ Tensor}}
+\pysigstopsignatures
+\sphinxAtStartPar
+Compute a SoftDTW barycenter (time series average) through optimization.
+
+\sphinxAtStartPar
+This function finds the barycenter that minimizes the weighted sum of SoftDTW
+distances to all input time series using gradient\sphinxhyphen{}based optimization.
+\begin{quote}\begin{description}
+\sphinxlineitem{Parameters}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{X}} \textendash{} Input time series of shape (B, N, D) where:
+\sphinxhyphen{} B: batch size (number of sequences)
+\sphinxhyphen{} N: sequence length
+\sphinxhyphen{} D: feature dimension
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{gamma}} \textendash{} SoftDTW regularization parameter. Default: 1.0
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{weights}} \textendash{} Optional weights for each sequence, shape (B,). Default: uniform
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{max\_iter}} \textendash{} Maximum optimization iterations. Default: 100
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{lr}} \textendash{} Learning rate for optimization. Default: 0.1
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{init}} \textendash{} Initial barycenter, shape (N, D). If None, uses weighted mean. Default: None
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{device}} \textendash{} Device to compute on. If None, uses X’s device. Default: None
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{verbose}} \textendash{} Print iteration progress and timing. Default: False
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{fused}} \textendash{} Fused mode selection. Default: None (auto\sphinxhyphen{}select)
+\sphinxhyphen{} None: Auto\sphinxhyphen{}select (use fused if CUDA available)
+\sphinxhyphen{} True: Require fused mode (error if not available)
+\sphinxhyphen{} False: Never use fused mode (always use standard distance matrix)
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{early\_stopping}} \textendash{} Stop early if loss plateaus. Default: True
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{patience}} \textendash{} Iterations without improvement before stopping. Default: 10
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{tol}} \textendash{} Absolute improvement threshold for early stopping. Default: 1e\sphinxhyphen{}5
+Note: Uses absolute improvement (best\_loss \sphinxhyphen{} loss\_val \textgreater{} tol), which handles
+negative SoftDTW values correctly
+
+\end{itemize}
+
+\sphinxlineitem{Returns}
+\sphinxAtStartPar
+Barycenter of shape (N, D)
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{softdtw\_barycenter\_cpu() (in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron)@\spxentry{softdtw\_barycenter\_cpu()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.softdtw_barycenter_cpu}}
+\pysigstartsignatures
+\pysiglinewithargsret
+{\sphinxcode{\sphinxupquote{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.}}\sphinxbfcode{\sphinxupquote{softdtw\_barycenter\_cpu}}}
+{\sphinxparam{\DUrole{n}{X}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor}}\sphinxparamcomma \sphinxparam{\DUrole{keyword-only-separator}{\DUrole{o}{\sphinxstyleabbreviation{*}}}}\sphinxparamcomma \sphinxparam{\DUrole{n}{gamma}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{1.0}}\sphinxparamcomma \sphinxparam{\DUrole{n}{weights}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor\DUrole{w}{ }\DUrole{p}{|}\DUrole{w}{ }None}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{None}}\sphinxparamcomma \sphinxparam{\DUrole{n}{max\_iter}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{int}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{100}}\sphinxparamcomma \sphinxparam{\DUrole{n}{lr}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{0.1}}\sphinxparamcomma \sphinxparam{\DUrole{n}{init}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor\DUrole{w}{ }\DUrole{p}{|}\DUrole{w}{ }None}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{None}}\sphinxparamcomma \sphinxparam{\DUrole{n}{verbose}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{bool}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{False}}\sphinxparamcomma \sphinxparam{\DUrole{n}{fused}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{bool\DUrole{w}{ }\DUrole{p}{|}\DUrole{w}{ }None}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{None}}\sphinxparamcomma \sphinxparam{\DUrole{n}{early\_stopping}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{bool}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{True}}\sphinxparamcomma \sphinxparam{\DUrole{n}{patience}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{int}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{10}}\sphinxparamcomma \sphinxparam{\DUrole{n}{tol}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{1e\sphinxhyphen{}05}}}
+{{ $\rightarrow$ Tensor}}
+\pysigstopsignatures
+\sphinxAtStartPar
+Compute a SoftDTW barycenter on CPU (convenience wrapper).
+\begin{quote}\begin{description}
+\sphinxlineitem{Parameters}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{X}} \textendash{} Input time series of shape (B, N, D)
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{gamma}} \textendash{} SoftDTW regularization parameter. Default: 1.0
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{weights}} \textendash{} Optional weights for each sequence. Default: uniform
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{max\_iter}} \textendash{} Maximum optimization iterations. Default: 100
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{lr}} \textendash{} Learning rate for optimization. Default: 0.01
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{init}} \textendash{} Initial barycenter. If None, uses weighted mean. Default: None
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{verbose}} \textendash{} Print iteration progress and timing. Default: False
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{fused}} \textendash{} Fused mode selection. Default: None (auto\sphinxhyphen{}select)
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{early\_stopping}} \textendash{} Stop early if loss plateaus. Default: True
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{patience}} \textendash{} Iterations without improvement before stopping. Default: 10
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{tol}} \textendash{} Improvement threshold for early stopping. Default: 1e\sphinxhyphen{}5
+
+\end{itemize}
+
+\sphinxlineitem{Returns}
+\sphinxAtStartPar
+Barycenter of shape (N, D)
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
+
+\subsection{Subpackages}
+\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron:subpackages}}
+\sphinxstepscope
+
+
+\subsubsection{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda package}
+\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda:module-dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda}}\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda:dtw-loss-functions-soft-dtw-implementations-soft-dtw-cuda-ron-cuda-package}}\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda::doc}}\index{module@\spxentry{module}!dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda@\spxentry{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda}}\index{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda@\spxentry{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda}!module@\spxentry{module}}
+
+\paragraph{Submodules}
+\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda:submodules}}
+\sphinxstepscope
+
+
+\subparagraph{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.kernels module}
+\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.kernels:module-dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.kernels}}\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.kernels:dtw-loss-functions-soft-dtw-implementations-soft-dtw-cuda-ron-cuda-kernels-module}}\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.kernels::doc}}\index{module@\spxentry{module}!dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.kernels@\spxentry{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.kernels}}\index{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.kernels@\spxentry{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.kernels}!module@\spxentry{module}}\index{softdtw\_backward\_kernel\_legacy() (in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.kernels)@\spxentry{softdtw\_backward\_kernel\_legacy()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.kernels}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.kernels:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.kernels.softdtw_backward_kernel_legacy}}
+\pysigstartsignatures
+\pysiglinewithargsret
+{\sphinxcode{\sphinxupquote{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.kernels.}}\sphinxbfcode{\sphinxupquote{softdtw\_backward\_kernel\_legacy}}}
+{\sphinxparam{\DUrole{n}{D\_pad}}\sphinxparamcomma \sphinxparam{\DUrole{n}{R}}\sphinxparamcomma \sphinxparam{\DUrole{n}{inv\_gamma}}\sphinxparamcomma \sphinxparam{\DUrole{n}{bandwidth}}\sphinxparamcomma \sphinxparam{\DUrole{n}{max\_i}}\sphinxparamcomma \sphinxparam{\DUrole{n}{max\_j}}\sphinxparamcomma \sphinxparam{\DUrole{n}{n\_passes}}\sphinxparamcomma \sphinxparam{\DUrole{n}{E}}}
+{}
+\pysigstopsignatures
+\end{fulllineitems}
+
+\index{softdtw\_backward\_log\_cuda() (in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.kernels)@\spxentry{softdtw\_backward\_log\_cuda()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.kernels}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.kernels:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.kernels.softdtw_backward_log_cuda}}
+\pysigstartsignatures
+\pysiglinewithargsret
+{\sphinxcode{\sphinxupquote{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.kernels.}}\sphinxbfcode{\sphinxupquote{softdtw\_backward\_log\_cuda}}}
+{\sphinxparam{\DUrole{n}{D}}\sphinxparamcomma \sphinxparam{\DUrole{n}{R}}\sphinxparamcomma \sphinxparam{\DUrole{n}{inv\_gamma}}\sphinxparamcomma \sphinxparam{\DUrole{n}{bandwidth}}\sphinxparamcomma \sphinxparam{\DUrole{n}{max\_i}}\sphinxparamcomma \sphinxparam{\DUrole{n}{max\_j}}\sphinxparamcomma \sphinxparam{\DUrole{n}{n\_passes}}\sphinxparamcomma \sphinxparam{\DUrole{n}{logE}}}
+{}
+\pysigstopsignatures
+\sphinxAtStartPar
+D: (B, N+2, M+2) padded
+R: (B, N+2, M+2) padded (with boundary conditions already set)
+logE: (B, N+2, M+2) padded, initialized to \sphinxhyphen{}inf with logE{[}:,\sphinxhyphen{}1,\sphinxhyphen{}1{]}=0
+
+\end{fulllineitems}
+
+\index{softdtw\_backward\_log\_diag\_cuda() (in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.kernels)@\spxentry{softdtw\_backward\_log\_diag\_cuda()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.kernels}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.kernels:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.kernels.softdtw_backward_log_diag_cuda}}
+\pysigstartsignatures
+\pysiglinewithargsret
+{\sphinxcode{\sphinxupquote{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.kernels.}}\sphinxbfcode{\sphinxupquote{softdtw\_backward\_log\_diag\_cuda}}}
+{\sphinxparam{\DUrole{n}{Dp}}\sphinxparamcomma \sphinxparam{\DUrole{n}{R}}\sphinxparamcomma \sphinxparam{\DUrole{n}{logE}}\sphinxparamcomma \sphinxparam{\DUrole{n}{inv\_gamma}}\sphinxparamcomma \sphinxparam{\DUrole{n}{bandwidth}}\sphinxparamcomma \sphinxparam{\DUrole{n}{N}}\sphinxparamcomma \sphinxparam{\DUrole{n}{M}}\sphinxparamcomma \sphinxparam{\DUrole{n}{p}}}
+{}
+\pysigstopsignatures
+\end{fulllineitems}
+
+\index{softdtw\_backward\_log\_diag\_sqeuclid\_cuda() (in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.kernels)@\spxentry{softdtw\_backward\_log\_diag\_sqeuclid\_cuda()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.kernels}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.kernels:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.kernels.softdtw_backward_log_diag_sqeuclid_cuda}}
+\pysigstartsignatures
+\pysiglinewithargsret
+{\sphinxcode{\sphinxupquote{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.kernels.}}\sphinxbfcode{\sphinxupquote{softdtw\_backward\_log\_diag\_sqeuclid\_cuda}}}
+{\sphinxparam{\DUrole{n}{X}}\sphinxparamcomma \sphinxparam{\DUrole{n}{Y}}\sphinxparamcomma \sphinxparam{\DUrole{n}{R}}\sphinxparamcomma \sphinxparam{\DUrole{n}{logE}}\sphinxparamcomma \sphinxparam{\DUrole{n}{inv\_gamma}}\sphinxparamcomma \sphinxparam{\DUrole{n}{bandwidth}}\sphinxparamcomma \sphinxparam{\DUrole{n}{N}}\sphinxparamcomma \sphinxparam{\DUrole{n}{M}}\sphinxparamcomma \sphinxparam{\DUrole{n}{D}}\sphinxparamcomma \sphinxparam{\DUrole{n}{p}}}
+{}
+\pysigstopsignatures
+\end{fulllineitems}
+
+\index{softdtw\_forward\_diag\_cuda() (in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.kernels)@\spxentry{softdtw\_forward\_diag\_cuda()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.kernels}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.kernels:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.kernels.softdtw_forward_diag_cuda}}
+\pysigstartsignatures
+\pysiglinewithargsret
+{\sphinxcode{\sphinxupquote{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.kernels.}}\sphinxbfcode{\sphinxupquote{softdtw\_forward\_diag\_cuda}}}
+{\sphinxparam{\DUrole{n}{D}}\sphinxparamcomma \sphinxparam{\DUrole{n}{R}}\sphinxparamcomma \sphinxparam{\DUrole{n}{gamma}}\sphinxparamcomma \sphinxparam{\DUrole{n}{bandwidth}}\sphinxparamcomma \sphinxparam{\DUrole{n}{N}}\sphinxparamcomma \sphinxparam{\DUrole{n}{M}}\sphinxparamcomma \sphinxparam{\DUrole{n}{p}}}
+{}
+\pysigstopsignatures
+\end{fulllineitems}
+
+\index{softdtw\_forward\_diag\_sqeuclid\_cuda() (in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.kernels)@\spxentry{softdtw\_forward\_diag\_sqeuclid\_cuda()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.kernels}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.kernels:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.kernels.softdtw_forward_diag_sqeuclid_cuda}}
+\pysigstartsignatures
+\pysiglinewithargsret
+{\sphinxcode{\sphinxupquote{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.kernels.}}\sphinxbfcode{\sphinxupquote{softdtw\_forward\_diag\_sqeuclid\_cuda}}}
+{\sphinxparam{\DUrole{n}{X}}\sphinxparamcomma \sphinxparam{\DUrole{n}{Y}}\sphinxparamcomma \sphinxparam{\DUrole{n}{R}}\sphinxparamcomma \sphinxparam{\DUrole{n}{gamma}}\sphinxparamcomma \sphinxparam{\DUrole{n}{bandwidth}}\sphinxparamcomma \sphinxparam{\DUrole{n}{N}}\sphinxparamcomma \sphinxparam{\DUrole{n}{M}}\sphinxparamcomma \sphinxparam{\DUrole{n}{D}}\sphinxparamcomma \sphinxparam{\DUrole{n}{p}}}
+{}
+\pysigstopsignatures
+\end{fulllineitems}
+
+\index{softdtw\_forward\_kernel() (in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.kernels)@\spxentry{softdtw\_forward\_kernel()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.kernels}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.kernels:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.kernels.softdtw_forward_kernel}}
+\pysigstartsignatures
+\pysiglinewithargsret
+{\sphinxcode{\sphinxupquote{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.kernels.}}\sphinxbfcode{\sphinxupquote{softdtw\_forward\_kernel}}}
+{\sphinxparam{\DUrole{n}{D}}\sphinxparamcomma \sphinxparam{\DUrole{n}{gamma}}\sphinxparamcomma \sphinxparam{\DUrole{n}{bandwidth}}\sphinxparamcomma \sphinxparam{\DUrole{n}{max\_i}}\sphinxparamcomma \sphinxparam{\DUrole{n}{max\_j}}\sphinxparamcomma \sphinxparam{\DUrole{n}{n\_passes}}\sphinxparamcomma \sphinxparam{\DUrole{n}{R}}}
+{}
+\pysigstopsignatures
+\end{fulllineitems}
+
+
+\sphinxstepscope
+
+
+\subparagraph{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.launcher module}
+\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.launcher:module-dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.launcher}}\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.launcher:dtw-loss-functions-soft-dtw-implementations-soft-dtw-cuda-ron-cuda-launcher-module}}\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.launcher::doc}}\index{module@\spxentry{module}!dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.launcher@\spxentry{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.launcher}}\index{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.launcher@\spxentry{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.launcher}!module@\spxentry{module}}\index{softdtw\_backward\_cpu() (in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.launcher)@\spxentry{softdtw\_backward\_cpu()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.launcher}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.launcher:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.launcher.softdtw_backward_cpu}}
+\pysigstartsignatures
+\pysiglinewithargsret
+{\sphinxcode{\sphinxupquote{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.launcher.}}\sphinxbfcode{\sphinxupquote{softdtw\_backward\_cpu}}}
+{\sphinxparam{\DUrole{n}{D}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor}}\sphinxparamcomma \sphinxparam{\DUrole{n}{R}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor}}\sphinxparamcomma \sphinxparam{\DUrole{n}{gamma}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float}}\sphinxparamcomma \sphinxparam{\DUrole{n}{bandwidth}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float}}}
+{}
+\pysigstopsignatures
+\end{fulllineitems}
+
+\index{softdtw\_backward\_cuda\_fused\_sqeuclid() (in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.launcher)@\spxentry{softdtw\_backward\_cuda\_fused\_sqeuclid()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.launcher}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.launcher:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.launcher.softdtw_backward_cuda_fused_sqeuclid}}
+\pysigstartsignatures
+\pysiglinewithargsret
+{\sphinxcode{\sphinxupquote{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.launcher.}}\sphinxbfcode{\sphinxupquote{softdtw\_backward\_cuda\_fused\_sqeuclid}}}
+{\sphinxparam{\DUrole{n}{X}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor}}\sphinxparamcomma \sphinxparam{\DUrole{n}{Y}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor}}\sphinxparamcomma \sphinxparam{\DUrole{n}{R}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor}}\sphinxparamcomma \sphinxparam{\DUrole{n}{gamma}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float}}\sphinxparamcomma \sphinxparam{\DUrole{n}{bandwidth}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float}}}
+{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Fused SoftDTW backward (log\sphinxhyphen{}space) for squared\sphinxhyphen{}euclidean distance that does NOT materialize D\_pad.
+\begin{description}
+\sphinxlineitem{Inputs:}
+\sphinxAtStartPar
+X: (B,N,D) CUDA
+Y: (B,M,D) CUDA
+R: (B,N+2,M+2) CUDA (from forward)
+
+\end{description}
+\begin{quote}\begin{description}
+\sphinxlineitem{Returns}
+\sphinxAtStartPar
+(B,N,M) CUDA  (E = d SoftDTW / d D  in linear space, via exp(logE))
+
+\sphinxlineitem{Return type}
+\sphinxAtStartPar
+E
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{softdtw\_backward\_cuda\_log() (in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.launcher)@\spxentry{softdtw\_backward\_cuda\_log()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.launcher}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.launcher:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.launcher.softdtw_backward_cuda_log}}
+\pysigstartsignatures
+\pysiglinewithargsret
+{\sphinxcode{\sphinxupquote{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.launcher.}}\sphinxbfcode{\sphinxupquote{softdtw\_backward\_cuda\_log}}}
+{\sphinxparam{\DUrole{n}{D}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor}}\sphinxparamcomma \sphinxparam{\DUrole{n}{R}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor}}\sphinxparamcomma \sphinxparam{\DUrole{n}{gamma}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float}}\sphinxparamcomma \sphinxparam{\DUrole{n}{bandwidth}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float}}}
+{}
+\pysigstopsignatures
+\end{fulllineitems}
+
+\index{softdtw\_forward\_cpu() (in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.launcher)@\spxentry{softdtw\_forward\_cpu()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.launcher}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.launcher:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.launcher.softdtw_forward_cpu}}
+\pysigstartsignatures
+\pysiglinewithargsret
+{\sphinxcode{\sphinxupquote{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.launcher.}}\sphinxbfcode{\sphinxupquote{softdtw\_forward\_cpu}}}
+{\sphinxparam{\DUrole{n}{D}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor}}\sphinxparamcomma \sphinxparam{\DUrole{n}{gamma}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float}}\sphinxparamcomma \sphinxparam{\DUrole{n}{bandwidth}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float}}}
+{}
+\pysigstopsignatures
+\end{fulllineitems}
+
+\index{softdtw\_forward\_cuda() (in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.launcher)@\spxentry{softdtw\_forward\_cuda()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.launcher}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.launcher:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.launcher.softdtw_forward_cuda}}
+\pysigstartsignatures
+\pysiglinewithargsret
+{\sphinxcode{\sphinxupquote{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.launcher.}}\sphinxbfcode{\sphinxupquote{softdtw\_forward\_cuda}}}
+{\sphinxparam{\DUrole{n}{D}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor}}\sphinxparamcomma \sphinxparam{\DUrole{n}{gamma}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float}}\sphinxparamcomma \sphinxparam{\DUrole{n}{bandwidth}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float}}}
+{}
+\pysigstopsignatures
+\end{fulllineitems}
+
+\index{softdtw\_forward\_cuda\_fused\_sqeuclid() (in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.launcher)@\spxentry{softdtw\_forward\_cuda\_fused\_sqeuclid()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.launcher}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.launcher:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.launcher.softdtw_forward_cuda_fused_sqeuclid}}
+\pysigstartsignatures
+\pysiglinewithargsret
+{\sphinxcode{\sphinxupquote{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.launcher.}}\sphinxbfcode{\sphinxupquote{softdtw\_forward\_cuda\_fused\_sqeuclid}}}
+{\sphinxparam{\DUrole{n}{X}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor}}\sphinxparamcomma \sphinxparam{\DUrole{n}{Y}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor}}\sphinxparamcomma \sphinxparam{\DUrole{n}{gamma}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float}}\sphinxparamcomma \sphinxparam{\DUrole{n}{bandwidth}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float}}}
+{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Fused SoftDTW forward for squared\sphinxhyphen{}euclidean distance that does NOT materialize D (B,N,M).
+
+\sphinxAtStartPar
+X: (B,N,D), Y: (B,M,D) CUDA tensors
+Returns: (out: (B,), R: (B,N+2,M+2))
+
+\end{fulllineitems}
+
+
+\sphinxstepscope
+
+
+\subsubsection{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.utils package}
+\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.utils:module-dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.utils}}\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.utils:dtw-loss-functions-soft-dtw-implementations-soft-dtw-cuda-ron-utils-package}}\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.utils::doc}}\index{module@\spxentry{module}!dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.utils@\spxentry{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.utils}}\index{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.utils@\spxentry{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.utils}!module@\spxentry{module}}
+
+\paragraph{Submodules}
+\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.utils:submodules}}
+\sphinxstepscope
+
+
+\subparagraph{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.utils.checks module}
+\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.utils.checks:module-dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.utils.checks}}\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.utils.checks:dtw-loss-functions-soft-dtw-implementations-soft-dtw-cuda-ron-utils-checks-module}}\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.utils.checks::doc}}\index{module@\spxentry{module}!dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.utils.checks@\spxentry{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.utils.checks}}\index{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.utils.checks@\spxentry{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.utils.checks}!module@\spxentry{module}}\index{check\_D() (in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.utils.checks)@\spxentry{check\_D()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.utils.checks}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.utils.checks:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.utils.checks.check_D}}
+\pysigstartsignatures
+\pysiglinewithargsret
+{\sphinxcode{\sphinxupquote{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.utils.checks.}}\sphinxbfcode{\sphinxupquote{check\_D}}}
+{\sphinxparam{\DUrole{n}{D}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor}}}
+{{ $\rightarrow$ None}}
+\pysigstopsignatures
+\end{fulllineitems}
+
+
+
+\subsection{Submodules}
+\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron:submodules}}
+\sphinxstepscope
+
+
+\subsubsection{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.autograd module}
+\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd:module-dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd}}\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd:dtw-loss-functions-soft-dtw-implementations-soft-dtw-cuda-ron-autograd-module}}\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd::doc}}\index{module@\spxentry{module}!dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.autograd@\spxentry{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.autograd}}\index{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.autograd@\spxentry{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.autograd}!module@\spxentry{module}}\index{SoftDTWAutograd (class in dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.autograd)@\spxentry{SoftDTWAutograd}\spxextra{class in dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.autograd}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd.SoftDTWAutograd}}
+\pysigstartsignatures
+\pysiglinewithargsret
+{\sphinxbfcode{\sphinxupquote{\DUrole{k}{class}\DUrole{w}{ }}}\sphinxcode{\sphinxupquote{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.autograd.}}\sphinxbfcode{\sphinxupquote{SoftDTWAutograd}}}
+{\sphinxparam{\DUrole{o}{*}\DUrole{n}{args}}\sphinxparamcomma \sphinxparam{\DUrole{o}{**}\DUrole{n}{kwargs}}}
+{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Bases: \sphinxcode{\sphinxupquote{Function}}
+\subsubsection*{Methods}
+
+
+\begin{savenotes}
+\sphinxatlongtablestart
+\sphinxthistablewithglobalstyle
+\sphinxthistablewithnovlinesstyle
+\makeatletter
+  \LTleft \@totalleftmargin plus1fill
+  \LTright\dimexpr\columnwidth-\@totalleftmargin-\linewidth\relax plus1fill
+\makeatother
+\begin{longtable}{\X{1}{2}\X{1}{2}}
+\sphinxtoprule
+\endfirsthead
+
+\multicolumn{2}{c}{\sphinxnorowcolor
+    \makebox[0pt]{\sphinxtablecontinued{\tablename\ \thetable{} \textendash{} continued from previous page}}%
+}\\
+\sphinxtoprule
+\endhead
+
+\sphinxbottomrule
+\multicolumn{2}{r}{\sphinxnorowcolor
+    \makebox[0pt][r]{\sphinxtablecontinued{continues on next page}}%
+}\\
+\endfoot
+
+\endlastfoot
+\sphinxtableatstartofbodyhook
+\begin{varwidth}[t]{\sphinxcolwidth{1}{2}}
+\sphinxAtStartPar
+{\hyperref[\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd.SoftDTWAutograd.backward}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{backward}}}}}(ctx, grad\_output)
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{2}}
+\sphinxAtStartPar
+Define a formula for differentiating the operation with backward mode automatic differentiation.
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+\\
+\sphinxhline\begin{varwidth}[t]{\sphinxcolwidth{1}{2}}
+\sphinxAtStartPar
+{\hyperref[\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd.SoftDTWAutograd.forward}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{forward}}}}}(ctx, D, gamma, bandwidth)
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{2}}
+\sphinxAtStartPar
+Define the forward of the custom autograd Function.
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+\\
+\sphinxbottomrule
+\end{longtable}
+\sphinxtableafterendhook
+\sphinxatlongtableend
+\end{savenotes}
+\index{backward() (dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.autograd.SoftDTWAutograd static method)@\spxentry{backward()}\spxextra{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.autograd.SoftDTWAutograd static method}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd.SoftDTWAutograd.backward}}
+\pysigstartsignatures
+\pysiglinewithargsret
+{\sphinxbfcode{\sphinxupquote{\DUrole{k}{static}\DUrole{w}{ }}}\sphinxbfcode{\sphinxupquote{backward}}}
+{\sphinxparam{\DUrole{n}{ctx}}\sphinxparamcomma \sphinxparam{\DUrole{n}{grad\_output}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor}}}
+{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Define a formula for differentiating the operation with backward mode automatic differentiation.
+
+\sphinxAtStartPar
+This function is to be overridden by all subclasses.
+(Defining this function is equivalent to defining the \sphinxcode{\sphinxupquote{vjp}} function.)
+
+\sphinxAtStartPar
+It must accept a context \sphinxcode{\sphinxupquote{ctx}} as the first argument, followed by
+as many outputs as the {\hyperref[\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd.SoftDTWAutograd.forward}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{forward()}}}}} returned (None will be passed in
+for non tensor outputs of the forward function),
+and it should return as many tensors, as there were inputs to
+{\hyperref[\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd.SoftDTWAutograd.forward}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{forward()}}}}}. Each argument is the gradient w.r.t the given output,
+and each returned value should be the gradient w.r.t. the
+corresponding input. If an input is not a Tensor or is a Tensor not
+requiring grads, you can just pass None as a gradient for that input.
+
+\sphinxAtStartPar
+The context can be used to retrieve tensors saved during the forward
+pass. It also has an attribute \sphinxcode{\sphinxupquote{ctx.needs\_input\_grad}} as a tuple
+of booleans representing whether each input needs gradient. E.g.,
+{\hyperref[\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd.SoftDTWAutograd.backward}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{backward()}}}}} will have \sphinxcode{\sphinxupquote{ctx.needs\_input\_grad{[}0{]} = True}} if the
+first input to {\hyperref[\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd.SoftDTWAutograd.forward}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{forward()}}}}} needs gradient computed w.r.t. the
+output.
+
+\end{fulllineitems}
+
+\index{forward() (dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.autograd.SoftDTWAutograd static method)@\spxentry{forward()}\spxextra{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.autograd.SoftDTWAutograd static method}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd.SoftDTWAutograd.forward}}
+\pysigstartsignatures
+\pysiglinewithargsret
+{\sphinxbfcode{\sphinxupquote{\DUrole{k}{static}\DUrole{w}{ }}}\sphinxbfcode{\sphinxupquote{forward}}}
+{\sphinxparam{\DUrole{n}{ctx}}\sphinxparamcomma \sphinxparam{\DUrole{n}{D}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor}}\sphinxparamcomma \sphinxparam{\DUrole{n}{gamma}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float}}\sphinxparamcomma \sphinxparam{\DUrole{n}{bandwidth}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float\DUrole{w}{ }\DUrole{p}{|}\DUrole{w}{ }None}}}
+{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Define the forward of the custom autograd Function.
+
+\sphinxAtStartPar
+This function is to be overridden by all subclasses.
+There are two ways to define forward:
+
+\sphinxAtStartPar
+Usage 1 (Combined forward and ctx):
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n+nd}{@staticmethod}
+\PYG{k}{def}\PYG{+w}{ }\PYG{n+nf}{forward}\PYG{p}{(}\PYG{n}{ctx}\PYG{p}{:} \PYG{n}{Any}\PYG{p}{,} \PYG{o}{*}\PYG{n}{args}\PYG{p}{:} \PYG{n}{Any}\PYG{p}{,} \PYG{o}{*}\PYG{o}{*}\PYG{n}{kwargs}\PYG{p}{:} \PYG{n}{Any}\PYG{p}{)} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}} \PYG{n}{Any}\PYG{p}{:}
+    \PYG{k}{pass}
+\end{sphinxVerbatim}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+It must accept a context ctx as the first argument, followed by any
+number of arguments (tensors or other types).
+
+\item {} 
+\sphinxAtStartPar
+See \DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{combining\sphinxhyphen{}forward\sphinxhyphen{}context}}} for more details
+
+\end{itemize}
+
+\sphinxAtStartPar
+Usage 2 (Separate forward and ctx):
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n+nd}{@staticmethod}
+\PYG{k}{def}\PYG{+w}{ }\PYG{n+nf}{forward}\PYG{p}{(}\PYG{o}{*}\PYG{n}{args}\PYG{p}{:} \PYG{n}{Any}\PYG{p}{,} \PYG{o}{*}\PYG{o}{*}\PYG{n}{kwargs}\PYG{p}{:} \PYG{n}{Any}\PYG{p}{)} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}} \PYG{n}{Any}\PYG{p}{:}
+    \PYG{k}{pass}
+
+\PYG{n+nd}{@staticmethod}
+\PYG{k}{def}\PYG{+w}{ }\PYG{n+nf}{setup\PYGZus{}context}\PYG{p}{(}\PYG{n}{ctx}\PYG{p}{:} \PYG{n}{Any}\PYG{p}{,} \PYG{n}{inputs}\PYG{p}{:} \PYG{n}{Tuple}\PYG{p}{[}\PYG{n}{Any}\PYG{p}{,} \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{p}{]}\PYG{p}{,} \PYG{n}{output}\PYG{p}{:} \PYG{n}{Any}\PYG{p}{)} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}} \PYG{k+kc}{None}\PYG{p}{:}
+    \PYG{k}{pass}
+\end{sphinxVerbatim}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+The forward no longer accepts a ctx argument.
+
+\item {} 
+\sphinxAtStartPar
+Instead, you must also override the \sphinxcode{\sphinxupquote{torch.autograd.Function.setup\_context()}}
+staticmethod to handle setting up the \sphinxcode{\sphinxupquote{ctx}} object.
+\sphinxcode{\sphinxupquote{output}} is the output of the forward, \sphinxcode{\sphinxupquote{inputs}} are a Tuple of inputs
+to the forward.
+
+\item {} 
+\sphinxAtStartPar
+See \DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{extending\sphinxhyphen{}autograd}}} for more details
+
+\end{itemize}
+
+\sphinxAtStartPar
+The context can be used to store arbitrary data that can be then
+retrieved during the backward pass. Tensors should not be stored
+directly on \sphinxtitleref{ctx} (though this is not currently enforced for
+backward compatibility). Instead, tensors should be saved either with
+\sphinxcode{\sphinxupquote{ctx.save\_for\_backward()}} if they are intended to be used in
+\sphinxcode{\sphinxupquote{backward}} (equivalently, \sphinxcode{\sphinxupquote{vjp}}) or \sphinxcode{\sphinxupquote{ctx.save\_for\_forward()}}
+if they are intended to be used for in \sphinxcode{\sphinxupquote{jvp}}.
+
+\end{fulllineitems}
+
+
+\end{fulllineitems}
+
+
+\sphinxstepscope
+
+
+\subsubsection{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.autograd\_xy module}
+\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd_xy:module-dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd_xy}}\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd_xy:dtw-loss-functions-soft-dtw-implementations-soft-dtw-cuda-ron-autograd-xy-module}}\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd_xy::doc}}\index{module@\spxentry{module}!dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.autograd\_xy@\spxentry{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.autograd\_xy}}\index{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.autograd\_xy@\spxentry{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.autograd\_xy}!module@\spxentry{module}}\index{SoftDTWXYAutograd (class in dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.autograd\_xy)@\spxentry{SoftDTWXYAutograd}\spxextra{class in dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.autograd\_xy}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd_xy:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd_xy.SoftDTWXYAutograd}}
+\pysigstartsignatures
+\pysiglinewithargsret
+{\sphinxbfcode{\sphinxupquote{\DUrole{k}{class}\DUrole{w}{ }}}\sphinxcode{\sphinxupquote{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.autograd\_xy.}}\sphinxbfcode{\sphinxupquote{SoftDTWXYAutograd}}}
+{\sphinxparam{\DUrole{o}{*}\DUrole{n}{args}}\sphinxparamcomma \sphinxparam{\DUrole{o}{**}\DUrole{n}{kwargs}}}
+{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Bases: \sphinxcode{\sphinxupquote{Function}}
+\subsubsection*{Methods}
+
+
+\begin{savenotes}
+\sphinxatlongtablestart
+\sphinxthistablewithglobalstyle
+\sphinxthistablewithnovlinesstyle
+\makeatletter
+  \LTleft \@totalleftmargin plus1fill
+  \LTright\dimexpr\columnwidth-\@totalleftmargin-\linewidth\relax plus1fill
+\makeatother
+\begin{longtable}{\X{1}{2}\X{1}{2}}
+\sphinxtoprule
+\endfirsthead
+
+\multicolumn{2}{c}{\sphinxnorowcolor
+    \makebox[0pt]{\sphinxtablecontinued{\tablename\ \thetable{} \textendash{} continued from previous page}}%
+}\\
+\sphinxtoprule
+\endhead
+
+\sphinxbottomrule
+\multicolumn{2}{r}{\sphinxnorowcolor
+    \makebox[0pt][r]{\sphinxtablecontinued{continues on next page}}%
+}\\
+\endfoot
+
+\endlastfoot
+\sphinxtableatstartofbodyhook
+\begin{varwidth}[t]{\sphinxcolwidth{1}{2}}
+\sphinxAtStartPar
+{\hyperref[\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd_xy:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd_xy.SoftDTWXYAutograd.backward}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{backward}}}}}(ctx, grad\_output)
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{2}}
+\sphinxAtStartPar
+Define a formula for differentiating the operation with backward mode automatic differentiation.
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+\\
+\sphinxhline\begin{varwidth}[t]{\sphinxcolwidth{1}{2}}
+\sphinxAtStartPar
+{\hyperref[\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd_xy:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd_xy.SoftDTWXYAutograd.forward}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{forward}}}}}(ctx, X, Y, gamma, bandwidth)
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{2}}
+\sphinxAtStartPar
+Define the forward of the custom autograd Function.
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+\\
+\sphinxbottomrule
+\end{longtable}
+\sphinxtableafterendhook
+\sphinxatlongtableend
+\end{savenotes}
+\index{backward() (dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.autograd\_xy.SoftDTWXYAutograd static method)@\spxentry{backward()}\spxextra{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.autograd\_xy.SoftDTWXYAutograd static method}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd_xy:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd_xy.SoftDTWXYAutograd.backward}}
+\pysigstartsignatures
+\pysiglinewithargsret
+{\sphinxbfcode{\sphinxupquote{\DUrole{k}{static}\DUrole{w}{ }}}\sphinxbfcode{\sphinxupquote{backward}}}
+{\sphinxparam{\DUrole{n}{ctx}}\sphinxparamcomma \sphinxparam{\DUrole{n}{grad\_output}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor}}}
+{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Define a formula for differentiating the operation with backward mode automatic differentiation.
+
+\sphinxAtStartPar
+This function is to be overridden by all subclasses.
+(Defining this function is equivalent to defining the \sphinxcode{\sphinxupquote{vjp}} function.)
+
+\sphinxAtStartPar
+It must accept a context \sphinxcode{\sphinxupquote{ctx}} as the first argument, followed by
+as many outputs as the {\hyperref[\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd_xy:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd_xy.SoftDTWXYAutograd.forward}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{forward()}}}}} returned (None will be passed in
+for non tensor outputs of the forward function),
+and it should return as many tensors, as there were inputs to
+{\hyperref[\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd_xy:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd_xy.SoftDTWXYAutograd.forward}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{forward()}}}}}. Each argument is the gradient w.r.t the given output,
+and each returned value should be the gradient w.r.t. the
+corresponding input. If an input is not a Tensor or is a Tensor not
+requiring grads, you can just pass None as a gradient for that input.
+
+\sphinxAtStartPar
+The context can be used to retrieve tensors saved during the forward
+pass. It also has an attribute \sphinxcode{\sphinxupquote{ctx.needs\_input\_grad}} as a tuple
+of booleans representing whether each input needs gradient. E.g.,
+{\hyperref[\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd_xy:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd_xy.SoftDTWXYAutograd.backward}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{backward()}}}}} will have \sphinxcode{\sphinxupquote{ctx.needs\_input\_grad{[}0{]} = True}} if the
+first input to {\hyperref[\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd_xy:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd_xy.SoftDTWXYAutograd.forward}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{forward()}}}}} needs gradient computed w.r.t. the
+output.
+
+\end{fulllineitems}
+
+\index{forward() (dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.autograd\_xy.SoftDTWXYAutograd static method)@\spxentry{forward()}\spxextra{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.autograd\_xy.SoftDTWXYAutograd static method}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd_xy:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd_xy.SoftDTWXYAutograd.forward}}
+\pysigstartsignatures
+\pysiglinewithargsret
+{\sphinxbfcode{\sphinxupquote{\DUrole{k}{static}\DUrole{w}{ }}}\sphinxbfcode{\sphinxupquote{forward}}}
+{\sphinxparam{\DUrole{n}{ctx}}\sphinxparamcomma \sphinxparam{\DUrole{n}{X}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor}}\sphinxparamcomma \sphinxparam{\DUrole{n}{Y}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor}}\sphinxparamcomma \sphinxparam{\DUrole{n}{gamma}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float}}\sphinxparamcomma \sphinxparam{\DUrole{n}{bandwidth}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float\DUrole{w}{ }\DUrole{p}{|}\DUrole{w}{ }None}}}
+{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Define the forward of the custom autograd Function.
+
+\sphinxAtStartPar
+This function is to be overridden by all subclasses.
+There are two ways to define forward:
+
+\sphinxAtStartPar
+Usage 1 (Combined forward and ctx):
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n+nd}{@staticmethod}
+\PYG{k}{def}\PYG{+w}{ }\PYG{n+nf}{forward}\PYG{p}{(}\PYG{n}{ctx}\PYG{p}{:} \PYG{n}{Any}\PYG{p}{,} \PYG{o}{*}\PYG{n}{args}\PYG{p}{:} \PYG{n}{Any}\PYG{p}{,} \PYG{o}{*}\PYG{o}{*}\PYG{n}{kwargs}\PYG{p}{:} \PYG{n}{Any}\PYG{p}{)} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}} \PYG{n}{Any}\PYG{p}{:}
+    \PYG{k}{pass}
+\end{sphinxVerbatim}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+It must accept a context ctx as the first argument, followed by any
+number of arguments (tensors or other types).
+
+\item {} 
+\sphinxAtStartPar
+See \DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{combining\sphinxhyphen{}forward\sphinxhyphen{}context}}} for more details
+
+\end{itemize}
+
+\sphinxAtStartPar
+Usage 2 (Separate forward and ctx):
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n+nd}{@staticmethod}
+\PYG{k}{def}\PYG{+w}{ }\PYG{n+nf}{forward}\PYG{p}{(}\PYG{o}{*}\PYG{n}{args}\PYG{p}{:} \PYG{n}{Any}\PYG{p}{,} \PYG{o}{*}\PYG{o}{*}\PYG{n}{kwargs}\PYG{p}{:} \PYG{n}{Any}\PYG{p}{)} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}} \PYG{n}{Any}\PYG{p}{:}
+    \PYG{k}{pass}
+
+\PYG{n+nd}{@staticmethod}
+\PYG{k}{def}\PYG{+w}{ }\PYG{n+nf}{setup\PYGZus{}context}\PYG{p}{(}\PYG{n}{ctx}\PYG{p}{:} \PYG{n}{Any}\PYG{p}{,} \PYG{n}{inputs}\PYG{p}{:} \PYG{n}{Tuple}\PYG{p}{[}\PYG{n}{Any}\PYG{p}{,} \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{p}{]}\PYG{p}{,} \PYG{n}{output}\PYG{p}{:} \PYG{n}{Any}\PYG{p}{)} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}} \PYG{k+kc}{None}\PYG{p}{:}
+    \PYG{k}{pass}
+\end{sphinxVerbatim}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+The forward no longer accepts a ctx argument.
+
+\item {} 
+\sphinxAtStartPar
+Instead, you must also override the \sphinxcode{\sphinxupquote{torch.autograd.Function.setup\_context()}}
+staticmethod to handle setting up the \sphinxcode{\sphinxupquote{ctx}} object.
+\sphinxcode{\sphinxupquote{output}} is the output of the forward, \sphinxcode{\sphinxupquote{inputs}} are a Tuple of inputs
+to the forward.
+
+\item {} 
+\sphinxAtStartPar
+See \DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{extending\sphinxhyphen{}autograd}}} for more details
+
+\end{itemize}
+
+\sphinxAtStartPar
+The context can be used to store arbitrary data that can be then
+retrieved during the backward pass. Tensors should not be stored
+directly on \sphinxtitleref{ctx} (though this is not currently enforced for
+backward compatibility). Instead, tensors should be saved either with
+\sphinxcode{\sphinxupquote{ctx.save\_for\_backward()}} if they are intended to be used in
+\sphinxcode{\sphinxupquote{backward}} (equivalently, \sphinxcode{\sphinxupquote{vjp}}) or \sphinxcode{\sphinxupquote{ctx.save\_for\_forward()}}
+if they are intended to be used for in \sphinxcode{\sphinxupquote{jvp}}.
+
+\end{fulllineitems}
+
+
+\end{fulllineitems}
+
+
+\sphinxstepscope
+
+
+\subsubsection{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.barycenters module}
+\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.barycenters:module-dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.barycenters}}\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.barycenters:dtw-loss-functions-soft-dtw-implementations-soft-dtw-cuda-ron-barycenters-module}}\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.barycenters::doc}}\index{module@\spxentry{module}!dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.barycenters@\spxentry{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.barycenters}}\index{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.barycenters@\spxentry{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.barycenters}!module@\spxentry{module}}
+\sphinxAtStartPar
+SoftDTW Barycenter Averaging
+
+\sphinxAtStartPar
+Implements time series averaging using soft Dynamic Time Warping geometry.
+Based on the method from Cuturi \& Blondel (ICML 2017).
+
+\sphinxAtStartPar
+Reference: \sphinxurl{https://github.com/tslearn-team/tslearn/blob/main/tslearn/barycenters/softdtw.py}
+\index{softdtw\_barycenter() (in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.barycenters)@\spxentry{softdtw\_barycenter()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.barycenters}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.barycenters:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.barycenters.softdtw_barycenter}}
+\pysigstartsignatures
+\pysiglinewithargsret
+{\sphinxcode{\sphinxupquote{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.barycenters.}}\sphinxbfcode{\sphinxupquote{softdtw\_barycenter}}}
+{\sphinxparam{\DUrole{n}{X}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor}}\sphinxparamcomma \sphinxparam{\DUrole{keyword-only-separator}{\DUrole{o}{\sphinxstyleabbreviation{*}}}}\sphinxparamcomma \sphinxparam{\DUrole{n}{gamma}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{1.0}}\sphinxparamcomma \sphinxparam{\DUrole{n}{weights}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor\DUrole{w}{ }\DUrole{p}{|}\DUrole{w}{ }None}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{None}}\sphinxparamcomma \sphinxparam{\DUrole{n}{max\_iter}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{int}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{100}}\sphinxparamcomma \sphinxparam{\DUrole{n}{lr}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{0.1}}\sphinxparamcomma \sphinxparam{\DUrole{n}{init}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor\DUrole{w}{ }\DUrole{p}{|}\DUrole{w}{ }None}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{None}}\sphinxparamcomma \sphinxparam{\DUrole{n}{device}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{str\DUrole{w}{ }\DUrole{p}{|}\DUrole{w}{ }device\DUrole{w}{ }\DUrole{p}{|}\DUrole{w}{ }None}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{None}}\sphinxparamcomma \sphinxparam{\DUrole{n}{verbose}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{bool}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{False}}\sphinxparamcomma \sphinxparam{\DUrole{n}{fused}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{bool\DUrole{w}{ }\DUrole{p}{|}\DUrole{w}{ }None}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{None}}\sphinxparamcomma \sphinxparam{\DUrole{n}{early\_stopping}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{bool}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{True}}\sphinxparamcomma \sphinxparam{\DUrole{n}{patience}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{int}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{10}}\sphinxparamcomma \sphinxparam{\DUrole{n}{tol}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{1e\sphinxhyphen{}05}}}
+{{ $\rightarrow$ Tensor}}
+\pysigstopsignatures
+\sphinxAtStartPar
+Compute a SoftDTW barycenter (time series average) through optimization.
+
+\sphinxAtStartPar
+This function finds the barycenter that minimizes the weighted sum of SoftDTW
+distances to all input time series using gradient\sphinxhyphen{}based optimization.
+\begin{quote}\begin{description}
+\sphinxlineitem{Parameters}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{X}} \textendash{} Input time series of shape (B, N, D) where:
+\sphinxhyphen{} B: batch size (number of sequences)
+\sphinxhyphen{} N: sequence length
+\sphinxhyphen{} D: feature dimension
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{gamma}} \textendash{} SoftDTW regularization parameter. Default: 1.0
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{weights}} \textendash{} Optional weights for each sequence, shape (B,). Default: uniform
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{max\_iter}} \textendash{} Maximum optimization iterations. Default: 100
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{lr}} \textendash{} Learning rate for optimization. Default: 0.1
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{init}} \textendash{} Initial barycenter, shape (N, D). If None, uses weighted mean. Default: None
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{device}} \textendash{} Device to compute on. If None, uses X’s device. Default: None
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{verbose}} \textendash{} Print iteration progress and timing. Default: False
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{fused}} \textendash{} Fused mode selection. Default: None (auto\sphinxhyphen{}select)
+\sphinxhyphen{} None: Auto\sphinxhyphen{}select (use fused if CUDA available)
+\sphinxhyphen{} True: Require fused mode (error if not available)
+\sphinxhyphen{} False: Never use fused mode (always use standard distance matrix)
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{early\_stopping}} \textendash{} Stop early if loss plateaus. Default: True
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{patience}} \textendash{} Iterations without improvement before stopping. Default: 10
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{tol}} \textendash{} Absolute improvement threshold for early stopping. Default: 1e\sphinxhyphen{}5
+Note: Uses absolute improvement (best\_loss \sphinxhyphen{} loss\_val \textgreater{} tol), which handles
+negative SoftDTW values correctly
+
+\end{itemize}
+
+\sphinxlineitem{Returns}
+\sphinxAtStartPar
+Barycenter of shape (N, D)
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{softdtw\_barycenter\_cpu() (in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.barycenters)@\spxentry{softdtw\_barycenter\_cpu()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.barycenters}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.barycenters:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.barycenters.softdtw_barycenter_cpu}}
+\pysigstartsignatures
+\pysiglinewithargsret
+{\sphinxcode{\sphinxupquote{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.barycenters.}}\sphinxbfcode{\sphinxupquote{softdtw\_barycenter\_cpu}}}
+{\sphinxparam{\DUrole{n}{X}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor}}\sphinxparamcomma \sphinxparam{\DUrole{keyword-only-separator}{\DUrole{o}{\sphinxstyleabbreviation{*}}}}\sphinxparamcomma \sphinxparam{\DUrole{n}{gamma}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{1.0}}\sphinxparamcomma \sphinxparam{\DUrole{n}{weights}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor\DUrole{w}{ }\DUrole{p}{|}\DUrole{w}{ }None}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{None}}\sphinxparamcomma \sphinxparam{\DUrole{n}{max\_iter}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{int}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{100}}\sphinxparamcomma \sphinxparam{\DUrole{n}{lr}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{0.1}}\sphinxparamcomma \sphinxparam{\DUrole{n}{init}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor\DUrole{w}{ }\DUrole{p}{|}\DUrole{w}{ }None}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{None}}\sphinxparamcomma \sphinxparam{\DUrole{n}{verbose}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{bool}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{False}}\sphinxparamcomma \sphinxparam{\DUrole{n}{fused}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{bool\DUrole{w}{ }\DUrole{p}{|}\DUrole{w}{ }None}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{None}}\sphinxparamcomma \sphinxparam{\DUrole{n}{early\_stopping}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{bool}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{True}}\sphinxparamcomma \sphinxparam{\DUrole{n}{patience}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{int}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{10}}\sphinxparamcomma \sphinxparam{\DUrole{n}{tol}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{1e\sphinxhyphen{}05}}}
+{{ $\rightarrow$ Tensor}}
+\pysigstopsignatures
+\sphinxAtStartPar
+Compute a SoftDTW barycenter on CPU (convenience wrapper).
+\begin{quote}\begin{description}
+\sphinxlineitem{Parameters}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{X}} \textendash{} Input time series of shape (B, N, D)
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{gamma}} \textendash{} SoftDTW regularization parameter. Default: 1.0
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{weights}} \textendash{} Optional weights for each sequence. Default: uniform
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{max\_iter}} \textendash{} Maximum optimization iterations. Default: 100
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{lr}} \textendash{} Learning rate for optimization. Default: 0.01
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{init}} \textendash{} Initial barycenter. If None, uses weighted mean. Default: None
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{verbose}} \textendash{} Print iteration progress and timing. Default: False
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{fused}} \textendash{} Fused mode selection. Default: None (auto\sphinxhyphen{}select)
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{early\_stopping}} \textendash{} Stop early if loss plateaus. Default: True
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{patience}} \textendash{} Iterations without improvement before stopping. Default: 10
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{tol}} \textendash{} Improvement threshold for early stopping. Default: 1e\sphinxhyphen{}5
+
+\end{itemize}
+
+\sphinxlineitem{Returns}
+\sphinxAtStartPar
+Barycenter of shape (N, D)
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
+\sphinxstepscope
+
+
+\subsubsection{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.distances module}
+\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.distances:module-dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.distances}}\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.distances:dtw-loss-functions-soft-dtw-implementations-soft-dtw-cuda-ron-distances-module}}\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.distances::doc}}\index{module@\spxentry{module}!dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.distances@\spxentry{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.distances}}\index{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.distances@\spxentry{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.distances}!module@\spxentry{module}}\index{pairwise\_distance() (in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.distances)@\spxentry{pairwise\_distance()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.distances}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.distances:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.distances.pairwise_distance}}
+\pysigstartsignatures
+\pysiglinewithargsret
+{\sphinxcode{\sphinxupquote{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.distances.}}\sphinxbfcode{\sphinxupquote{pairwise\_distance}}}
+{\sphinxparam{\DUrole{n}{x}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor}}\sphinxparamcomma \sphinxparam{\DUrole{n}{y}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor}}\sphinxparamcomma \sphinxparam{\DUrole{keyword-only-separator}{\DUrole{o}{\sphinxstyleabbreviation{*}}}}\sphinxparamcomma \sphinxparam{\DUrole{n}{dist}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{str}}}
+{{ $\rightarrow$ Tensor}}
+\pysigstopsignatures
+\end{fulllineitems}
+
+\index{sqeuclidean() (in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.distances)@\spxentry{sqeuclidean()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.distances}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.distances:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.distances.sqeuclidean}}
+\pysigstartsignatures
+\pysiglinewithargsret
+{\sphinxcode{\sphinxupquote{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.distances.}}\sphinxbfcode{\sphinxupquote{sqeuclidean}}}
+{\sphinxparam{\DUrole{n}{x}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor}}\sphinxparamcomma \sphinxparam{\DUrole{n}{y}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor}}}
+{{ $\rightarrow$ Tensor}}
+\pysigstopsignatures\begin{description}
+\sphinxlineitem{Efficient squared Euclidean distance:}
+\sphinxAtStartPar
+D{[}b,i,j{]} = ||x{[}b,i{]}\sphinxhyphen{}y{[}b,j{]}||\textasciicircum{}2
+
+\end{description}
+
+\sphinxAtStartPar
+x: (B,N,D), y: (B,M,D)
+returns: (B,N,M)
+
+\end{fulllineitems}
+
+
+\sphinxstepscope
+
+
+\subsubsection{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.functional module}
+\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.functional:module-dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.functional}}\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.functional:dtw-loss-functions-soft-dtw-implementations-soft-dtw-cuda-ron-functional-module}}\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.functional::doc}}\index{module@\spxentry{module}!dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.functional@\spxentry{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.functional}}\index{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.functional@\spxentry{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.functional}!module@\spxentry{module}}\index{softdtw() (in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.functional)@\spxentry{softdtw()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.functional}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.functional:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.functional.softdtw}}
+\pysigstartsignatures
+\pysiglinewithargsret
+{\sphinxcode{\sphinxupquote{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.functional.}}\sphinxbfcode{\sphinxupquote{softdtw}}}
+{\sphinxparam{\DUrole{n}{x}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor}}\sphinxparamcomma \sphinxparam{\DUrole{n}{y}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor}}\sphinxparamcomma \sphinxparam{\DUrole{keyword-only-separator}{\DUrole{o}{\sphinxstyleabbreviation{*}}}}\sphinxparamcomma \sphinxparam{\DUrole{n}{gamma}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{1.0}}\sphinxparamcomma \sphinxparam{\DUrole{n}{bandwidth}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float\DUrole{w}{ }\DUrole{p}{|}\DUrole{w}{ }None}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{None}}\sphinxparamcomma \sphinxparam{\DUrole{n}{normalize}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{bool}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{False}}\sphinxparamcomma \sphinxparam{\DUrole{n}{dist}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{str}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{\textquotesingle{}sqeuclidean\textquotesingle{}}}\sphinxparamcomma \sphinxparam{\DUrole{n}{fused}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{bool\DUrole{w}{ }\DUrole{p}{|}\DUrole{w}{ }None}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{None}}}
+{{ $\rightarrow$ Tensor}}
+\pysigstopsignatures
+\sphinxAtStartPar
+Convenience functional API.
+
+\sphinxAtStartPar
+x: (B,N,D) or (N,D)
+y: (B,M,D) or (M,D)
+fused: None (auto), True (require fused), False (never fused)
+returns: (B,)
+
+\end{fulllineitems}
+
+
+\sphinxstepscope
+
+
+\subsubsection{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.module module}
+\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.module:module-dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.module}}\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.module:dtw-loss-functions-soft-dtw-implementations-soft-dtw-cuda-ron-module-module}}\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.module::doc}}\index{module@\spxentry{module}!dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.module@\spxentry{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.module}}\index{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.module@\spxentry{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.module}!module@\spxentry{module}}\index{SoftDTW (class in dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.module)@\spxentry{SoftDTW}\spxextra{class in dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.module}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.module:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.module.SoftDTW}}
+\pysigstartsignatures
+\pysiglinewithargsret
+{\sphinxbfcode{\sphinxupquote{\DUrole{k}{class}\DUrole{w}{ }}}\sphinxcode{\sphinxupquote{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.module.}}\sphinxbfcode{\sphinxupquote{SoftDTW}}}
+{\sphinxparam{\DUrole{keyword-only-separator}{\DUrole{o}{\sphinxstyleabbreviation{*}}}}\sphinxparamcomma \sphinxparam{\DUrole{n}{gamma}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{1.0}}\sphinxparamcomma \sphinxparam{\DUrole{n}{bandwidth}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{float\DUrole{w}{ }\DUrole{p}{|}\DUrole{w}{ }None}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{None}}\sphinxparamcomma \sphinxparam{\DUrole{n}{normalize}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{bool}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{False}}\sphinxparamcomma \sphinxparam{\DUrole{n}{dist}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{str}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{\textquotesingle{}sqeuclidean\textquotesingle{}}}\sphinxparamcomma \sphinxparam{\DUrole{n}{fused}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{bool\DUrole{w}{ }\DUrole{p}{|}\DUrole{w}{ }None}\DUrole{w}{ }\DUrole{o}{=}\DUrole{w}{ }\DUrole{default_value}{None}}}
+{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Bases: \sphinxcode{\sphinxupquote{Module}}
+
+\sphinxAtStartPar
+User\sphinxhyphen{}facing module.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+dist: currently supports “sqeuclidean”
+
+\item {} 
+\sphinxAtStartPar
+normalize: SoftDTW(x,y) \sphinxhyphen{} 0.5*(SoftDTW(x,x)+SoftDTW(y,y))
+
+\item {} \begin{description}
+\sphinxlineitem{fused:}
+\sphinxAtStartPar
+None  \sphinxhyphen{}\textgreater{} auto (use fused only when possible)
+True  \sphinxhyphen{}\textgreater{} require fused (error if not possible)
+False \sphinxhyphen{}\textgreater{} never fused (always materialize D and use D\sphinxhyphen{}based autograd)
+
+\end{description}
+
+\end{itemize}
+\subsubsection*{Methods}
+
+
+\begin{savenotes}
+\sphinxatlongtablestart
+\sphinxthistablewithglobalstyle
+\sphinxthistablewithnovlinesstyle
+\makeatletter
+  \LTleft \@totalleftmargin plus1fill
+  \LTright\dimexpr\columnwidth-\@totalleftmargin-\linewidth\relax plus1fill
+\makeatother
+\begin{longtable}{\X{1}{2}\X{1}{2}}
+\sphinxtoprule
+\endfirsthead
+
+\multicolumn{2}{c}{\sphinxnorowcolor
+    \makebox[0pt]{\sphinxtablecontinued{\tablename\ \thetable{} \textendash{} continued from previous page}}%
+}\\
+\sphinxtoprule
+\endhead
+
+\sphinxbottomrule
+\multicolumn{2}{r}{\sphinxnorowcolor
+    \makebox[0pt][r]{\sphinxtablecontinued{continues on next page}}%
+}\\
+\endfoot
+
+\endlastfoot
+\sphinxtableatstartofbodyhook
+\begin{varwidth}[t]{\sphinxcolwidth{1}{2}}
+\sphinxAtStartPar
+{\hyperref[\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.module:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.module.SoftDTW.forward}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{forward}}}}}(x, y)
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{2}}
+\sphinxAtStartPar
+Define the computation performed at every call.
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+\\
+\sphinxbottomrule
+\end{longtable}
+\sphinxtableafterendhook
+\sphinxatlongtableend
+\end{savenotes}
+\index{forward() (dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.module.SoftDTW method)@\spxentry{forward()}\spxextra{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.module.SoftDTW method}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.module:dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.module.SoftDTW.forward}}
+\pysigstartsignatures
+\pysiglinewithargsret
+{\sphinxbfcode{\sphinxupquote{forward}}}
+{\sphinxparam{\DUrole{n}{x}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor}}\sphinxparamcomma \sphinxparam{\DUrole{n}{y}\DUrole{p}{:}\DUrole{w}{ }\DUrole{n}{Tensor}}}
+{{ $\rightarrow$ Tensor}}
+\pysigstopsignatures
+\sphinxAtStartPar
+Define the computation performed at every call.
+
+\sphinxAtStartPar
+Should be overridden by all subclasses.
+
+\begin{sphinxadmonition}{note}{Note:}
+\sphinxAtStartPar
+Although the recipe for forward pass needs to be defined within
+this function, one should call the \sphinxcode{\sphinxupquote{Module}} instance afterwards
+instead of this since the former takes care of running the
+registered hooks while the latter silently ignores them.
+\end{sphinxadmonition}
+
+\end{fulllineitems}
+
+
+\end{fulllineitems}
+
+
+\sphinxstepscope
+
+
+\chapter{Bibliography}
+\label{\detokenize{biblio:bibliography}}\label{\detokenize{biblio::doc}}
+\sphinxAtStartPar
+If you use this package please cite {[}\hyperlink{cite.biblio:id7}{ZBC25}{]}.
+
+
+\section{First Section}
+\label{\detokenize{biblio:first-section}}
+\sphinxAtStartPar
+If you use SoftDTW please also cite the following works, based on the implementation you decide to use.
+\begin{itemize}
+\item {} \begin{description}
+\sphinxlineitem{\sphinxcode{\sphinxupquote{mag}} cite {[}\hyperlink{cite.biblio:id8}{Mag20}{]} {[}\hyperlink{cite.biblio:id9}{MTL21}{]}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+GitHub Repository : \sphinxurl{https://github.com/Maghoumi/pytorch-softdtw-cuda}
+
+\end{itemize}
+
+\end{description}
+
+\item {} \begin{description}
+\sphinxlineitem{\sphinxcode{\sphinxupquote{pysdtw}} To the best of our knowledge no paper or any other work was mentioned in the GitHub page and PyPi page of this SDTW implementation.}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+GitHub repo : \sphinxurl{https://github.com/toinsson/pysdtw}
+
+\item {} 
+\sphinxAtStartPar
+PyPi Page : \sphinxurl{https://pypi.org/project/pysdtw/}
+
+\end{itemize}
+
+\end{description}
+
+\item {} \begin{description}
+\sphinxlineitem{\sphinxcode{\sphinxupquote{ron}} cite {[}\hyperlink{cite.biblio:id10}{WF26}{]} {[}\hyperlink{cite.biblio:id11}{SWBL+25}{]}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+GitHub Repository : \sphinxurl{https://github.com/BGU-CS-VIL/sdtw-cuda-torch}
+
+\end{itemize}
+
+\end{description}
+
+\end{itemize}
+
+
+\section{References list}
+\label{\detokenize{biblio:references-list}}
 
 \chapter{Indices and Tables}
 \label{\detokenize{index:indices-and-tables}}\begin{itemize}
@@ -1027,7 +2791,55 @@ Assumes that a requires gradients.
 
 \end{itemize}
 
+\begin{sphinxthebibliography}{SWBL+25}
+\bibitem[LLSH23]{biblio:id12}
+\sphinxAtStartPar
+Fabian Latorre, Chenghao Liu, Doyen Sahoo, and Steven C.H. Hoi. Otw: optimal transport warping for time series. In \sphinxstyleemphasis{ICASSP 2023 \sphinxhyphen{} 2023 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)}, volume, 1\textendash{}5. 2023. \sphinxhref{https://doi.org/10.1109/ICASSP49357.2023.10095915}{doi:10.1109/ICASSP49357.2023.10095915}.
+\bibitem[Mag20]{biblio:id8}
+\sphinxAtStartPar
+Mehran Maghoumi. \sphinxstyleemphasis{Deep Recurrent Networks for Gesture Recognition and Synthesis}. PhD thesis, University of Central Florida Orlando, Florida, 2020.
+\bibitem[MTL21]{biblio:id9}
+\sphinxAtStartPar
+Mehran Maghoumi, Eugene Matthew Taranta, and Joseph LaViola. Deepnag: deep non\sphinxhyphen{}adversarial gesture generation. In \sphinxstyleemphasis{26th International Conference on Intelligent User Interfaces}, 213\textendash{}223. 2021.
+\bibitem[SWBL+25]{biblio:id11}
+\sphinxAtStartPar
+Ron Shapira Weber, Shahar Benishay, Andrey Lavrinenko, Shahaf E. Finder, and Oren Freifeld. TimePoint: accelerated time series alignment via self\sphinxhyphen{}supervised keypoint and descriptor learning. In Aarti Singh, Maryam Fazel, Daniel Hsu, Simon Lacoste\sphinxhyphen{}Julien, Felix Berkenkamp, Tegan Maharaj, Kiri Wagstaff, and Jerry Zhu, editors, \sphinxstyleemphasis{Proceedings of the 42nd International Conference on Machine Learning}, volume 267 of Proceedings of Machine Learning Research, 54275\textendash{}54299. PMLR, 13\textendash{}19 Jul 2025. URL: \sphinxurl{https://proceedings.mlr.press/v267/shapira-weber25a.html}.
+\bibitem[WF26]{biblio:id10}
+\sphinxAtStartPar
+Ron Shapira Weber and Oren Freifeld. Softdtw\sphinxhyphen{}cuda\sphinxhyphen{}torch: memory\sphinxhyphen{}efficient gpu\sphinxhyphen{}accelerated soft dynamic time warping for pytorch. 2026. URL: \sphinxurl{https://arxiv.org/abs/2602.17206}, \sphinxhref{https://arxiv.org/abs/2602.17206}{arXiv:2602.17206}.
+\bibitem[ZBC25]{biblio:id7}
+\sphinxAtStartPar
+Alberto Zancanaro, Leonardo Badia, and Giulia Cisotto. Blockdtw: efficient and scalable similarity search algorithm for healthcare\sphinxhyphen{}focused time\sphinxhyphen{}series. In \sphinxstyleemphasis{2025 IEEE Conference on Standards for Communications and Networking (CSCN)}, volume, 1\textendash{}6. 2025. \sphinxhref{https://doi.org/10.1109/CSCN67557.2025.11230700}{doi:10.1109/CSCN67557.2025.11230700}.
+\end{sphinxthebibliography}
 
+
+\renewcommand{\indexname}{Python Module Index}
+\begin{sphinxtheindex}
+\let\bigletter\sphinxstyleindexlettergroup
+\bigletter{b}
+\item\relax\sphinxstyleindexentry{dtw\_loss\_functions.block\_dtw}\sphinxstyleindexpageref{dtw_loss_functions.block_dtw:\detokenize{module-dtw_loss_functions.block_dtw}}
+\indexspace
+\bigletter{o}
+\item\relax\sphinxstyleindexentry{dtw\_loss\_functions.otw}\sphinxstyleindexpageref{dtw_loss_functions.otw:\detokenize{module-dtw_loss_functions.otw}}
+\indexspace
+\bigletter{s}
+\item\relax\sphinxstyleindexentry{dtw\_loss\_functions.soft\_dtw}\sphinxstyleindexpageref{dtw_loss_functions.soft_dtw:\detokenize{module-dtw_loss_functions.soft_dtw}}
+\item\relax\sphinxstyleindexentry{dtw\_loss\_functions.soft\_dtw\_implementations}\sphinxstyleindexpageref{dtw_loss_functions.soft_dtw_implementations:\detokenize{module-dtw_loss_functions.soft_dtw_implementations}}
+\item\relax\sphinxstyleindexentry{dtw\_loss\_functions.soft\_dtw\_implementations.pysdtw\_normalize}\sphinxstyleindexpageref{dtw_loss_functions.soft_dtw_implementations.pysdtw_normalize:\detokenize{module-dtw_loss_functions.soft_dtw_implementations.pysdtw_normalize}}
+\item\relax\sphinxstyleindexentry{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_mag}\sphinxstyleindexpageref{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag:\detokenize{module-dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag}}
+\item\relax\sphinxstyleindexentry{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron}\sphinxstyleindexpageref{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron:\detokenize{module-dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron}}
+\item\relax\sphinxstyleindexentry{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.autograd}\sphinxstyleindexpageref{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd:\detokenize{module-dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd}}
+\item\relax\sphinxstyleindexentry{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.autograd\_xy}\sphinxstyleindexpageref{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd_xy:\detokenize{module-dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd_xy}}
+\item\relax\sphinxstyleindexentry{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.barycenters}\sphinxstyleindexpageref{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.barycenters:\detokenize{module-dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.barycenters}}
+\item\relax\sphinxstyleindexentry{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda}\sphinxstyleindexpageref{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda:\detokenize{module-dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda}}
+\item\relax\sphinxstyleindexentry{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.kernels}\sphinxstyleindexpageref{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.kernels:\detokenize{module-dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.kernels}}
+\item\relax\sphinxstyleindexentry{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.cuda.launcher}\sphinxstyleindexpageref{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.launcher:\detokenize{module-dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.launcher}}
+\item\relax\sphinxstyleindexentry{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.distances}\sphinxstyleindexpageref{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.distances:\detokenize{module-dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.distances}}
+\item\relax\sphinxstyleindexentry{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.functional}\sphinxstyleindexpageref{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.functional:\detokenize{module-dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.functional}}
+\item\relax\sphinxstyleindexentry{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.module}\sphinxstyleindexpageref{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.module:\detokenize{module-dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.module}}
+\item\relax\sphinxstyleindexentry{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.utils}\sphinxstyleindexpageref{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.utils:\detokenize{module-dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.utils}}
+\item\relax\sphinxstyleindexentry{dtw\_loss\_functions.soft\_dtw\_implementations.soft\_dtw\_cuda\_ron.utils.checks}\sphinxstyleindexpageref{dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.utils.checks:\detokenize{module-dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.utils.checks}}
+\end{sphinxtheindex}
 
 \renewcommand{\indexname}{Index}
 \printindex

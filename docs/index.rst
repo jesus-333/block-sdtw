@@ -13,11 +13,18 @@ For now the content is generated automatically from the docstrings in the code, 
 
 .. toctree::
     :maxdepth: 1
-    :caption: Contents:
+    :caption: Loss functions
     
     dtw_loss_functions.block_dtw
     dtw_loss_functions.otw
-    dtw_loss_functions.soft_dtw_cuda
+    dtw_loss_functions.soft_dtw
+
+.. toctree::
+    :maxdepth: 1
+    :caption: Other
+
+    dtw_loss_functions.soft_dtw_implementations
+    biblio
 
 Indices and Tables
 ==================

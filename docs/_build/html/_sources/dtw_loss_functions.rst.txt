@@ -6,6 +6,14 @@ dtw\_loss\_functions package
    :show-inheritance:
    :undoc-members:
 
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   dtw_loss_functions.soft_dtw_implementations
+
 Submodules
 ----------
 
@@ -14,4 +22,4 @@ Submodules
 
    dtw_loss_functions.block_dtw
    dtw_loss_functions.otw
-   dtw_loss_functions.soft_dtw_cuda
+   dtw_loss_functions.soft_dtw

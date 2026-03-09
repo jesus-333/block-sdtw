@@ -1,0 +1,212 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.barycenters module &mdash; dtw_loss_functions  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.distances module" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.distances.html" />
+    <link rel="prev" title="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd_xy module" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd_xy.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            dtw_loss_functions
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Loss functions</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dtw_loss_functions.block_dtw.html">Block DTW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dtw_loss_functions.otw.html">OTW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dtw_loss_functions.soft_dtw.html">Soft DTW</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.html">SoftDTW Subpackage</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.html">SoftDTW (Mehran Maghoumi)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.pysdtw_normalize.html">pysdtw</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.html">SoftDTW (Ron Shapira Weber)</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.html#dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.SoftDTW"><code class="docutils literal notranslate"><span class="pre">SoftDTW</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.html#dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.softdtw"><code class="docutils literal notranslate"><span class="pre">softdtw()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.html#dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.softdtw_barycenter"><code class="docutils literal notranslate"><span class="pre">softdtw_barycenter()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.html#dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.softdtw_barycenter_cpu"><code class="docutils literal notranslate"><span class="pre">softdtw_barycenter_cpu()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.html#subpackages">Subpackages</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd.html">dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd_xy.html">dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd_xy module</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.barycenters module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.distances.html">dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.distances module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.functional.html">dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.functional module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.module.html">dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.module module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="biblio.html">Bibliography</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">dtw_loss_functions</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="dtw_loss_functions.soft_dtw_implementations.html">SoftDTW Subpackage</a></li>
+          <li class="breadcrumb-item"><a href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.html">SoftDTW (Ron Shapira Weber)</a></li>
+      <li class="breadcrumb-item active">dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.barycenters module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.barycenters.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.barycenters">
+<span id="dtw-loss-functions-soft-dtw-implementations-soft-dtw-cuda-ron-barycenters-module"></span><h1>dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.barycenters module<a class="headerlink" href="#module-dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.barycenters" title="Link to this heading"></a></h1>
+<p>SoftDTW Barycenter Averaging</p>
+<p>Implements time series averaging using soft Dynamic Time Warping geometry.
+Based on the method from Cuturi &amp; Blondel (ICML 2017).</p>
+<p>Reference: <a class="reference external" href="https://github.com/tslearn-team/tslearn/blob/main/tslearn/barycenters/softdtw.py">https://github.com/tslearn-team/tslearn/blob/main/tslearn/barycenters/softdtw.py</a></p>
+<dl class="py function">
+<dt class="sig sig-object py" id="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.barycenters.softdtw_barycenter">
+<span class="sig-prename descclassname"><span class="pre">dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.barycenters.</span></span><span class="sig-name descname"><span class="pre">softdtw_barycenter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">device</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fused</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">early_stopping</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">patience</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1e-05</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/dtw_loss_functions/soft_dtw_implementations/soft_dtw_cuda_ron/barycenters.html#softdtw_barycenter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.barycenters.softdtw_barycenter" title="Link to this definition"></a></dt>
+<dd><p>Compute a SoftDTW barycenter (time series average) through optimization.</p>
+<p>This function finds the barycenter that minimizes the weighted sum of SoftDTW
+distances to all input time series using gradient-based optimization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> – Input time series of shape (B, N, D) where:
+- B: batch size (number of sequences)
+- N: sequence length
+- D: feature dimension</p></li>
+<li><p><strong>gamma</strong> – SoftDTW regularization parameter. Default: 1.0</p></li>
+<li><p><strong>weights</strong> – Optional weights for each sequence, shape (B,). Default: uniform</p></li>
+<li><p><strong>max_iter</strong> – Maximum optimization iterations. Default: 100</p></li>
+<li><p><strong>lr</strong> – Learning rate for optimization. Default: 0.1</p></li>
+<li><p><strong>init</strong> – Initial barycenter, shape (N, D). If None, uses weighted mean. Default: None</p></li>
+<li><p><strong>device</strong> – Device to compute on. If None, uses X’s device. Default: None</p></li>
+<li><p><strong>verbose</strong> – Print iteration progress and timing. Default: False</p></li>
+<li><p><strong>fused</strong> – Fused mode selection. Default: None (auto-select)
+- None: Auto-select (use fused if CUDA available)
+- True: Require fused mode (error if not available)
+- False: Never use fused mode (always use standard distance matrix)</p></li>
+<li><p><strong>early_stopping</strong> – Stop early if loss plateaus. Default: True</p></li>
+<li><p><strong>patience</strong> – Iterations without improvement before stopping. Default: 10</p></li>
+<li><p><strong>tol</strong> – Absolute improvement threshold for early stopping. Default: 1e-5
+Note: Uses absolute improvement (best_loss - loss_val &gt; tol), which handles
+negative SoftDTW values correctly</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Barycenter of shape (N, D)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.barycenters.softdtw_barycenter_cpu">
+<span class="sig-prename descclassname"><span class="pre">dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.barycenters.</span></span><span class="sig-name descname"><span class="pre">softdtw_barycenter_cpu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fused</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">early_stopping</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">patience</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1e-05</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/dtw_loss_functions/soft_dtw_implementations/soft_dtw_cuda_ron/barycenters.html#softdtw_barycenter_cpu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.barycenters.softdtw_barycenter_cpu" title="Link to this definition"></a></dt>
+<dd><p>Compute a SoftDTW barycenter on CPU (convenience wrapper).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> – Input time series of shape (B, N, D)</p></li>
+<li><p><strong>gamma</strong> – SoftDTW regularization parameter. Default: 1.0</p></li>
+<li><p><strong>weights</strong> – Optional weights for each sequence. Default: uniform</p></li>
+<li><p><strong>max_iter</strong> – Maximum optimization iterations. Default: 100</p></li>
+<li><p><strong>lr</strong> – Learning rate for optimization. Default: 0.01</p></li>
+<li><p><strong>init</strong> – Initial barycenter. If None, uses weighted mean. Default: None</p></li>
+<li><p><strong>verbose</strong> – Print iteration progress and timing. Default: False</p></li>
+<li><p><strong>fused</strong> – Fused mode selection. Default: None (auto-select)</p></li>
+<li><p><strong>early_stopping</strong> – Stop early if loss plateaus. Default: True</p></li>
+<li><p><strong>patience</strong> – Iterations without improvement before stopping. Default: 10</p></li>
+<li><p><strong>tol</strong> – Improvement threshold for early stopping. Default: 1e-5</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Barycenter of shape (N, D)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd_xy.html" class="btn btn-neutral float-left" title="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd_xy module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.distances.html" class="btn btn-neutral float-right" title="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.distances module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Alberto Zancanaro.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

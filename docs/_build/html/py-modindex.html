@@ -25,10 +25,6 @@
     <link rel="search" title="Search" href="search.html" />
  
 
-    <script>
-      DOCUMENTATION_OPTIONS.COLLAPSE_INDEX = true;
-    </script>
-
 
 </head>
 
@@ -51,11 +47,16 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Loss functions</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="dtw_loss_functions.block_dtw.html">Block DTW</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dtw_loss_functions.otw.html">OTW</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dtw_loss_functions.soft_dtw_cuda.html">Soft DTW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dtw_loss_functions.soft_dtw.html">Soft DTW</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.html">SoftDTW Subpackage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biblio.html">Bibliography</a></li>
 </ul>
 
         </div>
@@ -98,7 +99,7 @@
      <tr>
        <td></td>
        <td>
-       <a href="generated/dtw_loss_functions.block_dtw.html#module-dtw_loss_functions.block_dtw"><code class="xref">dtw_loss_functions.block_dtw</code></a></td><td>
+       <a href="dtw_loss_functions.block_dtw.html#module-dtw_loss_functions.block_dtw"><code class="xref">dtw_loss_functions.block_dtw</code></a></td><td>
        <em></em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-d"><td></td><td>
@@ -114,7 +115,7 @@
      <tr>
        <td></td>
        <td>
-       <a href="generated/dtw_loss_functions.otw.html#module-dtw_loss_functions.otw"><code class="xref">dtw_loss_functions.otw</code></a></td><td>
+       <a href="dtw_loss_functions.otw.html#module-dtw_loss_functions.otw"><code class="xref">dtw_loss_functions.otw</code></a></td><td>
        <em></em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-s"><td></td><td>
@@ -122,7 +123,83 @@
      <tr>
        <td></td>
        <td>
-       <a href="generated/dtw_loss_functions.soft_dtw_cuda.html#module-dtw_loss_functions.soft_dtw_cuda"><code class="xref">dtw_loss_functions.soft_dtw_cuda</code></a></td><td>
+       <a href="dtw_loss_functions.soft_dtw.html#module-dtw_loss_functions.soft_dtw"><code class="xref">dtw_loss_functions.soft_dtw</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td><img src="_static/minus.png" class="toggler"
+              id="toggle-1" style="display: none" alt="-" /></td>
+       <td>
+       <a href="dtw_loss_functions.soft_dtw_implementations.html#module-dtw_loss_functions.soft_dtw_implementations"><code class="xref">dtw_loss_functions.soft_dtw_implementations</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="dtw_loss_functions.soft_dtw_implementations.pysdtw_normalize.html#module-dtw_loss_functions.soft_dtw_implementations.pysdtw_normalize"><code class="xref">dtw_loss_functions.soft_dtw_implementations.pysdtw_normalize</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.html#module-dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag"><code class="xref">dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.html#module-dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron"><code class="xref">dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd.html#module-dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd"><code class="xref">dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd_xy.html#module-dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd_xy"><code class="xref">dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.autograd_xy</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.barycenters.html#module-dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.barycenters"><code class="xref">dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.barycenters</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.html#module-dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda"><code class="xref">dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.kernels.html#module-dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.kernels"><code class="xref">dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.kernels</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.launcher.html#module-dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.launcher"><code class="xref">dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.cuda.launcher</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.distances.html#module-dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.distances"><code class="xref">dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.distances</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.functional.html#module-dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.functional"><code class="xref">dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.functional</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.module.html#module-dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.module"><code class="xref">dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.module</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.utils.html#module-dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.utils"><code class="xref">dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.utils</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.utils.checks.html#module-dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.utils.checks"><code class="xref">dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.utils.checks</code></a></td><td>
        <em></em></td></tr>
    </table>
 

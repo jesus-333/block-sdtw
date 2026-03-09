@@ -1,0 +1,176 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pysdtw &mdash; dtw_loss_functions  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="SoftDTW (Ron Shapira Weber)" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.html" />
+    <link rel="prev" title="SoftDTW (Mehran Maghoumi)" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            dtw_loss_functions
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Loss functions</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dtw_loss_functions.block_dtw.html">Block DTW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dtw_loss_functions.otw.html">OTW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dtw_loss_functions.soft_dtw.html">Soft DTW</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.html">SoftDTW Subpackage</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.html">SoftDTW (Mehran Maghoumi)</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">pysdtw</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#authors">Authors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dtw_loss_functions.soft_dtw_implementations.pysdtw_normalize.pysdtw_normalized"><code class="docutils literal notranslate"><span class="pre">pysdtw_normalized</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dtw_loss_functions.soft_dtw_implementations.pysdtw_normalize.pysdtw_normalized.forward"><code class="docutils literal notranslate"><span class="pre">pysdtw_normalized.forward()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.html">SoftDTW (Ron Shapira Weber)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="biblio.html">Bibliography</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">dtw_loss_functions</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="dtw_loss_functions.soft_dtw_implementations.html">SoftDTW Subpackage</a></li>
+      <li class="breadcrumb-item active">pysdtw</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/dtw_loss_functions.soft_dtw_implementations.pysdtw_normalize.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-dtw_loss_functions.soft_dtw_implementations.pysdtw_normalize">
+<span id="pysdtw"></span><h1>pysdtw<a class="headerlink" href="#module-dtw_loss_functions.soft_dtw_implementations.pysdtw_normalize" title="Link to this heading"></a></h1>
+<p>Small Extension of the original PySDTW implementation to include normalization (i.e. the “divergence” version of the SoftDTW).</p>
+<section id="authors">
+<h2>Authors<a class="headerlink" href="#authors" title="Link to this heading"></a></h2>
+<p>Alberto Zancanaro &lt;<a class="reference external" href="mailto:alberto&#46;zancanaro&#37;&#52;&#48;uni&#46;lu">alberto<span>&#46;</span>zancanaro<span>&#64;</span>uni<span>&#46;</span>lu</a>&gt;</p>
+</section>
+<dl class="py class">
+<dt class="sig sig-object py" id="dtw_loss_functions.soft_dtw_implementations.pysdtw_normalize.pysdtw_normalized">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">dtw_loss_functions.soft_dtw_implementations.pysdtw_normalize.</span></span><span class="sig-name descname"><span class="pre">pysdtw_normalized</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">use_cuda</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bandwidth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dist_func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">callable</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dtw_loss_functions/soft_dtw_implementations/pysdtw_normalize.html#pysdtw_normalized"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dtw_loss_functions.soft_dtw_implementations.pysdtw_normalize.pysdtw_normalized" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">SoftDTW</span></code></p>
+<p>Extension of the original PySDTW implementation to include normalization (i.e. the “divergence” version of the SoftDTW).</p>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dtw_loss_functions.soft_dtw_implementations.pysdtw_normalize.pysdtw_normalized.forward" title="dtw_loss_functions.soft_dtw_implementations.pysdtw_normalize.pysdtw_normalized.forward"><code class="xref py py-obj docutils literal notranslate"><span class="pre">forward</span></code></a>(x, y)</p></td>
+<td><p>Computes the normalized SoftDTW (i.e. SoftDTW Divergence) distance between two time series.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="dtw_loss_functions.soft_dtw_implementations.pysdtw_normalize.pysdtw_normalized.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/dtw_loss_functions/soft_dtw_implementations/pysdtw_normalize.html#pysdtw_normalized.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dtw_loss_functions.soft_dtw_implementations.pysdtw_normalize.pysdtw_normalized.forward" title="Link to this definition"></a></dt>
+<dd><p>Computes the normalized SoftDTW (i.e. SoftDTW Divergence) distance between two time series.
+The final value is computed as SDTW(x, y) - SDTW(x, x) - SDTW(y, y).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>torch.Tensor</em>) – First input tensor of shape B x T x C</p></li>
+<li><p><strong>y</strong> (<em>torch.Tensor</em>) – Second input tensor of shape B x T x C</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>sdtw_divergence</strong> – Normalized SoftDTW distance between the two input tensors, of shape B.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.html" class="btn btn-neutral float-left" title="SoftDTW (Mehran Maghoumi)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.html" class="btn btn-neutral float-right" title="SoftDTW (Ron Shapira Weber)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Alberto Zancanaro.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
