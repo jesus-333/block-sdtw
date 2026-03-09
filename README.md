@@ -4,9 +4,12 @@ Python package with the implementation of various DTW-inspired loss functions.
 Each implementation is compatible with PyTorch and can be used for training.
 
 ### Loss Functions Currently Implemented
-- SoftDTW. CUDA implementation of the SoftDTW, by Mehran Maghoumi. See the [original repository](https://github.com/Maghoumi/pytorch-softdtw-cuda) for more details.
-- BlockDTW. Alternative version of SDTW, where a block-wise computation is used to improve performance. See the paper [BlockDTW: Efficient and Scalable Similarity Search Algorithm for Healthcare-Focused Time-Series](https://ieeexplore.ieee.org/document/11230700) for more details.
-- OTW. Implementation of the Optimal Transport Warping function. See the paper [OTW: Optimal Transport Warping for Time Series](https://ieeexplore.ieee.org/document/10095915) for more details.
+- **SDTW**. CUDA implementation of the SofDTW algorithm. This package offers several implementations of this algorithm. Currently
+  - [pytorch-softdtw-cuda](https://github.com/Maghoumi/pytorch-softdtw-cuda) by Mehran Maghoumi
+  - [pysdtw](https://github.com/toinsson/pysdtw) by Antoine Loriette
+  - [sdtw-cuda-torch](https://github.com/BGU-CS-VIL/sdtw-cuda-torch) by BGU-CS-VIL (implemented by Ron Shapira Weber)
+- **BlockDTW**. Alternative version of SDTW, where a block-wise computation is used to improve performance. See the paper [BlockDTW: Efficient and Scalable Similarity Search Algorithm for Healthcare-Focused Time-Series](https://ieeexplore.ieee.org/document/11230700) for more details.
+- **OTW**. Implementation of the Optimal Transport Warping function. See the paper [OTW: Optimal Transport Warping for Time Series](https://ieeexplore.ieee.org/document/10095915) for more details.
 
 
 ### Documentation
@@ -87,4 +90,4 @@ output_sdtw = sdtw_loss(x, x_r)
 
 # Citation 
 
-If you use this packet refer to the [citation file](./citation.md) for all the info regarding the works to cite.
+If you use this packet refer to the [citation file](./citations.md) for all the info regarding the works to cite.
