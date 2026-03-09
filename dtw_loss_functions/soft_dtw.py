@@ -4,7 +4,7 @@ SoftDTW module. Since there are various implementations online of the SoftDTW, t
 Currently, the following implementations are available:
 - pytorch-softdtw-cuda by Mehran Maghoumi
 - pysdtw by Antoine Loriette
-
+- sdtw-cuda-torch by BGU-CS-VIL (implemented by Ron Shapira Weber)
 
 Authors
 -------
@@ -17,25 +17,9 @@ Alberto Zancanaro <alberto.zancanaro@uni.lu>
 import torch
 
 import pysdtw
-from .soft_dtw_implementation import soft_dtw_cuda_mag, pysdtw_normalize
+from .soft_dtw_implementations import soft_dtw_cuda_mag, pysdtw_normalize, soft_dtw_cuda_ron
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-"""
-mag sdtw arg
-    :param use_cuda: Flag indicating whether the CUDA implementation should be used
-    :param gamma: sDTW's gamma parameter
-    :param normalize: Flag indicating whether to perform normalization
-                      (as discussed in https://github.com/mblondel/soft-dtw/issues/10#issuecomment-383564790)
-    :param bandwidth: Sakoe-Chiba bandwidth for pruning. Passing 'None' will disable pruning.
-    :param dist_func: Optional point-wise distance function to use. If 'None', then a default Euclidean distance function will be used.
-
-Pysdtw args
-    use_cuda (bool): Flag to use GPU, default to True.
-    gamma (float): Regularization parameter, lower is less smoothed (closer to true DTW).
-    bandwidth (int): Sakoe-Chiba type bandwith parameter, default to 0.
-    dist_func (func): Distance function used in pointwise computation, default to L2 squared.
-"""
 
 class soft_dtw(torch.nn.Module) :
     """
@@ -43,6 +27,7 @@ class soft_dtw(torch.nn.Module) :
     The implementation can be selected by passing the 'implementation' argument to the constructor. The available implementations are:
     - 'mag': pytorch-softdtw-cuda by Mehran Maghoumi
     - 'pysdtw': pysdtw by Antoine Loriette
+    - 'ron' : sdtw-cuda-torch by BGU-CS-VIL (implemented by Ron Shapira Weber)
 
     Parameters
     ----------
@@ -57,14 +42,19 @@ class soft_dtw(torch.nn.Module) :
     dist_func : function, optional
         Distance function to use for the SDTW. Default is None, which corresponds to the squared Euclidean distance.
     implementation : str, optional
-        Implementation to use for the SDTW. 
-
+        Implementation to use for the SDTW.
+    fused : bool, optional
+        Only for the 'ron' implementation.
+        None  -> auto (use fused only when possible)
+        True  -> require fused (error if not possible)
+        False -> never fused (always materialize D and use D-based autograd)
     """
 
     def __init__(self, use_cuda : bool,
                  gamma : float = 1, normalize : bool = False, bandwith : int = None,
                  dist_func : callable = None,
-                 implementation : str = 'mag') :
+                 implementation : str = 'mag',
+                 fused : bool = None) :
         super().__init__()
         
         if implementation == 'mag' :
@@ -74,6 +64,8 @@ class soft_dtw(torch.nn.Module) :
                 self.sdtw_function = pysdtw_normalize.pysdtw_normalized(use_cuda = use_cuda, gamma = gamma, bandwidth = bandwith, dist_func = dist_func)
             else :
                 self.sdtw_function = pysdtw.SoftDTW(use_cuda = use_cuda, gamma = gamma, bandwidth = bandwith, dist_func = dist_func)
+        elif implementation == 'ron' :
+            self.sdtw_function = soft_dtw_cuda_ron.SoftDTW(gamma = gamma, normalize = normalize, bandwidth = bandwith, dist_func = dist_func, fused = fused)
 
     def forward(self, x : torch.Tensor, y : torch.Tensor) -> torch.Tensor :
         """
@@ -94,13 +86,12 @@ class soft_dtw(torch.nn.Module) :
 
         return self.sdtw_function(x, y)
 
-
     def check_implementation(self, implementation : str) :
         """
         Check if the selected implementation is valid. If not, raise an error.
         """
 
-        implementations = ['mag', 'pysdtw']
+        implementations = ['mag', 'pysdtw', 'ron']
 
         if implementation not in implementations :
             raise ValueError(f"Invalid implementation selected. Implementations available: {implementations}. Selected implementation: {implementation}.")

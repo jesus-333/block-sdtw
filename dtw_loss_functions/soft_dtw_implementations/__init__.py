@@ -4,6 +4,7 @@ SoftDTW submodule. Since there are various implementations online of the SoftDTW
 Currently, the following implementations are available:
 - pytorch-softdtw-cuda by Mehran Maghoumi
 - pysdtw by Antoine Loriette
+- sdtw-cuda-torch by BGU-CS-VIL (implemented by Ron Shapira Weber)
 
 
 Authors
