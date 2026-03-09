@@ -31,7 +31,7 @@ from .soft_dtw_cuda import SoftDTW
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-class block_dtw() :
+class block_dtw(torch.nn.Module) :
     """
     Class that compute the block DTW loss, which is a variant of the SDTW that computes the SDTW on blocks of the signal instead of the entire signal.
     The block DTW can be computed in two ways: 
@@ -83,16 +83,16 @@ class block_dtw() :
         self.block_dtw_naive = block_dtw_naive(block_size = block_size, use_cuda = use_cuda, gamma_sdtw = gamma_sdtw, use_divergence = use_divergence, bandwidth = bandwidth, dist_func = dist_func)
         self.block_dtw_optimized = block_dtw_optimized(block_size = block_size, use_cuda = use_cuda, gamma_sdtw = gamma_sdtw, use_divergence = use_divergence, bandwidth = bandwidth, dist_func = dist_func)
 
-    def __call__(self, x : torch.tensor, x_r : torch.tensor) -> torch.tensor :
+    def forward(self, x : torch.tensor, x_r : torch.tensor) -> torch.tensor :
         """
         Compute the block DTW loss between the input tensors `x` and `x_r`.
 
         Parameters
         ----------
         x : torch.tensor
-            First input tensor of shape B x T x 1
+            First input tensor of shape B x T x C
         x_r : torch.tensor
-            Second input tensor of shape B x T x 1
+            Second input tensor of shape B x T x C
 
         Returns
         -------

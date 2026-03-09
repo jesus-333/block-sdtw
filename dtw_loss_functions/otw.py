@@ -19,7 +19,7 @@ import torch
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-class otw() :
+class otw(torch.nn.Module) :
 
     def __init__(self, m : float = 1, s : int | float = 0.5, beta : float = 1, reduction : str = 'mean') -> None :
         """
@@ -31,7 +31,7 @@ class otw() :
         self.beta = beta
         self.reduction = reduction
 
-    def __call__(self, x : torch.Tensor, y : torch.Tensor) -> torch.Tensor :
+    def forward(self, x : torch.Tensor, y : torch.Tensor) -> torch.Tensor :
         """
         Computes the OTW distance between two time series.
 
