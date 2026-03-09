@@ -1,0 +1,41 @@
+name: Sync sdtw-cuda-torch
+
+on:
+  schedule:
+    - cron: '0 9 1 * *'  # Automatic trigger. Every 1st of every month at 9.00am
+  workflow_dispatch:       # Allow manual trigger
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout dtw_loss_functions
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Clone sdtw-cuda-torch
+        run: |
+          git clone --depth=1 https://github.com/BGU-CS-VIL/sdtw-cuda-torch.git /tmp/sdtw-cuda-torch
+
+      - name: Copy softdtw_cuda folder
+        run: |
+          mkdir -p dtw_loss_functions/soft_dtw_implementations/soft_dtw_cuda_ron
+          cp -r /tmp/sdtw-cuda-torch/softdtw_cuda/. dtw_loss_functions/soft_dtw_implementations/soft_dtw_cuda_ron/
+
+      - name: Check for changes
+        id: check_changes
+        run: |
+          git diff --quiet && git diff --staged --quiet \
+            && echo "changed=false" >> $GITHUB_OUTPUT \
+            || echo "changed=true" >> $GITHUB_OUTPUT
+
+      - name: Commit and push if changes exist
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add dtw_loss_functions/soft_dtw_implementations/sdtw_cuda_torch/
+          git commit -m "chore: sync softdtw_cuda from sdtw-cuda-torch ($(date +'%Y-%m-%d'))"
+          git push
