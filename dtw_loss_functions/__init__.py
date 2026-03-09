@@ -10,8 +10,8 @@ block_dtw
     Block-wise variant of the Soft DTW loss.
 otw
     Optimal Transport Warping loss.
-soft_dtw_cuda
-    CUDA-accelerated Soft DTW implementation.
+soft_dtw
+    Collection of SoftDTW implementations
 """
 
 __author__    = "Alberto (Jesus) Zancanaro"

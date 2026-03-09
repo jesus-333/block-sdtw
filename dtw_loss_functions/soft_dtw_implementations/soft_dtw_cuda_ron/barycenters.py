@@ -60,18 +60,22 @@ def softdtw_barycenter(
     Returns:
         Barycenter of shape (N, D)
 
-    Example:
-        >>> X = torch.randn(16, 100, 3, device="cuda")  # 16 sequences of length 100, dim 3
-        >>> barycenter = softdtw_barycenter(X, gamma=1.0, max_iter=50, verbose=True)
-        >>> barycenter.shape
-        torch.Size([100, 3])
-
-        >>> # Force fused mode for memory efficiency
-        >>> barycenter_fused = softdtw_barycenter(X, fused=True)
-
-        >>> # Force unfused mode for predictable performance
-        >>> barycenter_unfused = softdtw_barycenter(X, fused=False)
     """
+
+
+    # Example:
+    #     >>> import torch
+    #     >>> from . import barycenter
+    #     >>> X = torch.randn(16, 100, 3, device="cuda")  # 16 sequences of length 100, dim 3
+    #     >>> barycenter = softdtw_barycenter(X, gamma=1.0, max_iter=50, verbose=True)
+    #     >>> barycenter.shape
+    #     torch.Size([100, 3])
+    #
+    #     >>> # Force fused mode for memory efficiency
+    #     >>> barycenter_fused = softdtw_barycenter(X, fused=True)
+    #
+    #     >>> # Force unfused mode for predictable performance
+    #     >>> barycenter_unfused = softdtw_barycenter(X, fused=False)
     device = device or X.device
 
     # Move X to target device first

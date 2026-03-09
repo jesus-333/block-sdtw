@@ -2,6 +2,7 @@
 *.png
 *.eps
 *.pdf
+*.zip
 *.DS_Store
 data/UCRArchive_2018
 data

@@ -16,7 +16,7 @@ If you use this package please cite the following publication
 
 ## SDTW Citation
 
-If you use softDTW please cite the following works, based on the implementation you decide to use.
+If you use softDTW please also cite the following works, based on the implementation you decide to use.
 
 ### `mag`
 One of most popular and used SDTW implementations available on the web, created by Mehran Maghoumi.

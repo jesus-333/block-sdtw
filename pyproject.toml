@@ -9,7 +9,7 @@ packages = ["dtw_loss_functions"]
 
 [project]
 name = "dtw_loss_functions"
-version = "1.0.2"
+version = "1.0.3"
 license = "Apache-2.0"
 authors = [
   { name = "Alberto (Jesus) Zancanaro", email = "alberto.zancanaro.1@gmail.com" },

@@ -27,7 +27,7 @@ Alberto Zancanaro <alberto.zancanaro@uni.lu>
 
 import torch
 
-from .soft_dtw_cuda import SoftDTW
+from .soft_dtw import soft_dtw
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -74,7 +74,9 @@ class block_dtw(torch.nn.Module) :
 
     def __init__(self, block_size : int,
                  use_cuda : bool,
-                 gamma_sdtw : float = 1, use_divergence : bool = False, bandwidth : float = None, dist_func = None
+                 gamma_sdtw : float = 1, use_divergence : bool = False, bandwidth : float = None, dist_func = None,
+                 implementation : str = 'mag',
+                 fused : bool = None,
                  ) :
         super().__init__()
 
@@ -85,19 +87,19 @@ class block_dtw(torch.nn.Module) :
 
     def forward(self, x : torch.tensor, x_r : torch.tensor) -> torch.tensor :
         """
-        Compute the block DTW loss between the input tensors `x` and `x_r`.
+        Compute the block DTW loss between the input tensors ``x`` and ``x_r``.
 
         Parameters
         ----------
         x : torch.tensor
-            First input tensor of shape B x T x C
+            First input tensor of shape ``B x T x C``
         x_r : torch.tensor
-            Second input tensor of shape B x T x C
+            Second input tensor of shape ``B x T x C``
 
         Returns
         -------
         recon_error : torch.tensor
-            Tensor of shape B containing the block DTW loss for each sample in the batch.
+            Tensor of shape ``B`` containing the block DTW loss for each sample in the batch.
         """
 
         if x.shape[1] % self.block_size == 0 :
@@ -106,7 +108,7 @@ class block_dtw(torch.nn.Module) :
             return self.block_dtw_naive(x, x_r)
 
 
-class block_dtw_naive(SoftDTW) :
+class block_dtw_naive(soft_dtw) :
     """
     Naive implementation of the block DTW, which computes the SDTW on each block separately.
 
@@ -115,28 +117,30 @@ class block_dtw_naive(SoftDTW) :
 
     def __init__(self, block_size : int,
                  use_cuda : bool,
-                 gamma_sdtw : float = 1, use_divergence : bool = False, bandwidth : float = None, dist_func = None
+                 gamma_sdtw : float = 1, use_divergence : bool = False, bandwidth : float = None, dist_func = None,
+                 implementation : str = 'mag',
+                 fused : bool = None,
                  ) :
 
-        super().__init__(use_cuda = use_cuda, gamma = gamma_sdtw, normalize = use_divergence, bandwidth = bandwidth, dist_func = dist_func)
+        super().__init__(use_cuda = use_cuda, gamma = gamma_sdtw, normalize = use_divergence, bandwidth = bandwidth, dist_func = dist_func, implementation = implementation, fused = fused)
 
         self.block_size = block_size
 
     def forward(self, x : torch.tensor, x_r : torch.tensor) -> torch.tensor :
         """
-        Compute the block DTW loss between the input tensors `x` and `x_r` by computing the SDTW on each block separately and summing the results.
+        Compute the block DTW loss between the input tensors ``x`` and ``x_r`` by computing the SDTW on each block separately and summing the results.
 
         Parameters
         ----------
         x : torch.tensor
-            First input tensor of shape B x T x C
+            First input tensor of shape ``B x T x C``
         x_r : torch.tensor
-            Second input tensor of shape B x T x C
+            Second input tensor of shape ``B x T x C``
 
         Returns
         -------
         recon_error : torch.tensor
-            Tensor of shape B containing the block DTW loss for each sample in the batch.
+            Tensor of shape ``B`` containing the block DTW loss for each sample in the batch.
         """
         tmp_recon_loss = 0
         i = 0
@@ -168,7 +172,7 @@ class block_dtw_naive(SoftDTW) :
 
         return tmp_recon_loss
 
-class block_dtw_optimized(SoftDTW) :
+class block_dtw_optimized(soft_dtw) :
     """
     Optimized implementation of the block DTW, which exploits reshaping of the input tensors to compute the SDTW on all blocks at once.
     
@@ -184,10 +188,12 @@ class block_dtw_optimized(SoftDTW) :
 
     def __init__(self, block_size : int,
                  use_cuda : bool,
-                 gamma_sdtw : float = 1, use_divergence : bool = False, bandwidth : float = None, dist_func = None
+                 gamma_sdtw : float = 1, use_divergence : bool = False, bandwidth : float = None, dist_func = None,
+                 implementation : str = 'mag',
+                 fused : bool = None,
                  ) :
 
-        super().__init__(use_cuda = use_cuda, gamma = gamma_sdtw, normalize = use_divergence, bandwidth = bandwidth, dist_func = dist_func)
+        super().__init__(use_cuda = use_cuda, gamma = gamma_sdtw, normalize = use_divergence, bandwidth = bandwidth, dist_func = dist_func, implementation = implementation, fused = fused)
 
         self.block_size = block_size
 

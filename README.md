@@ -66,10 +66,9 @@ output_block_dtw = block_dtw_loss(x, x_r)
 ```
 
 ### SoftDTW Example
-Note that the SoftDTW CUDA was [originally implemented](https://github.com/Maghoumi/pytorch-softdtw-cuda) by Mehran Maghoumi.
 ```python
 import torch
-from dtw_loss_functions import soft_dtw_cuda
+from dtw_loss_functions import soft_dtw
 
 use_cuda = torch.cuda.is_available()
 device = 'cuda' if use_cuda else 'cpu'
@@ -81,7 +80,7 @@ channels = 1
 x   = torch.randn(batch_size, time_samples, channels).to(device)
 x_r = torch.randn(batch_size, time_samples, channels).to(device)
 
-sdtw_loss = soft_dtw_cuda.SoftDTW(use_cuda = use_cuda)
+sdtw_loss = soft_dtw.soft_dtw(use_cuda = use_cuda)
 
 output_sdtw = sdtw_loss(x, x_r)
 ```

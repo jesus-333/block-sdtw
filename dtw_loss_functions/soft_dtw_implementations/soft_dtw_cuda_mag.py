@@ -1,12 +1,16 @@
 """
-Cuda Implementation of SoftDTW by Mehran Maghoumi.
+CUDA implementation of SoftDTW by Mehran Maghoumi. This is one of the most popular and used SoftDTW application available on web.
 
-The code here is identical to the one in the original repository (https://github.com/Maghoumi/pytorch-softdtw-cuda).
+The code in this file is identical to the one in the original repository.
 The only changes are the modification of the docstring to numpydoc style, to make it consistent with the rest of the codebase.
+
+If you use this implementation please cite :cite:`soft_dtw_mag_1` :cite:`soft_dtw_mag_2`
+
+GitHub repository : https://github.com/Maghoumi/pytorch-softdtw-cuda
 
 Example
 -------
->>> from dtw_loss_functions import soft_dtw_cuda
+>>> from dtw_loss_functions import soft_dtw
 >>> import torch
 >>> use_cuda = torch.cuda.is_available()
 >>> device = 'cuda' if use_cuda else 'cpu'
@@ -15,7 +19,7 @@ Example
 >>> channels = 1
 >>> x   = torch.randn(batch_size, time_samples, channels).to(device)
 >>> x_r = torch.randn(batch_size, time_samples, channels).to(device)
->>> sdtw_loss = soft_dtw_cuda.SoftDTW(use_cuda = use_cuda)
+>>> sdtw_loss = soft_dtw.soft_dtw(use_cuda = use_cuda, implementation = 'mag')
 >>> output_sdtw = sdtw_loss(x, x_r)
 
 Authors
@@ -24,7 +28,7 @@ Mehran Maghoumi
 
 """
 
-
+# ----------------------------------------------------------------------------------------------------------------------
 # MIT License
 #
 # Copyright (c) 2020 Mehran Maghoumi
