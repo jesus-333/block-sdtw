@@ -1,0 +1,94 @@
+\begin{sphinxtheindex}
+\let\bigletter\sphinxstyleindexlettergroup
+\let\spxpagem \sphinxstyleindexpagemain
+\let\spxentry \sphinxstyleindexentry
+\let\spxextra \sphinxstyleindexextra
+
+  \bigletter B
+  \item \spxentry{bandwidth}\spxextra{dtw\_loss\_functions.soft\_dtw\_cuda.SoftDTW attribute}, 
+		\hyperpage{10}
+  \item \spxentry{block\_dtw}\spxextra{class in dtw\_loss\_functions.block\_dtw}, \hyperpage{3}
+  \item \spxentry{block\_dtw\_naive}\spxextra{class in dtw\_loss\_functions.block\_dtw}, 
+		\hyperpage{4}
+  \item \spxentry{block\_dtw\_naive}\spxextra{dtw\_loss\_functions.block\_dtw.block\_dtw attribute}, 
+		\hyperpage{4}
+  \item \spxentry{block\_dtw\_optimized}\spxextra{class in dtw\_loss\_functions.block\_dtw}, 
+		\hyperpage{5}
+  \item \spxentry{block\_dtw\_optimized}\spxextra{dtw\_loss\_functions.block\_dtw.block\_dtw attribute}, 
+		\hyperpage{4}
+  \item \spxentry{block\_size}\spxextra{dtw\_loss\_functions.block\_dtw.block\_dtw attribute}, 
+		\hyperpage{3}
+
+  \indexspace
+  \bigletter C
+  \item \spxentry{compute\_softdtw()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_cuda}, 
+		\hyperpage{10}
+  \item \spxentry{compute\_softdtw\_backward()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_cuda}, 
+		\hyperpage{10}
+  \item \spxentry{compute\_softdtw\_backward\_cuda()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_cuda}, 
+		\hyperpage{10}
+  \item \spxentry{compute\_softdtw\_cuda()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_cuda}, 
+		\hyperpage{10}
+
+  \indexspace
+  \bigletter D
+  \item \spxentry{dist\_func}\spxextra{dtw\_loss\_functions.soft\_dtw\_cuda.SoftDTW attribute}, 
+		\hyperpage{10}
+  \item \spxentry{dtw\_loss\_functions.block\_dtw}
+    \subitem \spxentry{module}, \hyperpage{3}
+  \item \spxentry{dtw\_loss\_functions.otw}
+    \subitem \spxentry{module}, \hyperpage{7}
+  \item \spxentry{dtw\_loss\_functions.soft\_dtw\_cuda}
+    \subitem \spxentry{module}, \hyperpage{9}
+
+  \indexspace
+  \bigletter F
+  \item \spxentry{forward()}\spxextra{dtw\_loss\_functions.block\_dtw.block\_dtw\_naive method}, 
+		\hyperpage{4}
+  \item \spxentry{forward()}\spxextra{dtw\_loss\_functions.block\_dtw.block\_dtw\_optimized method}, 
+		\hyperpage{5}
+  \item \spxentry{forward()}\spxextra{dtw\_loss\_functions.soft\_dtw\_cuda.SoftDTW method}, 
+		\hyperpage{10}
+
+  \indexspace
+  \bigletter G
+  \item \spxentry{gamma}\spxextra{dtw\_loss\_functions.soft\_dtw\_cuda.SoftDTW attribute}, 
+		\hyperpage{9}
+
+  \indexspace
+  \bigletter M
+  \item \spxentry{module}
+    \subitem \spxentry{dtw\_loss\_functions.block\_dtw}, \hyperpage{3}
+    \subitem \spxentry{dtw\_loss\_functions.otw}, \hyperpage{7}
+    \subitem \spxentry{dtw\_loss\_functions.soft\_dtw\_cuda}, \hyperpage{9}
+
+  \indexspace
+  \bigletter N
+  \item \spxentry{normalize}\spxextra{dtw\_loss\_functions.soft\_dtw\_cuda.SoftDTW attribute}, 
+		\hyperpage{9}
+
+  \indexspace
+  \bigletter O
+  \item \spxentry{otw}\spxextra{class in dtw\_loss\_functions.otw}, \hyperpage{7}
+  \item \spxentry{otw\_distance()}\spxextra{in module dtw\_loss\_functions.otw}, \hyperpage{7}
+
+  \indexspace
+  \bigletter P
+  \item \spxentry{profile()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_cuda}, 
+		\hyperpage{10}
+
+  \indexspace
+  \bigletter S
+  \item \spxentry{smooth\_l1\_loss()}\spxextra{in module dtw\_loss\_functions.otw}, \hyperpage{7}
+  \item \spxentry{SoftDTW}\spxextra{class in dtw\_loss\_functions.soft\_dtw\_cuda}, \hyperpage{9}
+
+  \indexspace
+  \bigletter T
+  \item \spxentry{timed\_run()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_cuda}, 
+		\hyperpage{10}
+
+  \indexspace
+  \bigletter W
+  \item \spxentry{window\_cumsum()}\spxextra{in module dtw\_loss\_functions.otw}, \hyperpage{8}
+
+\end{sphinxtheindex}

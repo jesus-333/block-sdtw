@@ -1,0 +1,30 @@
+\indexentry{module@\spxentry{module}!dtw\_loss\_functions.block\_dtw@\spxentry{dtw\_loss\_functions.block\_dtw}|hyperpage}{3}
+\indexentry{dtw\_loss\_functions.block\_dtw@\spxentry{dtw\_loss\_functions.block\_dtw}!module@\spxentry{module}|hyperpage}{3}
+\indexentry{block\_dtw (class in dtw\_loss\_functions.block\_dtw)@\spxentry{block\_dtw}\spxextra{class in dtw\_loss\_functions.block\_dtw}|hyperpage}{3}
+\indexentry{block\_size (dtw\_loss\_functions.block\_dtw.block\_dtw attribute)@\spxentry{block\_size}\spxextra{dtw\_loss\_functions.block\_dtw.block\_dtw attribute}|hyperpage}{3}
+\indexentry{block\_dtw\_naive (dtw\_loss\_functions.block\_dtw.block\_dtw attribute)@\spxentry{block\_dtw\_naive}\spxextra{dtw\_loss\_functions.block\_dtw.block\_dtw attribute}|hyperpage}{4}
+\indexentry{block\_dtw\_optimized (dtw\_loss\_functions.block\_dtw.block\_dtw attribute)@\spxentry{block\_dtw\_optimized}\spxextra{dtw\_loss\_functions.block\_dtw.block\_dtw attribute}|hyperpage}{4}
+\indexentry{block\_dtw\_naive (class in dtw\_loss\_functions.block\_dtw)@\spxentry{block\_dtw\_naive}\spxextra{class in dtw\_loss\_functions.block\_dtw}|hyperpage}{4}
+\indexentry{forward() (dtw\_loss\_functions.block\_dtw.block\_dtw\_naive method)@\spxentry{forward()}\spxextra{dtw\_loss\_functions.block\_dtw.block\_dtw\_naive method}|hyperpage}{4}
+\indexentry{block\_dtw\_optimized (class in dtw\_loss\_functions.block\_dtw)@\spxentry{block\_dtw\_optimized}\spxextra{class in dtw\_loss\_functions.block\_dtw}|hyperpage}{5}
+\indexentry{forward() (dtw\_loss\_functions.block\_dtw.block\_dtw\_optimized method)@\spxentry{forward()}\spxextra{dtw\_loss\_functions.block\_dtw.block\_dtw\_optimized method}|hyperpage}{5}
+\indexentry{module@\spxentry{module}!dtw\_loss\_functions.otw@\spxentry{dtw\_loss\_functions.otw}|hyperpage}{7}
+\indexentry{dtw\_loss\_functions.otw@\spxentry{dtw\_loss\_functions.otw}!module@\spxentry{module}|hyperpage}{7}
+\indexentry{otw (class in dtw\_loss\_functions.otw)@\spxentry{otw}\spxextra{class in dtw\_loss\_functions.otw}|hyperpage}{7}
+\indexentry{otw\_distance() (in module dtw\_loss\_functions.otw)@\spxentry{otw\_distance()}\spxextra{in module dtw\_loss\_functions.otw}|hyperpage}{7}
+\indexentry{smooth\_l1\_loss() (in module dtw\_loss\_functions.otw)@\spxentry{smooth\_l1\_loss()}\spxextra{in module dtw\_loss\_functions.otw}|hyperpage}{7}
+\indexentry{window\_cumsum() (in module dtw\_loss\_functions.otw)@\spxentry{window\_cumsum()}\spxextra{in module dtw\_loss\_functions.otw}|hyperpage}{8}
+\indexentry{module@\spxentry{module}!dtw\_loss\_functions.soft\_dtw\_cuda@\spxentry{dtw\_loss\_functions.soft\_dtw\_cuda}|hyperpage}{9}
+\indexentry{dtw\_loss\_functions.soft\_dtw\_cuda@\spxentry{dtw\_loss\_functions.soft\_dtw\_cuda}!module@\spxentry{module}|hyperpage}{9}
+\indexentry{SoftDTW (class in dtw\_loss\_functions.soft\_dtw\_cuda)@\spxentry{SoftDTW}\spxextra{class in dtw\_loss\_functions.soft\_dtw\_cuda}|hyperpage}{9}
+\indexentry{normalize (dtw\_loss\_functions.soft\_dtw\_cuda.SoftDTW attribute)@\spxentry{normalize}\spxextra{dtw\_loss\_functions.soft\_dtw\_cuda.SoftDTW attribute}|hyperpage}{9}
+\indexentry{gamma (dtw\_loss\_functions.soft\_dtw\_cuda.SoftDTW attribute)@\spxentry{gamma}\spxextra{dtw\_loss\_functions.soft\_dtw\_cuda.SoftDTW attribute}|hyperpage}{9}
+\indexentry{bandwidth (dtw\_loss\_functions.soft\_dtw\_cuda.SoftDTW attribute)@\spxentry{bandwidth}\spxextra{dtw\_loss\_functions.soft\_dtw\_cuda.SoftDTW attribute}|hyperpage}{10}
+\indexentry{dist\_func (dtw\_loss\_functions.soft\_dtw\_cuda.SoftDTW attribute)@\spxentry{dist\_func}\spxextra{dtw\_loss\_functions.soft\_dtw\_cuda.SoftDTW attribute}|hyperpage}{10}
+\indexentry{forward() (dtw\_loss\_functions.soft\_dtw\_cuda.SoftDTW method)@\spxentry{forward()}\spxextra{dtw\_loss\_functions.soft\_dtw\_cuda.SoftDTW method}|hyperpage}{10}
+\indexentry{compute\_softdtw() (in module dtw\_loss\_functions.soft\_dtw\_cuda)@\spxentry{compute\_softdtw()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_cuda}|hyperpage}{10}
+\indexentry{compute\_softdtw\_backward() (in module dtw\_loss\_functions.soft\_dtw\_cuda)@\spxentry{compute\_softdtw\_backward()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_cuda}|hyperpage}{10}
+\indexentry{compute\_softdtw\_backward\_cuda() (in module dtw\_loss\_functions.soft\_dtw\_cuda)@\spxentry{compute\_softdtw\_backward\_cuda()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_cuda}|hyperpage}{10}
+\indexentry{compute\_softdtw\_cuda() (in module dtw\_loss\_functions.soft\_dtw\_cuda)@\spxentry{compute\_softdtw\_cuda()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_cuda}|hyperpage}{10}
+\indexentry{profile() (in module dtw\_loss\_functions.soft\_dtw\_cuda)@\spxentry{profile()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_cuda}|hyperpage}{10}
+\indexentry{timed\_run() (in module dtw\_loss\_functions.soft\_dtw\_cuda)@\spxentry{timed\_run()}\spxextra{in module dtw\_loss\_functions.soft\_dtw\_cuda}|hyperpage}{10}
