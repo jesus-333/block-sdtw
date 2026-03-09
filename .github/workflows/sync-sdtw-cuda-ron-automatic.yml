@@ -1,4 +1,4 @@
-name: Sync sdtw-cuda-torch
+name: Sync sdtw-cuda-ron-automatic
 
 on:
   schedule:
