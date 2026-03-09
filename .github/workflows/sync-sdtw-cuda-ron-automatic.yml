@@ -35,6 +35,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add dtw_loss_functions/soft_dtw_implementations/sdtw_cuda_torch/
+          git add dtw_loss_functions/soft_dtw_implementations/soft_dtw_cuda_ron/
           git commit -m "chore: sync softdtw_cuda from sdtw-cuda-torch ($(date +'%Y-%m-%d'))"
           git push
