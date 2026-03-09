@@ -3,7 +3,6 @@ name: Sync sdtw-cuda-torch
 on:
   schedule:
     - cron: '0 9 1 * *'  # Automatic trigger. Every 1st of every month at 9.00am
-  workflow_dispatch:       # Allow manual trigger
 
 jobs:
   sync:
