@@ -86,3 +86,6 @@ sdtw_loss = soft_dtw_cuda.SoftDTW(use_cuda = use_cuda)
 output_sdtw = sdtw_loss(x, x_r)
 ```
 
+# Citation 
+
+If you use this packet refer to the [citation file](./citation.md) for all the info regarding the works to cite.
