@@ -26,3 +26,9 @@ readme = "README.md"
 [project.optional-dependencies]
 extra = [
 ]
+
+[project.urls]
+Homepage = "https://github.com/jesus-333/dtw_loss_functions"
+Documentation = "https://jesus-333.github.io/dtw_loss_functions_documentation/"
+Repository = "https://github.com/jesus-333/dtw_loss_functions"
+"Bug Tracker" = "https://github.com/jesus-333/dtw_loss_functions/issues"
