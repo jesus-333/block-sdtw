@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Zancanaro"
+  given-names: "Alberto"
+  orcid: "https://orcid.org/0000-0002-5276-7030"
+- family-names: "Cistto"
+  given-names: "Giulia"
+  orcid: "https://orcid.org/0000-0002-9554-9367"
+title: "BlockDTW: Efficient and Scalable Similarity Search Algorithm for Healthcare-Focused Time-Series"
+version: 1.0.3
+doi: 10.1109/CSCN67557.2025.11230700
+date-released: 2017-12-18
+url: "https://github.com/jesus-333/dtw_loss_functions"
