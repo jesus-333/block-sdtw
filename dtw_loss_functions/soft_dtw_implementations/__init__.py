@@ -13,8 +13,14 @@ Currently, the following implementations are available :
 
 If you use this module, please cite together with this package the original paper of the implementation you are using.
 
+
 Authors
 -------
 Alberto Zancanaro <alberto.zancanaro@uni.lu>
 
 """
+
+__author__    = "Alberto (Jesus) Zancanaro"
+__email__     = "alberto.zancanaro@uni.lu"
+__version__   = "1.0.3"
+__license__   = "Apache-2.0"

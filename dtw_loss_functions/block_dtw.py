@@ -13,7 +13,7 @@ Example
 >>> channels = 1
 >>> x   = torch.randn(batch_size, time_samples, channels).to(device)
 >>> x_r = torch.randn(batch_size, time_samples, channels).to(device)
->>> block_dtw_loss = block_dtw.block_dtw(block_size, use_cuda)
+>>> block_dtw_loss = block_dtw.block_dtw(block_size)
 >>> output_block_dtw = block_dtw_loss(x, x_r)
 
 Authors
@@ -60,30 +60,23 @@ class block_dtw(torch.nn.Module) :
     ----------
     block_size : int
         Size of the blocks into which to divide the signal.
-    use_cuda : bool
-        If true, this class will use the CUDA implementation of the SDTW.
-    gamma_sdtw : float, optional
-        Value of the gamma hyperparameter for the SDTW. Default is 1.
-    use_divergence : bool, optional
-        If true, compute the SDTW divergence instead of the SDTW. Default is False.
-    bandwidth : float, optional
-        Sakoe-Chiba bandwidth for pruning. If the 'None' is given, no pruning is applied. Default is None.
-    dist_func : function, optional
-        Distance function to use for the SDTW. Default is None, which corresponds to the squared Euclidean distance.
+    implementation : str
+        Implementation to use for the SDTW. This parameter is passed to the SDTW implementation used in the block DTW. See the docstring of the :class:`~dtw_loss_functions.soft_dtw.soft_dtw` class for more details on the available implementations and their parameters.
+    sdtw_config : dict, optional
+        Configuration dictionary for the SDTW function used in the block DTW. See the docstring of the :class:`~dtw_loss_functions.soft_dtw.soft_dtw` class for more details on the available parameters and their default values.
+        If a parameter is not specified, or if the dictionary is empty, the default values will be used for all the parameters.
     """
 
     def __init__(self, block_size : int,
-                 use_cuda : bool,
-                 gamma_sdtw : float = 1, use_divergence : bool = False, bandwidth : float = None, dist_func = None,
                  implementation : str = 'mag',
-                 fused : bool = None,
+                 sdtw_config : dict = {}
                  ) :
         super().__init__()
 
         self.block_size = block_size
 
-        self.block_dtw_naive = block_dtw_naive(block_size = block_size, use_cuda = use_cuda, gamma_sdtw = gamma_sdtw, use_divergence = use_divergence, bandwidth = bandwidth, dist_func = dist_func)
-        self.block_dtw_optimized = block_dtw_optimized(block_size = block_size, use_cuda = use_cuda, gamma_sdtw = gamma_sdtw, use_divergence = use_divergence, bandwidth = bandwidth, dist_func = dist_func)
+        self.block_dtw_naive = block_dtw_naive(block_size, implementation, sdtw_config)
+        self.block_dtw_optimized = block_dtw_optimized(block_size, implementation, sdtw_config)
 
     def forward(self, x : torch.tensor, x_r : torch.tensor) -> torch.tensor :
         """
@@ -115,14 +108,9 @@ class block_dtw_naive(soft_dtw) :
     For details on the parameters, see the docstring of the :class:`block_dtw` class.
     """
 
-    def __init__(self, block_size : int,
-                 use_cuda : bool,
-                 gamma_sdtw : float = 1, use_divergence : bool = False, bandwidth : float = None, dist_func = None,
-                 implementation : str = 'mag',
-                 fused : bool = None,
-                 ) :
+    def __init__(self, block_size : int, implementation : str = 'mag', sdtw_config : dict = {}) :
 
-        super().__init__(use_cuda = use_cuda, gamma = gamma_sdtw, normalize = use_divergence, bandwidth = bandwidth, dist_func = dist_func, implementation = implementation, fused = fused)
+        super().__init__(implementation = implementation, sdtw_config = sdtw_config)
 
         self.block_size = block_size
 
@@ -186,14 +174,9 @@ class block_dtw_optimized(soft_dtw) :
     For details on the parameters, see the docstring of the :class:`block_dtw` class.
     """
 
-    def __init__(self, block_size : int,
-                 use_cuda : bool,
-                 gamma_sdtw : float = 1, use_divergence : bool = False, bandwidth : float = None, dist_func = None,
-                 implementation : str = 'mag',
-                 fused : bool = None,
-                 ) :
+    def __init__(self, block_size : int, implementation : str = 'mag', sdtw_config : dict = {}) :
 
-        super().__init__(use_cuda = use_cuda, gamma = gamma_sdtw, normalize = use_divergence, bandwidth = bandwidth, dist_func = dist_func, implementation = implementation, fused = fused)
+        super().__init__(implementation = implementation, sdtw_config = sdtw_config)
 
         self.block_size = block_size
 

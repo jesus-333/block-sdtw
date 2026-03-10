@@ -96,6 +96,36 @@
 
 <span class="sd">If you use this module, please cite together with this package the original paper of the implementation you are using.</span>
 
+<span class="sd">Example</span>
+<span class="sd">-------</span>
+
+<span class="sd">Mehran Maghoumi&#39;s (``mag``) implementation</span>
+
+<span class="sd">&gt;&gt;&gt; import torch</span>
+<span class="sd">&gt;&gt;&gt; from dtw_loss_functions import soft_dtw</span>
+<span class="sd">&gt;&gt;&gt; use_cuda = torch.cuda.is_available()</span>
+<span class="sd">&gt;&gt;&gt; sdtw_loss = soft_dtw.soft_dtw(implementation = &#39;mag&#39;, sdtw_config = {&#39;use_cuda&#39; : use_cuda, &#39;gamma&#39; : 0.1})</span>
+<span class="sd">&gt;&gt;&gt; device = &#39;cuda&#39; if use_cuda else &#39;cpu&#39;</span>
+<span class="sd">&gt;&gt;&gt; batch_size = 5</span>
+<span class="sd">&gt;&gt;&gt; time_samples = 300</span>
+<span class="sd">&gt;&gt;&gt; channels = 1</span>
+<span class="sd">&gt;&gt;&gt; x   = torch.randn(batch_size, time_samples, channels).to(device)</span>
+<span class="sd">&gt;&gt;&gt; x_r = torch.randn(batch_size, time_samples, channels).to(device)</span>
+<span class="sd">&gt;&gt;&gt; output_sdtw = sdtw_loss(x, x_r)</span>
+
+<span class="sd">Ron Shapira Weber&#39;s (``ron``) implementation</span>
+
+<span class="sd">&gt;&gt;&gt; import torch</span>
+<span class="sd">&gt;&gt;&gt; from dtw_loss_functions import soft_dtw</span>
+<span class="sd">&gt;&gt;&gt; sdtw_loss = soft_dtw.soft_dtw(implementation = &#39;ron&#39;, sdtw_config = {&#39;gamma&#39; : 0.1, &#39;dist&#39; : &#39;sqeuclidean&#39;})</span>
+<span class="sd">&gt;&gt;&gt; device = &#39;cuda&#39; if torch.cuda.is_available() else &#39;cpu&#39;</span>
+<span class="sd">&gt;&gt;&gt; batch_size = 5</span>
+<span class="sd">&gt;&gt;&gt; time_samples = 300</span>
+<span class="sd">&gt;&gt;&gt; channels = 1</span>
+<span class="sd">&gt;&gt;&gt; x   = torch.randn(batch_size, time_samples, channels).to(device)</span>
+<span class="sd">&gt;&gt;&gt; x_r = torch.randn(batch_size, time_samples, channels).to(device)</span>
+<span class="sd">&gt;&gt;&gt; output_sdtw = sdtw_loss(x, x_r)</span>
+
 <span class="sd">Authors</span>
 <span class="sd">-------</span>
 <span class="sd">Alberto Zancanaro &lt;alberto.zancanaro@uni.lu&gt;</span>
@@ -115,57 +145,65 @@
 <a class="viewcode-back" href="../../dtw_loss_functions.soft_dtw.html#dtw_loss_functions.soft_dtw.soft_dtw">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">soft_dtw</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">)</span> <span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    SoftDTW class. This class is a wrapper for the different implementations of the SoftDTW. </span>
-<span class="sd">    The implementation can be selected by passing the &#39;implementation&#39; argument to the constructor. The available implementations are:</span>
+<span class="sd">    SoftDTW class. This class is a wrapper for the different implementations of the SoftDTW.</span>
+<span class="sd">    The implementation can be selected by passing the ``implementation`` argument to the constructor. The available implementations are:</span>
 
 <span class="sd">    - `mag`: pytorch-softdtw-cuda by Mehran Maghoumi</span>
 <span class="sd">    - `pysdtw`: pysdtw by Antoine Loriette</span>
 <span class="sd">    - `ron` : sdtw-cuda-torch by BGU-CS-VIL (implemented by Ron Shapira Weber)</span>
 
+<span class="sd">    Together with the implementation, a configuration dictionary can be passed to the constructor to set the parameters of the SDTW function. </span>
+<span class="sd">    The available parameters depend on the implementation selected, but some parameters are common for all implementations (e.g. ``gamma``, ``normalize``, ``bandwidth``). </span>
+<span class="sd">    The available parameters are listed below.</span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    use_cuda : bool</span>
-<span class="sd">        If true, this class will use the CUDA implementation of the SDTW.</span>
-<span class="sd">    gamma : float, optional</span>
-<span class="sd">        Value of the gamma hyperparameter for the SDTW. Default is ``1``.</span>
-<span class="sd">    normalize : bool, optional</span>
-<span class="sd">        If true, the SDTW divergence will be computed instead of the SDTW. Default is ``False``.</span>
-<span class="sd">    bandwidth : float, optional</span>
-<span class="sd">        Sakoe-Chiba bandwidth for pruning. If the ``None`` is given, no pruning is applied. Default is None.</span>
-<span class="sd">    dist_func : function, optional</span>
-<span class="sd">        Distance function to use for the SDTW. Default is ``None``, which corresponds to the squared Euclidean distance.</span>
-<span class="sd">    implementation : str, optional</span>
+<span class="sd">    implementation : str</span>
 <span class="sd">        Implementation to use for the SDTW.</span>
 
 <span class="sd">        - ``mag``. Use the implementation by Mehran Maghoumi :cite:`soft_dtw_mag_1` :cite:`soft_dtw_mag_2`.</span>
 <span class="sd">        - ``pysdtw``. Use the implementation in the pysdtw package by Antoine Loriette.</span>
 <span class="sd">        - ``ron`` Use the implementation by Ron Shapira Weber :cite:`soft_dtw_ron_1` :cite:`soft_dtw_ron_2`.</span>
 
-<span class="sd">        Default is ``mag``.</span>
-<span class="sd">    fused : bool, optional</span>
-<span class="sd">        Only for the &#39;ron&#39; implementation.</span>
+<span class="sd">    sdtw_config : dict, optional</span>
 
-<span class="sd">        - ``None``  -&gt; auto (use fused only when possible)</span>
-<span class="sd">        - ``True``  -&gt; require fused (error if not possible)</span>
-<span class="sd">        - ``False`` -&gt; never fused (always materialize D and use D-based autograd)</span>
+<span class="sd">        Configuration dictionary for the SDTW function.</span>
+<span class="sd">        Note that if a parameter is not specified in the configuration dictionary, the default value will be used (the default values are specified in the description of each parameter).</span>
+<span class="sd">        The dictionary can contain the following keys :</span>
+
+<span class="sd">            use_cuda : bool</span>
+<span class="sd">                If ``True``, this class will use the CUDA implementation of the SDTW. Only for the ``mag`` and ``pysdtw`` implementations. Default is ``False``.</span>
+<span class="sd">            gamma : float, optional</span>
+<span class="sd">                Value of the gamma hyperparameter for the SDTW. Default is ``1``.</span>
+<span class="sd">            normalize : bool, optional</span>
+<span class="sd">                If ``True``, the SDTW divergence will be computed instead of the SDTW. Default is ``False``.</span>
+<span class="sd">            bandwidth : float, optional</span>
+<span class="sd">                Sakoe-Chiba bandwidth for pruning. If the ``None`` is given, no pruning is applied. Default is ``None``.</span>
+<span class="sd">            dist_func : function, optional</span>
+<span class="sd">                Only for the ``mag`` and ``pysdtw`` implementations. If passed, this function will be used as distance function to use for the SDTW.</span>
+<span class="sd">                If ``None``, the default distance function of the implementation will be used (squared Euclidean distance for both implementations).</span>
+<span class="sd">                Default is ``None``.</span>
+<span class="sd">            dist : str, optional</span>
+<span class="sd">                Only for the ``ron`` implementation. It has the same purpose as ``dist_func`` for the other implementations, but in this case must be a string.</span>
+<span class="sd">            fused : bool, optional</span>
+<span class="sd">                Only for the ``ron`` implementation.</span>
+
+<span class="sd">                - ``None``  -&gt; auto (use fused only when possible)</span>
+<span class="sd">                - ``True``  -&gt; require fused (error if not possible)</span>
+<span class="sd">                - ``False`` -&gt; never fused (always materialize D and use D-based autograd)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">use_cuda</span> <span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                 <span class="n">gamma</span> <span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">normalize</span> <span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">bandwidth</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                 <span class="n">dist_func</span> <span class="p">:</span> <span class="nb">callable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                 <span class="n">implementation</span> <span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;mag&#39;</span><span class="p">,</span>
-                 <span class="n">fused</span> <span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">implementation</span> <span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;mag&#39;</span><span class="p">,</span> <span class="n">sdtw_config</span> <span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{})</span> <span class="p">:</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="c1"># Check if the selected implementation is valid</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_implementation</span><span class="p">(</span><span class="n">implementation</span><span class="p">,</span> <span class="n">reset_sdtw_function</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+
+        <span class="c1"># Set the configuration for the SDTW function</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_sdtw_config</span><span class="p">(</span><span class="n">sdtw_config</span><span class="p">,</span> <span class="n">reset_sdtw_function</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
         
-        <span class="k">if</span> <span class="n">implementation</span> <span class="o">==</span> <span class="s1">&#39;mag&#39;</span> <span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">sdtw_function</span> <span class="o">=</span> <span class="n">soft_dtw_cuda_mag</span><span class="o">.</span><span class="n">SoftDTW</span><span class="p">(</span><span class="n">use_cuda</span> <span class="o">=</span> <span class="n">use_cuda</span><span class="p">,</span> <span class="n">gamma</span> <span class="o">=</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">normalize</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">,</span> <span class="n">bandwidth</span> <span class="o">=</span> <span class="n">bandwidth</span><span class="p">,</span> <span class="n">dist_func</span> <span class="o">=</span> <span class="n">dist_func</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">implementation</span> <span class="o">==</span> <span class="s1">&#39;pysdtw&#39;</span> <span class="p">:</span>
-            <span class="k">if</span> <span class="n">normalize</span> <span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">sdtw_function</span> <span class="o">=</span> <span class="n">pysdtw_normalize</span><span class="o">.</span><span class="n">pysdtw_normalized</span><span class="p">(</span><span class="n">use_cuda</span> <span class="o">=</span> <span class="n">use_cuda</span><span class="p">,</span> <span class="n">gamma</span> <span class="o">=</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">bandwidth</span> <span class="o">=</span> <span class="n">bandwidth</span><span class="p">,</span> <span class="n">dist_func</span> <span class="o">=</span> <span class="n">dist_func</span><span class="p">)</span>
-            <span class="k">else</span> <span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">sdtw_function</span> <span class="o">=</span> <span class="n">pysdtw</span><span class="o">.</span><span class="n">SoftDTW</span><span class="p">(</span><span class="n">use_cuda</span> <span class="o">=</span> <span class="n">use_cuda</span><span class="p">,</span> <span class="n">gamma</span> <span class="o">=</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">bandwidth</span> <span class="o">=</span> <span class="n">bandwidth</span><span class="p">,</span> <span class="n">dist_func</span> <span class="o">=</span> <span class="n">dist_func</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">implementation</span> <span class="o">==</span> <span class="s1">&#39;ron&#39;</span> <span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">sdtw_function</span> <span class="o">=</span> <span class="n">soft_dtw_cuda_ron</span><span class="o">.</span><span class="n">SoftDTW</span><span class="p">(</span><span class="n">gamma</span> <span class="o">=</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">normalize</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">,</span> <span class="n">bandwidth</span> <span class="o">=</span> <span class="n">bandwidth</span><span class="p">,</span> <span class="n">dist_func</span> <span class="o">=</span> <span class="n">dist_func</span><span class="p">,</span> <span class="n">fused</span> <span class="o">=</span> <span class="n">fused</span><span class="p">)</span>
+        <span class="c1"># Get the SDTW function based on the implementation selected and the configuration specified</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sdtw_function</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_sdtw_function</span><span class="p">(</span><span class="n">sdtw_config</span><span class="p">)</span>
 
 <div class="viewcode-block" id="soft_dtw.forward">
 <a class="viewcode-back" href="../../dtw_loss_functions.soft_dtw.html#dtw_loss_functions.soft_dtw.soft_dtw.forward">[docs]</a>
@@ -187,6 +225,79 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sdtw_function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="soft_dtw.set_implementation">
+<a class="viewcode-back" href="../../dtw_loss_functions.soft_dtw.html#dtw_loss_functions.soft_dtw.soft_dtw.set_implementation">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_implementation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">implementation</span> <span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">reset_sdtw_function</span> <span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the implementation to use for the SDTW. This function can be used to change the implementation after the class has been initialized.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_implementation</span><span class="p">(</span><span class="n">implementation</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">implementation</span> <span class="o">=</span> <span class="n">implementation</span></div>
+
+
+<div class="viewcode-block" id="soft_dtw.set_sdtw_config">
+<a class="viewcode-back" href="../../dtw_loss_functions.soft_dtw.html#dtw_loss_functions.soft_dtw.soft_dtw.set_sdtw_config">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_sdtw_config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sdtw_config</span> <span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{},</span> <span class="n">reset_sdtw_function</span> <span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the configuration for the SDTW function. This function can be used to change the configuration after the class has been initialized.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        sdtw_config : dict</span>
+<span class="sd">            Configuration dictionary for the SDTW function. The keys of the dictionary are the same as the parameters of the constructor.</span>
+<span class="sd">            Note that if a key is absent from the dictionary, the default value for that parameter will be used (the default values are specified in the description of each parameter).</span>
+<span class="sd">        reset_sdtw_function : bool, optional</span>
+<span class="sd">            If ``True``, the SDTW function will be reset with the new configuration.</span>
+<span class="sd">            If ``False``, the SDTW function will not be reset, but the new configuration will be saved as an attribute of the class.</span>
+<span class="sd">            Default is ``True``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Parameters for the SDTW (Common for all implementations)</span>
+        <span class="c1"># Note that the get method is used to set the default values for the parameters, in case they are not specified in the configuration dictionary</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="n">sdtw_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;gamma&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">normalize</span> <span class="o">=</span> <span class="n">sdtw_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;normalize&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bandwidth</span> <span class="o">=</span> <span class="n">sdtw_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;bandwidth&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="c1"># Saved the parameters specific for each implementation as attributes of the class, in case they are needed later (e.g. for the backward pass)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">implementation</span> <span class="o">==</span> <span class="s1">&#39;mag&#39;</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">implementation</span> <span class="o">==</span> <span class="s1">&#39;pysdtw&#39;</span> <span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">use_cuda</span> <span class="o">=</span> <span class="n">sdtw_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;use_cuda&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dist_func</span> <span class="o">=</span> <span class="n">sdtw_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;dist_func&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">implementation</span> <span class="o">==</span> <span class="s1">&#39;ron&#39;</span> <span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dist</span> <span class="o">=</span> <span class="n">sdtw_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;dist&#39;</span><span class="p">,</span> <span class="s1">&#39;sqeuclidean&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fused</span> <span class="o">=</span> <span class="n">sdtw_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;fused&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="c1"># Reset the SDTW function with the new configuration</span>
+        <span class="k">if</span> <span class="n">reset_sdtw_function</span> <span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sdtw_function</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_sdtw_function</span><span class="p">(</span><span class="n">sdtw_config</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="soft_dtw.create_sdtw_function">
+<a class="viewcode-back" href="../../dtw_loss_functions.soft_dtw.html#dtw_loss_functions.soft_dtw.soft_dtw.create_sdtw_function">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_sdtw_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sdtw_config</span> <span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create and return an istance of the SDTW function based on the current implementation and parameters.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        sdtw_config : dict</span>
+<span class="sd">            Configuration dictionary for the SDTW function. The keys of the dictionary are the same as the parameters of the constructor.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">implementation</span> <span class="ow">is</span> <span class="kc">None</span> <span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Implementation not set. Please set the implementation before instantiating the SDTW function.&quot;</span><span class="p">)</span>
+        <span class="k">else</span> <span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">implementation</span> <span class="o">==</span> <span class="s1">&#39;mag&#39;</span> <span class="p">:</span> 
+                <span class="n">sdtw_function</span> <span class="o">=</span> <span class="n">soft_dtw_cuda_mag</span><span class="o">.</span><span class="n">SoftDTW</span><span class="p">(</span><span class="n">use_cuda</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_cuda</span><span class="p">,</span> <span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span><span class="p">,</span> <span class="n">normalize</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalize</span><span class="p">,</span> <span class="n">bandwidth</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bandwidth</span><span class="p">,</span> <span class="n">dist_func</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dist_func</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">implementation</span> <span class="o">==</span> <span class="s1">&#39;pysdtw&#39;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalize</span> <span class="p">:</span> 
+                <span class="n">sdtw_function</span> <span class="o">=</span> <span class="n">pysdtw_normalize</span><span class="o">.</span><span class="n">pysdtw_normalized</span><span class="p">(</span><span class="n">use_cuda</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_cuda</span><span class="p">,</span> <span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span><span class="p">,</span> <span class="n">bandwidth</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bandwidth</span><span class="p">,</span> <span class="n">dist_func</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dist_func</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">implementation</span> <span class="o">==</span> <span class="s1">&#39;pysdtw&#39;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalize</span> <span class="p">:</span>
+                <span class="n">sdtw_function</span> <span class="o">=</span> <span class="n">pysdtw</span><span class="o">.</span><span class="n">SoftDTW</span><span class="p">(</span><span class="n">use_cuda</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_cuda</span><span class="p">,</span> <span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span><span class="p">,</span> <span class="n">bandwidth</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bandwidth</span><span class="p">,</span> <span class="n">dist_func</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dist_func</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">implementation</span> <span class="o">==</span> <span class="s1">&#39;ron&#39;</span> <span class="p">:</span>
+                <span class="n">sdtw_function</span> <span class="o">=</span> <span class="n">soft_dtw_cuda_ron</span><span class="o">.</span><span class="n">SoftDTW</span><span class="p">(</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span><span class="p">,</span> <span class="n">normalize</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalize</span><span class="p">,</span> <span class="n">bandwidth</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bandwidth</span><span class="p">,</span> <span class="n">dist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dist</span><span class="p">,</span> <span class="n">fused</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fused</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">sdtw_function</span></div>
 
 
 <div class="viewcode-block" id="soft_dtw.check_implementation">

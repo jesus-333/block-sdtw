@@ -96,9 +96,6 @@
   <section id="module-dtw_loss_functions.otw">
 <span id="otw"></span><h1>OTW<a class="headerlink" href="#module-dtw_loss_functions.otw" title="Link to this heading"></a></h1>
 <p>Implementation of OTW, presented in <span id="id1">[<a class="reference internal" href="biblio.html#id12" title="Fabian Latorre, Chenghao Liu, Doyen Sahoo, and Steven C.H. Hoi. Otw: optimal transport warping for time series. In ICASSP 2023 - 2023 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), volume, 1-5. 2023. doi:10.1109/ICASSP49357.2023.10095915.">LLSH23</a>]</span></p>
-<p>For more details see :
-- <a class="reference external" href="https://ieeexplore.ieee.org/document/10095915">https://ieeexplore.ieee.org/document/10095915</a>
-- <a class="reference external" href="https://arxiv.org/abs/2306.00620">https://arxiv.org/abs/2306.00620</a></p>
 <section id="authors">
 <h2>Authors<a class="headerlink" href="#authors" title="Link to this heading"></a></h2>
 <p>Alberto Zancanaro &lt;<a class="reference external" href="mailto:alberto&#46;zancanaro&#37;&#52;&#48;uni&#46;lu">alberto<span>&#46;</span>zancanaro<span>&#64;</span>uni<span>&#46;</span>lu</a>&gt;</p>
@@ -122,8 +119,8 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<em>torch.Tensor</em>) – First time series, of shape (B, L) where B is the batch size and L is the length of the time series.</p></li>
-<li><p><strong>y</strong> (<em>torch.Tensor</em>) – Second time series, of shape (B, L) where B is the batch size and L is the length of the time series.</p></li>
+<li><p><strong>x</strong> (<em>torch.Tensor</em>) – First time series, of shape <code class="docutils literal notranslate"><span class="pre">B</span> <span class="pre">x</span> <span class="pre">L</span></code> where <code class="docutils literal notranslate"><span class="pre">B</span></code> is the batch size and <code class="docutils literal notranslate"><span class="pre">L</span></code> is the length of the time series.</p></li>
+<li><p><strong>y</strong> (<em>torch.Tensor</em>) – Second time series, of shape <code class="docutils literal notranslate"><span class="pre">B</span> <span class="pre">x</span> <span class="pre">L</span></code> where <code class="docutils literal notranslate"><span class="pre">B</span></code> is the batch size and <code class="docutils literal notranslate"><span class="pre">L</span></code> is the length of the time series.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -140,17 +137,17 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="dtw_loss_functions.otw.otw_distance">
 <span class="sig-prename descclassname"><span class="pre">dtw_loss_functions.otw.</span></span><span class="sig-name descname"><span class="pre">otw_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reduction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'mean'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/dtw_loss_functions/otw.html#otw_distance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dtw_loss_functions.otw.otw_distance" title="Link to this definition"></a></dt>
-<dd><p>Implements the OTW distance between two time series, as defined in equation (10) of the paper.</p>
+<dd><p>Implements the OTW distance between two time series, as defined in equations (9) of the paper.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<em>torch.Tensor</em>) – First time series, of shape (B, L) where B is the batch size and L is the length of the time series.</p></li>
-<li><p><strong>y</strong> (<em>torch.Tensor</em>) – Second time series, of shape (B, L) where B is the batch size and L is the length of the time series.</p></li>
-<li><p><strong>m</strong> (<em>float</em>) – Waste cost parameter, default is 1.</p></li>
-<li><p><strong>s</strong> (<em>int</em><em> | </em><em>float</em>) – Window size parameter, it can be an integer or a float between 0 and 1. Default is 0.5.
+<li><p><strong>x</strong> (<em>torch.Tensor</em>) – First time series, of shape <code class="docutils literal notranslate"><span class="pre">B</span> <span class="pre">x</span> <span class="pre">L</span></code> where <code class="docutils literal notranslate"><span class="pre">B</span></code> is the batch size and <code class="docutils literal notranslate"><span class="pre">L</span></code> is the length of the time series.</p></li>
+<li><p><strong>y</strong> (<em>torch.Tensor</em>) – Second time series, of shape <code class="docutils literal notranslate"><span class="pre">B</span> <span class="pre">x</span> <span class="pre">L</span></code> where <code class="docutils literal notranslate"><span class="pre">B</span></code> is the batch size and <code class="docutils literal notranslate"><span class="pre">L</span></code> is the length of the time series.</p></li>
+<li><p><strong>m</strong> (<em>float</em>) – Waste cost parameter, default is <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p></li>
+<li><p><strong>s</strong> (<em>int</em><em> | </em><em>float</em>) – Window size parameter, it can be an integer or a float between <code class="docutils literal notranslate"><span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">1</span></code>. Default is <code class="docutils literal notranslate"><span class="pre">0.5</span></code>.
 If float, it is interpreted as a fraction of the length of the time series.
 If integer, it is interpreted as the number of time steps.</p></li>
-<li><p><strong>beta</strong> (<em>float</em>) – Hyperparameter for the smooth l1 loss, default is 1.</p></li>
+<li><p><strong>beta</strong> (<em>float</em>) – Hyperparameter for the smooth l1 loss, default is <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -169,13 +166,13 @@ If integer, it is interpreted as the number of time steps.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<em>torch.Tensor</em>) – Input tensor of shape (B). Each element corresponds to the difference between two time series.</p></li>
+<li><p><strong>x</strong> (<em>torch.Tensor</em>) – Input tensor of shape <code class="docutils literal notranslate"><span class="pre">B</span></code>. Each element corresponds to the difference between two time series.</p></li>
 <li><p><strong>beta</strong> (<em>float</em>) – Hyperparameter for the smooth l1 loss.</p></li>
-<li><p><strong>reduction</strong> (<em>str</em>) – Specifies the reduction to apply to the output: ‘none’ | ‘mean’ | ‘sum’. Default: ‘mean’.</p></li>
+<li><p><strong>reduction</strong> (<em>str</em>) – Specifies the reduction to apply to the output: <code class="docutils literal notranslate"><span class="pre">none</span></code> | <code class="docutils literal notranslate"><span class="pre">mean</span></code> | <code class="docutils literal notranslate"><span class="pre">sum</span></code>. Default: <code class="docutils literal notranslate"><span class="pre">mean</span></code>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Smooth l1 loss of the input tensor. If reduction is ‘none’, the output has the same shape as x. If reduction is ‘mean’ or ‘sum’, the output is a scalar.</p>
+<dd class="field-even"><p>Smooth l1 loss of the input tensor. If reduction is <code class="docutils literal notranslate"><span class="pre">none</span></code>, the output has the same shape as <cite>x</cite>. If reduction is <code class="docutils literal notranslate"><span class="pre">mean</span></code> or <code class="docutils literal notranslate"><span class="pre">sum</span></code>, the output is a scalar.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>torch.Tensor</p>

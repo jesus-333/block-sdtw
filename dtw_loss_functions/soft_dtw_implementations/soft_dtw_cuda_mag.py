@@ -10,8 +10,8 @@ GitHub repository : https://github.com/Maghoumi/pytorch-softdtw-cuda
 
 Example
 -------
->>> from dtw_loss_functions import soft_dtw
 >>> import torch
+>>> from dtw_loss_functions import soft_dtw
 >>> use_cuda = torch.cuda.is_available()
 >>> device = 'cuda' if use_cuda else 'cpu'
 >>> batch_size = 5
@@ -19,7 +19,8 @@ Example
 >>> channels = 1
 >>> x   = torch.randn(batch_size, time_samples, channels).to(device)
 >>> x_r = torch.randn(batch_size, time_samples, channels).to(device)
->>> sdtw_loss = soft_dtw.soft_dtw(use_cuda = use_cuda, implementation = 'mag')
+>>> sdtw_config = {use_cuda : use_cuda}
+>>> sdtw_loss = soft_dtw.soft_dtw(implementation = 'mag', sdtw_config = sdtw_config)
 >>> output_sdtw = sdtw_loss(x, x_r)
 
 Authors

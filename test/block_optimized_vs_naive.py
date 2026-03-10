@@ -34,6 +34,7 @@ parser.add_argument('--time_samples'   , type = int, default = None, help = 'Num
 parser.add_argument('--channels'       , type = int, default = None, help = 'Number of channels for the input data')
 parser.add_argument('--block_size'     , type = int, default = None, help = 'Block size for the block DTW implementation')
 parser.add_argument('--n_repetitions'  , type = int, default = None, help = 'Number of repetitions for the time evaluation of the loss functions')
+parser.add_argument('--implementation' , type = str, default = None, help = 'Which implementation will be used for the SoftDTW. Possible values are "mag", "pysdtw" and "ron". See the documentation of the soft_dtw class for more details about the different implementations. If None, the default implementation will be used (which is "mag")')
 parser.add_argument('--use_cuda'       , action = 'store_true', default = None, help = 'Whether to use CUDA backend for the computations. If None, it will check automatically if CUDA is available and use it if possible')
 parser.add_argument('--time_in_seconds', action = 'store_true', default = False, help = 'If set, the computational times will be printed in seconds instead of milliseconds')
 
@@ -46,7 +47,7 @@ import numpy as np
 import torch
 import time
 
-from dtw_loss_functions import soft_dtw_cuda, block_dtw
+from dtw_loss_functions import soft_dtw, block_dtw
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Default arguments
@@ -56,6 +57,7 @@ default_time_samples = 300
 default_channels = 1
 default_block_size = 25
 default_n_repetitions = 100
+default_implementation = 'mag'
 default_use_cuda = None
 default_time_in_seconds = False
 
@@ -68,6 +70,7 @@ time_samples    = args.time_samples if args.time_samples is not None else defaul
 channels        = args.channels if args.channels is not None else default_channels
 block_size      = args.block_size if args.block_size is not None else default_block_size
 n_repetitions   = args.n_repetitions if args.n_repetitions is not None else default_n_repetitions
+implementation  = args.implementation if args.implementation is not None else default_implementation
 use_cuda        = args.use_cuda if args.use_cuda is not None else default_use_cuda
 time_in_seconds = args.time_in_seconds if args.time_in_seconds is not None else default_time_in_seconds
 
@@ -83,10 +86,12 @@ else :
         use_cuda = False
 device = torch.device('cuda' if use_cuda else 'cpu')
 
+sdtw_config = {'use_cuda' : use_cuda}
+
 # Set up loss functions
-sdtw_loss = soft_dtw_cuda.SoftDTW(use_cuda = use_cuda)
-block_naive_loss = block_dtw.block_dtw_naive(block_size, use_cuda)
-block_optimized_loss = block_dtw.block_dtw_optimized(block_size, use_cuda)
+sdtw_loss = soft_dtw.soft_dtw(implementation = implementation, sdtw_config = sdtw_config)
+block_naive_loss = block_dtw.block_dtw_naive(block_size, implementation = implementation, sdtw_config = sdtw_config)
+block_optimized_loss = block_dtw.block_dtw_optimized(block_size, implementation = implementation, sdtw_config = sdtw_config)
 
 # Generate synthetic data
 x   = torch.randn(batch_size, time_samples, channels).to(device)
@@ -152,6 +157,9 @@ label_time = 's' if time_in_seconds else 'ms'
 
 # Print results
 print("Test 2 : Compare the computational time")
+print(f"Block size for the block DTW implementations     : {block_size}")
+print(f"Implementation used for the SoftDTW computations : {implementation}")
+print(f"Input data shape                                 : {x.shape}\n")
 print(f"Average computational time over {n_repetitions} repetitions :")
 print(f"\tBlock DTW Naive Implementation     : {block_naive_times.mean():.4f}±{block_naive_times.std():.4f} {label_time}")
 print(f"\tBlock DTW Optimized Implementation : {block_optimized_times.mean():.4f}±{block_optimized_times.std():.4f} {label_time}")

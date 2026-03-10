@@ -1,12 +1,6 @@
 """
 Implementation of OTW, presented in :cite:`otw_paper`
 
-
-For more details see :
-- https://ieeexplore.ieee.org/document/10095915
-- https://arxiv.org/abs/2306.00620
-
-
 Authors
 -------
 Alberto Zancanaro <alberto.zancanaro@uni.lu>
@@ -39,9 +33,9 @@ class otw(torch.nn.Module) :
         Parameters
         ----------
         x : torch.Tensor
-            First time series, of shape (B, L) where B is the batch size and L is the length of the time series.
+            First time series, of shape ``B x L`` where ``B`` is the batch size and ``L`` is the length of the time series.
         y : torch.Tensor
-            Second time series, of shape (B, L) where B is the batch size and L is the length of the time series.
+            Second time series, of shape ``B x L`` where ``B`` is the batch size and ``L`` is the length of the time series.
 
 
         Returns
@@ -54,23 +48,23 @@ class otw(torch.nn.Module) :
 
 def otw_distance(x : torch.Tensor, y : torch.Tensor, m : float = 1, s : int | float = 0.5, beta : float = 1, reduction : str = 'mean') -> torch.Tensor:
     """
-    Implements the OTW distance between two time series, as defined in equation (10) of the paper.
+    Implements the OTW distance between two time series, as defined in equations (9) of the paper.
 
 
     Parameters
     ----------
     x : torch.Tensor
-        First time series, of shape (B, L) where B is the batch size and L is the length of the time series.
+        First time series, of shape ``B x L`` where ``B`` is the batch size and ``L`` is the length of the time series.
     y : torch.Tensor
-        Second time series, of shape (B, L) where B is the batch size and L is the length of the time series.
+        Second time series, of shape ``B x L`` where ``B`` is the batch size and ``L`` is the length of the time series.
     m : float
-        Waste cost parameter, default is 1.
+        Waste cost parameter, default is ``1``.
     s : int | float
-        Window size parameter, it can be an integer or a float between 0 and 1. Default is 0.5.
+        Window size parameter, it can be an integer or a float between ``0`` and ``1``. Default is ``0.5``.
         If float, it is interpreted as a fraction of the length of the time series.
         If integer, it is interpreted as the number of time steps.
     beta : float
-        Hyperparameter for the smooth l1 loss, default is 1.
+        Hyperparameter for the smooth l1 loss, default is ``1``.
 
 
     Returns
@@ -122,17 +116,17 @@ def smooth_l1_loss(x : torch.Tensor, beta : float, reduction = 'mean') -> torch.
     Parameters
     ----------
     x : torch.Tensor
-        Input tensor of shape (B). Each element corresponds to the difference between two time series.
+        Input tensor of shape ``B``. Each element corresponds to the difference between two time series.
     beta : float
         Hyperparameter for the smooth l1 loss.
     reduction : str
-        Specifies the reduction to apply to the output: 'none' | 'mean' | 'sum'. Default: 'mean'.
+        Specifies the reduction to apply to the output: ``none`` | ``mean`` | ``sum``. Default: ``mean``.
 
 
     Returns
     -------
     torch.Tensor
-        Smooth l1 loss of the input tensor. If reduction is 'none', the output has the same shape as x. If reduction is 'mean' or 'sum', the output is a scalar.
+        Smooth l1 loss of the input tensor. If reduction is ``none``, the output has the same shape as `x`. If reduction is ``mean`` or ``sum``, the output is a scalar.
     """
     
     # Compute smooth l1 loss element-wise

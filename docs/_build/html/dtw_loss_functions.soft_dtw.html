@@ -55,7 +55,10 @@
 <li class="toctree-l2"><a class="reference internal" href="#authors">Authors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#dtw_loss_functions.soft_dtw.soft_dtw"><code class="docutils literal notranslate"><span class="pre">soft_dtw</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#dtw_loss_functions.soft_dtw.soft_dtw.check_implementation"><code class="docutils literal notranslate"><span class="pre">soft_dtw.check_implementation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dtw_loss_functions.soft_dtw.soft_dtw.create_sdtw_function"><code class="docutils literal notranslate"><span class="pre">soft_dtw.create_sdtw_function()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#dtw_loss_functions.soft_dtw.soft_dtw.forward"><code class="docutils literal notranslate"><span class="pre">soft_dtw.forward()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dtw_loss_functions.soft_dtw.soft_dtw.set_implementation"><code class="docutils literal notranslate"><span class="pre">soft_dtw.set_implementation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dtw_loss_functions.soft_dtw.soft_dtw.set_sdtw_config"><code class="docutils literal notranslate"><span class="pre">soft_dtw.set_sdtw_config()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -120,43 +123,90 @@
 </li>
 </ul>
 <p>If you use this module, please cite together with this package the original paper of the implementation you are using.</p>
+<p class="rubric">Example</p>
+<p>Mehran Maghoumi’s (<code class="docutils literal notranslate"><span class="pre">mag</span></code>) implementation</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">dtw_loss_functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">soft_dtw</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">use_cuda</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sdtw_loss</span> <span class="o">=</span> <span class="n">soft_dtw</span><span class="o">.</span><span class="n">soft_dtw</span><span class="p">(</span><span class="n">implementation</span> <span class="o">=</span> <span class="s1">&#39;mag&#39;</span><span class="p">,</span> <span class="n">sdtw_config</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;use_cuda&#39;</span> <span class="p">:</span> <span class="n">use_cuda</span><span class="p">,</span> <span class="s1">&#39;gamma&#39;</span> <span class="p">:</span> <span class="mf">0.1</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">device</span> <span class="o">=</span> <span class="s1">&#39;cuda&#39;</span> <span class="k">if</span> <span class="n">use_cuda</span> <span class="k">else</span> <span class="s1">&#39;cpu&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">batch_size</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time_samples</span> <span class="o">=</span> <span class="mi">300</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">channels</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>   <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">time_samples</span><span class="p">,</span> <span class="n">channels</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x_r</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">time_samples</span><span class="p">,</span> <span class="n">channels</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output_sdtw</span> <span class="o">=</span> <span class="n">sdtw_loss</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x_r</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Ron Shapira Weber’s (<code class="docutils literal notranslate"><span class="pre">ron</span></code>) implementation</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">dtw_loss_functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">soft_dtw</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sdtw_loss</span> <span class="o">=</span> <span class="n">soft_dtw</span><span class="o">.</span><span class="n">soft_dtw</span><span class="p">(</span><span class="n">implementation</span> <span class="o">=</span> <span class="s1">&#39;ron&#39;</span><span class="p">,</span> <span class="n">sdtw_config</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;gamma&#39;</span> <span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span> <span class="s1">&#39;dist&#39;</span> <span class="p">:</span> <span class="s1">&#39;sqeuclidean&#39;</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">device</span> <span class="o">=</span> <span class="s1">&#39;cuda&#39;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;cpu&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">batch_size</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time_samples</span> <span class="o">=</span> <span class="mi">300</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">channels</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>   <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">time_samples</span><span class="p">,</span> <span class="n">channels</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x_r</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">time_samples</span><span class="p">,</span> <span class="n">channels</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output_sdtw</span> <span class="o">=</span> <span class="n">sdtw_loss</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x_r</span><span class="p">)</span>
+</pre></div>
+</div>
 <section id="authors">
 <h2>Authors<a class="headerlink" href="#authors" title="Link to this heading"></a></h2>
 <p>Alberto Zancanaro &lt;<a class="reference external" href="mailto:alberto&#46;zancanaro&#37;&#52;&#48;uni&#46;lu">alberto<span>&#46;</span>zancanaro<span>&#64;</span>uni<span>&#46;</span>lu</a>&gt;</p>
 </section>
 <dl class="py class">
 <dt class="sig sig-object py" id="dtw_loss_functions.soft_dtw.soft_dtw">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">dtw_loss_functions.soft_dtw.</span></span><span class="sig-name descname"><span class="pre">soft_dtw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">use_cuda</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bandwidth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dist_func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">callable</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">implementation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'mag'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fused</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dtw_loss_functions/soft_dtw.html#soft_dtw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dtw_loss_functions.soft_dtw.soft_dtw" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">dtw_loss_functions.soft_dtw.</span></span><span class="sig-name descname"><span class="pre">soft_dtw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">implementation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'mag'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sdtw_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dtw_loss_functions/soft_dtw.html#soft_dtw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dtw_loss_functions.soft_dtw.soft_dtw" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
 <p>SoftDTW class. This class is a wrapper for the different implementations of the SoftDTW.
-The implementation can be selected by passing the ‘implementation’ argument to the constructor. The available implementations are:</p>
+The implementation can be selected by passing the <code class="docutils literal notranslate"><span class="pre">implementation</span></code> argument to the constructor. The available implementations are:</p>
 <ul class="simple">
 <li><p><cite>mag</cite>: pytorch-softdtw-cuda by Mehran Maghoumi</p></li>
 <li><p><cite>pysdtw</cite>: pysdtw by Antoine Loriette</p></li>
 <li><p><cite>ron</cite> : sdtw-cuda-torch by BGU-CS-VIL (implemented by Ron Shapira Weber)</p></li>
 </ul>
+<p>Together with the implementation, a configuration dictionary can be passed to the constructor to set the parameters of the SDTW function.
+The available parameters depend on the implementation selected, but some parameters are common for all implementations (e.g. <code class="docutils literal notranslate"><span class="pre">gamma</span></code>, <code class="docutils literal notranslate"><span class="pre">normalize</span></code>, <code class="docutils literal notranslate"><span class="pre">bandwidth</span></code>).
+The available parameters are listed below.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>use_cuda</strong> (<em>bool</em>) – If true, this class will use the CUDA implementation of the SDTW.</p></li>
-<li><p><strong>gamma</strong> (<em>float</em><em>, </em><em>optional</em>) – Value of the gamma hyperparameter for the SDTW. Default is <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p></li>
-<li><p><strong>normalize</strong> (<em>bool</em><em>, </em><em>optional</em>) – If true, the SDTW divergence will be computed instead of the SDTW. Default is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
-<li><p><strong>bandwidth</strong> (<em>float</em><em>, </em><em>optional</em>) – Sakoe-Chiba bandwidth for pruning. If the <code class="docutils literal notranslate"><span class="pre">None</span></code> is given, no pruning is applied. Default is None.</p></li>
-<li><p><strong>dist_func</strong> (<em>function</em><em>, </em><em>optional</em>) – Distance function to use for the SDTW. Default is <code class="docutils literal notranslate"><span class="pre">None</span></code>, which corresponds to the squared Euclidean distance.</p></li>
-<li><p><strong>implementation</strong> (<em>str</em><em>, </em><em>optional</em>) – <p>Implementation to use for the SDTW.</p>
+<li><p><strong>implementation</strong> (<em>str</em>) – <p>Implementation to use for the SDTW.</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">mag</span></code>. Use the implementation by Mehran Maghoumi <span id="id5">[<a class="reference internal" href="biblio.html#id8" title="Mehran Maghoumi. Deep Recurrent Networks for Gesture Recognition and Synthesis. PhD thesis, University of Central Florida Orlando, Florida, 2020.">Mag20</a>]</span> <span id="id6">[<a class="reference internal" href="biblio.html#id9" title="Mehran Maghoumi, Eugene Matthew Taranta, and Joseph LaViola. Deepnag: deep non-adversarial gesture generation. In 26th International Conference on Intelligent User Interfaces, 213–223. 2021.">MTL21</a>]</span>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">pysdtw</span></code>. Use the implementation in the pysdtw package by Antoine Loriette.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ron</span></code> Use the implementation by Ron Shapira Weber <span id="id7">[<a class="reference internal" href="biblio.html#id10" title="Ron Shapira Weber and Oren Freifeld. Softdtw-cuda-torch: memory-efficient gpu-accelerated soft dynamic time warping for pytorch. 2026. URL: https://arxiv.org/abs/2602.17206, arXiv:2602.17206.">WF26</a>]</span> <span id="id8">[<a class="reference internal" href="biblio.html#id11" title="Ron Shapira Weber, Shahar Benishay, Andrey Lavrinenko, Shahaf E. Finder, and Oren Freifeld. TimePoint: accelerated time series alignment via self-supervised keypoint and descriptor learning. In Aarti Singh, Maryam Fazel, Daniel Hsu, Simon Lacoste-Julien, Felix Berkenkamp, Tegan Maharaj, Kiri Wagstaff, and Jerry Zhu, editors, Proceedings of the 42nd International Conference on Machine Learning, volume 267 of Proceedings of Machine Learning Research, 54275–54299. PMLR, 13–19 Jul 2025. URL: https://proceedings.mlr.press/v267/shapira-weber25a.html.">SWBL+25</a>]</span>.</p></li>
 </ul>
-<p>Default is <code class="docutils literal notranslate"><span class="pre">mag</span></code>.</p>
 </p></li>
-<li><p><strong>fused</strong> (<em>bool</em><em>, </em><em>optional</em>) – <p>Only for the ‘ron’ implementation.</p>
+<li><p><strong>sdtw_config</strong> (<em>dict</em><em>, </em><em>optional</em>) – <p>Configuration dictionary for the SDTW function.
+Note that if a parameter is not specified in the configuration dictionary, the default value will be used (the default values are specified in the description of each parameter).
+The dictionary can contain the following keys :</p>
+<blockquote>
+<div><dl class="simple">
+<dt>use_cuda<span class="classifier">bool</span></dt><dd><p>If <code class="docutils literal notranslate"><span class="pre">True</span></code>, this class will use the CUDA implementation of the SDTW. Only for the <code class="docutils literal notranslate"><span class="pre">mag</span></code> and <code class="docutils literal notranslate"><span class="pre">pysdtw</span></code> implementations. Default is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</dd>
+<dt>gamma<span class="classifier">float, optional</span></dt><dd><p>Value of the gamma hyperparameter for the SDTW. Default is <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+</dd>
+<dt>normalize<span class="classifier">bool, optional</span></dt><dd><p>If <code class="docutils literal notranslate"><span class="pre">True</span></code>, the SDTW divergence will be computed instead of the SDTW. Default is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</dd>
+<dt>bandwidth<span class="classifier">float, optional</span></dt><dd><p>Sakoe-Chiba bandwidth for pruning. If the <code class="docutils literal notranslate"><span class="pre">None</span></code> is given, no pruning is applied. Default is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+<dt>dist_func<span class="classifier">function, optional</span></dt><dd><p>Only for the <code class="docutils literal notranslate"><span class="pre">mag</span></code> and <code class="docutils literal notranslate"><span class="pre">pysdtw</span></code> implementations. If passed, this function will be used as distance function to use for the SDTW.
+If <code class="docutils literal notranslate"><span class="pre">None</span></code>, the default distance function of the implementation will be used (squared Euclidean distance for both implementations).
+Default is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+<dt>dist<span class="classifier">str, optional</span></dt><dd><p>Only for the <code class="docutils literal notranslate"><span class="pre">ron</span></code> implementation. It has the same purpose as <code class="docutils literal notranslate"><span class="pre">dist_func</span></code> for the other implementations, but in this case must be a string.</p>
+</dd>
+<dt>fused<span class="classifier">bool, optional</span></dt><dd><p>Only for the <code class="docutils literal notranslate"><span class="pre">ron</span></code> implementation.</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">None</span></code>  -&gt; auto (use fused only when possible)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">True</span></code>  -&gt; require fused (error if not possible)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">False</span></code> -&gt; never fused (always materialize D and use D-based autograd)</p></li>
 </ul>
+</dd>
+</dl>
+</div></blockquote>
 </p></li>
 </ul>
 </dd>
@@ -167,8 +217,17 @@ The implementation can be selected by passing the ‘implementation’ argument 
 <tr class="row-odd"><td><p><a class="reference internal" href="#dtw_loss_functions.soft_dtw.soft_dtw.check_implementation" title="dtw_loss_functions.soft_dtw.soft_dtw.check_implementation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_implementation</span></code></a>(implementation)</p></td>
 <td><p>Check if the selected implementation is valid.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#dtw_loss_functions.soft_dtw.soft_dtw.forward" title="dtw_loss_functions.soft_dtw.soft_dtw.forward"><code class="xref py py-obj docutils literal notranslate"><span class="pre">forward</span></code></a>(x, y)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#dtw_loss_functions.soft_dtw.soft_dtw.create_sdtw_function" title="dtw_loss_functions.soft_dtw.soft_dtw.create_sdtw_function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_sdtw_function</span></code></a>(sdtw_config)</p></td>
+<td><p>Create and return an istance of the SDTW function based on the current implementation and parameters.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dtw_loss_functions.soft_dtw.soft_dtw.forward" title="dtw_loss_functions.soft_dtw.soft_dtw.forward"><code class="xref py py-obj docutils literal notranslate"><span class="pre">forward</span></code></a>(x, y)</p></td>
 <td><p>Compute the SoftDTW distance between two time series.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dtw_loss_functions.soft_dtw.soft_dtw.set_implementation" title="dtw_loss_functions.soft_dtw.soft_dtw.set_implementation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_implementation</span></code></a>(implementation[, ...])</p></td>
+<td><p>Set the implementation to use for the SDTW.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dtw_loss_functions.soft_dtw.soft_dtw.set_sdtw_config" title="dtw_loss_functions.soft_dtw.soft_dtw.set_sdtw_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_sdtw_config</span></code></a>([sdtw_config, ...])</p></td>
+<td><p>Set the configuration for the SDTW function.</p></td>
 </tr>
 </tbody>
 </table>
@@ -176,6 +235,17 @@ The implementation can be selected by passing the ‘implementation’ argument 
 <dt class="sig sig-object py" id="dtw_loss_functions.soft_dtw.soft_dtw.check_implementation">
 <span class="sig-name descname"><span class="pre">check_implementation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">implementation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dtw_loss_functions/soft_dtw.html#soft_dtw.check_implementation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dtw_loss_functions.soft_dtw.soft_dtw.check_implementation" title="Link to this definition"></a></dt>
 <dd><p>Check if the selected implementation is valid. If not, raise an error.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dtw_loss_functions.soft_dtw.soft_dtw.create_sdtw_function">
+<span class="sig-name descname"><span class="pre">create_sdtw_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sdtw_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dtw_loss_functions/soft_dtw.html#soft_dtw.create_sdtw_function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dtw_loss_functions.soft_dtw.soft_dtw.create_sdtw_function" title="Link to this definition"></a></dt>
+<dd><p>Create and return an istance of the SDTW function based on the current implementation and parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>sdtw_config</strong> (<em>dict</em>) – Configuration dictionary for the SDTW function. The keys of the dictionary are the same as the parameters of the constructor.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -194,6 +264,29 @@ The implementation can be selected by passing the ‘implementation’ argument 
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dtw_loss_functions.soft_dtw.soft_dtw.set_implementation">
+<span class="sig-name descname"><span class="pre">set_implementation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">implementation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reset_sdtw_function</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dtw_loss_functions/soft_dtw.html#soft_dtw.set_implementation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dtw_loss_functions.soft_dtw.soft_dtw.set_implementation" title="Link to this definition"></a></dt>
+<dd><p>Set the implementation to use for the SDTW. This function can be used to change the implementation after the class has been initialized.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dtw_loss_functions.soft_dtw.soft_dtw.set_sdtw_config">
+<span class="sig-name descname"><span class="pre">set_sdtw_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sdtw_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reset_sdtw_function</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dtw_loss_functions/soft_dtw.html#soft_dtw.set_sdtw_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dtw_loss_functions.soft_dtw.soft_dtw.set_sdtw_config" title="Link to this definition"></a></dt>
+<dd><p>Set the configuration for the SDTW function. This function can be used to change the configuration after the class has been initialized.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sdtw_config</strong> (<em>dict</em>) – Configuration dictionary for the SDTW function. The keys of the dictionary are the same as the parameters of the constructor.
+Note that if a key is absent from the dictionary, the default value for that parameter will be used (the default values are specified in the description of each parameter).</p></li>
+<li><p><strong>reset_sdtw_function</strong> (<em>bool</em><em>, </em><em>optional</em>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, the SDTW function will be reset with the new configuration.
+If <code class="docutils literal notranslate"><span class="pre">False</span></code>, the SDTW function will not be reset, but the new configuration will be saved as an attribute of the class.
+Default is <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>

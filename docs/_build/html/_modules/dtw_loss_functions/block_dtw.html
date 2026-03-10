@@ -96,7 +96,7 @@
 <span class="sd">&gt;&gt;&gt; channels = 1</span>
 <span class="sd">&gt;&gt;&gt; x   = torch.randn(batch_size, time_samples, channels).to(device)</span>
 <span class="sd">&gt;&gt;&gt; x_r = torch.randn(batch_size, time_samples, channels).to(device)</span>
-<span class="sd">&gt;&gt;&gt; block_dtw_loss = block_dtw.block_dtw(block_size, use_cuda)</span>
+<span class="sd">&gt;&gt;&gt; block_dtw_loss = block_dtw.block_dtw(block_size)</span>
 <span class="sd">&gt;&gt;&gt; output_block_dtw = block_dtw_loss(x, x_r)</span>
 
 <span class="sd">Authors</span>
@@ -145,30 +145,23 @@
 <span class="sd">    ----------</span>
 <span class="sd">    block_size : int</span>
 <span class="sd">        Size of the blocks into which to divide the signal.</span>
-<span class="sd">    use_cuda : bool</span>
-<span class="sd">        If true, this class will use the CUDA implementation of the SDTW.</span>
-<span class="sd">    gamma_sdtw : float, optional</span>
-<span class="sd">        Value of the gamma hyperparameter for the SDTW. Default is 1.</span>
-<span class="sd">    use_divergence : bool, optional</span>
-<span class="sd">        If true, compute the SDTW divergence instead of the SDTW. Default is False.</span>
-<span class="sd">    bandwidth : float, optional</span>
-<span class="sd">        Sakoe-Chiba bandwidth for pruning. If the &#39;None&#39; is given, no pruning is applied. Default is None.</span>
-<span class="sd">    dist_func : function, optional</span>
-<span class="sd">        Distance function to use for the SDTW. Default is None, which corresponds to the squared Euclidean distance.</span>
+<span class="sd">    implementation : str</span>
+<span class="sd">        Implementation to use for the SDTW. This parameter is passed to the SDTW implementation used in the block DTW. See the docstring of the :class:`~dtw_loss_functions.soft_dtw.soft_dtw` class for more details on the available implementations and their parameters.</span>
+<span class="sd">    sdtw_config : dict, optional</span>
+<span class="sd">        Configuration dictionary for the SDTW function used in the block DTW. See the docstring of the :class:`~dtw_loss_functions.soft_dtw.soft_dtw` class for more details on the available parameters and their default values.</span>
+<span class="sd">        If a parameter is not specified, or if the dictionary is empty, the default values will be used for all the parameters.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">block_size</span> <span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-                 <span class="n">use_cuda</span> <span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                 <span class="n">gamma_sdtw</span> <span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">use_divergence</span> <span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">bandwidth</span> <span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">dist_func</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                  <span class="n">implementation</span> <span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;mag&#39;</span><span class="p">,</span>
-                 <span class="n">fused</span> <span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">sdtw_config</span> <span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{}</span>
                  <span class="p">)</span> <span class="p">:</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">block_size</span> <span class="o">=</span> <span class="n">block_size</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">block_dtw_naive</span> <span class="o">=</span> <span class="n">block_dtw_naive</span><span class="p">(</span><span class="n">block_size</span> <span class="o">=</span> <span class="n">block_size</span><span class="p">,</span> <span class="n">use_cuda</span> <span class="o">=</span> <span class="n">use_cuda</span><span class="p">,</span> <span class="n">gamma_sdtw</span> <span class="o">=</span> <span class="n">gamma_sdtw</span><span class="p">,</span> <span class="n">use_divergence</span> <span class="o">=</span> <span class="n">use_divergence</span><span class="p">,</span> <span class="n">bandwidth</span> <span class="o">=</span> <span class="n">bandwidth</span><span class="p">,</span> <span class="n">dist_func</span> <span class="o">=</span> <span class="n">dist_func</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">block_dtw_optimized</span> <span class="o">=</span> <span class="n">block_dtw_optimized</span><span class="p">(</span><span class="n">block_size</span> <span class="o">=</span> <span class="n">block_size</span><span class="p">,</span> <span class="n">use_cuda</span> <span class="o">=</span> <span class="n">use_cuda</span><span class="p">,</span> <span class="n">gamma_sdtw</span> <span class="o">=</span> <span class="n">gamma_sdtw</span><span class="p">,</span> <span class="n">use_divergence</span> <span class="o">=</span> <span class="n">use_divergence</span><span class="p">,</span> <span class="n">bandwidth</span> <span class="o">=</span> <span class="n">bandwidth</span><span class="p">,</span> <span class="n">dist_func</span> <span class="o">=</span> <span class="n">dist_func</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">block_dtw_naive</span> <span class="o">=</span> <span class="n">block_dtw_naive</span><span class="p">(</span><span class="n">block_size</span><span class="p">,</span> <span class="n">implementation</span><span class="p">,</span> <span class="n">sdtw_config</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">block_dtw_optimized</span> <span class="o">=</span> <span class="n">block_dtw_optimized</span><span class="p">(</span><span class="n">block_size</span><span class="p">,</span> <span class="n">implementation</span><span class="p">,</span> <span class="n">sdtw_config</span><span class="p">)</span>
 
 <div class="viewcode-block" id="block_dtw.forward">
 <a class="viewcode-back" href="../../dtw_loss_functions.block_dtw.html#dtw_loss_functions.block_dtw.block_dtw.forward">[docs]</a>
@@ -206,14 +199,9 @@
 <span class="sd">    For details on the parameters, see the docstring of the :class:`block_dtw` class.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">block_size</span> <span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-                 <span class="n">use_cuda</span> <span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                 <span class="n">gamma_sdtw</span> <span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">use_divergence</span> <span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">bandwidth</span> <span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">dist_func</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                 <span class="n">implementation</span> <span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;mag&#39;</span><span class="p">,</span>
-                 <span class="n">fused</span> <span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                 <span class="p">)</span> <span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">block_size</span> <span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">implementation</span> <span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;mag&#39;</span><span class="p">,</span> <span class="n">sdtw_config</span> <span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{})</span> <span class="p">:</span>
 
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">use_cuda</span> <span class="o">=</span> <span class="n">use_cuda</span><span class="p">,</span> <span class="n">gamma</span> <span class="o">=</span> <span class="n">gamma_sdtw</span><span class="p">,</span> <span class="n">normalize</span> <span class="o">=</span> <span class="n">use_divergence</span><span class="p">,</span> <span class="n">bandwidth</span> <span class="o">=</span> <span class="n">bandwidth</span><span class="p">,</span> <span class="n">dist_func</span> <span class="o">=</span> <span class="n">dist_func</span><span class="p">,</span> <span class="n">implementation</span> <span class="o">=</span> <span class="n">implementation</span><span class="p">,</span> <span class="n">fused</span> <span class="o">=</span> <span class="n">fused</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">implementation</span> <span class="o">=</span> <span class="n">implementation</span><span class="p">,</span> <span class="n">sdtw_config</span> <span class="o">=</span> <span class="n">sdtw_config</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">block_size</span> <span class="o">=</span> <span class="n">block_size</span>
 
@@ -283,14 +271,9 @@
 <span class="sd">    For details on the parameters, see the docstring of the :class:`block_dtw` class.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">block_size</span> <span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-                 <span class="n">use_cuda</span> <span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                 <span class="n">gamma_sdtw</span> <span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">use_divergence</span> <span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">bandwidth</span> <span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">dist_func</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                 <span class="n">implementation</span> <span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;mag&#39;</span><span class="p">,</span>
-                 <span class="n">fused</span> <span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                 <span class="p">)</span> <span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">block_size</span> <span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">implementation</span> <span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;mag&#39;</span><span class="p">,</span> <span class="n">sdtw_config</span> <span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{})</span> <span class="p">:</span>
 
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">use_cuda</span> <span class="o">=</span> <span class="n">use_cuda</span><span class="p">,</span> <span class="n">gamma</span> <span class="o">=</span> <span class="n">gamma_sdtw</span><span class="p">,</span> <span class="n">normalize</span> <span class="o">=</span> <span class="n">use_divergence</span><span class="p">,</span> <span class="n">bandwidth</span> <span class="o">=</span> <span class="n">bandwidth</span><span class="p">,</span> <span class="n">dist_func</span> <span class="o">=</span> <span class="n">dist_func</span><span class="p">,</span> <span class="n">implementation</span> <span class="o">=</span> <span class="n">implementation</span><span class="p">,</span> <span class="n">fused</span> <span class="o">=</span> <span class="n">fused</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">implementation</span> <span class="o">=</span> <span class="n">implementation</span><span class="p">,</span> <span class="n">sdtw_config</span> <span class="o">=</span> <span class="n">sdtw_config</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">block_size</span> <span class="o">=</span> <span class="n">block_size</span>
 
