@@ -82,9 +82,9 @@
              
   <h1>Source code for dtw_loss_functions.soft_dtw</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">SoftDTW module. Since there are various implementations online of the SoftDTW, this module was created as a wrapper to be able to easily switch between different implementations.</span>
+<span class="sd">Since there are various implementations online of the SoftDTW, this module was created as a wrapper to be able to easily switch between different implementations.</span>
 
-<span class="sd">Currently, the following implementations are available:</span>
+<span class="sd">Currently, the following implementations are available :</span>
 
 <span class="sd">- pytorch-softdtw-cuda by Mehran Maghoumi :cite:`soft_dtw_mag_1` :cite:`soft_dtw_mag_2`</span>
 <span class="sd">    - GitHub repository : https://github.com/Maghoumi/pytorch-softdtw-cuda</span>
@@ -94,9 +94,7 @@
 <span class="sd">- sdtw-cuda-torch by BGU-CS-VIL (implemented by Ron Shapira Weber) :cite:`soft_dtw_ron_1` :cite:`soft_dtw_ron_2`</span>
 <span class="sd">    - GitHub repository : https://github.com/BGU-CS-VIL/sdtw-cuda-torch</span>
 
-<span class="sd">If you this module, please refer to the original implementations and cite the corresponding papers.</span>
-<span class="sd">For each implementation, the original paper is cited in the corresponding module docstring.</span>
-<span class="sd">Also, all the citation are listed in the `citations.md` file in the root of this repository.</span>
+<span class="sd">If you use this module, please cite together with this package the original paper of the implementation you are using.</span>
 
 <span class="sd">Authors</span>
 <span class="sd">-------</span>
@@ -137,7 +135,13 @@
 <span class="sd">    dist_func : function, optional</span>
 <span class="sd">        Distance function to use for the SDTW. Default is ``None``, which corresponds to the squared Euclidean distance.</span>
 <span class="sd">    implementation : str, optional</span>
-<span class="sd">        Implementation to use for the SDTW. Currently accepted values are ``mag``, ``pysdtw`` and ``ron``. Default is ``mag``.</span>
+<span class="sd">        Implementation to use for the SDTW.</span>
+
+<span class="sd">        - ``mag``. Use the implementation by Mehran Maghoumi :cite:`soft_dtw_mag_1` :cite:`soft_dtw_mag_2`.</span>
+<span class="sd">        - ``pysdtw``. Use the implementation in the pysdtw package by Antoine Loriette.</span>
+<span class="sd">        - ``ron`` Use the implementation by Ron Shapira Weber :cite:`soft_dtw_ron_1` :cite:`soft_dtw_ron_2`.</span>
+
+<span class="sd">        Default is ``mag``.</span>
 <span class="sd">    fused : bool, optional</span>
 <span class="sd">        Only for the &#39;ron&#39; implementation.</span>
 

@@ -1,7 +1,7 @@
 """
-SoftDTW module. Since there are various implementations online of the SoftDTW, this module was created as a wrapper to be able to easily switch between different implementations.
+Since there are various implementations online of the SoftDTW, this module was created as a wrapper to be able to easily switch between different implementations.
 
-Currently, the following implementations are available:
+Currently, the following implementations are available :
 
 - pytorch-softdtw-cuda by Mehran Maghoumi :cite:`soft_dtw_mag_1` :cite:`soft_dtw_mag_2`
     - GitHub repository : https://github.com/Maghoumi/pytorch-softdtw-cuda
@@ -11,9 +11,7 @@ Currently, the following implementations are available:
 - sdtw-cuda-torch by BGU-CS-VIL (implemented by Ron Shapira Weber) :cite:`soft_dtw_ron_1` :cite:`soft_dtw_ron_2`
     - GitHub repository : https://github.com/BGU-CS-VIL/sdtw-cuda-torch
 
-If you this module, please refer to the original implementations and cite the corresponding papers.
-For each implementation, the original paper is cited in the corresponding module docstring.
-Also, all the citation are listed in the `citations.md` file in the root of this repository.
+If you use this module, please cite together with this package the original paper of the implementation you are using.
 
 Authors
 -------
@@ -52,7 +50,13 @@ class soft_dtw(torch.nn.Module) :
     dist_func : function, optional
         Distance function to use for the SDTW. Default is ``None``, which corresponds to the squared Euclidean distance.
     implementation : str, optional
-        Implementation to use for the SDTW. Currently accepted values are ``mag``, ``pysdtw`` and ``ron``. Default is ``mag``.
+        Implementation to use for the SDTW.
+
+        - ``mag``. Use the implementation by Mehran Maghoumi :cite:`soft_dtw_mag_1` :cite:`soft_dtw_mag_2`.
+        - ``pysdtw``. Use the implementation in the pysdtw package by Antoine Loriette.
+        - ``ron`` Use the implementation by Ron Shapira Weber :cite:`soft_dtw_ron_1` :cite:`soft_dtw_ron_2`.
+
+        Default is ``mag``.
     fused : bool, optional
         Only for the 'ron' implementation.
 

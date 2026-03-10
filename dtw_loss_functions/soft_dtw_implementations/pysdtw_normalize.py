@@ -1,5 +1,7 @@
 """
-Small Extension of the original PySDTW implementation to include normalization (i.e. the "divergence" version of the SoftDTW).
+Small extension for original pysdtw that implements the normalized version of the SoftDTW (i.e. the "divergence" version of the SoftDTW).
+
+Note that the original implementation of the pysdtw is not included directly in this package, but it is listed as a dependency.
 
 Authors
 -------

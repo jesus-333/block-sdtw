@@ -1,5 +1,5 @@
-pysdtw
-======
+pysdtw normalized
+=================
 
 .. automodule:: dtw_loss_functions.soft_dtw_implementations.pysdtw_normalize
    :members:

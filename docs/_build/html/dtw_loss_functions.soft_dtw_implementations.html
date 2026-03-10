@@ -58,7 +58,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">SoftDTW Subpackage</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#authors">Authors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.html">SoftDTW (Mehran Maghoumi)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.pysdtw_normalize.html">pysdtw</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.pysdtw_normalize.html">pysdtw normalized</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.html">SoftDTW (Ron Shapira Weber)</a></li>
 </ul>
 </li>
@@ -91,11 +91,33 @@
              
   <section id="module-dtw_loss_functions.soft_dtw_implementations">
 <span id="softdtw-subpackage"></span><h1>SoftDTW Subpackage<a class="headerlink" href="#module-dtw_loss_functions.soft_dtw_implementations" title="Link to this heading"></a></h1>
-<p>SoftDTW submodule. Since there are various implementations online of the SoftDTW, this submodule was created as a wrapper to be able to easily switch between different implementations.</p>
-<p>Currently, the following implementations are available:
-- pytorch-softdtw-cuda by Mehran Maghoumi
-- pysdtw by Antoine Loriette
-- sdtw-cuda-torch by BGU-CS-VIL (implemented by Ron Shapira Weber)</p>
+<p>Since there are various implementations online of the SoftDTW, this subpackage was created to collect the different implementations.</p>
+<p>Currently, the following implementations are available :</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>pytorch-softdtw-cuda by Mehran Maghoumi <span id="id1">[<a class="reference internal" href="biblio.html#id8" title="Mehran Maghoumi. Deep Recurrent Networks for Gesture Recognition and Synthesis. PhD thesis, University of Central Florida Orlando, Florida, 2020.">Mag20</a>]</span> <span id="id2">[<a class="reference internal" href="biblio.html#id9" title="Mehran Maghoumi, Eugene Matthew Taranta, and Joseph LaViola. Deepnag: deep non-adversarial gesture generation. In 26th International Conference on Intelligent User Interfaces, 213–223. 2021.">MTL21</a>]</span></dt><dd><ul>
+<li><p>GitHub repository : <a class="reference external" href="https://github.com/Maghoumi/pytorch-softdtw-cuda">https://github.com/Maghoumi/pytorch-softdtw-cuda</a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>pysdtw by Antoine Loriette</dt><dd><ul>
+<li><p>GitHub repository : <a class="reference external" href="https://github.com/toinsson/pysdtw">https://github.com/toinsson/pysdtw</a></p></li>
+<li><p>PyPi Page : <a class="reference external" href="https://pypi.org/project/pysdtw/">https://pypi.org/project/pysdtw/</a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>sdtw-cuda-torch by BGU-CS-VIL (implemented by Ron Shapira Weber) <span id="id3">[<a class="reference internal" href="biblio.html#id10" title="Ron Shapira Weber and Oren Freifeld. Softdtw-cuda-torch: memory-efficient gpu-accelerated soft dynamic time warping for pytorch. 2026. URL: https://arxiv.org/abs/2602.17206, arXiv:2602.17206.">WF26</a>]</span> <span id="id4">[<a class="reference internal" href="biblio.html#id11" title="Ron Shapira Weber, Shahar Benishay, Andrey Lavrinenko, Shahaf E. Finder, and Oren Freifeld. TimePoint: accelerated time series alignment via self-supervised keypoint and descriptor learning. In Aarti Singh, Maryam Fazel, Daniel Hsu, Simon Lacoste-Julien, Felix Berkenkamp, Tegan Maharaj, Kiri Wagstaff, and Jerry Zhu, editors, Proceedings of the 42nd International Conference on Machine Learning, volume 267 of Proceedings of Machine Learning Research, 54275–54299. PMLR, 13–19 Jul 2025. URL: https://proceedings.mlr.press/v267/shapira-weber25a.html.">SWBL+25</a>]</span></dt><dd><ul>
+<li><p>GitHub repository : <a class="reference external" href="https://github.com/BGU-CS-VIL/sdtw-cuda-torch">https://github.com/BGU-CS-VIL/sdtw-cuda-torch</a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>If you use this module, please cite together with this package the original paper of the implementation you are using.</p>
 <section id="authors">
 <h2>Authors<a class="headerlink" href="#authors" title="Link to this heading"></a></h2>
 <p>Alberto Zancanaro &lt;<a class="reference external" href="mailto:alberto&#46;zancanaro&#37;&#52;&#48;uni&#46;lu">alberto<span>&#46;</span>zancanaro<span>&#64;</span>uni<span>&#46;</span>lu</a>&gt;</p>
@@ -104,7 +126,7 @@
 <p class="caption" role="heading"><span class="caption-text">SoftDTW Implementations</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_mag.html">SoftDTW (Mehran Maghoumi)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.pysdtw_normalize.html">pysdtw</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.pysdtw_normalize.html">pysdtw normalized</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.soft_dtw_cuda_ron.html">SoftDTW (Ron Shapira Weber)</a></li>
 </ul>
 </div>

@@ -28,7 +28,7 @@ At this point, given the presence of 3 different loss functions within the code 
 
 ## Installation 
 
-### Packet manager
+### pip installation
 The easiest way to use this package is to install it via pip
 ```sh
 pip install dtw-loss-function
@@ -43,8 +43,8 @@ cd dtw_loss_functions
 hatchling build && pip install .
 ```
 
-## Usage
-Each loss function is implemented as a class inside the packet.
+## Usage Examples
+Each loss function is implemented as a class inside the package.
 
 ### Block-DTW Example
 ```python
@@ -90,4 +90,4 @@ output_sdtw = sdtw_loss(x, x_r)
 
 # Citation 
 
-If you use this packet refer to the [citation file](./citations.md) for all the info regarding the works to cite.
+If you use this package refer to the [citation file](./citations.md) for all the info regarding the works to cite.

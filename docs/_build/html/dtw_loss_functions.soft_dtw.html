@@ -93,8 +93,8 @@
              
   <section id="module-dtw_loss_functions.soft_dtw">
 <span id="soft-dtw"></span><h1>Soft DTW<a class="headerlink" href="#module-dtw_loss_functions.soft_dtw" title="Link to this heading"></a></h1>
-<p>SoftDTW module. Since there are various implementations online of the SoftDTW, this module was created as a wrapper to be able to easily switch between different implementations.</p>
-<p>Currently, the following implementations are available:</p>
+<p>Since there are various implementations online of the SoftDTW, this module was created as a wrapper to be able to easily switch between different implementations.</p>
+<p>Currently, the following implementations are available :</p>
 <ul class="simple">
 <li><dl class="simple">
 <dt>pytorch-softdtw-cuda by Mehran Maghoumi <span id="id1">[<a class="reference internal" href="biblio.html#id8" title="Mehran Maghoumi. Deep Recurrent Networks for Gesture Recognition and Synthesis. PhD thesis, University of Central Florida Orlando, Florida, 2020.">Mag20</a>]</span> <span id="id2">[<a class="reference internal" href="biblio.html#id9" title="Mehran Maghoumi, Eugene Matthew Taranta, and Joseph LaViola. Deepnag: deep non-adversarial gesture generation. In 26th International Conference on Intelligent User Interfaces, 213–223. 2021.">MTL21</a>]</span></dt><dd><ul>
@@ -119,9 +119,7 @@
 </dl>
 </li>
 </ul>
-<p>If you this module, please refer to the original implementations and cite the corresponding papers.
-For each implementation, the original paper is cited in the corresponding module docstring.
-Also, all the citation are listed in the <cite>citations.md</cite> file in the root of this repository.</p>
+<p>If you use this module, please cite together with this package the original paper of the implementation you are using.</p>
 <section id="authors">
 <h2>Authors<a class="headerlink" href="#authors" title="Link to this heading"></a></h2>
 <p>Alberto Zancanaro &lt;<a class="reference external" href="mailto:alberto&#46;zancanaro&#37;&#52;&#48;uni&#46;lu">alberto<span>&#46;</span>zancanaro<span>&#64;</span>uni<span>&#46;</span>lu</a>&gt;</p>
@@ -145,7 +143,14 @@ The implementation can be selected by passing the ‘implementation’ argument 
 <li><p><strong>normalize</strong> (<em>bool</em><em>, </em><em>optional</em>) – If true, the SDTW divergence will be computed instead of the SDTW. Default is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
 <li><p><strong>bandwidth</strong> (<em>float</em><em>, </em><em>optional</em>) – Sakoe-Chiba bandwidth for pruning. If the <code class="docutils literal notranslate"><span class="pre">None</span></code> is given, no pruning is applied. Default is None.</p></li>
 <li><p><strong>dist_func</strong> (<em>function</em><em>, </em><em>optional</em>) – Distance function to use for the SDTW. Default is <code class="docutils literal notranslate"><span class="pre">None</span></code>, which corresponds to the squared Euclidean distance.</p></li>
-<li><p><strong>implementation</strong> (<em>str</em><em>, </em><em>optional</em>) – Implementation to use for the SDTW. Currently accepted values are <code class="docutils literal notranslate"><span class="pre">mag</span></code>, <code class="docutils literal notranslate"><span class="pre">pysdtw</span></code> and <code class="docutils literal notranslate"><span class="pre">ron</span></code>. Default is <code class="docutils literal notranslate"><span class="pre">mag</span></code>.</p></li>
+<li><p><strong>implementation</strong> (<em>str</em><em>, </em><em>optional</em>) – <p>Implementation to use for the SDTW.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">mag</span></code>. Use the implementation by Mehran Maghoumi <span id="id5">[<a class="reference internal" href="biblio.html#id8" title="Mehran Maghoumi. Deep Recurrent Networks for Gesture Recognition and Synthesis. PhD thesis, University of Central Florida Orlando, Florida, 2020.">Mag20</a>]</span> <span id="id6">[<a class="reference internal" href="biblio.html#id9" title="Mehran Maghoumi, Eugene Matthew Taranta, and Joseph LaViola. Deepnag: deep non-adversarial gesture generation. In 26th International Conference on Intelligent User Interfaces, 213–223. 2021.">MTL21</a>]</span>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pysdtw</span></code>. Use the implementation in the pysdtw package by Antoine Loriette.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ron</span></code> Use the implementation by Ron Shapira Weber <span id="id7">[<a class="reference internal" href="biblio.html#id10" title="Ron Shapira Weber and Oren Freifeld. Softdtw-cuda-torch: memory-efficient gpu-accelerated soft dynamic time warping for pytorch. 2026. URL: https://arxiv.org/abs/2602.17206, arXiv:2602.17206.">WF26</a>]</span> <span id="id8">[<a class="reference internal" href="biblio.html#id11" title="Ron Shapira Weber, Shahar Benishay, Andrey Lavrinenko, Shahaf E. Finder, and Oren Freifeld. TimePoint: accelerated time series alignment via self-supervised keypoint and descriptor learning. In Aarti Singh, Maryam Fazel, Daniel Hsu, Simon Lacoste-Julien, Felix Berkenkamp, Tegan Maharaj, Kiri Wagstaff, and Jerry Zhu, editors, Proceedings of the 42nd International Conference on Machine Learning, volume 267 of Proceedings of Machine Learning Research, 54275–54299. PMLR, 13–19 Jul 2025. URL: https://proceedings.mlr.press/v267/shapira-weber25a.html.">SWBL+25</a>]</span>.</p></li>
+</ul>
+<p>Default is <code class="docutils literal notranslate"><span class="pre">mag</span></code>.</p>
+</p></li>
 <li><p><strong>fused</strong> (<em>bool</em><em>, </em><em>optional</em>) – <p>Only for the ‘ron’ implementation.</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">None</span></code>  -&gt; auto (use fused only when possible)</p></li>
