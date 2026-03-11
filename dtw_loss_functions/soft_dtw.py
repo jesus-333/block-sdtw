@@ -22,10 +22,10 @@ Mehran Maghoumi's (``mag``) implementation
 >>> from dtw_loss_functions import soft_dtw
 >>> use_cuda = torch.cuda.is_available()
 >>> sdtw_loss = soft_dtw.soft_dtw(implementation = 'mag', sdtw_config = {'use_cuda' : use_cuda, 'gamma' : 0.1})
->>> device = 'cuda' if use_cuda else 'cpu'
 >>> batch_size = 5
 >>> time_samples = 300
 >>> channels = 1
+>>> device = 'cuda' if use_cuda else 'cpu'
 >>> x   = torch.randn(batch_size, time_samples, channels).to(device)
 >>> x_r = torch.randn(batch_size, time_samples, channels).to(device)
 >>> output_sdtw = sdtw_loss(x, x_r)
@@ -35,10 +35,10 @@ Ron Shapira Weber's (``ron``) implementation
 >>> import torch
 >>> from dtw_loss_functions import soft_dtw
 >>> sdtw_loss = soft_dtw.soft_dtw(implementation = 'ron', sdtw_config = {'gamma' : 0.1, 'dist' : 'sqeuclidean'})
->>> device = 'cuda' if torch.cuda.is_available() else 'cpu'
 >>> batch_size = 5
 >>> time_samples = 300
 >>> channels = 1
+>>> device = 'cuda' if torch.cuda.is_available() else 'cpu'
 >>> x   = torch.randn(batch_size, time_samples, channels).to(device)
 >>> x_r = torch.randn(batch_size, time_samples, channels).to(device)
 >>> output_sdtw = sdtw_loss(x, x_r)

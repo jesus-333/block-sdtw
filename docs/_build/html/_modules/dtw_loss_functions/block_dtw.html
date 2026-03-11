@@ -90,13 +90,13 @@
 <span class="sd">&gt;&gt;&gt; import torch</span>
 <span class="sd">&gt;&gt;&gt; block_size = 25</span>
 <span class="sd">&gt;&gt;&gt; use_cuda = torch.cuda.is_available()</span>
-<span class="sd">&gt;&gt;&gt; device = &#39;cuda&#39; if use_cuda else &#39;cpu&#39;</span>
+<span class="sd">&gt;&gt;&gt; block_dtw_loss = block_dtw.block_dtw(block_size, sdtw_config = {&#39;use_cuda&#39; : use_cuda})</span>
 <span class="sd">&gt;&gt;&gt; batch_size = 5</span>
 <span class="sd">&gt;&gt;&gt; time_samples = 300</span>
 <span class="sd">&gt;&gt;&gt; channels = 1</span>
+<span class="sd">&gt;&gt;&gt; device = &#39;cuda&#39; if use_cuda else &#39;cpu&#39;</span>
 <span class="sd">&gt;&gt;&gt; x   = torch.randn(batch_size, time_samples, channels).to(device)</span>
 <span class="sd">&gt;&gt;&gt; x_r = torch.randn(batch_size, time_samples, channels).to(device)</span>
-<span class="sd">&gt;&gt;&gt; block_dtw_loss = block_dtw.block_dtw(block_size)</span>
 <span class="sd">&gt;&gt;&gt; output_block_dtw = block_dtw_loss(x, x_r)</span>
 
 <span class="sd">Authors</span>

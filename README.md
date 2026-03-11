@@ -44,46 +44,64 @@ hatchling build && pip install .
 ```
 
 ## Usage Examples
-Each loss function is implemented as a class inside the package.
+Each loss function is implemented as a module inside the package.
 
 ### Block-DTW Example
 ```python
-import torch
 from dtw_loss_functions import block_dtw
+import torch
 
 block_size = 25
-
 use_cuda = torch.cuda.is_available()
-device = 'cuda' if use_cuda else 'cpu'
+block_dtw_loss = block_dtw.block_dtw(block_size, sdtw_config = {'use_cuda' : use_cuda})
 
 batch_size = 5
 time_samples = 300
 channels = 1
 
+device = 'cuda' if use_cuda else 'cpu'
 x   = torch.randn(batch_size, time_samples, channels).to(device)
 x_r = torch.randn(batch_size, time_samples, channels).to(device)
-
-block_dtw_loss = block_dtw.block_dtw(block_size, use_cuda)
 
 output_block_dtw = block_dtw_loss(x, x_r)
 ```
 
 ### SoftDTW Example
+
+Mehran Maghoumi's (`mag`) implementation
 ```python
 import torch
 from dtw_loss_functions import soft_dtw
 
 use_cuda = torch.cuda.is_available()
-device = 'cuda' if use_cuda else 'cpu'
+
+sdtw_loss = soft_dtw.soft_dtw(implementation = 'mag', sdtw_config = {'use_cuda' : use_cuda, 'gamma' : 0.1})
 
 batch_size = 5
 time_samples = 300
 channels = 1
 
+device = 'cuda' if use_cuda else 'cpu'
 x   = torch.randn(batch_size, time_samples, channels).to(device)
 x_r = torch.randn(batch_size, time_samples, channels).to(device)
 
-sdtw_loss = soft_dtw.soft_dtw(use_cuda = use_cuda)
+output_sdtw = sdtw_loss(x, x_r)
+```
+
+Ron Shapira Weber's (`ron`) implementation
+```python
+import torch
+from dtw_loss_functions import soft_dtw
+
+sdtw_loss = soft_dtw.soft_dtw(implementation = 'ron', sdtw_config = {'gamma' : 0.1, 'dist' : 'sqeuclidean'})
+
+batch_size = 5
+time_samples = 300
+channels = 1
+
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
+x   = torch.randn(batch_size, time_samples, channels).to(device)
+x_r = torch.randn(batch_size, time_samples, channels).to(device)
 
 output_sdtw = sdtw_loss(x, x_r)
 ```

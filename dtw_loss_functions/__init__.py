@@ -21,5 +21,5 @@ soft_dtw_implementations
 
 __author__    = "Alberto (Jesus) Zancanaro"
 __email__     = "alberto.zancanaro@uni.lu"
-__version__   = "1.0.3"
+__version__   = "1.0.4"
 __license__   = "Apache-2.0"

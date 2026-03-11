@@ -7,13 +7,13 @@ Example
 >>> import torch
 >>> block_size = 25
 >>> use_cuda = torch.cuda.is_available()
->>> device = 'cuda' if use_cuda else 'cpu'
+>>> block_dtw_loss = block_dtw.block_dtw(block_size, sdtw_config = {'use_cuda' : use_cuda})
 >>> batch_size = 5
 >>> time_samples = 300
 >>> channels = 1
+>>> device = 'cuda' if use_cuda else 'cpu'
 >>> x   = torch.randn(batch_size, time_samples, channels).to(device)
 >>> x_r = torch.randn(batch_size, time_samples, channels).to(device)
->>> block_dtw_loss = block_dtw.block_dtw(block_size)
 >>> output_block_dtw = block_dtw_loss(x, x_r)
 
 Authors
