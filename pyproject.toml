@@ -16,6 +16,7 @@ authors = [
 ]
 description = "Torch implementation of various DTW inpsired loss functions"
 dependencies = [
+	"matplotlib",
 	"numba",
 	"pysdtw",
 	"toml",
