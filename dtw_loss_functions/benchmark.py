@@ -16,8 +16,6 @@ import os
 import time
 import torch
 
-from dtw_loss_functions import block_dtw, soft_dtw, otw
-
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 def compute_benchmark(B_list : list, T_list : list, C_list : list, loss_functions_to_use : dict, device : str, n_repetitions : int = 100, path_save : str = 'benchmark', print_progress : bool = False) :
@@ -369,26 +367,74 @@ def get_info_from_filename(file_name : str) -> tuple :
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-def plot_benchmark(plot_config : dict, x_axis_variable_list : list, x_axis_variable_name : str, data_to_plot_mean : list, labels_to_plot : list, data_to_plot_std : list = None) :
+def plot_benchmark(plot_config : dict, x_axis_variable_list : list, x_axis_variable_name : str, data_to_plot_mean : list, labels_to_plot : list, data_to_plot_std : list = None, color_dict : dict = None) -> tuple :
     """
     Plot the results of the benchmark. The data should be in the format returned by the :func:``get_array_to_plot`` function, i.e. a list of arrays containing the mean computation times for each combination of batch size, signal length and number of channels, a list of strings containing the labels for each array.
     The x-axis variable indicates which variable should be used as x-axis in the plot. E.g. if x_axis_variable is 'T', the function will plot the computation times for different signal lengths.
     If the standard deviation of the computation times is provided, it will be plotted as shaded area around the mean values.
+
+    Note that this function is more an example of how you can plot the results than the "definitive" way to plot the results.
+    You can customize the plot as you want, using the data returned by the :func:``get_array_to_plot`` function.
     
     Parameters
     ----------
+    plot_config : dict
+        Dictionary containing the plot settings. The following settings are available (with their default values) :
+        - figsize : tuple, default (10, 6)
+            Size of the figure in inches.
+        - fontsize : int, default 12
+            Font size for the labels and legend.
+        - marker : str, default 'o'
+            Marker style for the points in the plot.
+        - markersize : int, default 8
+            Size of the markers in the plot.
+        - linewidth : int, default 2
+            Line width for the lines in the plot.
+        - y_scale_log : bool, default False
+            Whether to use a logarithmic scale for the y-axis.
+        - use_milliseconds : bool, default False
+            Whether to use milliseconds instead of seconds for the computation times. If True, the computation times will be multiplied by 1000 and the y-axis label will be updated accordingly.
+        - path_save : str, default 'benchmark/plot.png'
+            If specified, the plot will be saved at the given path. If None, or not specified, the plot will not be saved.
+    x_axis_variable_list : list
+        List of values for the x-axis variable.
+    x_axis_variable_name : str
+        Name of the x-axis variable to use as label for the x-axis.
+    data_to_plot_mean : list
+        List of arrays containing the mean computation times, as returned by the :func:``get_array_to_plot`` function.
+    labels_to_plot : list
+        List of strings containing the labels for each array in the ``data_to_plot_mean`` list, as returned by the :func:``get_array_to_plot`` function.
+    data_to_plot_std : list, optional
+        List of arrays containing the standard deviation of the computation times, as returned by the :func:``get_array_to_plot`` function. 
+        If provided, the standard deviation will be plotted as shaded area around the mean values. The default value is None, which means that the standard deviation will not be plotted.
+    color_dict : list, optional
+        Dictionary containing the colors to use for each label. The keys of the dictionary should be the same as the labels in the ``labels_to_plot`` list.
+        The values should be valid color specifications for matplotlib (e.g. 'red', '#FF0000', etc.).
+        If not provided, the default color cycle of matplotlib will be used. The default value is None.
+
+    Returns
+    -------
+    fig : matplotlib.figure.Figure
+        Figure object containing the plot.
+    ax : matplotlib.axes.Axes
+        Axes object containing the plot.
     """
 
     # Check plot settings
-    if 'figsize' not in plot_config : plot_config['figsize'] = (10, 6)
-    if 'y_scale_log' not in plot_config : plot_config['y_scale_log'] = False
+    if 'figsize' not in plot_config          : plot_config['figsize'] = (10, 6)
+    if 'fontsize' not in plot_config         : plot_config['fontsize'] = 12
+    if 'marker' not in plot_config           : plot_config['marker'] = 'o'
+    if 'markersize' not in plot_config       : plot_config['markersize'] = 8
+    if 'linewidth' not in plot_config        : plot_config['linewidth'] = 2
+    if 'y_scale_log' not in plot_config      : plot_config['y_scale_log'] = False
     if 'use_milliseconds' not in plot_config : plot_config['use_milliseconds'] = False
-    if 'fontsize' not in plot_config : plot_config['fontsize'] = 12
+    if 'path_save' not in plot_config        : plot_config['path_save'] = None
+    if color_dict is not None and len(color_dict) != len(data_to_plot_mean) : raise ValueError(f"Length of color_dict must be the same as the length of labels_to_plot. Received {len(color_dict)} and {len(labels_to_plot)}, respectively.")
     
     # Create the figure and axis
     fig, ax = plt.subplots(figsize = plot_config['figsize'])
 
-    # 
+    # Set scale factor (second/millisecond)
     if 'use_milliseconds' in plot_config and plot_config['use_milliseconds'] :
         scale_factor = 1000
         label_time_unit = 'ms'
@@ -400,7 +446,13 @@ def plot_benchmark(plot_config : dict, x_axis_variable_list : list, x_axis_varia
         # Plot mean values
         mean_values = data_to_plot_mean[i] * scale_factor
         label = labels_to_plot[i]
-        ax.plot(x_axis_variable_list, mean_values, label = label)
+        color = color_dict[label] if color_dict is not None else None
+        
+        # Plot mean values as line with markers
+        ax.plot(x_axis_variable_list, mean_values,
+                label = label, color = color, linewidth = plot_config['linewidth'], 
+                marker = plot_config['marker'], markersize = plot_config['markersize']
+                )
 
         # (OPTIONAL) Plot std values as shaded area around the mean values
         if data_to_plot_std is not None :
@@ -416,5 +468,12 @@ def plot_benchmark(plot_config : dict, x_axis_variable_list : list, x_axis_varia
     ax.grid(True)
     fig.tight_layout()
     ax.tick_params(axis = 'both', which = 'major', labelsize = plot_config['fontsize'] * 0.8)
+
+    if plot_config['path_save'] is not None :
+        # Create the folder if it does not exist
+        os.makedirs(os.path.dirname(plot_config['path_save']), exist_ok = True)
+
+        # Save the plot
+        fig.savefig(plot_config['path_save'])
 
     return fig, ax
