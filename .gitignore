@@ -3,6 +3,7 @@
 *.eps
 *.pdf
 *.zip
+*.npy
 *.DS_Store
 data/UCRArchive_2018
 data
