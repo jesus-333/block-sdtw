@@ -21,4 +21,5 @@ Results/hpc_log
 dist
 scripts/training/train_V3_UCR_timeseries.sh
 
-!./benchmark/MAC_M4_PRO/sdtw_implementations.png
+# Ignore all png files except those in benchmark/MAC_M4_PRO (Used in the benchmark README)
+!benchmark/MAC_M4_PRO/*.png
