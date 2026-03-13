@@ -44,9 +44,26 @@ path_results = 'benchmark/MAC_M4_PRO/'
 plot_config = dict(
     figsize = (20, 12),
     fontsize = 18,
+    marker = 'o',
+    markersize = 10,
+    linewidth = 2,
     y_scale_log = False,
-    add_std = False,
+    use_milliseconds = True,
+    path_save = 'benchmark/MAC_M4_PRO/block_optimized_vs_naive.png',
 )
+
+# Color settings for the plot. The keys must be the same as the labels of the plot.
+# Note that in this case I run the script a first time to get the labels with the current settings and then I copy-paste them here and set the colors.
+color_dict = {
+    'block_naive_10 (B=10, C=1)'        : 'cornflowerblue',
+    'block_naive_10 (B=100, C=1)'       : 'dodgerblue',
+    'block_naive_100 (B=10, C=1)'       : 'royalblue',
+    'block_naive_100 (B=100, C=1)'      : 'steelblue',
+    'block_optimized_10 (B=10, C=1)'    : 'orange',
+    'block_optimized_10 (B=100, C=1)'   : 'darkorange',
+    'block_optimized_100 (B=10, C=1)'   : 'orangered',
+    'block_optimized_100 (B=100, C=1)'  : 'red',
+}
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Load data
@@ -78,9 +95,15 @@ for block_size in block_size_list :
     data_to_plot_mean += data_block_optimized_mean
     data_to_plot_std  += data_block_optimized_std
     labels_to_plot    += labels_optimized
+
+# Sort data in alphabetical order of labels (this is useful to have the same order of colors in the plot)
+idx_sort = np.argsort(labels_to_plot)
+data_to_plot_mean = [data_to_plot_mean[i] for i in idx_sort]
+data_to_plot_std = [data_to_plot_std[i] for i in idx_sort]
+labels_to_plot = [labels_to_plot[i] for i in idx_sort]
     
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Plot results
 
-fig, ax = benchmark.plot_benchmark(plot_config, T_list, 'Time Samples T', data_to_plot_mean, labels_to_plot)
+fig, ax = benchmark.plot_benchmark(plot_config, T_list, 'Time Samples T', data_to_plot_mean, labels_to_plot, color_dict = color_dict)
 plt.show()

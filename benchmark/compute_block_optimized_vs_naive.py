@@ -1,5 +1,5 @@
 """
-Use the ``benchmark`` module inside the package to evaluate the performance of the block-optimized implementation  against the naive one.
+Use the ``benchmark`` module inside the package to evaluate the performance of the block-optimized implementation against the naive one.
 
 Authors
 -------
@@ -43,6 +43,7 @@ path_save = 'benchmark/MAC_M4_PRO/'
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Benchmark
 
+loss_functions_to_use = dict()
 for i in range(len(block_size_list)) :
     block_size = block_size_list[i]
 
@@ -51,9 +52,8 @@ for i in range(len(block_size_list)) :
     loss_block_optimized = block_dtw.block_dtw_optimized(block_size = block_size, implementation = implementation, sdtw_config = sdtw_config)
     
     # Add the loss functions to the dictionary of loss functions to test
-    loss_functions_to_use = dict()
     loss_functions_to_use[f'block_naive_{block_size}'] = loss_block_naive
     loss_functions_to_use[f'block_optimized_{block_size}'] = loss_block_optimized
 
-    # Compute benchmark
-    benchmark.compute_benchmark(B_list, T_list, C_list, loss_functions_to_use, device, n_repetitions, path_save, print_progress)
+# Compute benchmark
+benchmark.compute_benchmark(B_list, T_list, C_list, loss_functions_to_use, device, n_repetitions, path_save, print_progress)

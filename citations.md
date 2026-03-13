@@ -1,4 +1,4 @@
-# Work to cite
+# Package citation
 
 If you use this package please cite the following publication
 ```
