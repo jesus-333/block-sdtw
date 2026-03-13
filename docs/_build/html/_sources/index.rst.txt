@@ -23,6 +23,7 @@ For now the content is generated automatically from the docstrings in the code, 
     :maxdepth: 1
     :caption: Other
 
+    dtw_loss_functions.benchmark
     dtw_loss_functions.soft_dtw_implementations
     biblio
 

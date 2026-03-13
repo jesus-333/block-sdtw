@@ -1,0 +1,611 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dtw_loss_functions.benchmark &mdash; dtw_loss_functions  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            dtw_loss_functions
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Loss functions</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../dtw_loss_functions.block_dtw.html">Block DTW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dtw_loss_functions.otw.html">OTW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dtw_loss_functions.soft_dtw.html">Soft DTW</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../dtw_loss_functions.benchmark.html">Benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dtw_loss_functions.soft_dtw_implementations.html">SoftDTW Subpackage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../biblio.html">Bibliography</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">dtw_loss_functions</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">dtw_loss_functions.benchmark</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for dtw_loss_functions.benchmark</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Module for benchmarking the DTW loss functions implemented in this package. It includes functions to compare the performance of different DTW loss, save and visualize the results.</span>
+
+<span class="sd">Authors</span>
+<span class="sd">-------</span>
+<span class="sd">Alberto Zancanaro &lt;alberto.zancanaro@uni.lu&gt;</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span>
+<span class="c1"># Imports</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+
+<span class="c1"># - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span>
+
+<div class="viewcode-block" id="compute_benchmark">
+<a class="viewcode-back" href="../../dtw_loss_functions.benchmark.html#dtw_loss_functions.benchmark.compute_benchmark">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_benchmark</span><span class="p">(</span><span class="n">B_list</span> <span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">T_list</span> <span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">C_list</span> <span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">loss_functions_to_use</span> <span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">device</span> <span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">n_repetitions</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">path_save</span> <span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;benchmark&#39;</span><span class="p">,</span> <span class="n">print_progress</span> <span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    For each combination of batch size, signal length and number of channels specified in the input lists, compute the loss for each loss function specified in ``loss_functions_to_use``.</span>
+<span class="sd">    </span>
+<span class="sd">    The ``loss_functions_to_use`` is a dictionary where the keys are the names of the loss functions and the values are the instances of the loss functions to test.</span>
+<span class="sd">    The loss functions must be instances of the classes implemented in this package.</span>
+
+<span class="sd">    The results are saved in npy files at the path ``{path_save}/{loss_function_name}/``. The ``loss_function_name`` is the key of the loss function in the ``loss_functions_to_use`` dictionary.</span>
+<span class="sd">    Each file will be name as ``B_{batch_size}_T_{signal_length}_C_{num_channels}.npy`` and will contain a numpy array of shape (n_repetitions,) with the computed loss values for each repetition.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    B_list : list</span>
+<span class="sd">        List of batch sizes to test.</span>
+<span class="sd">    T_list : list</span>
+<span class="sd">        List of signal lengths to test.</span>
+<span class="sd">    C_list : list</span>
+<span class="sd">        List of number of channels to test.</span>
+<span class="sd">    loss_functions_to_use : dict</span>
+<span class="sd">        Dictionary of loss functions to test. The keys are the names of the loss functions and the values are the instances of the loss functions to test.</span>
+<span class="sd">    device : str</span>
+<span class="sd">        Device to use for the computations. Must be &#39;cpu&#39; or &#39;cuda&#39;.</span>
+<span class="sd">    n_repetitions : int, optional</span>
+<span class="sd">        Number of repetitions to perform for each combination of batch size, signal length and number of channels. The default value is 100.</span>
+<span class="sd">    path_save : str, optional</span>
+<span class="sd">        Path to save the results. The default value is &#39;benchmark&#39;. If the folder does not exist, it will be created. If results are already present in the folder, they will be overwritten.</span>
+<span class="sd">    print_progress : bool, optional</span>
+<span class="sd">        Whether to print the progress of the benchmark. The default value is False.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="c1"># Create the path if it does not exist</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">path_save</span><span class="p">,</span> <span class="n">exist_ok</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+    
+    <span class="c1"># Iterate over loss functions</span>
+    <span class="k">for</span> <span class="n">loss_function_name</span> <span class="ow">in</span> <span class="n">loss_functions_to_use</span> <span class="p">:</span>
+        <span class="k">if</span> <span class="n">print_progress</span> <span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Loss function : </span><span class="si">{</span><span class="n">loss_function_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">current_loss_function</span> <span class="o">=</span> <span class="n">loss_functions_to_use</span><span class="p">[</span><span class="n">loss_function_name</span><span class="p">]</span>
+
+        <span class="c1"># Create folder for the current loss function if it does not exist</span>
+        <span class="n">path_save_loss_function</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_save</span><span class="p">,</span> <span class="n">loss_function_name</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">path_save_loss_function</span><span class="p">,</span> <span class="n">exist_ok</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+        
+        <span class="c1"># Iterate over batch sizes</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">B_list</span><span class="p">))</span> <span class="p">:</span>
+            <span class="k">if</span> <span class="n">print_progress</span> <span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">Batch size = </span><span class="si">{</span><span class="n">B_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">B_list</span><span class="p">)</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+            <span class="n">batch_size</span> <span class="o">=</span> <span class="n">B_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            
+            <span class="c1"># Iterate over signal lengths</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">T_list</span><span class="p">))</span> <span class="p">:</span>
+                <span class="k">if</span> <span class="n">print_progress</span> <span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">Signal length = </span><span class="si">{</span><span class="n">T_list</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">j</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">T_list</span><span class="p">)</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+                <span class="n">time_samples</span> <span class="o">=</span> <span class="n">T_list</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                
+                <span class="c1"># Iterate over number of channels</span>
+                <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">C_list</span><span class="p">))</span> <span class="p">:</span>
+                    <span class="k">if</span> <span class="n">print_progress</span> <span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t\t\t</span><span class="s2">Number of channels = </span><span class="si">{</span><span class="n">C_list</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">k</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">C_list</span><span class="p">)</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+                    <span class="n">n_channels</span> <span class="o">=</span> <span class="n">C_list</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+
+                    <span class="c1"># Create synthetic data</span>
+                    <span class="n">x</span>   <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">time_samples</span><span class="p">,</span> <span class="n">n_channels</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+                    <span class="n">x_r</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">time_samples</span><span class="p">,</span> <span class="n">n_channels</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+                    <span class="c1"># Evaluate computation time (over n_repetitions)</span>
+                    <span class="n">time_list_loss</span> <span class="o">=</span> <span class="n">repeat_inference</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x_r</span><span class="p">,</span> <span class="n">current_loss_function</span><span class="p">,</span> <span class="n">n_repetitions</span><span class="p">)</span>
+
+                    <span class="c1"># Save results</span>
+                    <span class="n">file_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;B_</span><span class="si">{</span><span class="n">batch_size</span><span class="si">}</span><span class="s2">_T_</span><span class="si">{</span><span class="n">time_samples</span><span class="si">}</span><span class="s2">_C_</span><span class="si">{</span><span class="n">n_channels</span><span class="si">}</span><span class="s2">.npy&quot;</span>
+                    <span class="n">path_save_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_save_loss_function</span><span class="p">,</span> <span class="n">file_name</span><span class="p">)</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">path_save_file</span><span class="p">,</span> <span class="n">time_list_loss</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="repeat_inference">
+<a class="viewcode-back" href="../../dtw_loss_functions.benchmark.html#dtw_loss_functions.benchmark.repeat_inference">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">repeat_inference</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x_r</span><span class="p">,</span> <span class="n">loss_function</span> <span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span> <span class="n">n_repetitions</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span> <span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the loss for the input tensors ``x`` and ``x_r`` for a number of repetitions specified in ``n_repetitions`` and save the computation times in a list.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : torch.tensor</span>
+<span class="sd">        First input tensor of shape ``B x T x C``.</span>
+<span class="sd">    x_r : torch.tensor</span>
+<span class="sd">        Second input tensor of shape ``B x T x C``.</span>
+<span class="sd">    loss_function : torch.nn.Module</span>
+<span class="sd">        Loss function to use for the computation. The loss function must be an instance of a class implemented in this package.</span>
+<span class="sd">    n_repetitions : int</span>
+<span class="sd">        Number of repetitions to perform. The default value is ``100``.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    time_list_loss : list</span>
+<span class="sd">        List of length ``n_repetitions`` containing the computation times for each repetition.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">time_list_loss</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_repetitions</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">()</span> <span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_repetitions</span><span class="p">)</span> <span class="p">:</span>
+            
+            <span class="c1"># Evaluate computation time</span>
+            <span class="n">time_start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="n">_</span> <span class="o">=</span> <span class="n">loss_function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x_r</span><span class="p">)</span>
+            <span class="n">time_end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+            <span class="c1"># Save computations times</span>
+            <span class="n">time_list_loss</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">time_end</span> <span class="o">-</span> <span class="n">time_start</span>
+
+    <span class="k">return</span> <span class="n">time_list_loss</span></div>
+
+
+<span class="c1"># - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span>
+
+<div class="viewcode-block" id="load_benchmark_results">
+<a class="viewcode-back" href="../../dtw_loss_functions.benchmark.html#dtw_loss_functions.benchmark.load_benchmark_results">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">load_benchmark_results</span><span class="p">(</span><span class="n">path_results</span> <span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">loss_list</span> <span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span> <span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Load all the results stored in the specified path. This function expects that the results are stored in npy files organized as described in the docstring of the :func:`compute_benchmark` function.</span>
+<span class="sd">    The function will return a dictionary where the keys are the loss function names and the values are dictionaries containing the results for each combination of batch size, signal length and number of channels.</span>
+
+<span class="sd">    Note that by default, the function will load all the results present in the specified path. The name of the loss function will be inferred from the filename.</span>
+<span class="sd">    If you want to load only a subset of the results, you can specify the list of loss function names to load in the ``loss_list`` parameter. In this case, only the results corresponding to the specified loss function names will be loaded.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    path_results : str</span>
+<span class="sd">        Path to the folder containing the results. The results must be stored in npy files with the name format ``B_{batch_size}_T_{signal_length}_C_{num_channels}.npy``.</span>
+<span class="sd">    loss_list : list, optional</span>
+<span class="sd">        List of loss function names to load. If specified, only the results corresponding to the specified loss function names will be loaded. The default value is None, which means that all the results present in the specified path will be loaded.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    results_dict : dict[str, dict[str, np.ndarray]]</span>
+<span class="sd">        Dictionary containing the loaded results. The keys are the loss function names and the values are dictionaries containing the results for each combination of batch size, signal length and number of channels.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="c1"># Variable to store the results</span>
+    <span class="n">results_dict</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># Get all folders in the specified path.</span>
+    <span class="c1"># Note that the function compute benchmark should create a folder for each loss function (with the folder name corresponding to the keys of dictionary that contains the loss functions)</span>
+    <span class="c1"># This list iteration first will get all element inside path results (f for f in os.listdir(path_results)). Then that element will be inserted in the list only if it is a folder (if os.path.isdir(os.path.join(path_results, f))).</span>
+    <span class="n">folder_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path_results</span><span class="p">)</span> <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_results</span><span class="p">,</span> <span class="n">f</span><span class="p">))]</span>
+    
+    <span class="c1"># Iterate over folders (i.e. loss functions)</span>
+    <span class="k">for</span> <span class="n">folder</span> <span class="ow">in</span> <span class="n">folder_list</span> <span class="p">:</span>
+        <span class="c1"># Get the name of the loss function from the folder name</span>
+        <span class="n">loss_function_name</span> <span class="o">=</span> <span class="n">folder</span>
+
+        <span class="c1"># Check if the loss function name is in the list of loss functions to load (if specified)</span>
+        <span class="k">if</span> <span class="n">loss_list</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="p">:</span>
+            <span class="k">if</span> <span class="n">loss_function_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">loss_list</span> <span class="p">:</span>
+                <span class="k">continue</span>
+
+        <span class="c1"># Create a dictionary to store the results for the current loss function</span>
+        <span class="n">results_dict</span><span class="p">[</span><span class="n">loss_function_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="c1"># Get all npy files in the current folder</span>
+        <span class="n">path_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_results</span><span class="p">,</span> <span class="n">folder</span><span class="p">)</span>
+        <span class="n">file_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path_folder</span><span class="p">)</span> <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.npy&#39;</span><span class="p">)]</span>
+
+        <span class="c1"># Check if there are npy files in the current folder</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">file_list</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Warning : no npy files found in folder </span><span class="si">{</span><span class="n">path_folder</span><span class="si">}</span><span class="s2">. Skipping this folder.&quot;</span><span class="p">)</span>
+            <span class="k">continue</span>
+        
+        <span class="c1"># Iterate over file for the specific loss function</span>
+        <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">file_list</span> <span class="p">:</span>
+            <span class="c1"># batch_size, signal_length, n_channels = get_info_from_filename(filename)</span>
+
+            <span class="c1"># Remove the extension from the filename</span>
+            <span class="n">filename_no_ext</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+            <span class="c1"># Save the results in the dictionary</span>
+            <span class="c1"># Note that the key for each result was chosen to be the filename without the extension because it is very easy to create.</span>
+            <span class="n">results_dict</span><span class="p">[</span><span class="n">loss_function_name</span><span class="p">][</span><span class="n">filename_no_ext</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_folder</span><span class="p">,</span> <span class="n">filename</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">results_dict</span></div>
+
+
+<div class="viewcode-block" id="get_array_to_plot">
+<a class="viewcode-back" href="../../dtw_loss_functions.benchmark.html#dtw_loss_functions.benchmark.get_array_to_plot">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_array_to_plot</span><span class="p">(</span><span class="n">results_dict</span> <span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">loss_function_name</span> <span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">x_axis_variable</span> <span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">B_list</span> <span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">T_list</span> <span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">C_list</span> <span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span> <span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Given the results dictionary returned by the :func:`load_benchmark_results` function, extract the array of computation times for the specified loss function name.</span>
+<span class="sd">    The data will be organized as a list of arrays, where each array corresponds to a specific combination of batch size, signal length and number of channels. </span>
+<span class="sd">    The x-axis variable indicates which variable should be used as x-axis in the plot.</span>
+<span class="sd">    E.g. if x_axis_variable is &#39;T&#39;, the function will return a list of arrays where each array corresponds to a specific combination of batch size and number of channels, and the values in the array correspond to the computation times for different signal lengths.</span>
+
+<span class="sd">    </span>
+<span class="sd">    This function will return 3 lists :</span>
+
+<span class="sd">    - data_list_mean : list of arrays containing the mean computation times for each combination of batch size, signal length and number of channels.</span>
+<span class="sd">    - data_list_std : list of arrays containing the standard deviation of the computation times for each combination of batch size, signal length and number of channels.</span>
+<span class="sd">    - data_list_label : list of strings containing, where each element corresponds to the label of the data in the same position in the data_list_mean and data_list_std lists.</span>
+
+<span class="sd">    Remember that for each combination of batch size, signal length and number of channels, there are n_repetitions computation times stored in the results dictionary. </span>
+<span class="sd">    For this reason, this function return both the mean and std for each combination.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    results_dict : dict</span>
+<span class="sd">        Dictionary containing the loaded results as returned by the :func:`load_benchmark_results` function.</span>
+<span class="sd">    loss_function_name : str</span>
+<span class="sd">        Name of the loss function for which to extract the data. It must be a key of the input dictionary.</span>
+<span class="sd">    x_axis_variable : str</span>
+<span class="sd">        Variable to use as x-axis in the plot. It must be one of &#39;B&#39;, &#39;T&#39; or &#39;C&#39;, corresponding to batch size, signal length and number of channels, respectively.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">loss_function_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">results_dict</span> <span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Loss function name </span><span class="si">{</span><span class="n">loss_function_name</span><span class="si">}</span><span class="s2"> not found in the results dictionary. Available loss function names are : </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">results_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">x_axis_variable</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">]</span> <span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;x_axis_variable must be one of &#39;B&#39;, &#39;T&#39; or &#39;C&#39;. Received </span><span class="si">{</span><span class="n">x_axis_variable</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">x_axis_variable</span> <span class="o">==</span> <span class="s1">&#39;T&#39;</span> <span class="p">:</span>
+        <span class="n">data_list_mean</span><span class="p">,</span> <span class="n">data_list_std</span><span class="p">,</span> <span class="n">data_list_label</span> <span class="o">=</span> <span class="n">__get_array_to_plot_T</span><span class="p">(</span><span class="n">results_dict</span><span class="p">,</span> <span class="n">loss_function_name</span><span class="p">,</span> <span class="n">B_list</span><span class="p">,</span> <span class="n">T_list</span><span class="p">,</span> <span class="n">C_list</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">x_axis_variable</span> <span class="o">==</span> <span class="s1">&#39;B&#39;</span> <span class="p">:</span>
+        <span class="n">data_list_mean</span><span class="p">,</span> <span class="n">data_list_std</span><span class="p">,</span> <span class="n">data_list_label</span> <span class="o">=</span> <span class="n">__get_array_to_plot_B</span><span class="p">(</span><span class="n">results_dict</span><span class="p">,</span> <span class="n">loss_function_name</span><span class="p">,</span> <span class="n">B_list</span><span class="p">,</span> <span class="n">T_list</span><span class="p">,</span> <span class="n">C_list</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">x_axis_variable</span> <span class="o">==</span> <span class="s1">&#39;C&#39;</span> <span class="p">:</span>
+        <span class="n">data_list_mean</span><span class="p">,</span> <span class="n">data_list_std</span><span class="p">,</span> <span class="n">data_list_label</span> <span class="o">=</span> <span class="n">__get_array_to_plot_C</span><span class="p">(</span><span class="n">results_dict</span><span class="p">,</span> <span class="n">loss_function_name</span><span class="p">,</span> <span class="n">B_list</span><span class="p">,</span> <span class="n">T_list</span><span class="p">,</span> <span class="n">C_list</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">data_list_mean</span><span class="p">,</span> <span class="n">data_list_std</span><span class="p">,</span> <span class="n">data_list_label</span></div>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">__get_array_to_plot_T</span><span class="p">(</span><span class="n">results_dict</span><span class="p">,</span> <span class="n">loss_function_name</span><span class="p">,</span> <span class="n">B_list</span><span class="p">,</span> <span class="n">T_list</span><span class="p">,</span> <span class="n">C_list</span><span class="p">)</span> <span class="p">:</span>
+    <span class="n">data_list_mean</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">data_list_std</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">data_list_label</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">B</span> <span class="ow">in</span> <span class="n">B_list</span> <span class="p">:</span>
+        <span class="k">for</span> <span class="n">C</span> <span class="ow">in</span> <span class="n">C_list</span> <span class="p">:</span>
+            
+            <span class="c1"># Temporary variables to store the mean and std of the computation times for the current combination of batch size and number of channels.</span>
+            <span class="n">tmp_data_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">T_list</span><span class="p">))</span>
+            <span class="n">tmp_data_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">T_list</span><span class="p">))</span>
+            <span class="n">tmp_data_label</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">loss_function_name</span><span class="si">}</span><span class="s2"> (B=</span><span class="si">{</span><span class="n">B</span><span class="si">}</span><span class="s2">, C=</span><span class="si">{</span><span class="n">C</span><span class="si">}</span><span class="s2">)&quot;</span>
+
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">T_list</span><span class="p">))</span> <span class="p">:</span>
+                <span class="n">T</span> <span class="o">=</span> <span class="n">T_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+                <span class="c1"># Create the key to access the results for the current combination of batch size, signal length and number of channels</span>
+                <span class="n">key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;B_</span><span class="si">{</span><span class="n">B</span><span class="si">}</span><span class="s2">_T_</span><span class="si">{</span><span class="n">T</span><span class="si">}</span><span class="s2">_C_</span><span class="si">{</span><span class="n">C</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">results_dict</span><span class="p">[</span><span class="n">loss_function_name</span><span class="p">]</span> <span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Key </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> not found in the results dictionary for loss function </span><span class="si">{</span><span class="n">loss_function_name</span><span class="si">}</span><span class="s2">. Check your input lists and the results dictionary.&quot;</span><span class="p">)</span>
+
+                <span class="c1"># Get the computation times for the current combination of batch size, signal length and number of channels</span>
+                <span class="n">time_values</span> <span class="o">=</span> <span class="n">results_dict</span><span class="p">[</span><span class="n">loss_function_name</span><span class="p">][</span><span class="n">key</span><span class="p">]</span>
+
+                <span class="c1"># Save mean and std</span>
+                <span class="n">tmp_data_mean</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">time_values</span><span class="p">)</span>
+                <span class="n">tmp_data_std</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">time_values</span><span class="p">)</span>
+            
+            <span class="c1"># Save data and label</span>
+            <span class="n">data_list_mean</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmp_data_mean</span><span class="p">)</span>
+            <span class="n">data_list_std</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmp_data_std</span><span class="p">)</span>
+            <span class="n">data_list_label</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmp_data_label</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">data_list_mean</span><span class="p">,</span> <span class="n">data_list_std</span><span class="p">,</span> <span class="n">data_list_label</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">__get_array_to_plot_B</span><span class="p">(</span><span class="n">results_dict</span><span class="p">,</span> <span class="n">loss_function_name</span><span class="p">,</span> <span class="n">B_list</span><span class="p">,</span> <span class="n">T_list</span><span class="p">,</span> <span class="n">C_list</span><span class="p">)</span> <span class="p">:</span>
+    <span class="n">data_list_mean</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">data_list_std</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">data_list_label</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">T</span> <span class="ow">in</span> <span class="n">T_list</span> <span class="p">:</span>
+        <span class="k">for</span> <span class="n">C</span> <span class="ow">in</span> <span class="n">C_list</span> <span class="p">:</span>
+            
+            <span class="c1"># Temporary variables to store the mean and std of the computation times for the current combination of signal length and number of channels.</span>
+            <span class="n">tmp_data_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">B_list</span><span class="p">))</span>
+            <span class="n">tmp_data_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">B_list</span><span class="p">))</span>
+            <span class="n">tmp_data_label</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">loss_function_name</span><span class="si">}</span><span class="s2"> (T=</span><span class="si">{</span><span class="n">T</span><span class="si">}</span><span class="s2">, C=</span><span class="si">{</span><span class="n">C</span><span class="si">}</span><span class="s2">)&quot;</span>
+
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">B_list</span><span class="p">))</span> <span class="p">:</span>
+                <span class="n">B</span> <span class="o">=</span> <span class="n">B_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+                <span class="c1"># Create the key to access the results for the current combination of batch size, signal length and number of channels</span>
+                <span class="n">key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;B_</span><span class="si">{</span><span class="n">B</span><span class="si">}</span><span class="s2">_T_</span><span class="si">{</span><span class="n">T</span><span class="si">}</span><span class="s2">_C_</span><span class="si">{</span><span class="n">C</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">results_dict</span><span class="p">[</span><span class="n">loss_function_name</span><span class="p">]</span> <span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Key </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> not found in the results dictionary for loss function </span><span class="si">{</span><span class="n">loss_function_name</span><span class="si">}</span><span class="s2">. Check your input lists and the results dictionary.&quot;</span><span class="p">)</span>
+
+                <span class="c1"># Get the computation times for the current combination of batch size, signal length and number of channels</span>
+                <span class="n">time_values</span> <span class="o">=</span> <span class="n">results_dict</span><span class="p">[</span><span class="n">loss_function_name</span><span class="p">][</span><span class="n">key</span><span class="p">]</span>
+
+                <span class="c1"># Save mean and std</span>
+                <span class="n">tmp_data_mean</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">time_values</span><span class="p">)</span>
+                <span class="n">tmp_data_std</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">time_values</span><span class="p">)</span>
+
+            <span class="c1"># Save data and label</span>
+            <span class="n">data_list_mean</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmp_data_mean</span><span class="p">)</span>
+            <span class="n">data_list_std</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmp_data_std</span><span class="p">)</span>
+            <span class="n">data_list_label</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmp_data_label</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">data_list_mean</span><span class="p">,</span> <span class="n">data_list_std</span><span class="p">,</span> <span class="n">data_list_label</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">__get_array_to_plot_C</span><span class="p">(</span><span class="n">results_dict</span><span class="p">,</span> <span class="n">loss_function_name</span><span class="p">,</span> <span class="n">B_list</span><span class="p">,</span> <span class="n">T_list</span><span class="p">,</span> <span class="n">C_list</span><span class="p">)</span> <span class="p">:</span>
+    <span class="n">data_list_mean</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">data_list_std</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">data_list_label</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">B</span> <span class="ow">in</span> <span class="n">B_list</span> <span class="p">:</span>
+        <span class="k">for</span> <span class="n">T</span> <span class="ow">in</span> <span class="n">T_list</span> <span class="p">:</span>
+            
+            <span class="c1"># Temporary variables to store the mean and std of the computation times for the current combination of batch size and signal length.</span>
+            <span class="n">tmp_data_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">C_list</span><span class="p">))</span>
+            <span class="n">tmp_data_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">C_list</span><span class="p">))</span>
+            <span class="n">tmp_data_label</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">loss_function_name</span><span class="si">}</span><span class="s2"> (B=</span><span class="si">{</span><span class="n">B</span><span class="si">}</span><span class="s2">, T=</span><span class="si">{</span><span class="n">T</span><span class="si">}</span><span class="s2">)&quot;</span>
+
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">C_list</span><span class="p">))</span> <span class="p">:</span>
+                <span class="n">C</span> <span class="o">=</span> <span class="n">C_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+                <span class="c1"># Create the key to access the results for the current combination of batch size, signal length and number of channels</span>
+                <span class="n">key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;B_</span><span class="si">{</span><span class="n">B</span><span class="si">}</span><span class="s2">_T_</span><span class="si">{</span><span class="n">T</span><span class="si">}</span><span class="s2">_C_</span><span class="si">{</span><span class="n">C</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">results_dict</span><span class="p">[</span><span class="n">loss_function_name</span><span class="p">]</span> <span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Key </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> not found in the results dictionary for loss function </span><span class="si">{</span><span class="n">loss_function_name</span><span class="si">}</span><span class="s2">. Check your input lists and the results dictionary.&quot;</span><span class="p">)</span>
+
+                <span class="c1"># Get the computation times for the current combination of batch size, signal length and number of channels</span>
+                <span class="n">time_values</span> <span class="o">=</span> <span class="n">results_dict</span><span class="p">[</span><span class="n">loss_function_name</span><span class="p">][</span><span class="n">key</span><span class="p">]</span>
+
+                <span class="c1"># Save mean and std</span>
+                <span class="n">tmp_data_mean</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">time_values</span><span class="p">)</span>
+                <span class="n">tmp_data_std</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">time_values</span><span class="p">)</span>
+
+            <span class="c1"># Save data and label</span>
+            <span class="n">data_list_mean</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmp_data_mean</span><span class="p">)</span>
+            <span class="n">data_list_std</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmp_data_std</span><span class="p">)</span>
+            <span class="n">data_list_label</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmp_data_label</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">data_list_mean</span><span class="p">,</span> <span class="n">data_list_std</span><span class="p">,</span> <span class="n">data_list_label</span>
+
+<div class="viewcode-block" id="get_info_from_filename">
+<a class="viewcode-back" href="../../dtw_loss_functions.benchmark.html#dtw_loss_functions.benchmark.get_info_from_filename">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_info_from_filename</span><span class="p">(</span><span class="n">file_name</span> <span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span> <span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Given a file name in the format ``B_{batch_size}_T_{signal_length}_C_{num_channels}.npy``, extract the batch size, signal length and number of channels from the filename and return them.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    file_name : str</span>
+<span class="sd">        File name in the format ``B_{batch_size}_T_{signal_length}_C_{num_channels}.npy``.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    batch_size : int</span>
+<span class="sd">        Batch size extracted from the file name.</span>
+<span class="sd">    signal_length : int</span>
+<span class="sd">        Signal length extracted from the file name.</span>
+<span class="sd">    n_channels : int</span>
+<span class="sd">        Number of channels extracted from the file name.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="c1"># Remove the extension from the file name</span>
+    <span class="n">file_name</span> <span class="o">=</span> <span class="n">file_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># Extract the batch size, signal length and number of channels from the file name</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">B_str</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">T_str</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">C_str</span> <span class="o">=</span> <span class="n">file_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Convert the extracted values to integers</span>
+    <span class="n">batch_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">B_str</span><span class="p">)</span>
+    <span class="n">signal_length</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">T_str</span><span class="p">)</span>
+    <span class="n">n_channels</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">C_str</span><span class="p">)</span>
+
+    <span class="c1"># Return the extracted values</span>
+    <span class="k">return</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">signal_length</span><span class="p">,</span> <span class="n">n_channels</span></div>
+
+
+<span class="c1"># - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span>
+
+<div class="viewcode-block" id="plot_benchmark">
+<a class="viewcode-back" href="../../dtw_loss_functions.benchmark.html#dtw_loss_functions.benchmark.plot_benchmark">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_benchmark</span><span class="p">(</span><span class="n">plot_config</span> <span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">x_axis_variable_list</span> <span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">x_axis_variable_name</span> <span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data_to_plot_mean</span> <span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">labels_to_plot</span> <span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">data_to_plot_std</span> <span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">color_dict</span> <span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span> <span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plot the results of the benchmark. The data should be in the format returned by the :func:`get_array_to_plot` function, i.e. a list of arrays containing the mean computation times for each combination of batch size, signal length and number of channels, a list of strings containing the labels for each array.</span>
+<span class="sd">    The x-axis variable indicates which variable should be used as x-axis in the plot. E.g. if x_axis_variable is &#39;T&#39;, the function will plot the computation times for different signal lengths.</span>
+<span class="sd">    If the standard deviation of the computation times is provided, it will be plotted as shaded area around the mean values.</span>
+
+<span class="sd">    Note that this function is more an example of how you can plot the results than the &quot;definitive&quot; way to plot the results.</span>
+<span class="sd">    You can customize the plot as you want, using the data returned by the :func:`get_array_to_plot` function.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    plot_config : dict</span>
+<span class="sd">        Dictionary containing the plot settings. The following settings are available (with their default values) :</span>
+<span class="sd">        - figsize : tuple, default (10, 6)</span>
+<span class="sd">            Size of the figure in inches.</span>
+<span class="sd">        - fontsize : int, default 12</span>
+<span class="sd">            Font size for the labels and legend.</span>
+<span class="sd">        - marker : str, default &#39;o&#39;</span>
+<span class="sd">            Marker style for the points in the plot.</span>
+<span class="sd">        - markersize : int, default 8</span>
+<span class="sd">            Size of the markers in the plot.</span>
+<span class="sd">        - linewidth : int, default 2</span>
+<span class="sd">            Line width for the lines in the plot.</span>
+<span class="sd">        - y_scale_log : bool, default False</span>
+<span class="sd">            Whether to use a logarithmic scale for the y-axis.</span>
+<span class="sd">        - use_milliseconds : bool, default False</span>
+<span class="sd">            Whether to use milliseconds instead of seconds for the computation times. If True, the computation times will be multiplied by 1000 and the y-axis label will be updated accordingly.</span>
+<span class="sd">        - path_save : str, default &#39;benchmark/plot.png&#39;</span>
+<span class="sd">            If specified, the plot will be saved at the given path. If None, or not specified, the plot will not be saved.</span>
+<span class="sd">    x_axis_variable_list : list</span>
+<span class="sd">        List of values for the x-axis variable.</span>
+<span class="sd">    x_axis_variable_name : str</span>
+<span class="sd">        Name of the x-axis variable to use as label for the x-axis.</span>
+<span class="sd">    data_to_plot_mean : list</span>
+<span class="sd">        List of arrays containing the mean computation times, as returned by the :func:`get_array_to_plot` function.</span>
+<span class="sd">    labels_to_plot : list</span>
+<span class="sd">        List of strings containing the labels for each array in the ``data_to_plot_mean` list, as returned by the :func:`get_array_to_plot`` function.</span>
+<span class="sd">    data_to_plot_std : list, optional</span>
+<span class="sd">        List of arrays containing the standard deviation of the computation times, as returned by the :func:`get_array_to_plot` function. </span>
+<span class="sd">        If provided, the standard deviation will be plotted as shaded area around the mean values. The default value is None, which means that the standard deviation will not be plotted.</span>
+<span class="sd">    color_dict : list, optional</span>
+<span class="sd">        Dictionary containing the colors to use for each label. The keys of the dictionary should be the same as the labels in the ``labels_to_plot`` list.</span>
+<span class="sd">        The values should be valid color specifications for matplotlib (e.g. &#39;red&#39;, &#39;#FF0000&#39;, etc.).</span>
+<span class="sd">        If not provided, the default color cycle of matplotlib will be used. The default value is None.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    fig : matplotlib.figure.Figure</span>
+<span class="sd">        Figure object containing the plot.</span>
+<span class="sd">    ax : matplotlib.axes.Axes</span>
+<span class="sd">        Axes object containing the plot.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Check plot settings</span>
+    <span class="k">if</span> <span class="s1">&#39;figsize&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">plot_config</span>          <span class="p">:</span> <span class="n">plot_config</span><span class="p">[</span><span class="s1">&#39;figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s1">&#39;fontsize&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">plot_config</span>         <span class="p">:</span> <span class="n">plot_config</span><span class="p">[</span><span class="s1">&#39;fontsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">12</span>
+    <span class="k">if</span> <span class="s1">&#39;marker&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">plot_config</span>           <span class="p">:</span> <span class="n">plot_config</span><span class="p">[</span><span class="s1">&#39;marker&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span>
+    <span class="k">if</span> <span class="s1">&#39;markersize&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">plot_config</span>       <span class="p">:</span> <span class="n">plot_config</span><span class="p">[</span><span class="s1">&#39;markersize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">8</span>
+    <span class="k">if</span> <span class="s1">&#39;linewidth&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">plot_config</span>        <span class="p">:</span> <span class="n">plot_config</span><span class="p">[</span><span class="s1">&#39;linewidth&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="k">if</span> <span class="s1">&#39;y_scale_log&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">plot_config</span>      <span class="p">:</span> <span class="n">plot_config</span><span class="p">[</span><span class="s1">&#39;y_scale_log&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="s1">&#39;use_milliseconds&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">plot_config</span> <span class="p">:</span> <span class="n">plot_config</span><span class="p">[</span><span class="s1">&#39;use_milliseconds&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="s1">&#39;path_save&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">plot_config</span>        <span class="p">:</span> <span class="n">plot_config</span><span class="p">[</span><span class="s1">&#39;path_save&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">color_dict</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">color_dict</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data_to_plot_mean</span><span class="p">)</span> <span class="p">:</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Length of color_dict must be the same as the length of labels_to_plot. Received </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">color_dict</span><span class="p">)</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">labels_to_plot</span><span class="p">)</span><span class="si">}</span><span class="s2">, respectively.&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Create the figure and axis</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="n">plot_config</span><span class="p">[</span><span class="s1">&#39;figsize&#39;</span><span class="p">])</span>
+
+    <span class="c1"># Set scale factor (second/millisecond)</span>
+    <span class="k">if</span> <span class="s1">&#39;use_milliseconds&#39;</span> <span class="ow">in</span> <span class="n">plot_config</span> <span class="ow">and</span> <span class="n">plot_config</span><span class="p">[</span><span class="s1">&#39;use_milliseconds&#39;</span><span class="p">]</span> <span class="p">:</span>
+        <span class="n">scale_factor</span> <span class="o">=</span> <span class="mi">1000</span>
+        <span class="n">label_time_unit</span> <span class="o">=</span> <span class="s1">&#39;ms&#39;</span>
+    <span class="k">else</span> <span class="p">:</span>
+        <span class="n">scale_factor</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">label_time_unit</span> <span class="o">=</span> <span class="s1">&#39;s&#39;</span>
+        
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data_to_plot_mean</span><span class="p">))</span> <span class="p">:</span>
+        <span class="c1"># Plot mean values</span>
+        <span class="n">mean_values</span> <span class="o">=</span> <span class="n">data_to_plot_mean</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">scale_factor</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="n">labels_to_plot</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="n">color_dict</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="k">if</span> <span class="n">color_dict</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
+        
+        <span class="c1"># Plot mean values as line with markers</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_axis_variable_list</span><span class="p">,</span> <span class="n">mean_values</span><span class="p">,</span>
+                <span class="n">label</span> <span class="o">=</span> <span class="n">label</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">color</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="n">plot_config</span><span class="p">[</span><span class="s1">&#39;linewidth&#39;</span><span class="p">],</span> 
+                <span class="n">marker</span> <span class="o">=</span> <span class="n">plot_config</span><span class="p">[</span><span class="s1">&#39;marker&#39;</span><span class="p">],</span> <span class="n">markersize</span> <span class="o">=</span> <span class="n">plot_config</span><span class="p">[</span><span class="s1">&#39;markersize&#39;</span><span class="p">]</span>
+                <span class="p">)</span>
+
+        <span class="c1"># (OPTIONAL) Plot std values as shaded area around the mean values</span>
+        <span class="k">if</span> <span class="n">data_to_plot_std</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="p">:</span>
+            <span class="n">std_values</span> <span class="o">=</span> <span class="n">data_to_plot_std</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">scale_factor</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x_axis_variable_list</span><span class="p">,</span> <span class="n">mean_values</span> <span class="o">-</span> <span class="n">std_values</span><span class="p">,</span> <span class="n">mean_values</span> <span class="o">+</span> <span class="n">std_values</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">)</span>
+    
+    <span class="c1"># Add details to the plot</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">x_axis_variable_name</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="n">plot_config</span><span class="p">[</span><span class="s1">&#39;fontsize&#39;</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Computation time (</span><span class="si">{</span><span class="n">label_time_unit</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="n">plot_config</span><span class="p">[</span><span class="s1">&#39;fontsize&#39;</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">x_axis_variable_list</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x_axis_variable_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">plot_config</span><span class="p">[</span><span class="s1">&#39;y_scale_log&#39;</span><span class="p">]</span> <span class="p">:</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span> <span class="o">=</span> <span class="n">plot_config</span><span class="p">[</span><span class="s1">&#39;fontsize&#39;</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">which</span> <span class="o">=</span> <span class="s1">&#39;major&#39;</span><span class="p">,</span> <span class="n">labelsize</span> <span class="o">=</span> <span class="n">plot_config</span><span class="p">[</span><span class="s1">&#39;fontsize&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.8</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">plot_config</span><span class="p">[</span><span class="s1">&#39;path_save&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="p">:</span>
+        <span class="c1"># Create the folder if it does not exist</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">plot_config</span><span class="p">[</span><span class="s1">&#39;path_save&#39;</span><span class="p">]),</span> <span class="n">exist_ok</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># Save the plot</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">plot_config</span><span class="p">[</span><span class="s1">&#39;path_save&#39;</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Alberto Zancanaro.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

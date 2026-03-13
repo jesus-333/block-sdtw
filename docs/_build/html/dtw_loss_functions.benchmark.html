@@ -1,0 +1,326 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Benchmark &mdash; dtw_loss_functions  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="SoftDTW Subpackage" href="dtw_loss_functions.soft_dtw_implementations.html" />
+    <link rel="prev" title="Soft DTW" href="dtw_loss_functions.soft_dtw.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            dtw_loss_functions
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Loss functions</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dtw_loss_functions.block_dtw.html">Block DTW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dtw_loss_functions.otw.html">OTW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dtw_loss_functions.soft_dtw.html">Soft DTW</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Benchmark</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dtw_loss_functions.benchmark.compute_benchmark"><code class="docutils literal notranslate"><span class="pre">compute_benchmark()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dtw_loss_functions.benchmark.get_array_to_plot"><code class="docutils literal notranslate"><span class="pre">get_array_to_plot()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dtw_loss_functions.benchmark.get_info_from_filename"><code class="docutils literal notranslate"><span class="pre">get_info_from_filename()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dtw_loss_functions.benchmark.load_benchmark_results"><code class="docutils literal notranslate"><span class="pre">load_benchmark_results()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dtw_loss_functions.benchmark.plot_benchmark"><code class="docutils literal notranslate"><span class="pre">plot_benchmark()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dtw_loss_functions.benchmark.repeat_inference"><code class="docutils literal notranslate"><span class="pre">repeat_inference()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dtw_loss_functions.soft_dtw_implementations.html">SoftDTW Subpackage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biblio.html">Bibliography</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">dtw_loss_functions</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Benchmark</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/dtw_loss_functions.benchmark.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="benchmark">
+<h1>Benchmark<a class="headerlink" href="#benchmark" title="Link to this heading"></a></h1>
+<p>For some example on how to use the benchmark module you could check the <a class="reference external" href="https://github.com/jesus-333/dtw_loss_functions/tree/main/benchmark">Benchmark page</a> on github.</p>
+<p id="module-dtw_loss_functions.benchmark">Module for benchmarking the DTW loss functions implemented in this package. It includes functions to compare the performance of different DTW loss, save and visualize the results.</p>
+<section id="authors">
+<h2>Authors<a class="headerlink" href="#authors" title="Link to this heading"></a></h2>
+<p>Alberto Zancanaro &lt;<a class="reference external" href="mailto:alberto&#46;zancanaro&#37;&#52;&#48;uni&#46;lu">alberto<span>&#46;</span>zancanaro<span>&#64;</span>uni<span>&#46;</span>lu</a>&gt;</p>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="dtw_loss_functions.benchmark.compute_benchmark">
+<span class="sig-prename descclassname"><span class="pre">dtw_loss_functions.benchmark.</span></span><span class="sig-name descname"><span class="pre">compute_benchmark</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">B_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss_functions_to_use</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_repetitions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_save</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'benchmark'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_progress</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dtw_loss_functions/benchmark.html#compute_benchmark"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dtw_loss_functions.benchmark.compute_benchmark" title="Link to this definition"></a></dt>
+<dd><p>For each combination of batch size, signal length and number of channels specified in the input lists, compute the loss for each loss function specified in <code class="docutils literal notranslate"><span class="pre">loss_functions_to_use</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">loss_functions_to_use</span></code> is a dictionary where the keys are the names of the loss functions and the values are the instances of the loss functions to test.
+The loss functions must be instances of the classes implemented in this package.</p>
+<p>The results are saved in npy files at the path <code class="docutils literal notranslate"><span class="pre">{path_save}/{loss_function_name}/</span></code>. The <code class="docutils literal notranslate"><span class="pre">loss_function_name</span></code> is the key of the loss function in the <code class="docutils literal notranslate"><span class="pre">loss_functions_to_use</span></code> dictionary.
+Each file will be name as <code class="docutils literal notranslate"><span class="pre">B_{batch_size}_T_{signal_length}_C_{num_channels}.npy</span></code> and will contain a numpy array of shape (n_repetitions,) with the computed loss values for each repetition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>B_list</strong> (<em>list</em>) – List of batch sizes to test.</p></li>
+<li><p><strong>T_list</strong> (<em>list</em>) – List of signal lengths to test.</p></li>
+<li><p><strong>C_list</strong> (<em>list</em>) – List of number of channels to test.</p></li>
+<li><p><strong>loss_functions_to_use</strong> (<em>dict</em>) – Dictionary of loss functions to test. The keys are the names of the loss functions and the values are the instances of the loss functions to test.</p></li>
+<li><p><strong>device</strong> (<em>str</em>) – Device to use for the computations. Must be ‘cpu’ or ‘cuda’.</p></li>
+<li><p><strong>n_repetitions</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of repetitions to perform for each combination of batch size, signal length and number of channels. The default value is 100.</p></li>
+<li><p><strong>path_save</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to save the results. The default value is ‘benchmark’. If the folder does not exist, it will be created. If results are already present in the folder, they will be overwritten.</p></li>
+<li><p><strong>print_progress</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to print the progress of the benchmark. The default value is False.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dtw_loss_functions.benchmark.get_array_to_plot">
+<span class="sig-prename descclassname"><span class="pre">dtw_loss_functions.benchmark.</span></span><span class="sig-name descname"><span class="pre">get_array_to_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">results_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss_function_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_axis_variable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="_modules/dtw_loss_functions/benchmark.html#get_array_to_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dtw_loss_functions.benchmark.get_array_to_plot" title="Link to this definition"></a></dt>
+<dd><p>Given the results dictionary returned by the <a class="reference internal" href="#dtw_loss_functions.benchmark.load_benchmark_results" title="dtw_loss_functions.benchmark.load_benchmark_results"><code class="xref py py-func docutils literal notranslate"><span class="pre">load_benchmark_results()</span></code></a> function, extract the array of computation times for the specified loss function name.
+The data will be organized as a list of arrays, where each array corresponds to a specific combination of batch size, signal length and number of channels.
+The x-axis variable indicates which variable should be used as x-axis in the plot.
+E.g. if x_axis_variable is ‘T’, the function will return a list of arrays where each array corresponds to a specific combination of batch size and number of channels, and the values in the array correspond to the computation times for different signal lengths.</p>
+<p>This function will return 3 lists :</p>
+<ul class="simple">
+<li><p>data_list_mean : list of arrays containing the mean computation times for each combination of batch size, signal length and number of channels.</p></li>
+<li><p>data_list_std : list of arrays containing the standard deviation of the computation times for each combination of batch size, signal length and number of channels.</p></li>
+<li><p>data_list_label : list of strings containing, where each element corresponds to the label of the data in the same position in the data_list_mean and data_list_std lists.</p></li>
+</ul>
+<p>Remember that for each combination of batch size, signal length and number of channels, there are n_repetitions computation times stored in the results dictionary.
+For this reason, this function return both the mean and std for each combination.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>results_dict</strong> (<em>dict</em>) – Dictionary containing the loaded results as returned by the <a class="reference internal" href="#dtw_loss_functions.benchmark.load_benchmark_results" title="dtw_loss_functions.benchmark.load_benchmark_results"><code class="xref py py-func docutils literal notranslate"><span class="pre">load_benchmark_results()</span></code></a> function.</p></li>
+<li><p><strong>loss_function_name</strong> (<em>str</em>) – Name of the loss function for which to extract the data. It must be a key of the input dictionary.</p></li>
+<li><p><strong>x_axis_variable</strong> (<em>str</em>) – Variable to use as x-axis in the plot. It must be one of ‘B’, ‘T’ or ‘C’, corresponding to batch size, signal length and number of channels, respectively.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dtw_loss_functions.benchmark.get_info_from_filename">
+<span class="sig-prename descclassname"><span class="pre">dtw_loss_functions.benchmark.</span></span><span class="sig-name descname"><span class="pre">get_info_from_filename</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="_modules/dtw_loss_functions/benchmark.html#get_info_from_filename"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dtw_loss_functions.benchmark.get_info_from_filename" title="Link to this definition"></a></dt>
+<dd><p>Given a file name in the format <code class="docutils literal notranslate"><span class="pre">B_{batch_size}_T_{signal_length}_C_{num_channels}.npy</span></code>, extract the batch size, signal length and number of channels from the filename and return them.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file_name</strong> (<em>str</em>) – File name in the format <code class="docutils literal notranslate"><span class="pre">B_{batch_size}_T_{signal_length}_C_{num_channels}.npy</span></code>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>batch_size</strong> (<em>int</em>) – Batch size extracted from the file name.</p></li>
+<li><p><strong>signal_length</strong> (<em>int</em>) – Signal length extracted from the file name.</p></li>
+<li><p><strong>n_channels</strong> (<em>int</em>) – Number of channels extracted from the file name.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dtw_loss_functions.benchmark.load_benchmark_results">
+<span class="sig-prename descclassname"><span class="pre">dtw_loss_functions.benchmark.</span></span><span class="sig-name descname"><span class="pre">load_benchmark_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_results</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="_modules/dtw_loss_functions/benchmark.html#load_benchmark_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dtw_loss_functions.benchmark.load_benchmark_results" title="Link to this definition"></a></dt>
+<dd><p>Load all the results stored in the specified path. This function expects that the results are stored in npy files organized as described in the docstring of the <a class="reference internal" href="#dtw_loss_functions.benchmark.compute_benchmark" title="dtw_loss_functions.benchmark.compute_benchmark"><code class="xref py py-func docutils literal notranslate"><span class="pre">compute_benchmark()</span></code></a> function.
+The function will return a dictionary where the keys are the loss function names and the values are dictionaries containing the results for each combination of batch size, signal length and number of channels.</p>
+<p>Note that by default, the function will load all the results present in the specified path. The name of the loss function will be inferred from the filename.
+If you want to load only a subset of the results, you can specify the list of loss function names to load in the <code class="docutils literal notranslate"><span class="pre">loss_list</span></code> parameter. In this case, only the results corresponding to the specified loss function names will be loaded.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path_results</strong> (<em>str</em>) – Path to the folder containing the results. The results must be stored in npy files with the name format <code class="docutils literal notranslate"><span class="pre">B_{batch_size}_T_{signal_length}_C_{num_channels}.npy</span></code>.</p></li>
+<li><p><strong>loss_list</strong> (<em>list</em><em>, </em><em>optional</em>) – List of loss function names to load. If specified, only the results corresponding to the specified loss function names will be loaded. The default value is None, which means that all the results present in the specified path will be loaded.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>results_dict</strong> – Dictionary containing the loaded results. The keys are the loss function names and the values are dictionaries containing the results for each combination of batch size, signal length and number of channels.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict[str, dict[str, np.ndarray]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dtw_loss_functions.benchmark.plot_benchmark">
+<span class="sig-prename descclassname"><span class="pre">dtw_loss_functions.benchmark.</span></span><span class="sig-name descname"><span class="pre">plot_benchmark</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plot_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_axis_variable_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_axis_variable_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_to_plot_mean</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels_to_plot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_to_plot_std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="_modules/dtw_loss_functions/benchmark.html#plot_benchmark"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dtw_loss_functions.benchmark.plot_benchmark" title="Link to this definition"></a></dt>
+<dd><p>Plot the results of the benchmark. The data should be in the format returned by the <a class="reference internal" href="#dtw_loss_functions.benchmark.get_array_to_plot" title="dtw_loss_functions.benchmark.get_array_to_plot"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_array_to_plot()</span></code></a> function, i.e. a list of arrays containing the mean computation times for each combination of batch size, signal length and number of channels, a list of strings containing the labels for each array.
+The x-axis variable indicates which variable should be used as x-axis in the plot. E.g. if x_axis_variable is ‘T’, the function will plot the computation times for different signal lengths.
+If the standard deviation of the computation times is provided, it will be plotted as shaded area around the mean values.</p>
+<p>Note that this function is more an example of how you can plot the results than the “definitive” way to plot the results.
+You can customize the plot as you want, using the data returned by the <a class="reference internal" href="#dtw_loss_functions.benchmark.get_array_to_plot" title="dtw_loss_functions.benchmark.get_array_to_plot"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_array_to_plot()</span></code></a> function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>plot_config</strong> (<em>dict</em>) – <p>Dictionary containing the plot settings. The following settings are available (with their default values) :
+- figsize : tuple, default (10, 6)</p>
+<blockquote>
+<div><p>Size of the figure in inches.</p>
+</div></blockquote>
+<ul>
+<li><dl class="simple">
+<dt>fontsize<span class="classifier">int, default 12</span></dt><dd><p>Font size for the labels and legend.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>marker<span class="classifier">str, default ‘o’</span></dt><dd><p>Marker style for the points in the plot.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>markersize<span class="classifier">int, default 8</span></dt><dd><p>Size of the markers in the plot.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>linewidth<span class="classifier">int, default 2</span></dt><dd><p>Line width for the lines in the plot.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>y_scale_log<span class="classifier">bool, default False</span></dt><dd><p>Whether to use a logarithmic scale for the y-axis.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>use_milliseconds<span class="classifier">bool, default False</span></dt><dd><p>Whether to use milliseconds instead of seconds for the computation times. If True, the computation times will be multiplied by 1000 and the y-axis label will be updated accordingly.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>path_save<span class="classifier">str, default ‘benchmark/plot.png’</span></dt><dd><p>If specified, the plot will be saved at the given path. If None, or not specified, the plot will not be saved.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</p></li>
+<li><p><strong>x_axis_variable_list</strong> (<em>list</em>) – List of values for the x-axis variable.</p></li>
+<li><p><strong>x_axis_variable_name</strong> (<em>str</em>) – Name of the x-axis variable to use as label for the x-axis.</p></li>
+<li><p><strong>data_to_plot_mean</strong> (<em>list</em>) – List of arrays containing the mean computation times, as returned by the <a class="reference internal" href="#dtw_loss_functions.benchmark.get_array_to_plot" title="dtw_loss_functions.benchmark.get_array_to_plot"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_array_to_plot()</span></code></a> function.</p></li>
+<li><p><strong>labels_to_plot</strong> (<em>list</em>) – List of strings containing the labels for each array in the <code class="docutils literal notranslate"><span class="pre">data_to_plot_mean`</span> <span class="pre">list,</span> <span class="pre">as</span> <span class="pre">returned</span> <span class="pre">by</span> <span class="pre">the</span> <span class="pre">:func:`get_array_to_plot</span></code> function.</p></li>
+<li><p><strong>data_to_plot_std</strong> (<em>list</em><em>, </em><em>optional</em>) – List of arrays containing the standard deviation of the computation times, as returned by the <a class="reference internal" href="#dtw_loss_functions.benchmark.get_array_to_plot" title="dtw_loss_functions.benchmark.get_array_to_plot"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_array_to_plot()</span></code></a> function.
+If provided, the standard deviation will be plotted as shaded area around the mean values. The default value is None, which means that the standard deviation will not be plotted.</p></li>
+<li><p><strong>color_dict</strong> (<em>list</em><em>, </em><em>optional</em>) – Dictionary containing the colors to use for each label. The keys of the dictionary should be the same as the labels in the <code class="docutils literal notranslate"><span class="pre">labels_to_plot</span></code> list.
+The values should be valid color specifications for matplotlib (e.g. ‘red’, ‘#FF0000’, etc.).
+If not provided, the default color cycle of matplotlib will be used. The default value is None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>fig</strong> (<em>matplotlib.figure.Figure</em>) – Figure object containing the plot.</p></li>
+<li><p><strong>ax</strong> (<em>matplotlib.axes.Axes</em>) – Axes object containing the plot.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dtw_loss_functions.benchmark.repeat_inference">
+<span class="sig-prename descclassname"><span class="pre">dtw_loss_functions.benchmark.</span></span><span class="sig-name descname"><span class="pre">repeat_inference</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss_function</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Module</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_repetitions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/dtw_loss_functions/benchmark.html#repeat_inference"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dtw_loss_functions.benchmark.repeat_inference" title="Link to this definition"></a></dt>
+<dd><p>Compute the loss for the input tensors <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">x_r</span></code> for a number of repetitions specified in <code class="docutils literal notranslate"><span class="pre">n_repetitions</span></code> and save the computation times in a list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>torch.tensor</em>) – First input tensor of shape <code class="docutils literal notranslate"><span class="pre">B</span> <span class="pre">x</span> <span class="pre">T</span> <span class="pre">x</span> <span class="pre">C</span></code>.</p></li>
+<li><p><strong>x_r</strong> (<em>torch.tensor</em>) – Second input tensor of shape <code class="docutils literal notranslate"><span class="pre">B</span> <span class="pre">x</span> <span class="pre">T</span> <span class="pre">x</span> <span class="pre">C</span></code>.</p></li>
+<li><p><strong>loss_function</strong> (<em>torch.nn.Module</em>) – Loss function to use for the computation. The loss function must be an instance of a class implemented in this package.</p></li>
+<li><p><strong>n_repetitions</strong> (<em>int</em>) – Number of repetitions to perform. The default value is <code class="docutils literal notranslate"><span class="pre">100</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>time_list_loss</strong> – List of length <code class="docutils literal notranslate"><span class="pre">n_repetitions</span></code> containing the computation times for each repetition.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="dtw_loss_functions.soft_dtw.html" class="btn btn-neutral float-left" title="Soft DTW" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dtw_loss_functions.soft_dtw_implementations.html" class="btn btn-neutral float-right" title="SoftDTW Subpackage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Alberto Zancanaro.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
