@@ -126,7 +126,7 @@ def repeat_inference(x, x_r, loss_function : torch.nn.Module, n_repetitions : in
 
 def load_benchmark_results(path_results : str, loss_list : list = None) -> dict :
     """
-    Load all the results stored in the specified path. This function expects that the results are stored in npy files organized as described in the docstring of the :func:``compute_benchmark`` function.
+    Load all the results stored in the specified path. This function expects that the results are stored in npy files organized as described in the docstring of the :func:`compute_benchmark` function.
     The function will return a dictionary where the keys are the loss function names and the values are dictionaries containing the results for each combination of batch size, signal length and number of channels.
 
     Note that by default, the function will load all the results present in the specified path. The name of the loss function will be inferred from the filename.
@@ -190,7 +190,7 @@ def load_benchmark_results(path_results : str, loss_list : list = None) -> dict 
 
 def get_array_to_plot(results_dict : dict, loss_function_name : str, x_axis_variable : str, B_list : list, T_list : list, C_list : list) -> tuple :
     """
-    Given the results dictionary returned by the :func:``load_benchmark_results`` function, extract the array of computation times for the specified loss function name.
+    Given the results dictionary returned by the :func:`load_benchmark_results` function, extract the array of computation times for the specified loss function name.
     The data will be organized as a list of arrays, where each array corresponds to a specific combination of batch size, signal length and number of channels. 
     The x-axis variable indicates which variable should be used as x-axis in the plot.
     E.g. if x_axis_variable is 'T', the function will return a list of arrays where each array corresponds to a specific combination of batch size and number of channels, and the values in the array correspond to the computation times for different signal lengths.
@@ -208,7 +208,7 @@ def get_array_to_plot(results_dict : dict, loss_function_name : str, x_axis_vari
     Parameters
     ----------
     results_dict : dict
-        Dictionary containing the loaded results as returned by the :func:``load_benchmark_results`` function.
+        Dictionary containing the loaded results as returned by the :func:`load_benchmark_results` function.
     loss_function_name : str
         Name of the loss function for which to extract the data. It must be a key of the input dictionary.
     x_axis_variable : str
@@ -369,12 +369,12 @@ def get_info_from_filename(file_name : str) -> tuple :
 
 def plot_benchmark(plot_config : dict, x_axis_variable_list : list, x_axis_variable_name : str, data_to_plot_mean : list, labels_to_plot : list, data_to_plot_std : list = None, color_dict : dict = None) -> tuple :
     """
-    Plot the results of the benchmark. The data should be in the format returned by the :func:``get_array_to_plot`` function, i.e. a list of arrays containing the mean computation times for each combination of batch size, signal length and number of channels, a list of strings containing the labels for each array.
+    Plot the results of the benchmark. The data should be in the format returned by the :func:`get_array_to_plot` function, i.e. a list of arrays containing the mean computation times for each combination of batch size, signal length and number of channels, a list of strings containing the labels for each array.
     The x-axis variable indicates which variable should be used as x-axis in the plot. E.g. if x_axis_variable is 'T', the function will plot the computation times for different signal lengths.
     If the standard deviation of the computation times is provided, it will be plotted as shaded area around the mean values.
 
     Note that this function is more an example of how you can plot the results than the "definitive" way to plot the results.
-    You can customize the plot as you want, using the data returned by the :func:``get_array_to_plot`` function.
+    You can customize the plot as you want, using the data returned by the :func:`get_array_to_plot` function.
     
     Parameters
     ----------
@@ -401,11 +401,11 @@ def plot_benchmark(plot_config : dict, x_axis_variable_list : list, x_axis_varia
     x_axis_variable_name : str
         Name of the x-axis variable to use as label for the x-axis.
     data_to_plot_mean : list
-        List of arrays containing the mean computation times, as returned by the :func:``get_array_to_plot`` function.
+        List of arrays containing the mean computation times, as returned by the :func:`get_array_to_plot` function.
     labels_to_plot : list
-        List of strings containing the labels for each array in the ``data_to_plot_mean`` list, as returned by the :func:``get_array_to_plot`` function.
+        List of strings containing the labels for each array in the ``data_to_plot_mean` list, as returned by the :func:`get_array_to_plot`` function.
     data_to_plot_std : list, optional
-        List of arrays containing the standard deviation of the computation times, as returned by the :func:``get_array_to_plot`` function. 
+        List of arrays containing the standard deviation of the computation times, as returned by the :func:`get_array_to_plot` function. 
         If provided, the standard deviation will be plotted as shaded area around the mean values. The default value is None, which means that the standard deviation will not be plotted.
     color_dict : list, optional
         Dictionary containing the colors to use for each label. The keys of the dictionary should be the same as the labels in the ``labels_to_plot`` list.

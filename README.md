@@ -104,11 +104,15 @@ output_sdtw = sdtw_loss(x, x_r)
 
 # Citation 
 
-If you use this package refer to the [citation file](https://github.com/jesus-333/dtw_loss_functions/blob/main/citations.md) for all the info regarding the works to cite.
+If you use this package refer to the [citation page](https://github.com/jesus-333/dtw_loss_functions/blob/main/citations.md) for all the info regarding the works to cite.
+
+# Benchmark
+
+The [benchmark page](https://github.com/jesus-333/dtw_loss_functions/tree/main/benchmark) offers some comparison between the different loss functions included in this package and show how to use the `benchmark` module.
 
 # Important notes about Repository Name
 The original name of this repository was `block-sdtw` because it was initially created to develop only the code related to block-DTW loss function. As with many academic projects, the code was initially "not very well organized", so I decided to refactor it and transform it into a Python package for easier use.
-Since my implementation of Block-DTW relies on Mehran Maghoumi's [implementation](https://github.com/Maghoumi/pytorch-softdtw-cuda) of SoftDTW, I decided to also include SoftDTW inside the package.
+Since my implementation of Block-DTW relies on Mehran Maghoumi's [implementation](https://github.com/Maghoumi/pytorch-softdtw-cuda) SoftDTW, I decided to also include his SoftDTW inside the package.
 Due to some testing, I also had the opportunity to implement the [OTW](https://ieeexplore.ieee.org/document/10095915) loss function.
 
 At this point, given the presence of 3 different loss functions within the code base, the name `block-sdtw` for the package seemed a bit misleading to me. So, I decided to change the name from `block-sdtw` to `dtw-loss-function`.
